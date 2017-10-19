@@ -1,0 +1,12 @@
+#select-bruger-dialog .modal-dialog {
+	min-width: 780px !important;
+	max-width: 780px !important;
+}
+#select-bruger-dialog .modal-body {
+	height: 400px !important;
+	min-height: 400px !important;
+	max-height: 400px !important;
+	font-size: 90%;
+}
+
+

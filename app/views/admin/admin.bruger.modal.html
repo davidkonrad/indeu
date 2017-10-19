@@ -1,0 +1,284 @@
+<div class="modal ng-scope top am-fade-and-slide-top center col-md-12" tabindex="-1" role="dialog" style="display: block;" id="bruger-dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title"> {{ __brugerModal.title }}</h4>
+			</div>
+
+			<div class="modal-body">
+				<div bs-tabs>
+					<div bs-pane data-title="Generelt">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off">
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="first_name">Fornavn</label>
+								<div class="col-md-4">
+							    <input class="form-control" 
+										type="text"
+										id="first_name"
+										select-on-click
+										ng-model="edit.first_name" 
+										placeholder="Fornavn">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="last_name">Efternavn</label>
+								<div class="col-md-4">
+							    <input class="form-control" 
+										type="text"
+										id="last_name"
+										select-on-click
+										ng-model="edit.last_name" 
+										placeholder="Efternavn">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="full_name">Fulde navn</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="full_name"
+										select-on-click
+										ng-model="edit.full_name" 
+										placeholder="Fulde navn">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="alias">Alias</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="alias"
+										select-on-click
+										ng-model="edit.alias" 
+										placeholder="Alias, kaldenavn">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="email">Email</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="email"
+										select-on-click
+										ng-model="edit.email" 
+										placeholder="Email">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="password">Password</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="password"
+										select-on-click
+										ng-model="edit.password" 
+										placeholder="Password">
+								</div>
+							</div>
+
+						</form>
+					</div>
+
+<!---- adresse --->
+					<div bs-pane data-title="Adresse">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off">
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="adresse">Adresse</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="adresse"
+										select-on-click
+										ng-model="edit.address" 
+										placeholder="Adresse">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="postal_code">Postnr</label>
+								<div class="col-md-2">
+							    <input class="form-control" 
+										type="text"
+										id="postal_code"
+										select-on-click
+										only-numbers
+										ng-model="edit.postal_code" 
+										placeholder="Postnr">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="city">By</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="city"
+										select-on-click
+										ng-model="edit.city" 
+										placeholder="By">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="phone">Telefon</label>
+								<div class="col-md-3">
+							    <input class="form-control" 
+										type="text"
+										id="phone"
+										select-on-click
+										ng-model="edit.phone" 
+										placeholder="12345678">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="visible_address">Synlig adresse</label>
+								<div class="col-md-3">
+							    <input class="checkbox" 
+										type="checkbox"
+										id="visible_address"
+										select-on-click
+										ng-model="edit.visible_adress">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="visible_phone">Synlig tlf.nr</label>
+								<div class="col-md-3">
+							    <input class="checkbox" 
+										type="checkbox"
+										id="visible_phone"
+										select-on-click
+										ng-model="edit.visible_phone">
+								</div>
+							</div>
+
+						</form>
+					</div>
+
+<!---- socialt --->
+					<div bs-pane data-title="Socialt">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off">
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="homepage">Hjemmeside</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="homepage"
+										select-on-click
+										ng-model="edit.homepage" 
+										placeholder="Hjemmeside adresse">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="facebook">Facebook</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="facebook"
+										select-on-click
+										ng-model="edit.facebook" 
+										placeholder="Facebook url">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="twitter">Twitter</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="twitter"
+										select-on-click
+										ng-model="edit.twitter" 
+										placeholder="Twitter konto">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="linkedin">LinkedIn</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="linkedin"
+										select-on-click
+										ng-model="edit.linkedin" 
+										placeholder="LinkedIn konto">
+								</div>
+							</div>
+
+						</form>
+					</div>
+
+<!---- bio --->
+					<div bs-pane data-title="Bio">
+						<form role="form" class="form-horizontal" autocomplete="off">
+							<br>
+					    <div class="form-group">
+								<div class="col-md-12">
+									<text-angular ng-model="edit.about" 
+										ta-text-editor-class="form-control col-md-12"
+										ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'html']]">
+									</text-angular>
+								</div>
+							</div>
+						</form>
+					</div>
+
+<!---- billede --->
+					<div bs-pane data-title="Billede">
+						<div class="bruger-modal-image" ng-click="__brugerModal.uploadImage()">
+							<i ng-if="edit.image == '' " class="fa fa-user medlem-default-image"></i>
+							<img ng-if="edit.image != '' " ng-src="../media/medlem/{{ edit.image }}">
+						</div>
+					</div>
+
+<!---- grupper --->
+					<div bs-pane data-title="Grupper">
+						<table datatable="" 
+							id="table-bruger-grupper"
+							class="table table-striped col-md-12 no-padding no-margin" 
+							dt-options="dtOptions_grupper" 
+							dt-columns="dtColumns_grupper" 
+							dt-instance="dtInstanceCallback">
+						</table>
+					</div>
+
+<!---- handlinger --->
+					<div bs-pane data-title="Handlinger">
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" 
+					class="btn" 
+					ng-click="brugerModalClose(true)" 
+					ng-class="{ 'btn-success' : __brugerModal.canSave() }"
+					ng-disabled="!__brugerModal.canSave()">
+						{{ __brugerModal.btnOk }}
+				</button> 
+				<button type="button" 
+					class="btn btn-default" 
+					ng-click="brugerModalClose(false)" 
+					ng-show="!alertParams.okOnly" >
+						Fortryd
+				</button> 
+			</div>
+
+		</div>
+	</div>
+</div>

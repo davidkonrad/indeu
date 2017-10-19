@@ -1,0 +1,56 @@
+<div>
+	<div class="list-group">
+		<span class="text-muted" ng-if="showEmpty()">Ingen nye reaktioner</span>
+
+	  <div ng-repeat="r in reactions" 
+			title="{{ r.title }}" 
+			class="list-group-item list-group-item-sm">
+
+			<div ng-if="r.type == 'f'">
+				<i class="fa fa-thumbs-o-up text-success"></i>
+				<small>
+					<em> 
+						<a ng-href="{{ r.userUrl }}" xclass="unstyled">
+							{{ r.show_name }} 
+						</a>
+					</em> 
+					&nbsp;&nbsp;<i class="fa fa-calendar-check-o text-success"></i>
+					<a ng-href="{{ r.url }}" xclass="unstyled">
+						{{ r.caption }} 
+					</a>
+				</small>
+			</div>
+
+			<div ng-if="r.type == 'a' || r.type == 'e'">
+				<i ng-if="r.type == 'a'" class="fa fa-file-code-o text-muted"></i>
+				<i ng-if="r.type == 'e'" class="fa fa-calendar text-muted"></i>
+				<small>
+					<em> 
+						<a ng-href="{{ r.userUrl }}" xclass="unstyled">
+							{{ r.show_name }} 
+						</a>
+					</em> 
+					&nbsp; <i class="fa fa-comments-o text-muted"></i> 
+					<a ng-href="{{ r.url }}" xclass="unstyled">
+						{{ r.caption }} 
+					</a>
+				</small>
+			</div>
+
+			<div ng-if="r.type == 'c'">
+				<i class="fa fa-comments-o"></i>
+				<small>
+					<em> 
+						<a ng-href="{{ r.userUrl }}" xclass="unstyled">
+							{{ r.show_name }} 
+						</a>
+					</em> 
+					&nbsp; <small><i class="fa fa-play text-muted"></i> </small>
+					{{ r.caption }}
+				</small>		
+			</div>
+			
+		</div>
+		
+	</div>
+</div>

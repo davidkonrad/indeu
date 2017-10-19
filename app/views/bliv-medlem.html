@@ -1,0 +1,98 @@
+<div class="container-fluid">
+
+	<div class="col-md-9">
+		<h1>Bliv medlem</h1>
+		<h3>Man skal ansøge om medlemsskab på indeu.org.</h3>
+		<p>Godkendelse af nye medlemmer er 100% brugerstyret, og findes kun for at forhindre at brodne kar kan få adgang til følsomme data, 
+			såsom events i den lukkede kalender</p>
+		<br>
+		<ol>
+			<li>Udfyld nedenstående ansøgnings-formular og klik "Send ansøgning"</li>
+			<li>Du modtager kort efter en mail, klik på linket i mailen for at bekræfte din email-adresse</li>
+			<li>Når du har fået tilstrækkelig mange bruger-stemmer modtager du en bekræftelses-mail</li> 
+			<li>Medlemsskab koster kr. 300 om året</li>
+		</ol>
+
+		<br>
+
+		<form role="form" class="form-horizontal bliv-medlem" autocomplete="off">
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label required" for="navn">Fulde navn</label>
+				<div class="col-md-9">
+			    <input class="form-control" 
+						type="text"
+						select-on-click
+						ng-model="reg.fuldeNavn" 
+						placeholder="Fornavn og efternavn">
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label required" for="email">Email</label>
+				<div class="col-md-9">
+			    <input class="form-control" 
+						select-on-click
+						ng-model="reg.email" 
+						placeholder="Email-adresse">
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label required" for="adresse">Adresse</label>
+				<div class="col-md-9">
+			    <input class="form-control" 
+						select-on-click
+						ng-model="reg.adresse" 
+						placeholder="Adresse">
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label required" for="postnr">Postnr</label>
+				<div class="col-md-2">
+			    <input class="form-control" 
+						select-on-click
+						ng-model="reg.postnr" 
+						placeholder="Postnr">
+				</div>
+	      <label class="col-md-1 control-label required" for="by">By</label>
+				<div class="col-md-6">
+			    <input class="form-control" 
+						select-on-click
+						ng-model="reg.by" 
+						placeholder="By">
+				</div>
+			</div>
+
+	    <div class="form-group">
+				<div class="col-md-12">
+					<hr>
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label" for=""></label>
+				<div class="col-md-9">
+					<button role="button" 
+						class="btn btn-default" 
+						ng-class="{ 'btn-success' : canRegister() }">
+						Send ansøgning
+					</button>
+				</div>
+			</div>
+
+		</form>
+
+	</div>
+	
+	<div class="col-md-3">
+		lille kolonne #1
+	</div>
+
+
+</div>
+
+<div class="clearfix">
+	<br><br><br><br>
+</div>

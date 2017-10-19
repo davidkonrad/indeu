@@ -1,0 +1,15 @@
+form.bliv-medlem {
+	background-color: #dadada;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	border-radius: 5px;
+	padding-left: 10px !important;
+}
+	
+form.bliv-medlem .col-md-2  {
+	padding-right: 3px;
+}
+
+form.bliv-medlem .col-md-1  {
+	padding-right: 3px;
+}

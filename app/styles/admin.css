@@ -1,0 +1,100 @@
+
+.admin-menu {
+	width: 160px;
+	min-width: 160px;
+	max-width: 160px;
+	border-top:1px solid #ebebeb;
+	border-left:1px solid #ebebeb;
+	border-right:1px solid #ebebeb;
+	float: left;
+	clear: none;
+}
+
+.admin-content {
+	float: left;
+	clear: none;
+	margin-left: 20px;
+	width: 860px;
+	min-width: 860px;
+}
+
+.admin-menu a {
+	font-size: 16px;
+	display: inline-block;
+	padding:5px;
+	padding-top: 7px;
+	padding-left: 7px;
+	border-bottom:1px solid #ebebeb;
+	width: 100%;
+	text-decoration: none;
+}
+
+.admin-menu a.selected {
+	background-color: #337ab7;
+	color: #fff;
+}
+
+/* events */
+#event-dialog .modal-dialog {
+	min-width: 580px !important;
+}
+#event-dialog .modal-body {
+	height: 400px !important;
+	min-height: 400px !important;
+	max-height: 400px !important;
+	font-size: 90%;
+}
+
+/* artikler */
+#artikel-dialog .modal-dialog {
+	min-width: 780px !important;
+}
+#artikel-dialog .modal-body {
+	height: 400px !important;
+	min-height: 400px !important;
+	max-height: 400px !important;
+	font-size: 90%;
+}
+
+/* std tds */
+td.max400 {
+	max-width: 400px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+td.max500 {
+	max-width: 500px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+td.max600 {
+	max-width: 600px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* std modals */
+.medium-dialog .modal-dialog {
+	min-width: 600px !important;
+	max-width: 600px !important;
+	width: 600px !important;
+}
+.medium-dialog .modal-body {
+	height: 400px !important;
+	min-height: 400px !important;
+	max-height: 400px !important;
+	font-size: 90%;
+}
+
+
+.large-dialog .modal-dialog {
+	min-width: 880px !important;
+}
+.large-dialog .modal-body {
+	height: 400px !important;
+	min-height: 400px !important;
+	max-height: 400px !important;
+	font-size: 90%;
+}
+
+

@@ -1,0 +1,386 @@
+<div>
+
+	<div class="col-md-12">
+		<div class="medlem-image medlem-image-edit cursor-pointer" ng-click="changeImage()">
+			<i ng-if="edit.image == ''" class="fa fa-user medlem-default-image"></i>
+			<img ng-if="edit.image != ''" ng-src="../media/medlem/{{ edit.image }}">
+		</div>
+
+		<div class="pull-right action-element">
+			<button class="btn btn-default btn-sm" 
+				type="button"
+				ng-class="{ 'btn-success' : saveEnabled() }"
+				ng-disabled="!saveEnabled()"
+				ng-click="doSaveClose()">Gem og luk
+			</button>
+			<button class="btn btn-danger btn-sm" 
+				type="button"
+				ng-click="doCancel()">Fortryd
+			</button>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="">
+			<text-angular ng-model="edit.about" 
+				ta-text-editor-class="form-control ta-editor-md"
+				ta-toolbar="[['h2','h3'],['bold','italics','underline','strikeThrough'],['insertLink'], ['html']]">
+			</text-angular>
+
+			<div class="clearfix">&nbsp;</div>
+		</div>
+	</div>
+
+
+<!-- collapsible -->
+	<div class="panel-group" 
+		role="tablist" 
+		aria-multiselectable="true" 
+		bs-collapse 
+		data-start-collapsed="true"
+		data-allow-multiple="true">
+
+<!-- indstillinger -->
+	  <div class="panel panel-default">
+	    <div class="panel-heading" role="tab">
+	      <h4 class="panel-title">
+	        <a bs-collapse-toggle>
+						<i class="fa fa-plus text-muted"></i>
+						Indstillinger
+	        </a>
+	      </h4>
+	    </div>
+	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+	      <div class="panel-body">
+					<div class="col-md-1"></div>
+					<form id="settings" role="form" class="form-horizontal" autocomplete="off">
+
+						<div class="col-md-12 no-padding no-margin">
+							<button class="btn btn-xs btn-default pull-right"
+								ng-click="formSave('#settings')"
+								ng-class="{ 'btn-primary' : formSaveEnabled('#settings') }"
+								ng-disabled="!formSaveEnabled('#settings')">
+								Gem
+							</button>
+						</div>
+												
+			    	<div class="form-group col-md-4">
+							<div class="checkbox">
+							  <label class="control-label">
+									<input type="checkbox" 
+										ng-false-value="'0'"
+										ng-true-value="'1'"
+										name="visible_address"
+										ng-model="edit.visible_address">Synlig adresse
+								</label>
+							</div>
+							<div class="checkbox">
+							  <label class="control-label">
+									<input type="checkbox" 
+										ng-false-value="'0'"
+										ng-true-value="'1'"
+										name="visible_email"
+										ng-model="edit.visible_email">Synlig email
+								</label>
+							</div>
+							<div class="checkbox">
+							  <label class="control-label">
+									<input type="checkbox" 
+										ng-false-value="'0'"
+										ng-true-value="'1'"
+										name="visible_phone"
+										ng-model="edit.visible_phone">Synlig telefon
+								</label>
+							</div>
+			      </div>
+
+			    	<div class="form-group col-md-4">
+							<div class="checkbox">
+							  <label class="control-label">
+									<input type="checkbox" 
+										ng-false-value="'0'"
+										ng-true-value="'1'"
+										name="visible_calendar"
+										ng-model="edit.visible_calendar">Synlig kalender
+								</label>
+							</div>
+							<div class="radio">
+							  <label class="no-padding">Signatur</label><br>
+								&nbsp;&nbsp;<label><input type="radio" name="signatur">Alias</label><br>
+								&nbsp;&nbsp;<label><input type="radio" name="signatur">Fulde navn</label><br>
+								&nbsp;&nbsp;<label><input type="radio" name="signatur">Fornavn</label><br>
+								&nbsp;&nbsp;<label><input type="radio" name="signatur">Efternavn</label><br>
+							</div>
+			      </div>
+
+					</form>
+		    </div>
+			</div>
+		</div>
+
+<!-- personligt -->
+	  <div class="panel panel-default">
+	    <div class="panel-heading" role="tab">
+	      <h4 class="panel-title">
+	        <a bs-collapse-toggle>
+						<i class="fa fa-plus text-muted"></i>
+						Personligt
+	        </a>
+	      </h4>
+	    </div>
+	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+	      <div class="panel-body">
+					<form id="personal" role="form" class="form-horizontal" autocomplete="off">
+
+						<div class="col-md-12 no-padding no-margin">
+							<button class="btn btn-xs btn-default pull-right"
+								ng-click="formSave('#personal')"
+								ng-class="{ 'btn-primary' : formSaveEnabled('#personal') }"
+								ng-disabled="!formSaveEnabled('#personal')">
+								Gem
+							</button>
+						</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="first_name">Fornavn</label>
+								<div class="col-md-4">
+							    <input class="form-control" 
+										type="text"
+										id="first_name"
+										select-on-click
+										disabled
+										ng-model="edit.first_name" 
+										placeholder="Fornavn">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="last_name">Efternavn</label>
+								<div class="col-md-4">
+							    <input class="form-control" 
+										type="text"
+										id="last_name"
+										select-on-click
+										disabled
+										ng-model="edit.last_name" 
+										placeholder="Efternavn">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="full_name">Fulde navn</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="full_name"
+										select-on-click
+										disabled
+										ng-model="edit.full_name" 
+										placeholder="Fulde navn">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="alias">Alias</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="alias"
+										select-on-click
+										ng-model="edit.alias" 
+										placeholder="Alias, kaldenavn">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="email">Email</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="email"
+										select-on-click
+										disabled
+										ng-model="edit.email" 
+										placeholder="Email">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="password">Password</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="password"
+										select-on-click
+										ng-model="edit.password" 
+										placeholder="Password">
+								</div>
+							</div>
+
+						</form>
+
+	      </div>
+	    </div>
+	  </div>
+
+<!-- adresse -->
+	  <div class="panel panel-default">
+	    <div class="panel-heading" role="tab">
+	      <h4 class="panel-title">
+	        <a bs-collapse-toggle>
+						<i class="fa fa-plus text-muted"></i>
+						Adresse
+	        </a>
+	      </h4>
+	    </div>
+	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+	      <div class="panel-body">
+					<form id="address" role="form" class="form-horizontal" autocomplete="off">
+
+						<div class="col-md-12 no-padding no-margin">
+							<button class="btn btn-xs btn-default pull-right"
+								ng-click="formSave('#address')"
+								ng-class="{ 'btn-primary' : formSaveEnabled('#address') }"
+								ng-disabled="!formSaveEnabled('#address')">
+								Gem
+							</button>
+						</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="adresse">Adresse</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="adresse"
+										select-on-click
+										ng-model="edit.address" 
+										adresse-opslag
+										adresse-type="adresser"
+										adresse-on-select="adresseSelect"
+										placeholder="Adresse">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="postal_code">Postnr</label>
+								<div class="col-md-2">
+							    <input class="form-control" 
+										type="text"
+										id="postal_code"
+										select-on-click
+										only-numbers
+										ng-model="edit.postal_code" 
+										placeholder="Postnr">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="city">By</label>
+								<div class="col-md-5">
+							    <input class="form-control" 
+										type="text"
+										id="city"
+										select-on-click
+										ng-model="edit.city" 
+										placeholder="By">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="phone">Telefon</label>
+								<div class="col-md-3">
+							    <input class="form-control" 
+										type="text"
+										id="phone"
+										select-on-click
+										ng-model="edit.phone" 
+										placeholder="12345678">
+								</div>
+							</div>
+						</form>
+
+	      </div>
+	    </div>
+	  </div>
+
+<!-- sociale links -->
+	  <div class="panel panel-default">
+	    <div class="panel-heading" role="tab">
+	      <h4 class="panel-title">
+	        <a bs-collapse-toggle>
+						<i class="fa fa-plus text-muted"></i>
+						Socialt
+	        </a>
+	      </h4>
+	    </div>
+	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+	      <div class="panel-body">
+					<form id="social" role="form" class="form-horizontal" autocomplete="off">
+
+						<div class="col-md-12 no-padding no-margin">
+							<button class="btn btn-xs btn-default pull-right"
+								ng-click="formSave('#social')"
+								ng-class="{ 'btn-primary' : formSaveEnabled('#social') }"
+								ng-disabled="!formSaveEnabled('#social')">
+								Gem
+							</button>
+						</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="homepage">Hjemmeside</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="homepage"
+										select-on-click
+										ng-model="edit.homepage" 
+										placeholder="Hjemmeside adresse">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="facebook">Facebook</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="facebook"
+										select-on-click
+										ng-model="edit.facebook" 
+										placeholder="Facebook url">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="twitter">Twitter</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="twitter"
+										select-on-click
+										ng-model="edit.twitter" 
+										placeholder="Twitter konto">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="linkedin">LinkedIn</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="linkedin"
+										select-on-click
+										ng-model="edit.linkedin" 
+										placeholder="LinkedIn konto">
+								</div>
+							</div>
+
+						</form>
+
+	      </div>
+	    </div>
+	  </div>
+
+</div>
+
+
+
+

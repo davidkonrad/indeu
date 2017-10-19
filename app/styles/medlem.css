@@ -1,0 +1,140 @@
+
+.medlem-image {
+	float: left;
+	clear: none;
+	width: 140px;
+	height: auto;
+	margin-right: 30px;
+	xxmargin-bottom: 16px;
+	background-color: #F8F8F8;
+	color: gray;
+	text-align: center;
+	max-width: 170px;
+}
+.medlem-image-edit {
+	margin-bottom: 16px;
+}
+
+.medlem-default-image {
+	font-size: 90px;
+	padding-top: 30px;
+}
+.medlem-image img {
+	max-height: 150px;
+	max-width: 160px;
+	border: 1px solid #ebebeb;
+	cursor:pointer; 
+}
+
+.medlem-info {
+	clear: none;
+	height: 100%;
+}
+
+.medlem-info h1 {
+	clear: right;
+	padding: 0px;
+	margin: 0px;
+	display: inline-block;
+}
+
+.medlem-info p {
+}
+
+/* right */
+.medlem-event-name {
+	position: relative;
+	top: -2px;
+	clear: right;
+	display: inline-block;
+	float: left;
+	max-width: 180px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.medlem-event-date {
+	float: left;
+	display: block;
+	clear: left;
+	margin-right: 5px;
+	font-size: 95%;
+}
+
+/* save or cancel */
+.action-element {
+	margin-right: 200px;
+}
+
+/* article edit */
+
+.article-image {
+	float: left;
+	clear: none;
+	width: 140px;
+	height: 150px;
+	margin-right: 30px;
+	margin-bottom: 16px;
+	background-color: #F8F8F8;
+	color: gray;
+	text-align: center;
+	max-width: 200px;
+	cursor:pointer; 
+}
+.article-default-image {
+	font-size: 90px;
+	padding-top: 30px;
+}
+.article-image img {
+	max-height: 150px;
+	max-width: 200px;
+	border: 1px solid #ebebeb;
+	cursor:pointer; 
+}
+
+/* medlems events */
+.medlem-details a  {
+	margin-left: 6px;
+	font-size: 10px;
+}
+
+/* medlem grupper */
+span.medlem-gruppe {
+	background-color: #F8F8F8;
+	border-radius: 10px;
+	border-top-left-radius: 24px;
+	border-bottom-left-radius: 24px;
+	font-size: 110%;
+	display: inline;
+	padding: 1px;
+	padding-right: 10px;
+	padding-bottom: 0px;
+	line-height: 40px;
+	margin-bottom: 1px;
+	margin-top: 10px;
+	margin-right: 10px;
+	font-weight: bold;
+	clear: none;
+	float: left;
+}
+span.medlem-gruppe-logo {
+	border-radius: 50%;	
+	background-color: #fff;
+	text-align: center;
+	color: gray;
+	font-size: 130%;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	max-width: 40px;
+	max-height: 40px;
+}
+.medlem-gruppe .medlem-gruppe-owner-icon {
+	position: relative;
+	top: -20px;
+	right: -1px;
+	display: inline;
+	float: none;
+	clear: none;
+}
+

@@ -1,0 +1,163 @@
+
+<div ng-controller="NavbarCtrl" class="container-fluid">
+	<div class="indeu-navbar">
+		<div class="indeu-navbar-left col-md-7 col-sm-6  col-xs-12">
+		  <h1><strong><code class="indeu-navbar-logo"><a href="/" class="unstyled" title="indeu,org">indeu.org</a></code></strong></h1>
+		</div>
+		<div class="indeu-navbar-right col-md-4 col-sm-12 col-xs-12 form-fade" ng-show="!isLoggedIn()" id="login-form">
+			<div>
+				<i ng-if="login.error != ''" class="fa fa-remove text-danger bg-warning"></i>
+				{{ login.error }} &nbsp;
+			</div>
+			<form role="form" class="form-inline form-group-sm" autocomplete="off">
+		    <input class="form-control input-sm" 
+					type="text"
+					select-on-click
+					ng-model="login.email" 
+					size="16"
+					name="email"
+					placeholder="Email">
+		    <input class="form-control input-sm" 
+					type="password"
+					size="16"
+					ng-model="login.password" 
+					name="password"
+					placeholder="Password">
+				<button role="button" 
+					ng-click="doLogin()"
+					class="btn btn-sm btn-default">
+					Login
+				</button>
+			</form>
+			<div class="checkbox xxpull-right no-padding no-margin">
+				<label>
+					<input type="checkbox" ng-model="login.rememberMe" ng-false-value="0" ng-true-value="1">
+					Husk mig
+				</label>
+			</div>
+		</div>
+		
+		<div class="indeu-navbar-right col-md-3 col-sm-12 col-xs-12" ng-show="showSearchForm()" >
+			<div ng-if="showSearchBox()" style="margin-top:15px;">
+				<search-box></search-box>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!--
+<nav class="navbar navbar-default navbar-fixed-top" bs-affix data-offset-top="97" ng-controller="NavbarCtrl">
+-->
+	<nav id="indeu-navbar" class="navbar yamm navbar-default XXnavbar-fixed-top" ng-controller="NavbarCtrl">
+	<div class="no-margin no-padding">
+	<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="navbar-collapse-1">
+
+			<ul class="nav navbar-nav navbar-left" style="margin-left:15px;">
+				<li class="dropdown">
+					<a class="dropdown-toggle text-primary" data-toggle="dropdown" href="">
+						indeu.org
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Formålsparagraf</a></li>
+						<li><a href="#">Foreningen bag</a></li>
+						<li><a href="#">Kontakt</a></li>
+					</ul>
+				</li>
+
+				<li><a href="/det-sker" debug-link>Kalender</a></li>
+
+<!-- --->
+				<li class="dropdown mega-dropdown">
+					<a class="dropdown-toggle text-primary" data-toggle="dropdown" href="">
+						Foreninger 
+						<span class="caret"></span>
+					</a>				
+					<ul class="dropdown-menu mega-dropdown-menu">
+						<li class="col-sm-6">
+							<ul>
+								<li class="dropdown-header">header</li>
+								<li><a href="">item item item</a></li>
+								<li><a href="">item item item</a></li>
+								<li><a href="">item item item</a></li>
+								<li><a href="">item item item</a></li>
+								<li><a href="">item item item</a></li>
+							</ul>
+						</li>
+						<li class="col-sm-6">
+							<ul>
+								<li class="dropdown-header">header</li>
+								<li><a href="">item item item</a></li>
+								<li><a href="">item item item</a></li>
+								<li><a href="">item item item</a></li>
+								<li><a href="">item item item</a></li>
+								<li><a href="">item item item</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+
+				<li class="dropdown mega-dropdown">
+					<a class="dropdown-toggle text-primary" data-toggle="dropdown" href="">
+						Grupper 
+						<span class="caret"></span>
+					</a>				
+					<ul class="dropdown-menu mega-dropdown-menu" id="nav-indeu-groups">
+						<li class="col-sm-4">
+							<ul>
+								<li ng-repeat="g in groups.f" class="list-unstyled">
+									<a ng-href="{{ g.url }}"> {{ g.name }}</a>
+								</li>
+							</ul>
+						</li>
+						<li class="col-sm-4">
+							<ul>
+								<li ng-repeat="g in groups.s" class="list-unstyled">
+									<a ng-href="{{ g.url }}"> {{ g.name }}</a>
+								</li>
+							</ul>
+						</li>
+						<li class="col-sm-4">
+							<ul>
+								<li ng-repeat="g in groups.t" class="list-unstyled">
+									<a ng-href="{{ g.url }}"> {{ g.name }}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				
+<!-- --->
+
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-if="isLoggedIn()">
+					<a href="/dig" debug-link title="Din forside">
+						<i class="fa fa-user fa-1x text-primary"></i>
+						<strong>{{ user_name }}</strong>
+					</a>
+				</li>
+				<li ng-if="showSearchBox() && userIsAdmin()">
+					<a href="/admin-overblik" debug-link>Administration</a>
+				</li>
+				<li ng-if="!isLoggedIn()"><a href="/bliv-medlem" debug-link>Bliv medlem</a></li>
+				<li ng-if="isLoggedIn()"><a href="" ng-click="logout()">Log af</a></li>
+			</ul>
+
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container -->
+</nav><!-- /.navbar -->
+

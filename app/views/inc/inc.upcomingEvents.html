@@ -1,0 +1,17 @@
+<div ng-repeat="e in events">
+	<div class="recent">
+		<a ng-href="/event/{{ e.id }}/{{ e.urlName }}" class="unstyled" debug-link>
+			<span class="header small">
+				<strong>{{ e.city }}</strong>.
+				{{ e.date | date:'dd MMM yyyy' }}
+				fra kl. {{ e.from }}
+			</span>
+			<span ng-if="e.image" class="recent-image">
+				<img ng-src="media/event/{{ e.image }}">
+			</span>
+			<span class="recent-desc h5">
+				{{ e.name }}
+			</span>
+		</a>
+	</div>
+</div>

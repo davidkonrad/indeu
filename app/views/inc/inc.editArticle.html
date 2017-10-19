@@ -1,0 +1,105 @@
+<div>
+		<form class="form-horizontal">
+			<div class="form-group">
+	      <label class="col-md-1 control-label" for=""></label>
+				<label class="radio-inline">
+          <input type="radio" 
+						name="visibility_level" 
+						ng-model="article.visibility_level"
+						ng-value="1" > Offentlig
+        </label>
+        <label class="radio-inline">
+          <input type="radio" 
+						name="visibility_level" 
+						ng-model="article.visibility_level"
+						ng-value="2"> Kun medlemmer
+        </label>
+        <label ng-if="group_id"	class="radio-inline">
+          <input type="radio" 
+						name="article.visibility_level" 
+						ng-model="article.visibility_level"
+						ng-value="3"> Kun gruppe
+        </label>
+				<div class="pull-right action-element">
+					<button class="btn btn-default btn-sm" 
+						ng-class="{ 'btn-success' : articleAction.canSave() }"
+						ng-disabled="!articleAction.canSave()"
+						ng-click="articleAction.save()">
+						{{ articleAction.caption }}
+					</button>
+					<button class="btn btn-danger btn-sm" 
+						ng-click="articleAction.cancel()">
+						Fortryd
+					</button>
+				</div>
+			</div>
+			<table class="col-md-12">
+				<tr>
+					<td class="col-md-8">
+						<div class="form-group">
+				      <label class="col-md-3 control-label required" for="header">Overskrift</label>
+							<div class="col-md-9">
+						    <input class="form-control input-sm" 
+									type="text"
+									id="header"
+									select-on-click
+									ng-model="article.header" 
+									placeholder="Overskrift">
+							</div>
+						</div>
+						<div class="form-group">
+				      <label class="col-md-3 control-label" for="sub_header">Manchet</label>
+							<div class="col-md-9">
+								<textarea class="form-control input-sm" 
+									select-on-click
+									rows="3"
+									ng-model="article.sub_header" 
+									placeholder="Manchet">
+								</textarea>
+							</div>
+						</div>
+					</td>
+					<td class="col-md-4">
+						<div class="article-image" ng-click="articleUploadImage()">
+							<i ng-if="article.image == ''" class="fa fa-image article-default-image"></i>
+							<img ng-if="article.image != ''" ng-src="../media/artikel/{{ article.image }}" XXfancyboxable="{centerOnScroll:true,margin:20}">
+						</div>
+					</td>
+				</tr>
+<!-- groups -->
+				<tr>
+					<td colspan="2">
+				    <div class="form-group">
+							<div class="col-md-12">
+								<span ng-repeat="g in article_groups">
+									<button class="btn btn-default btn-xs" type="button">
+										{{ g.name }}
+										<i class="fa fa-remove text-danger"
+											title="Fjern gruppe"
+											ng-click="articleAction.removeGroup(g.id)">
+										</i>
+									</button>
+								</span>
+								<button class="btn btn-primary btn-xs" 
+									type="button"
+									ng-click="articleAction.addGroup()">
+									<i class="fa fa-plus"></i>
+									Gruppe
+								</buttun>
+							</div>
+						</div>
+					</td>
+				</tr>
+
+			</table>
+	    <div class="form-group">
+				<div class="col-md-12">
+					<text-angular ng-model="article.content" 
+						ta-text-editor-class="form-control col-md-12"
+						ta-toolbar="[['h2','h3'],['bold','italics','underline','strikeThrough'],['insertLink'], ['quote'], ['ol', 'ul'], ['undo', 'redo', 'clear', 'html']]">
+					</text-angular>
+				</div>
+			</div>
+			<br><br><br>
+		</form>
+</div>

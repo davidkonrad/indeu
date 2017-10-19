@@ -1,0 +1,12 @@
+<div>
+	<span ng-if="message">{{ message }}</span>
+
+	<span ng-repeat="p in participants">
+		<span ng-if="!p.isUser">
+			<a href="{{ p.urlLink }}">{{p.full_name}}</a><span ng-if="!$last">{{ sep }}</span>
+			<span ng-if="$last">deltager.</span>
+		</span>
+	</span>
+
+</div>
+		

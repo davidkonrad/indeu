@@ -1,0 +1,253 @@
+<div class="modal ng-scope top am-fade-and-slide-top center col-md-12" tabindex="-1" role="dialog" style="display: block;" id="gruppe-dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title" ng-bind-html="__gruppeModal.title"></h4>
+			</div>
+
+			<div class="modal-body">
+				<div bs-tabs>
+					<div bs-pane data-title="Generelt">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off">
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="name">Navn</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="name"
+										select-on-click
+										ng-model="edit.name" 
+										placeholder="Navn på gruppe">
+								</div>
+							</div>
+
+					    <div class="form-group no-bottom-margin">
+					      <label class="col-md-3 control-label"></label>
+								<div class="col-md-9">
+								  <label class="checkbox-inline">
+										<input type="checkbox" 
+											id="accepted"
+											ng-true-value="'1'"
+											ng-false-value="'0'"
+											ng-model="edit.accepted">
+											Godkendt
+									</label>
+								  <label class="checkbox-inline">
+										<input type="checkbox" 
+											id="active"
+											ng-true-value="'1'"
+											ng-false-value="'0'"
+											ng-model="edit.active">
+											Aktiv
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group no-bottom-margin">
+					      <label class="col-md-3 control-label"></label>
+								<div class="col-md-9">
+								  <label class="checkbox-inline">
+										<input type="checkbox" 
+											id="events_enabled"
+											ng-true-value="'1'"
+											ng-false-value="'0'"
+											ng-model="edit.events_enabled">
+											Tillad events
+									</label>
+								  <label class="checkbox-inline">
+										<input type="checkbox" 
+											id="articles_enabled"
+											ng-true-value="'1'"
+											ng-false-value="'0'"
+											ng-model="edit.articles_enabled">
+											Tillad artikler
+									</label>
+								  <label class="checkbox-inline">
+										<input type="checkbox" 
+											id="articles_enabled"
+											ng-true-value="'1'"
+											ng-false-value="'0'"
+											ng-model="edit.allow_comments">
+											Tillad kommentarer
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label"></label>
+								<div class="col-md-9">
+								  <label class="checkbox-inline">
+										<input type="checkbox" 
+											id="visible_members"
+											ng-true-value="'1'"
+											ng-false-value="'0'"
+											ng-model="edit.visible_members">
+											Medlemmer synlige
+									</label>
+								  <label class="checkbox-inline">
+										<input type="checkbox" 
+											id="visible_social"
+											ng-true-value="'1'"
+											ng-false-value="'0'"
+											ng-model="edit.visible_social">
+											Sociale medier synlige
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="owner_id">Gruppeejer</label>
+								<div class="col-md-4">
+							    <button class="btn btn-default btn-sm"
+										id="owner_id"
+										ng-click="__gruppeModal.selectOwner()"
+										ng-model="edit.owner_id">
+											{{ __gruppeModal.owner_btn_caption }}
+									</button>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="access_level">Niveau</label>
+								<div class="col-md-5">
+									<button type="button" 
+										class="btn btn-default btn-sm" 
+										ng-model="edit.access_level" 
+										data-toggle="true"
+										placeholder="Vælg"
+										id="access_level"
+										bs-select
+										bs-options="al.id as al.name for al in accessLevels">
+									  <span class="caret"></span>
+									</button>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="visibility_level">Synlighed</label>
+								<div class="col-md-5">
+									<button type="button" 
+										class="btn btn-default btn-sm" 
+										ng-model="edit.visibility_level" 
+										data-toggle="true"
+										placeholder="Vælg"
+										id="visibility_level"
+										bs-select
+										bs-options="vl.id as vl.name for vl in visibilityLevels">
+									  <span class="caret"></span>
+									</button>
+								</div>
+							</div>
+
+						</form>
+					</div>
+
+					<div bs-pane data-title="Socialt">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off">
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label" for="email">Email</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="email"
+										select-on-click
+										ng-model="edit.email" 
+										placeholder="Email">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label" for="homepage">Hjemmeside</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="homepage"
+										select-on-click
+										ng-model="edit.homepage" 
+										placeholder="Hjemmeside adresse">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label" for="facebook">Facebook</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="facebook"
+										select-on-click
+										ng-model="edit.facebook" 
+										placeholder="Facebook url">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label" for="twitter">Twitter</label>
+								<div class="col-md-8">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="twitter"
+										select-on-click
+										ng-model="edit.twitter" 
+										placeholder="Twitter konto">
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div bs-pane data-title="Beskrivelse">
+						<form role="form" class="form-horizontal" autocomplete="off">
+							<br>
+					    <div class="form-group" style="height:50px !important;">
+								<div class="col-md-12">
+									<text-angular ng-model="edit.about" 
+										ta-text-editor-class="form-control col-md-12 gruppe-dialog"
+										ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'html']]">
+									</text-angular>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div bs-pane data-title="Logo" data-disabled="__gruppeModal.create == true">
+						<div class="gruppe-modal-image" ng-click="__gruppeModal.uploadImage()">
+							<i ng-if="edit.image == '' " class="fa fa-users medlem-default-image"></i>
+							<img ng-if="edit.image != '' " ng-src="../media/gruppe/{{ edit.image }}">
+						</div>
+					</div>
+
+					<div bs-pane data-title="Medlemmer" ng-if="!disableMedlemmerTab()">
+						<table datatable="" 
+							id="table-gruppe-medlemmer"
+							class="table table-striped col-md-12 no-padding no-margin" 
+							dt-options="__gruppeModal.medlemmer.dtOptions" 
+							dt-columns="__gruppeModal.medlemmer.dtColumns"
+							dt-instance="__gruppeModal.medlemmer.dtInstanceCallback">
+						</table>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" 
+					class="btn" 
+					ng-click="gruppeModalClose(true)" 
+					ng-class="{ 'btn-success' : __gruppeModal.canSave() }"
+					ng-disabled="!__gruppeModal.canSave()">
+						{{ __gruppeModal.btnOk }}
+				</button> 
+				<button type="button" 
+					class="btn btn-default" 
+					ng-click="gruppeModalClose(false)" >
+						Fortryd
+				</button> 
+			</div>
+
+		</div>
+	</div>
+</div>

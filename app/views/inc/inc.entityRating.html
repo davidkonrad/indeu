@@ -1,0 +1,32 @@
+<div>
+
+	<div ng-if="user.id">
+		<span class="msg-ngrateit text-muted">Vurder dette</span>
+		<button class="btn btn-xs btn-ngrateit"
+			title="Afgiv bedømmelse"
+			ng-class="{ 'btn-success': canSaveRating() }"
+			ng-disabled="!canSaveRating()"
+			ng-click="saveRating()">
+			<i class="fa fa-check"></i>
+		</button>
+		<ng-rate-it 
+			max="6"
+			ng-model="user.rating" 
+			read-only="user.readonly"
+			resetable="false">
+		</ng-rate-it>
+	</div>
+
+	<div>
+		<span class="msg-ngrateit" ng-if="user.id" style="color:#fff;">Vurder dette</span>
+		<ng-rate-it 
+			max="6"
+			title="{{ total.title }}"
+			ng-model="total.average" 
+			read-only="true"
+			resetable="false">
+		</ng-rate-it>
+	</div>
+
+
+</div>

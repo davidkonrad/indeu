@@ -1,0 +1,59 @@
+{
+  "name": "indeu",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.6.4",
+    "bootstrap": "~3.3.7",
+    "angular-animate": "1.6.4",
+    "angular-cookies": "^1.4.0",
+    "angular-resource": "^1.4.0",
+    "angular-route": "^1.4.0",
+    "angular-sanitize": "^1.4.0",
+    "angular-touch": "^1.4.0",
+    "font-awesome": "~4.4.0",
+    "momentjs": "~2.18.1",
+    "jszip": "2.6.0",
+    "pdfmake": "*",
+    "angular-datatables": "0.6.1",
+    "datatables.net-buttons": "*",
+    "datatables.net-buttons-dt": "*",
+    "datatables.net-bs": "*",
+    "datatables.net-select": "*",
+    "angular-strap": "2.3.12",
+    "angular-motion": "0.4.4",
+    "bootstrap3-typeahead": "3.1.1",
+    "angular-bootstrap3-typeahead": "*",
+    "ng-tags-input": "3.1.2",
+    "textAngular": "^1.5.16",
+    "ng-file-upload": "^12.2.12",
+    "angular-fancybox-plus": "^1.0.3",
+    "angular-i18n": "^1.6.4",
+    "angular-loading-bar": "~0.9.0",
+    "angular-ui-calendar": "^1.0.2",
+    "angular-leaflet-directive": "~0.8.8",
+    "leaflet-providers": "~1.1.7",
+    "leaflet-plugins": "^1.9.0",
+    "angular-ui-notification": "~0.3.6",
+    "angular-rateit": "~3.0.4",
+    "moment-timezone": "^0.5.13",
+    "angular-smilies": "^1.3.0",
+    "yamm3": "~1.1.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.0"
+  },
+  "appPath": "app",
+  "moduleName": "indeuApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  },
+  "resolutions": {
+    "angular": "1.6.4"
+  }
+}

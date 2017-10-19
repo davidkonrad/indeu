@@ -1,0 +1,44 @@
+#gruppe-dialog .modal-dialog {
+	min-width: 580px !important;
+}
+#gruppe-dialog .modal-body {
+	height: 340px !important;
+	min-height: 340px !important;
+	max-height: 340px !important;
+	font-size: 90%;
+}
+
+.ta-editor.form-control.gruppe-dialog, .ta-scroll-window.form-control.gruppe-dialog  {
+    height: 210px;
+    min-height: 210px;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+}
+.form-control.gruppe-dialog > .ta-bind {
+    min-height: 210px;
+    padding: 6px 12px;
+}
+
+
+#gruppe-dialog .gruppe-modal-image {
+	margin-top: 10px;
+	margin-left: 10px;
+
+	float: left;
+	clear: none;
+	width: 140px;
+	height: 150px;
+	margin-right: 20px;
+	margin-bottom: 16px;
+	background-color: #F8F8F8;
+	color: gray;
+	text-align: center;
+	cursor: pointer;
+}
+
+#gruppe-dialog .gruppe-modal-image img { 
+	max-width: 300px;
+	max-height: 300px;
+}
+

@@ -1,0 +1,19 @@
+<div>
+	<span ng-if="message">{{ message }} </span>
+
+	<span ng-repeat="event in events"  xxxstyle="background-color: red !important;max-width:100px !important;overflow: hidden; word-break:keep-all; white-space: nowrap;" >
+		
+			<a href="{{ event.urlLink }}" debug-link>
+				<span class="medlem-event-date">
+					{{ event.date | date:"dd/MM" }}
+				</span>
+				<span class="medlem-event-name">
+					<strong>				
+						{{ event.name }}
+					</strong>
+				</span>
+			</a>
+
+	</span>
+
+</div>

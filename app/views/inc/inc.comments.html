@@ -1,0 +1,113 @@
+<div class="col-md-12 no-padding no-margin">
+
+	<div class="clearfix">
+		<br><br><br>
+	</div>
+
+	<span class="h4">
+		{{ commentsHeader }}
+		<span ng-if="user == undefined" class="h5 pull-right no-padding no-margin text-muted" style="position:relative; top:4px;">
+			Du skal være logget ind for at se kommentarer
+		</span>
+	</span>
+	
+	<hr style="margin-top: 1px;">
+
+	<div ng-if="user != undefined">
+		<div class="comment-box col-md-12 no-padding no-margin">
+
+			<span class="comment-user-image col-md-2 no-padding no-margin">
+				<i ng-if="user.image == null " class="fa fa-user default-image"></i>
+				<img ng-if="user.image != null " ng-src="../media/medlem/{{ user.image }}">
+			</span>
+			<span class="comment-comment col-md-10">
+				<textarea class="form-control" 
+					ng-disabled="actionAnswer != '' "
+					id="comment-content"
+					ng-keyup="textAreaAdjust('comment-content')"
+					rows="3" 
+					ng-model="comment.content">
+				</textarea>
+				<span class="comment-action pull-right">
+					<button class="btn btn-xs btn-default"
+						ng-disabled="actionAnswer != '' "
+						ng-click="actionCancel()">
+						Fortryd
+					</button>
+					<button class="btn btn-xs"
+						ng-click="actionSave()"
+						ng-disabled="actionAnswer != '' "
+						ng-class="{ 'btn-primary' : canSave('content') }"
+						ng-disabled="!canSave('content')">
+						<strong>Gem</strong>
+					</button>
+				</span>
+			</span>
+		
+		</div>
+
+		<div class="comments">
+
+			<div ng-repeat="_c in comments">
+
+				<div class="comment" 
+					ng-class="indentClass(_c.id)"
+					id="comment{{ _c.id }}">
+					<span class="user-image">
+						<i ng-if="_c.user.image == null " class="fa fa-user default-image"></i>
+						<img ng-if="_c.user.image != null " ng-src="../media/medlem/{{ _c.user.image }}">
+					</span>
+					<span class="content">
+						<span class="user-info">
+
+							<span ng-if="_c.parent_user">
+								<strong> {{ _c.user.full_name }} </strong>
+								&nbsp;<i class="fa fa-share"></i>&nbsp;
+								<strong> {{ _c.parent_user.full_name }}, </strong>
+							</span>
+							<span ng-if="!_c.parent_user">
+								<strong> {{ _c.user.full_name }}, </strong>
+							</span>
+							{{ _c.dateStamp }}
+
+						</span>
+						<pre smilies="_c.content">{{ _c.content }}</pre>
+						<span class="clearfix"></span>
+	
+						<a class="answer-comment"
+							href="" 
+							ng-click="setActionAnswer(_c.id)">
+							Svar
+						</a>
+		
+						<span class="comment-answer-box indent1" ng-if="actionAnswer == _c.id">
+
+							<textarea class="form-control" 
+								id="answer-comment-content{{_c.id}}"
+								ng-keyup="textAreaAdjust('answer-comment-content'+_c.id)"
+								rows="3" 
+								ng-model="comment.contentAnswer">
+							</textarea>
+
+							<span class="answer-comment-action pull-right">
+								<button class="btn btn-xs btn-default"
+									ng-click="actionCancel()">
+									Fortryd
+								</button>
+								<button class="btn btn-xs"
+									ng-click="actionSave()"
+									ng-class="{ 'btn-primary' : canSave('contentAnswer') }"
+									ng-disabled="!canSave('contentAnswer')">
+									<strong>Gem</strong>
+								</button>
+							</span>
+						</span>
+
+					</span>
+				</div>
+			</div>		
+		</div>
+
+	</div>
+</div>
+

@@ -1,0 +1,25 @@
+<div>
+	<table class="table table-striped">
+		<tr ng-repeat="article in articles | orderBy: 'dateInt':true ">
+			<td class="h5">
+				&nbsp;&nbsp;
+				<i ng-if="user_id == article.user_id"
+					title="Rediger artikel"
+					ng-click="onEdit(article.id)"
+					class="fa fa-fw fa-wrench fa-x2 text-primary cursor-pointer" >
+				</i>
+			</td>
+			<td>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				{{ article.created_timestamp | date:"dd MMM yyyy HH:mm" }} 
+			</td>
+			<td class="max500">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a class="unstyled h4" ng-href="/artikel/{{ article.id }}/{{ article.urlName }}" debug-link style="overflow: hidden;">
+					{{ article.header }}
+				</a>
+			</td>
+		</tr>
+	</table>
+
+</div>

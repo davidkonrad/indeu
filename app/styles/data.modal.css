@@ -1,0 +1,15 @@
+
+.modal-small {
+	min-width: 500px !important;
+	width: 500px !important;
+}
+
+.modal-medium {
+	min-width: 800px !important;
+	width: 800px !important;
+}
+
+.modal-large {
+	min-width: 1100px !important;
+	width: 1100px !important;
+}

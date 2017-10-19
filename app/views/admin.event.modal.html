@@ -1,0 +1,203 @@
+<div class="modal ng-scope top am-fade-and-slide-top center col-md-12" tabindex="-1" role="dialog" style="display: block;" id="event-dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title" ng-bind-html="__eventModal.title"></h4>
+			</div>
+
+			<div class="modal-body">
+				<div bs-tabs>
+					<div bs-pane data-title="Generelt">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off">
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="user_id">Bruger</label>
+								<div class="col-md-8">
+							    <button class="btn btn-default btn-sm"
+										id="user_id"
+										ng-click="__eventModal.selectUser()"
+										ng-model="edit.user_id">
+											{{ __eventModal.user_btn_caption }}
+									</button>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="name">Navn</label>
+								<div class="col-md-8">
+							    <input class="form-control" 
+										type="text"
+										id="name"
+										select-on-click
+										ng-model="edit.name" 
+										placeholder="Navn på event">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="event_type_idf">Type</label>
+								<div class="col-md-5">
+									<button type="button" 
+										class="btn btn-default" 
+										ng-model="edit.event_type_id" 
+										data-toggle="true"
+										placeholder="Vælg"
+										id="event_type_id"
+										bs-select
+										bs-options="et.id as et.name for et in eventTypes">
+									  <span class="caret"></span>
+									</button>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="date">Dato, tid</label>
+								<div class="col-md-3">
+						      <input type="text" 
+										class="form-control" 
+										ng-model="edit.date" 
+										placeholder="Dato" 
+										data-date-format="dd-MM-yyyy" 
+										data-autoclose="true" 
+										data-container="#event-dialog" 
+										bs-datepicker />
+								</div>			
+								<div class="col-md-2">
+						      <input type="text" 
+										class="form-control" 
+										ng-model="edit.from" 
+										placeholder="Fra" 
+										data-time-format="HH:mm" 
+										data-time-type="string" 
+										data-length="1" 
+										data-minute-step="1" 
+										data-arrow-behavior="picker" 
+										data-autoclose="true" 
+										data-container="#event-dialog" 
+										bs-timepicker />
+								</div>
+								<div class="col-md-2">
+						      <input type="text"		 
+										class="form-control" 
+										ng-model="edit.to" 
+										data-time-format="HH:mm" 
+										data-time-type="string" 
+										data-length="1" 
+										data-minute-step="1" 
+										data-arrow-behavior="picker" 
+										data-autoclose="true" 
+										data-container="#event-dialog" 
+										placeholder="Til" 
+										bs-timepicker />
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="visibility_level">Synlighed</label>
+								<div class="col-md-5">
+									<button type="button" 
+										class="btn btn-default" 
+										ng-model="edit.visibility_level" 
+										data-toggle="true"
+										placeholder="Vælg"
+										id="visibility_level"
+										bs-select
+										bs-options="vl.id as vl.name for vl in visibilityLevels">
+									  <span class="caret"></span>
+									</button>
+								</div>
+							</div>
+
+						</form>
+					</div>
+
+					<div bs-pane data-title="Adresse">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off">
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="adresse">Adresse</label>
+								<div class="col-md-8">
+							    <input class="form-control" 
+										type="text"
+										id="adresse"
+										select-on-click
+										ng-model="edit.address" 
+										ng-click="adresseClick()"
+										adresse-opslag 
+										adresse-type="adresser" 
+										on-select="adresseSelect" 
+										placeholder="Vej, nr">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="postnr">Postnr</label>
+								<div class="col-md-2">
+							    <input class="form-control" 
+										type="text"
+										id="postnr"
+										select-on-click
+										ng-model="edit.postal_code" 
+										placeholder="Postnr">
+								</div>
+					      <label class="col-md-2 control-label required" for="by">By</label>
+								<div class="col-md-4">
+							    <input class="form-control" 
+										type="text"
+										id="by"
+										select-on-click
+										ng-model="edit.city" 
+										placeholder="by">
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div bs-pane data-title="Beskrivelse">
+						<form role="form" class="form-horizontal" autocomplete="off">
+							<br>
+					    <div class="form-group" style="height:50px !important;">
+								<div class="col-md-12">
+									<text-angular ng-model="edit.about" 
+										ta-text-editor-class="form-control col-md-12 gruppe-dialog"
+										ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'html']]">
+									</text-angular>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div bs-pane data-title="Kontaktpersoner" data-disabled="__eventModal.create == true">
+						<table datatable="" 
+							id="table-gruppe-medlemmer"
+							class="table table-striped col-md-12 no-padding no-margin" 
+							dt-options="__eventModal.medlemmer.dtOptions" 
+							dt-columns="__eventModal.medlemmer.dtColumns"
+							dt-instance="__eventModal.medlemmer.dtInstanceCallback">
+						</table>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" 
+					class="btn" 
+					ng-click="eventModalClose(true)" 
+					ng-class="{ 'btn-success' : canSave() }"
+					ng-enabled="canSave()">
+						{{ __eventModal.btnOk }}
+				</button> 
+				<button type="button" 
+					class="btn btn-default" 
+					ng-click="eventModalClose(false)" >
+						Fortryd
+				</button> 
+			</div>
+
+		</div>
+	</div>
+</div>

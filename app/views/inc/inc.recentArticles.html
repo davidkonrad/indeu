@@ -1,0 +1,15 @@
+		<div class="list-group">
+			<span class="text-muted" ng-if="showEmpty()">Ingen nye eller ikke læste artikler</span>
+		  <a ng-repeat="a in articles" 
+				ng-if="!Settings.recentArticlesShowVisited || (Settings.recentArticlesShowVisited && !a.user_visited)"
+				ng-href="/artikel/{{ a.id }}/{{ a.urlName }}" 
+				debug-link
+				ng-class="{ 'list-group-item-success' : !a.user_visited }"
+				class="list-group-item list-group-item-sm">
+					<span ng-if="a.image" class="list-group-item-image">
+						<img ng-src="media/artikel/{{ a.image }}">
+					</span>
+					<span class="list-group-item-image-text">{{ a.header }}</span>
+			</a>
+		</div>
+

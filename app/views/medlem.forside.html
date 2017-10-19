@@ -1,0 +1,71 @@
+
+<div class="col-md-9">
+
+	<div class="medlem-image">
+		<i ng-if="user.image == ''" class="fa fa-user medlem-default-image"></i>
+		<img ng-if="user.image != ''" ng-src="../media/medlem/{{ user.image }}" fancyboxable="{centerOnScroll:true,margin:20}">
+	</div>
+
+	<div class="medlem-info">
+		<h1>{{ user.first_name }} {{ user.last_name }} </h1>
+		<span ng-bind-html="user.about"></span>
+	</div>
+
+	<div class="layout-right-header">Grupper</div>
+	<div user-groups="{{ user.id }}" personal="{{ user.first_name }}"></div>
+
+	<div class="clearfix">
+		<br>
+		</div>
+	<div class="layout-right-header">Kontaktoplysninger</div>
+
+</div>
+
+<div class="col-md-3">
+	<div class="layout-right-header">Socialt</div>
+	<div class="layout-right-header-content" social-links="{{ user }}"></div>
+
+	<div class="layout-right-header">Deltager i kommende events</div>
+	<div class="layout-right-header-content">
+		<div user-events-participate="{{ user }}"></div>
+	</div>
+
+	<div class="layout-right-header">Seneste artikler</div>
+	<div class="layout-right-header-content" user-recent-articles="{{ user.id }}"></div>
+<!--
+		<span ng-repeat="article in articles">
+			<a ng-href="#/artikel/{{ article.id }}/{{ article.headerUrl }}" debug-link>
+				<span class="medlem-event-name">
+					<strong>				
+						{{ article.header }}
+					</strong>
+				</span>
+			</a>
+		</span>
+	</div>
+-->
+
+
+	<div class="layout-right-header">Seneste events</div>
+	<div class="layout-right-header-content">
+		<span ng-repeat="event in events">
+			<a ng-href="#/event/{{ event.id }}/{{ event.name }}" debug-link>
+				<span class="medlem-event-date">
+					{{ event.date | date:"dd/MM" }}
+				</span>
+				<span class="medlem-event-name">
+					<strong>				
+						{{ event.name }}
+					</strong>
+				</span>
+			</a>
+		</span>
+	</div>
+			
+
+	<div class="layout-right-header">Seneste kommentarer</div>
+
+</div>
+
+
+

@@ -1,0 +1,42 @@
+
+/* event */
+input.event-date {
+	width: 110px;
+	max-width: 110px;
+}
+input.event-from {
+	width: 60px;
+	max-width: 60px;
+}
+input.event-to {
+	width: 60px;
+	max-width: 60px;
+}
+input.event-postalcode {
+	width: 60px;
+	max-width: 60px;
+}
+input.event-city {
+	margin-left: 20px;
+	width: 160px;
+	max-width: 160px;
+}
+
+/* calendar */
+
+.dig-calendar .fc-toolbar h2 {
+	font-size: 20px;
+}
+
+.dig-gruppe-owner-icon {
+	position: relative;
+	top: -1px;
+	right: -0px;
+	display: inline-block;
+	float: none;
+	clear: none;
+	z-index: 222;
+}
+
+
+

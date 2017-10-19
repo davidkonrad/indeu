@@ -1,0 +1,249 @@
+'use strict';
+
+angular.module('indeuApp')
+	.directive('logNotifications', function(Utils, Login, ESPBA, Log, Lookup) {
+
+	return {
+		templateUrl: "views/inc/inc.logNotifications.html",
+		restrict: 'EA',
+		replace: true,
+		scope: {
+			userId: '@',
+			hash: '@',
+			limit: '=',
+			notSeen: '=',
+		},
+		link: function(scope, element, attrs) {
+
+			var login_user_id = Login.isLoggedIn() ? Login.currentUser().id	: null;
+
+			function entityLink(item) {
+				if (item.article_id) {
+					return ' artiklen <a href="'+Utils.articleUrl(item.article_id, item.article_name)+'">'+item.article_name+'</a>';
+				} else if (item.group_id) {
+					return ' gruppen <a href="'+Utils.gruppeUrl(item.group_id, item.group_name)+'">'+item.group_name+'</a>';
+				} else if (item.event_id) {
+					return ' eventen <a href="'+Utils.eventUrl(item.event_id, item.event_name)+'">'+item.event_name+'</a>';
+				} else if (item.forening_id) {
+					return ' foreningen <a href="'+Utils.foreningUrl(item.forening_id, item.forening_name)+'">'+item.forening_name+'</a>';
+				}
+				return 'Should never happen';
+			}
+
+			function process(item) {
+				item.type = parseInt(item.type);
+				item.display_timestamp = moment(item.created_timestamp).fromNow().capitalize();
+
+				switch (item.type) {
+					//user
+					case Log.USER_PROFILE_EDITED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'redigerede din';
+						item.action += ' <a href="'+Utils.userUrl(item.user_id, item.user_full_name) + '">profil</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.USER_ENTITY_RATING :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'gav';
+						item.action += ' '+entityLink(item);
+						item.action += ' en brugervurdering';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					//associations
+					case Log.ASSOCIATION_CREATED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'oprettede foreningen';
+						item.action += ' <a href="'+Utils.foreningUrl(item.forening_id, item.forening_name) + '">'+item.forening_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.ASSOCIATION_EDITED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'redigerede foreningen';
+						item.action += ' <a href="'+Utils.foreningUrl(item.forening_id, item.forening_name) + '">'+item.forening_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.ASSOCIATION_MEMBER_ADDED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						var contextName = item.context_user_id == login_user_id ? 'dig' : item.context_user_full_name;
+						item.action = 'tilføjede <a href="'+Utils.userUrl(item.context_user_id, item.context_user_full_name)+'">'+ contextName +'</a>';
+						item.action += ' til foreningen <a href="'+Utils.foreningUrl(item.forening_id, item.forening_name) + '">'+item.forening_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.ASSOCIATION_MEMBER_REMOVED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						var contextName = item.context_user_id == login_user_id ? 'dig' : item.context_user_full_name;
+						item.action = 'fjernede <a href="'+Utils.userUrl(item.context_user_id, item.context_user_full_name)+'">'+ contextName +'</a>';
+						item.action += ' fra foreningen <a href="'+Utils.foreningUrl(item.forening_id, item.forening_name) + '">'+item.forening_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+					
+					//comments
+					case Log.COMMENT_ENTITY :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'kommenterede';
+						item.action += entityLink(item);
+						item.title = Utils.plainText(item.action);	
+						break;
+
+					case Log.COMMENT_COMMENT :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'svarede ';
+						item.action += ' <a href="'+Utils.userUrl(item.context_user_id, item.context_user_full_name)+'">' + item.context_user_full_name + '</a>';
+						item.action += ' i '+entityLink(item);
+						item.title = Utils.plainText(item.action);	
+						break;
+
+					case Log.COMMENT_OWN_COMMENT :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'besvarede din egen kommentar';
+						item.action += ' i '+entityLink(item);
+						item.title = Utils.plainText(item.action);	
+						break;
+					
+					//groups
+					case Log.GROUP_MEMBER_ADDED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.url = Utils.gruppeUrl(item.group_id, item.group_name);
+						item.title = item.userName + ' ' + item.action + ' ' + item.group_name;
+						item.action = 'følger nu gruppen <a href="'+item.url+'">' + item.group_name +'</a>';
+						break;
+
+					case Log.GROUP_CREATED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'oprettede gruppen';
+						item.action += ' <a href="'+Utils.gruppeUrl(item.group_id, item.group_name) + '">'+item.group_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.GROUP_EDITED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'redigerede gruppen';
+						item.action += ' <a href="'+Utils.gruppeUrl(item.group_id, item.group_name) + '">'+item.group_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					//events
+					case Log.EVENT_CREATED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'oprettede en ny event ';
+						item.action += '  <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">'+item.event_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.EVENT_EDITED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'redigerede eventen';
+						item.action += '  <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">'+item.event_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.EVENT_CONTACTPERSON_ADDED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'tilføjede';
+						var contextName = item.context_user_id == login_user_id ? 'dig' : item.context_user_full_name;
+						item.action += '  <a href="'+Utils.userUrl(item.context_user_id, item.context_user_full_name) + '">' + contextName + '</a>';
+						item.action += ' som kontaktperson til eventen <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">'+item.event_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.EVENT_CONTACTPERSON_REMOVED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						var contextName = item.context_user_id == login_user_id ? 'dig' : item.context_user_full_name;
+						item.action = 'fjernede';
+						item.action += '  <a href="'+Utils.userUrl(item.context_user_id, item.context_user_full_name) + '">' + contextName + '</a>';
+						item.action += ' som kontaktperson til eventen <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">'+item.event_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.EVENT_GROUP_ADDED :
+						var group = Lookup.getGroup(item.context_user_id);
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'tilføjede';
+						item.action += '  <a href="'+Utils.gruppeUrl(group.id, group.name) + '">'+group.name+'</a>';
+						item.action += ' til eventen <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">'+item.event_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.EVENT_GROUP_REMOVED :
+						var group = Lookup.getGroup(item.context_user_id);
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'fjernede';
+						item.action += '  <a href="'+Utils.gruppeUrl(group.id, group.name) + '">'+group.name+'</a>';
+						item.action += ' fra eventen <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">'+item.event_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.EVENT_FEEDBACK_1 :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'deltager måske i eventen';
+						item.action += ' <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">' + item.event_name + '</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.EVENT_FEEDBACK_2 :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'deltager i eventen';
+						item.action += ' <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">' + item.event_name + '</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.EVENT_FEEDBACK_REMOVE :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'deltager alligevel ikke i eventen';
+						item.action += ' <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">' + item.event_name + '</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					//articles
+					case Log.ARTICLE_EDITED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'redigerede artiklen';
+						item.action += '  <a href="'+Utils.articleUrl(item.article_id, item.article_name) + '">'+item.article_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.ARTICLE_CREATED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'oprettede en ny artikel';
+						item.action += '  <a href="'+Utils.articleUrl(item.article_id, item.article_name) + '">'+item.article_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+
+					default : 
+						break;
+				}
+			}
+			
+			function reload() {
+				var params = {};
+				if (scope.userId) params.user_id = scope.userId;
+				if (scope.hash) params.hash = scope.hash;				
+				if (scope.notSeen) params.notSeen = 'yes';
+				if (scope.limit) params.limit = scope.limit;
+
+				ESPBA.prepared('Log', params).then(function(p) {
+					p.data.forEach(function(item) {
+						process(item)
+					})
+					scope.notifications = p.data
+				})
+			}
+
+			attrs.$observe('userId', function() {
+				if (scope.userId) reload()
+			})
+			attrs.$observe('hash', function() {
+				if (scope.hash) reload()
+			})
+
+		}
+	}
+
+});
+

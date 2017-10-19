@@ -1,0 +1,382 @@
+
+/** reset some styles **/
+*.no-margin {
+	margin: 0px !important;
+}
+*.no-padding {
+	padding: 0px !important;
+}
+
+/** dataTables **/
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding : 0px;
+	margin-left: 0px;
+	display: inline;
+	border: 0px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	border: 0px;
+}
+
+/* reset dataTables + boostrap + angular dataTables sort icons to something reasonable **/
+table.table thead .sorting_desc:before {
+	content: "";
+	padding: 0px;
+}
+table.table thead .sorting_asc:before {
+	content: "";
+	padding: 0px;
+}
+table.dataTable thead .sorting_asc:after {
+	content: "\25B4";
+	top: 7px;
+	color: blue;
+}
+table.dataTable thead .sorting_desc:after {
+	content: "\25BE";
+	top: 7px;
+	color: blue;
+}
+
+/*
+table.dataTable thead .sorting, 
+table.dataTable thead .sorting_asc, 
+table.dataTable thead .sorting_desc {
+	background: none !important;
+}
+*/
+
+.modal-open {
+	overflow: scroll;
+}
+
+.navbar-default {
+	padding-right: 20px !important;
+	margin-bottom: 0px;
+  background-color: rgba(248, 248, 248, 0.7);
+}
+.navbar {
+	margin-bottom: 0px;
+}
+
+/*' */
+.element-even {
+	background-color: rgb(251, 251, 251) !important;
+}
+
+/** new affix **/
+.affix {
+	top: 0;
+	width: 100%;
+}
+
+.affix + .container-fluid {
+	padding-top: 70px;
+}
+
+.dropdown-menu {
+	z-index: 1005;
+}
+
+/* large dropdown menu */
+.dropdown-menu-left {
+	position: absolute !important;
+	left: 270px !important;
+	font-weight: bold;
+}
+
+/* correct to large search icon */
+.input-group-addon {
+	line-height: 0;
+}
+
+/* anchor styling */
+a.unstyled {
+	color: inherit;
+	text-decoration: none;
+	cursor: pointer;
+}
+a.disabled {
+	cursor: not-allowed;
+	opacity: .5; 
+}
+a.disabled:hover, a.disabled:active, a.disabled:focus {
+	text-decoration: none;
+}
+
+.container-fluid {
+	padding-right: 0px; !important;
+	padding-left: 0px; !important;
+
+}
+
+/* navbar top */
+.indeu-navbar {
+	background-color: #000; /* DK #E31836; */ /* EU #003399; */
+	height:97px;
+	background-repeat: repeat-x;
+}
+.indeu-navbar-left {
+	float: left;
+	clear: none;
+}
+.indeu-navbar-right {
+	clear: none; 
+	top: 15px;
+	color: white;
+}
+code.indeu-navbar-logo {
+	padding-left:10px;
+	padding-right:10px;
+	color: #fff; /*#FFCC00;*/
+	background-color: #000; /* DK #E31836;*/ /*EU #003399; */
+}
+.navbar-right {
+	padding-right: 100px !important;
+}
+
+/* required red star */
+label.required:before {
+  content: "* ";
+  color: red;
+}
+
+/* prevent selection */
+*.no-select {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/** fix angular-dataTables pagination issue **/
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	padding: 0px;
+}
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+	border-bottom: 0px;
+}
+table.table-striped tbody tr {
+	cursor: pointer;
+}
+table tbody tr td {
+	white-space: nowrap
+}
+table thead th {
+	white-space: nowrap
+}
+div.dataTables_filter {
+	float: right;
+}
+.td-about-text {
+	max-width: 250px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}	
+
+/** device widths **/
+.max-width {
+	max-width: 1070px !important;
+}
+.admin-max-width {
+	margin-left: 20px;
+}
+
+/** text-angular fixes **/
+.ta-scroll-window {
+	margin-top: 4px !important;
+}
+.ta-editor.form-control.ta-editor-small, .ta-scroll-window.form-control.ta-editor-small {
+	min-height: 100px;
+	height: 100px;
+	max-width: 100%;
+	white-space: normal;
+}
+.ta-editor.form-control.ta-editor-md, .ta-scroll-window.form-control.ta-editor-md {
+	min-height: 200px;
+	height: 200px;
+	max-width: 100%;
+	white-space: normal;
+}
+
+.ta-scroll-window > .ta-bind {
+	max-width: 100%;
+}
+
+/* general */
+.no-margin : {
+	margin: 0px;
+}
+.no-bottom-margin {
+	margin-bottom: 0px !important;
+}
+.no-padding-top {
+	padding-top: 0px !important;
+}
+
+*.cursor-pointer {
+	cursor: pointer;
+}
+*.no-wrap {
+	white-space: nowrap;
+}
+*.auto-width {
+	width: auto !important;
+}
+
+img {
+	max-width: 100%;
+}
+/* fix fancy box image movement */
+#fbplus-wrap {
+	box-sizing: content-box;
+}
+#fbplus-content { 
+	box-sizing: content-box;
+}
+
+/* leaflet */
+.event-leaflet-map {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	width: 100%;
+	height: 200px;
+}
+
+/* angular strap */
+.datepicker {
+	z-index: 2000;
+}
+
+/* fullcalandar */
+.fc-event, .fc-event:hover, .ui-widget .fc-event {
+	cursor: pointer;
+}
+
+/* notification */
+.ui-notification {
+	border-radius: 5px;
+	white-space: nowrap;
+	width: auto;
+}
+
+/* reverse odd even */
+.table-striped > tbody > tr:nth-of-type(odd) {
+	background-color: #fff;
+}
+.table-striped > tbody > tr:nth-of-type(even) {
+	background-color: #f9f9f9;
+}
+
+/* stars*/
+.msg-ngrateit {
+	clear: none;
+	float: left;
+	display: inline-block;
+	font-size: 80%;
+	position: relative;
+	top: 2px;
+	margin-right: 6px;
+}
+.ngrateit {
+	clear: none;
+	float: left;
+	display: inline-block;
+}
+.btn-ngrateit {
+	clear: none;
+	margin-left: 5px;
+	position: relative;
+	top: -2px;
+	float: right;
+	display: inline-block;
+}
+
+/* form fade */
+.form-fade.ng-hide {
+  opacity: 0;
+}
+.form-fade.ng-hide-remove,
+.form-fade.ng-hide-add {
+  display: block !important; /* or inline-block, as appropriate */
+}
+.form-fade.ng-hide-remove {
+  transition: all linear 500ms;
+}
+.form-fade.ng-hide-add {
+  transition: all linear 500ms;
+}
+
+/* different glow border? */
+.white-glow-control:focus {
+  border-color: #FF0000;
+ /*
+	 box-shadow: inset 0px 0px 3px 3px rgba(0, 0, 0, 0.075), 3px 3px 2px rgba(255, 0, 0, 0.6); 
+*/
+ border-color: rgba(126, 239, 104, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
+  outline: 0 none;
+}
+
+/* hide tooltip arrow */
+.tooltip .tooltip-arrow {
+	visibility: hidden;
+}
+.tooltip .tooltip-inner {
+	font-family: "Lucida Sans Unicode", Roboto !important;
+	font-weight: 400;
+	font-size: 17px;
+	max-width: 250px;
+}
+
+/*
+.tooltip .tooltip-inner {
+	font-family: verdana, Arial;
+	xxword-break: nowrap;
+	max-width: 200px;
+	font-weight: 500;
+	font-size: 15px;
+	color: white;
+  text-shadow: 2px 2px #ff0000;
+}
+*/
+
+/* full calendar */
+.fc button {
+	font-size: 12px;
+}
+
+/* smiley */
+[class^='smiley-'], [class*=' smiley-'] {
+	position: relative;
+	top: 4px;
+}
+
+/* ?? */
+.mega-dropdown-menu {
+	padding-right: 30px;
+	padding-bottom: 20px;
+	padding-top: 10px;
+}
+.mega-dropdown-menu li {
+	white-space: nowrap;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.mega-dropdown-menu li ul:first-child {
+	padding-left: 20px !important;
+}
+.mega-dropdown-menu li ul:last-child {
+	padding-right: 60px !important;
+}
+
+.mega-dropdown-menu li ul {
+	padding-left: 10px;
+	Xpadding-right: 0px;
+	Xmargin-right: 0px;
+	Xmargin-left: 0px;
+}
+
+
+

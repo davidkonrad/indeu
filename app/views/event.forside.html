@@ -1,0 +1,129 @@
+<div class="col-md-9">
+	<div ng-if="action == '' ">		
+
+			<h4>
+				<small>
+					<a href="{{ event.userUrlLink }} ">{{ event.userFullName }}</a>,
+					uploadet <span title="{{ event.realDate }}">{{ event.dateStamp }}</span>
+				</small>
+			</h4>
+
+
+		<h1> {{ event.name }} </h1>
+		<div class="col-md-8">
+			<div class="well well-lg">
+				<h4 class="no-margin">
+					Hvornår: <strong class="text-primary">{{ event.date | date : "dd/MM/yyyy" }} </strong> 
+					kl. <strong class="text-primary">{{ event.from | date : "HH:mm" }}</strong>
+					<span ng-if="event.to != null">
+						til kl. <strong class="text-primary">{{ event.to | date : "HH:mm" }} </strong>
+					</span>
+				</h4>
+				<h4 class="no-margin" style="padding-top:15px;">
+					Sted: <strong class="text-primary">{{ event.address }}</strong> 
+				</h4>
+			</div>
+			<div ng-bind-html="event.about"></div>
+			<entity-rating hash="{{ event.hash }}" user-id="{{ user.id }}" class="pull-right"></entity-rating>
+		</div>
+		<div class="col-md-4 no-padding">
+			<leaflet class="event-leaflet-map"
+				center="eventMap.center" 
+				defaults="eventMap.defaults" 
+				layers="eventMap.layers" 
+				markers="eventMap.markers" 
+				events="eventMap.events">
+			</leaflet>
+		</div>
+		<div class="col-md-12" ng-if="user">
+			<hr>
+			<span>Hvad vil du?&nbsp;&nbsp;</span>
+			<div class="btn-group" ng-model="feedback.feedback" bs-radio-group>
+			  <label class="btn btn-default btn-sm" 
+					ng-class="{ 'btn-danger' : feedback.feedback == 0 }"
+					ng-click="setFeedback(0)">
+					<input type="radio" class="btn btn-default" value="0" > Deltager ikke
+				</label>
+			  <label class="btn btn-default btn-sm" 
+					ng-class="{ 'btn-primary' : feedback.feedback == 1 }"
+					ng-click="setFeedback(1)">
+					<input type="radio" class="btn btn-default" value="1"> Deltager måske
+				</label>
+			  <label class="btn btn-default btn-sm" 
+					ng-class="{ 'btn-success' : feedback.feedback == 2 }"
+					ng-click="setFeedback(2)">
+					<input type="radio" class="btn btn-default" value="2"> Jeg deltager
+				</label>		
+			</div>
+			<hr>
+		</div>
+	</div>
+
+	<div ng-if="action == 'e'">
+		<h3 class="no-padding no-margin">&nbsp;Rediger</h3>
+		<div edit-event="{{ event.id }}"  
+			user-id="{{ user.id }}"
+			on-save="actionSaved(item)" 
+			on-cancel="actionCancel()">
+		</div>
+	</div>
+
+	<log-notifications hash="{{ event.hash }}"></log-notifications>
+
+	<comments hash="{{ event.hash }}" user-id="{{ user.id }}"></comments>
+
+</div>
+	
+<div class="col-md-3">
+	<div class="layout-right-header">Handlinger</div>
+	<div class="layout-right-header-content">
+		<a ng-if="user.id == event.user_id"
+			href="" 
+			ng-class="{ 'disabled': actionDisable('e') }"
+			ng-disabled="actionDisable('e')" 
+			ng-click="setAction('e')">
+			<i class="fa fa-fw fa-wrench fa-x2"></i>
+			Rediger event<br>
+		</a>
+		<a href="" 
+			ng-class="{ 'disabled': actionDisable('e') }"
+			ng-disabled="actionDisable('n')" 
+			ng-click="setAction('n')">
+			<i class="fa fa-fw fa-calendar fa-x2"></i>
+			Ny event
+		</a>
+	</div>
+
+	<div ng-if="user.id != event.user_id">
+		<div class="layout-right-header">Oprettet af</div>
+		<div class="layout-right-header-content">
+			<a ng-href="/medlemmer/{{ event_user.id }}/{{ event_user.urlName }}" debug-link>{{ event_user.full_name }}</a>
+		</div>
+	</div>
+
+	<div class="layout-right-header">Kontakt</div>
+	<div class="layout-right-header-content">
+		<span ng-repeat="cp in event_contactpersons">
+			<a ng-href="/medlemmer/{{ cp.user.id }}/{{ cp.user.urlName }}" debug-link>{{ cp.user.full_name }}</a><br>
+		</span>
+	</div>
+
+	<div class="layout-right-header">Grupper</div>
+	<div class="layout-right-header-content">
+		<span ng-repeat="g in event_groups">
+			<a ng-href="/grupper/{{ g.group_id }}/{{ g.urlName }}" debug-link>{{ g.name }}</a><br>
+		</span>
+	</div>
+
+	<div class="layout-right-header">Deltagere</div>
+	<div class="layout-right-header-content">
+		<div event-participants="{{ event.id }}"></div>
+	</div>
+
+</div>
+
+<div class="col-md-12 clearfix">
+	<br><br>
+</div>
+
+

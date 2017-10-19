@@ -1,0 +1,26 @@
+<div>
+		<div class="list-group">
+			<span class="text-muted" ng-if="showEmpty()">Ingen nye eller ikke sete events</span>
+		  <a ng-repeat="e in events" 
+				ng-if="!Settings.recentEventsShowVisited || (Settings.recentEventsShowVisited && !e.user_visited)"
+				ng-href="{{ e.urlLink }}"
+				ng-class="{ 'list-group-item-success' : !e.user_visited }"
+				debug-link
+				class="list-group-item list-group-item-sm" >
+<!--
+					<small ng-if="e.group_id != false" class="text-muted">&#9658;
+					<a ng-href="{{ e.group_urlLink }}" class="unstyled" debug-link bs-tooltip="e.group_name">
+						<i class="fa fa-users text-muted"></i>ss
+					</a>
+					</small>
+-->
+				<span>	{{ e.name }} </span>
+				<span ng-if="e.group_id != false">
+					<small class="text-priority" style="position: relative; top:-1px;">&nbsp;&#9658;</small>
+					<i class="fa fa-users text-muted"></i>
+				</span>
+			</a>
+		</div>
+
+
+</div>

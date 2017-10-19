@@ -1,0 +1,8 @@
+<div class="attach-image cursor-pointer" 
+	ng-class="getSizeClass()" 
+	ng-click="loadImage()">
+	<span ng-if="image == ''" ng-bind-html="defaultImage"	title="Klik for at skifte billede"></span>
+	<span class="attach-image-center">
+		<img ng-if="image != ''" ng-src="{{ image }}"	title="Klik for at skifte billede">
+	</span>
+</div>

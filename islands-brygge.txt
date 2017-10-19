@@ -1,0 +1,35 @@
+
+davidkonrad@gmail.com		test
+hellejoench@gmail.com		test
+milipoul@gmail.com			test
+john@doe.com						test
+
+
+* lave statiske sider, og så sætte nogle stamlinks i bunden der kan rumme en statisk artikel
+
+* upvote/downvote system. Et stjernesystem  1-6 stjerner. Dannebrogsflag. 
+
+* på artikelejeren skal også kunne se hvor man læsninger
+
+* månedens blogger (automatisk?) 
+
+* ur der tæller population op / ned etniske europæere / migranter
+
+* tal der tæller antallet migranter op 
+
+* dagens oplysning / dagens wow / vidste du at ....
+
+* 
+
+
+
+
+
+
+
+
+
+ 
+
+
+

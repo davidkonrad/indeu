@@ -1,0 +1,54 @@
+
+.attach-image {
+	text-align: center;
+	vertical-align: middle;
+	display: table;
+	color: gray;
+}
+
+.attach-image-icon {
+	background-color: #f8f8f8;
+	font-size: 850%;
+}
+
+.attach-image img {
+	vertical-align: middle;
+}
+
+.attach-image-center {
+	display: inline-block; 
+	height: 100% !important;
+	vertical-align: middle;
+	margin-bottom: 10px;
+}
+
+.attach-image-sm {
+	height: 65px;
+	min-height: 25px;
+	max-height: 65px;
+	max-width	: 	90px;
+	width: 90px;
+	font-size	: 60px;
+	padding	:	4px;
+	border-radius	: 4px;
+}
+
+.attach-image-md {
+	max-width: 170px;
+	max-height: 90px;
+	width: 170px;
+	height:	90px;
+	font-size: 120px;
+	padding	:	4px;
+	border-radius: 6px;
+}
+
+.attach-image-auto {
+	min-width: 90%;
+	min-height: 90%;
+	width: 90%;
+	height: 90%;
+	padding	:	4px;
+	border-radius	: 4px;
+}
+

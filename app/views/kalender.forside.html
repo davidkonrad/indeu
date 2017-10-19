@@ -1,0 +1,28 @@
+<div class="container-fluid">
+
+	<div class="col-md-8">
+<!--
+		<h1 ng-if="!isLoggedIn">Åben kalender</h1>
+		<h1 ng-if="isLoggedIn">Kalender</h1>
+		<p ng-if="!isLoggedIn">Der vises kun events fra den åbne, offentlige kalender. For at se alle events skal du logge ind.</p>
+		<p ng-if="isLoggedIn">Alle offentlige events, events forbeholdt brugere samt events knyttet til de grupper du er medlem af.</p>
+-->
+		
+		<div ui-calendar="uiConfig.calendar" class="calendar" ng-model="events"></div> 
+	</div>
+	
+	<div class="col-md-4">
+		<leaflet class="event-leaflet-map"
+			height="300"
+			center="eventMap.center" 
+			defaults="eventMap.defaults" 
+			layers="eventMap.layers" 
+			markers="eventMap.markers" 
+			events="eventMap.events">
+		</leaflet>
+	</div>
+
+</div>
+
+
+

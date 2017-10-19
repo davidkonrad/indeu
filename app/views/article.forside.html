@@ -1,0 +1,78 @@
+
+<div class="col-md-9">
+	<div ng-if="action == '' ">		
+
+		<div class="artikel">
+			<h4>
+				<small>
+					<a href="{{ article.userUrlLink }} ">{{ article.userFullName }}</a>,
+					uploadet <span title="{{ article.realDate }}">{{ article.dateStamp }}</span>
+				</small>
+			</h4>
+			<h1> {{ article.header }} </h1>
+			<h4><em> {{ article.sub_header }} </em></h4>
+
+			<div ng-if="article.image"class="artikel-image">
+				<img ng-src="media/artikel/{{ article.image }}">
+			</div>
+
+			<div class="artikel-content"	ng-bind-html="article.content"></div>
+
+			<div class="col-md-12 clearfix">
+				<entity-rating hash="{{ article.hash }}" user-id="{{ user.id }}" class="pull-right"></entity-rating>
+			</div>
+
+			<comments hash="{{ article.hash }}" on-comment-added="onCommentAdded"></comments>
+		</div>
+
+	</div>
+	
+	<div ng-if="action == 'a'">
+		<h3 class="no-padding no-margin">&nbsp;Rediger</h3>
+		<div edit-article="{{ article.id }}"  
+			user-id="{{ user.id }}"
+			on-save="actionSaved(item)" 
+			on-cancel="actionCancel()">
+		</div>
+	</div>
+
+</div>
+	
+	
+<div class="col-md-3">
+
+	<div ng-if="user.id == article.user_id">
+		<div class="layout-right-header">Handlinger</div>
+		<div class="layout-right-header-content">
+			<small ng-if="visitCounter != false "
+				style="display: inline-block; position: relative; top: -9px;"
+				class="pull-right no-padding no-margin">
+				<small>Vist {{ visitCounter }} gange</small>
+			</small>
+			<a href="" 
+				ng-class="{ 'disabled': actionDisable('e') }"
+				ng-disabled="actionDisable('a')" 
+				ng-click="setAction('a')">
+				<i class="fa fa-fw fa-wrench fa-x2"></i>
+				Rediger artikel<br>
+			</a>
+		</div>
+	</div>
+
+	<div ng-if="article_groups.length">
+		<div class="layout-right-header">Grupper</div>
+		<div class="layout-right-header-content">
+			<span ng-repeat="g in article_groups">
+				<a ng-href="/grupper/{{ g.group_id }}/{{ g.urlName }}" debug-link>{{ g.name }}</a><br>
+			</span>
+		</div>
+	</div>
+
+	<div class="layout-right-header">Kommentarer</div>
+	<div class="layout-right-header-content" recent-comments="{{ article.hash }}" limit="5"></div>
+
+</div>
+
+</div>
+
+

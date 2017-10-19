@@ -1,0 +1,176 @@
+<div class="modal ng-scope top am-fade-and-slide-top center col-md-12" tabindex="-1" role="dialog" style="display: block;" id="artikel-dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title" ng-bind-html="__artikelModal.title"></h4>
+			</div>
+
+			<div class="modal-body">
+				<div bs-tabs>
+
+					<div bs-pane data-title="Generelt">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off">
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="author_id">Bruger (forf.)</label>
+								<div class="col-md-4">
+							    <button class="btn btn-default btn-sm"
+										id="author_id"
+										ng-click="__artikelModal.selectAuthor()"
+										ng-model="edit.author_id">
+											{{ __artikelModal.author_btn_caption }}
+									</button>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="alternative_author">Alt. forfatter</label>
+								<div class="col-md-4">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="alternative_author"
+										select-on-click
+										ng-model="edit.alternative_author" 
+										placeholder="Alternativ forfatter">
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required" for="visibility_level">Synlighed</label>
+								<div class="col-md-4">
+									<button type="button" 
+										class="btn btn-default btn-sm" 
+										ng-model="edit.visibility_level" 
+										data-toggle="true"
+										placeholder="Vælg"
+										id="visibility_level"
+										bs-select
+										bs-options="vl.id as vl.name for vl in visibilityLevels">
+									  <span class="caret"></span>
+									</button>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for=""></label>
+								<div class="col-md-10 checkbox">
+
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit.accepted"
+											ng-false-value="'0'" 
+											ng-true-value="'1'">Godkendt
+									</label>
+
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit.published"
+											ng-false-value="'0'" 
+											ng-true-value="'1'">Publiceret
+									</label>
+
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit.allow_comments"
+											ng-false-value="'0'" 
+											ng-true-value="'1'">Kommentarer
+									</label>
+
+									<span class="pull-right" style="margin-right:100px;">
+										Valideret af <strong>{{ __artikelModal.reviewerFullName }}&nbsp;</strong>
+									</span>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="">Grupper</label>
+								<div class="col-md-10">
+
+									<span ng-repeat="g in __artikelModal.article_groups">
+										<button class="btn btn-default btn-sm" type="button">
+											{{ g.name }}
+											<i class="fa fa-remove text-danger"
+												title="Fjern gruppe"
+												ng-click="__artikelModal.removeGroup(g.id)">
+											</i>
+										</button>
+									</span>
+							    <button class="btn btn-default btn-xs"
+										ng-disabled="!edit.id"
+										ng-click="__artikelModal.addGroup()">
+											<i class="fa fa-plus text-success"></i>&nbsp;Tilføj gruppe
+									</button>
+
+								</div>
+							</div>
+
+						</form>
+					</div>
+
+					<div bs-pane data-title="Overskrift mm">
+						<br>
+						<div class="col-md-6">
+							<form role="form" autocomplete="off">
+						    <div class="form-group">
+						      <label class="control-label" for="header">Overskrift</label>
+							    <input class="form-control input" 
+											type="text"
+											id="header"
+											select-on-click
+											ng-model="edit.header" 
+											placeholder="overskrift">
+								</div>
+						    <div class="form-group">
+						      <label class="control-label" for="sub_header">Manchet</label>
+							    <input class="form-control input" 
+											type="text"
+											id="sub_header"
+											select-on-click
+											ng-model="edit.Sub_header" 
+											placeholder="Manchet">
+								</div>
+
+							</form>
+						</div>
+						<div class="col-md-6">
+							<attach-image ng-model="edit.image" type="a" size="auto" height="200"></attach-image>
+						</div>
+					</div>
+
+					<div bs-pane data-title="Tekst">
+						<form role="form" class="form-horizontal" autocomplete="off">
+							<br>
+					    <div class="form-group" style="height:50px !important;">
+								<div class="col-md-12">
+									<text-angular ng-model="edit.content" 
+										ta-text-editor-class="form-control col-md-12 gruppe-dialog"
+										ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'html']]">
+									</text-angular>
+								</div>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" 
+					class="btn" 
+					ng-click="artikelModalClose(true)" 
+					ng-class="{ 'btn-success' : canSave() }"
+					ng-enabled="canSave()">
+						{{ __artikelModal.btnOk }}
+				</button> 
+				<button type="button" 
+					class="btn btn-default" 
+					ng-click="artikelModalClose(false)" >
+						Fortryd
+				</button> 
+			</div>
+
+		</div>
+	</div>
+</div>

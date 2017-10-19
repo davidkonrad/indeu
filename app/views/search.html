@@ -1,0 +1,70 @@
+
+<div class="col-md-9">
+
+	<div class="col-md-12">
+		<form>
+	    <label class="checkbox-inline">
+	      <input type="checkbox" 
+					ng-false-value="undefined"
+					ng-true-value="true"
+					ng-model="Settings.searchWithinArticles">Artikler
+	    </label>
+	    <label class="checkbox-inline">
+	      <input type="checkbox"
+ 					ng-false-value="undefined"
+					ng-true-value="true"
+					ng-model="Settings.searchWithinEvents">Events
+	    </label>
+	    <label class="checkbox-inline">
+	      <input type="checkbox"
+					ng-false-value="undefined"
+					ng-true-value="true"
+					ng-model="Settings.searchWithinBulletins">Opslag
+	    </label>
+			
+			<br><br>
+	  </form>
+	</div>
+
+	<div class="input-group col-md-6">
+	  <input id="input"
+			type="search" 
+			class="form-control" 
+			select-on-click
+			ng-model="term"
+			placeholder="søg ..">
+	  <span class="input-group-btn">
+	    <button class="btn btn-default" type="submit">
+        <i class="fa fa-search"></i>
+	    </button>
+	  </span>
+	</div>
+
+	<p ng-if="!results"	class="text-muted">
+		<br>
+		Ingen søgning
+	</p>
+	<p ng-if="results"	class="text-muted">
+		<br>
+		{{ results.length }} resultater
+	</p>
+
+	<div ng-repeat="r in results">
+		<div class="clearfix" style="margin-bottom:16px;">&nbsp;</div>
+		<a ng-href="{{ r.url }}" class="unstyled">
+			<h3 class="text-primary no-margin search">{{ r.caption }}</h3>
+			<span class="h5"><small> {{ r.full_name }}, {{ r.date_str }} </small></span>
+			<p class="col-md-11" ng-bind-html="r.content_extract"></p>
+		</a>
+	</div>
+
+
+</div>
+
+<div class="col-md-3">
+højre
+</div>
+
+
+
+

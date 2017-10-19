@@ -1,0 +1,10 @@
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components
+/app/media-uploads
+/app/api/pw.php
+/convert/
+log.txt
+old_Gruntfile.js

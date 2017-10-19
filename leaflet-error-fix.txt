@@ -1,0 +1,6 @@
+
+linie 240 angular-leaflet-directive.js
+
+//        if(!defaults.controls.layers.visible) {
+				if(!defaults || !defaults.controls.layers.visible) {
+

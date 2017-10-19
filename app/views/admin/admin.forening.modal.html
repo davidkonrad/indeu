@@ -1,0 +1,126 @@
+<div class="modal ng-scope top am-fade-and-slide-top center medium-dialog" tabindex="-1" role="dialog" style="display: block;" id="forening-dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title" ng-bind-html="__forModal.title"></h4>
+			</div>
+
+			<div class="modal-body">
+				<div bs-tabs>
+
+					<div bs-pane data-title="Generelt">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off">
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="name">Navn</label>
+								<div class="col-md-9">
+							    <input class="form-control input-sm" 
+										type="text"
+										id="name"
+										select-on-click
+										ng-model="edit.name" 
+										placeholder="Navn">
+								</div>
+							</div>
+
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="owner_id">Ejer</label>
+								<div class="col-md-5">
+							    <button class="btn btn-default btn-sm"
+										id="owner_id"
+										ng-click="__forModal.selectOwner()"
+										ng-model="edit.owner_id">
+											{{ __forModal.owner_btn_caption }}
+									</button>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label required" for="visibility_level">Synlighed</label>
+								<div class="col-md-4">
+									<button type="button" 
+										class="btn btn-default btn-sm" 
+										ng-model="edit.visibility_level" 
+										data-toggle="true"
+										placeholder="Vælg"
+										id="visibility_level"
+										bs-select
+										bs-options="vl.id as vl.name for vl in visibilityLevels">
+									  <span class="caret"></span>
+									</button>
+								</div>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-3 control-label" for=""></label>
+								<div class="col-md-10 checkbox">
+
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit.active"
+											ng-false-value="'0'" 
+											ng-true-value="'1'">Aktiv
+									</label>
+
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit.allow_comments"
+											ng-false-value="'0'" 
+											ng-true-value="'1'">Kommentarer
+									</label>
+
+								</div>
+							</div>
+
+						</form>
+					</div>
+
+					<div bs-pane data-title="Tekst & logo">
+					</div>
+
+					<div bs-pane data-title="Medlemmer" ng-if="edit.id != null">
+						<table datatable="" 
+							id="table-forening-medlemmer"
+							class="table table-striped col-md-12 no-padding no-margin" 
+							dt-options="__forModal.medlemmer.dtOptions" 
+							dt-columns="__forModal.medlemmer.dtColumns"
+							dt-instance="__forModal.medlemmer.dtInstanceCallback">
+						</table>
+					</div>
+
+					<div bs-pane data-title="Grupper" ng-if="edit.id != null">
+<!--
+						<table datatable="" 
+							id="table-forening-grupper"
+							class="table table-striped col-md-12 no-padding no-margin" 
+							dt-options="__forModal.grupper.dtOptions" 
+							dt-columns="__forModal.grupper.dtColumns"
+							dt-instance="__forModal.grupper.dtInstanceCallback">
+						</table>
+-->
+					</div>
+
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" 
+					class="btn" 
+					ng-click="__forModal.modalClose(true)" 
+					ng-class="{ 'btn-success' : canSave() }"
+					ng-enabled="canSave()">
+						{{ __forModal.btnOk }}
+				</button> 
+				<button type="button" 
+					class="btn btn-default" 
+					ng-click="__forModal.modalClose(false)" >
+						Fortryd
+				</button> 
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+<div class="list-group">
+	<a ng-repeat="c in comments" 
+		href=""
+		ng-click="commentClick('#comment'+c.id)"
+		class="list-group-item list-group-item-sm" >
+		<img ng-if="c.image" ng-src="media/medlem/{{ c.image }}">
+		<span ng-if="!c.image" class="no-image"><i class="fa fa-user"></i></span>
+		<small><em>{{ c.content }}</em></small>
+	</a>
+</div>

@@ -1,0 +1,11 @@
+<div class="list-group">
+	<span class="text-muted" ng-if="showEmpty()">Ingen nye reaktioner</span>
+
+  <div ng-repeat="a in articles" class="list-group-item list-group-item-sm">
+		<a ng-href="{{ a.url }}">
+			{{ a.header }}
+		</a>
+	</div>
+
+</div>
+

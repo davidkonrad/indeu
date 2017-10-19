@@ -1,0 +1,130 @@
+
+<div class="col-md-9">
+<!-- info -->
+	<div ng-if="action == ''">
+		<div class="medlem-image">
+			<i ng-if="group.image == '' " class="fa fa-users medlem-default-image"></i>
+			<img ng-if="group.image != '' " ng-src="../media/gruppe/{{ group.image }}" fancyboxable="{centerOnScroll:true,margin:20}">
+		</div>
+
+		<div class="medlem-info">
+			<h1>{{ group.name }} </h1>
+				<button role="button"
+					ng-if="!userIsMember && !userIsOwner"	
+					ng-click="followRequest()"
+					title="Følg denne gruppe. Er gruppen lukket skal du godkendes først."
+					class="btn btn-xs btn-primary pull-right">
+					<i class="fa fa-user-plus"></i> 
+					{{ btn_follow_caption }}
+				</button>
+			<span ng-bind-html="group.about"></span>
+		</div>
+
+		<div ng-if="group.events_enabled">
+			<div class="layout-right-header no-bottom-margin">Kommende events</div>
+			<div entity-events="{{ group.id }}" entity-type="group" user-id="{{ user.id }}" on-edit="editEvent"></div>
+		</div>
+
+		<div ng-if="group.articles_enabled">
+			<div class="layout-right-header no-bottom-margin">Artikler</div>
+			<div entity-articles="{{ group.id }}" entity-type="group" user-id="{{ user.id }}" on-edit="editArticle"></div>
+		</div>
+
+		<comments ng-if="group.allow_comments" hash="{{ group.hash }}" on-comment-added="onCommentAdded"></comments>
+
+	</div>
+
+<!-- edit group -->
+	<div ng-if="action == 'g'">
+		<div edit-gruppe="{{ group.id }}"  
+			on-save="onEventSave()" 
+			on-cancel="onActionCancel()">
+		</div>
+	</div>
+
+<!-- event -->
+	<div ng-if="action == 'e'">
+		<h1>{{ group.name }} </h1>
+		<h3>Opret ny event</h3>
+		<div edit-event="{{ edit_event_id }}"  
+			group-id="{{ group.id }}"
+			user-id="{{ user.id }}"
+			on-save="onEventSave()" 
+			on-cancel="onActionCancel()">
+		</div>
+	</div>
+
+<!-- article -->
+	<div ng-if="action == 'a'">
+		<h3 class="no-padding no-margin">&nbsp;Skriv ny artikel</h3>
+		<div edit-article="{{ edit_article_id }}"  
+			user-id="{{ user.id }}"
+			group-id="{{ group.id }}"
+			on-save="onArticleSave()" 
+			on-cancel="onActionCancel()">
+		</div>
+	</div>
+
+	<div class="clearfix">
+		<br><br><br><br><br>
+	</div>
+
+</div>
+
+<div class="col-md-3">
+
+	<div>
+		<div class="layout-right-header">Gruppestatus</div>
+		<div class="layout-right-header-content">
+			{{ group.visibility_status }}
+			{{ group.access_status }}
+		</div>
+	</div>	
+
+	<div ng-if="userIsOwner || userIsMember">
+		<div class="layout-right-header">Handlinger</div>
+		<div class="layout-right-header-content">
+			<a ng-if="userIsOwner" 
+				ng-disabled="actionDisable('g')" 
+				ng-click="setAction('g')"
+				href="">
+				<i class="fa fa-fw fa-wrench fa-x2"></i>Rediger gruppe<br>
+			</a>
+
+			<a ng-if="group.articles_enabled"
+				ng-disabled="actionDisable('a')" 
+				ng-click="setAction('a')"
+				href="">
+				<i class="fa fa-fw fa-file-code-o fa-x2"></i>Opret ny artikel<br>
+			</a>
+
+			<a ng-if="group.events_enabled"
+				ng-disabled="actionDisable('e')" 
+				ng-click="setAction('e')"
+				href="">
+				<i class="fa fa-fw fa-calendar fa-x2"></i>Opret ny event<br>
+			</a>
+
+			<a ng-if="userIsMember && !userIsOwner" href="">
+				<i class="fa fa-fw fa-remove fa-x2 text-danger"></i>Følg ikke længere<br>
+			</a>
+
+		</div>
+	</div>	
+
+	<div ng-if="group.visible_social">
+		<div class="layout-right-header">Socialt</div>
+		<div class="layout-right-header-content" social-links="{{ group }}"></div>
+	</div>
+
+	<div class="layout-right-header">Medlemmer</div>
+	<div ng-repeat="user in group_users" class="layout-right-header-content">
+		<a ng-href="/medlemmer/{{ user.id }}/{{ user.urlName }}" debug-link style="float: left; clear: none; display: inline; margin-right: 10px;">{{ user.full_name }}</a>
+	</div>
+
+</div>
+
+<div class="col-md-12 clearfix">
+	<br><br><br>
+</div>
+

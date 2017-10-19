@@ -1,0 +1,54 @@
+<div class="modal ng-scope top am-fade-and-slide-top center" tabindex="-1" role="dialog" style="display: block;" id="modal-upload">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title pull-left">{{ __upload.title }}</h4>
+
+				  <div ng-show="false" 
+						id="selectBtn" 
+						class="btn btn-primary btn-sm pull-right" 
+						ngf-select="registerFile($file, $invalidFiles)" 
+						ng-model="file" 
+						name="file" 
+						ngf-pattern="'image/*'"
+				    ngf-accept="'image/*'" 
+						ngf-max-size="10MB" 
+						ngf-min-height="100">Vælg billede fra computer
+					</div>
+
+			</div>
+
+			<div class="modal-body text-center">
+				<form name="form" class="form-inline">
+					<div class="form-group">
+						<div class="form-control col-md-12 upload-image-area " ng-click="triggerSelect()">
+
+							<span class="upload-image-span" 
+								ng-if="__upload.noImage()"
+								ng-bind-html="__upload.noImageCaption">
+							</span>
+					
+							<img id="upload-image-modal"
+								class="upload-image-img cursor-pointer"
+							  ng-src="{{ __upload.currentImage }}">
+						</div>
+					</div>
+				</form>			
+			</div>
+
+			<div class="modal-footer clearfix">
+			  <button	class="btn" 
+					ng-class="{ 'btn-success': canUpload() }" 
+					ng-disabled="!canUpload()" 
+					ng-click="uploadFile()">{{ __upload.btnOk }}
+				</button>
+				<button type="button" 
+					class="btn btn-default" 
+					ng-click="modalClose(false)">{{ __upload.btnCancel }} 
+				</button> 
+			</div>
+
+		</div>
+	</div>
+</div>

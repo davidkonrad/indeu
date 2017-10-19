@@ -1,0 +1,11 @@
+<div class="list-group">
+	<div ng-repeat="n in notifications"	class="list-group-item list-group-item-sm" title="{{ n.title }}">
+
+		[<small> {{ n.type }} </small>]
+		<span> {{ n.display_timestamp }}: </span>
+		<span> {{ n.userName }} </span>
+		<span ng-bind-html="n.action"></span>
+
+	</div>
+
+</div>

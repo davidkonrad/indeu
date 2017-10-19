@@ -1,0 +1,31 @@
+<h1>Artikler</h1>
+
+<div class="admin-menu">
+	<div ng-include="'views/admin.menu.html'"></div>
+</div>
+
+<div class="admin-content">
+
+<!--
+	<div class="col-md-2">
+		<attach-image ng-model="test1" type="u" size="sm" title="Dette er en prøeve"></attach-image>
+	</div>
+	<div class="col-md-2">
+		<attach-image ng-model="test" type="a" size="md"></attach-image>
+	</div>
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-7">
+		<attach-image ng-model="test" type="a" size="auto" height="200"></attach-image>
+	</div>
+-->
+
+	<table datatable="" 
+		id="table-artikler"
+		class="table table-striped col-md-12 no-padding no-margin" 
+		dt-options="dtOptions" 
+		dt-columns="dtColumns" 
+		dt-instance="dtInstanceCallback">
+	</table>
+</div>
+

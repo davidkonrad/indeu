@@ -1,0 +1,30 @@
+#bruger-dialog .modal-dialog {
+	min-width: 980px !important;
+}
+#bruger-dialog .modal-body {
+	height: 400px !important;
+	min-height: 400px !important;
+	font-size: 90%;
+}
+
+#bruger-dialog .bruger-modal-image {
+	margin-top: 10px;
+	margin-left: 10px;
+
+	float: left;
+	clear: none;
+	width: 140px;
+	height: 150px;
+	margin-right: 20px;
+	margin-bottom: 16px;
+	background-color: #F8F8F8;
+	color: gray;
+	text-align: center;
+	cursor: pointer;
+}
+
+#bruger-dialog .bruger-modal-image img { 
+	max-width: 300px;
+	max-height: 300px;
+}
+

@@ -1,0 +1,223 @@
+
+<div class="col-md-9" id="main-cnt">
+	<h1>{{ user.first_name }} {{ user.last_name }} 
+		<small ng-if="action_caption" style="position:relative;top:-2px;"><small>&mdash;</small> {{ action_caption }}</small>
+	</h1>
+
+<!-- profile -->
+	<div ng-if="action == ''">
+		<div class="medlem-image">
+			<i ng-if="user.image == ''" class="fa fa-user medlem-default-image"></i>
+			<img ng-if="user.image != ''" ng-src="../media/medlem/{{ user.image }}" fancyboxable="{centerOnScroll:true,margin:20}">
+		</div>
+		<div class="medlem-info">
+			<span ng-bind-html="user.about"></span>
+		</div>
+
+	<div class="layout-right-header">
+		Notifikationer
+	</div>
+	<div class="layout-right-header-content">
+		<log-notifications user-id="{{ user.id }}"></log-notifications>
+	</div>
+
+		<div class="clearfix"></div>
+		
+		<div class="col-md-9 no-padding" style="padding-right:15px !important;">
+			<div class="layout-right-header">Næste 5 dage</div>
+			<div ui-calendar="calConfig" class="calendar dig-calendar"></div> 
+		</div>
+
+		<div class="col-md-3 no-padding">
+			<div class="layout-right-header">Kommende</div>
+			<div class="layout-right-header-content">
+				<span ng-repeat="event in calConfig.futureEvents | orderBy:'start':false" >
+					<a href="{{ event.urlLink }}" debug-link>
+						<span class="medlem-event-date">
+							<strong>
+								{{ event.start | date:"dd/MM" }}
+							</strong>
+						</span>
+						<span class="px100">
+							{{ event.name }}
+						</span>
+					</a>
+				</span>
+			</div>
+		</div>
+
+		<div class="col-md-12 clearfix">&nbsp;</div>
+
+		<div class="layout-right-header no-bottom-margin">Dine artikler</div>
+		<div entity-articles="{{ user.id }}" entity-type="user" user-id="{{ user.id }}" on-edit="editArticle"></div>
+
+		<div class="clearfix">
+			<br>
+		</div>
+
+		<div class="layout-right-header no-bottom-margin">Dine events</div>
+		<div entity-events="{{ user.id }}" entity-type="user" user-id="{{ user.id }}" on-edit="editEvent"></div>
+
+		<div class="clearfix">
+			<br><br><br>
+		</div>
+
+	</div>
+
+<!-- create gruppe --->
+	<div ng-if="action == 'g'">
+		<div edit-gruppe="{{ edit_gruppe_id }}"  
+			user-id="{{ user.id }}"
+			on-save="actionSaved(item)" 
+			on-cancel="actionCancel()">
+		</div>
+	</div>
+
+<!-- edit event --->
+	<div ng-if="action == 'e'">
+		<div edit-event="{{ edit_event_id }}"  
+			user-id="{{ user.id }}"
+			on-save="actionSaved(item)" 
+			on-cancel="actionCancel()">
+		</div>
+	</div>
+
+<!-- edit article -->
+	<div ng-if="action == 'a'">
+		<div edit-article="{{ edit_article_id }}"  
+			user-id="{{ user.id }}"
+			on-save="actionSaved(item)" 
+			on-cancel="actionCancel()">
+		</div>
+	</div>
+
+<!-- edit profile -->
+	<div ng-if="action == 'p'">
+		<div edit-profile="{{ user.id }}"  
+			on-save="actionProfileSaved(item)" 
+			on-cancel="actionCancel()">
+		</div>
+	</div>
+
+
+</div>
+
+<div class="col-md-3">
+
+	<div class="layout-right-header">Handlinger</div>
+	<div class="layout-right-header-content">
+		<a href="" 
+			ng-class="{ 'disabled': actionDisable('p') }"
+			ng-disabled="actionDisable('p')"
+			ng-click="setAction('p')">
+			<i class="fa fa-fw fa-wrench fa-x2"></i>Rediger profil<br>
+		</a>
+		<a href="" 
+			ng-class="{ 'disabled': actionDisable('a') }"
+			ng-disabled="actionDisable('a')"
+			ng-click="setAction('a')">
+			<i class="fa fa-fw fa-file-code-o fa-x2"></i>Skriv artikel
+			<span ng-if="edit_article_id != undefined ">Rediger artikel</span>
+			<br>
+		</a>
+
+<!-- --->
+		<a href="" 
+			ng-if="edit_event_id == undefined "
+			ng-class="{ 'disabled': actionDisable('e') }"
+			ng-disabled="actionDisable('e')" 
+			ng-click="setAction('e')">
+			<i class="fa fa-fw fa-calendar fa-x2"></i>Opret ny event
+			<span ng-if="edit_event_id != undefined ">Rediger event</span>
+			<br>
+		</a>
+		<a href="" 
+			ng-if="edit_event_id != undefined "
+			ng-class="{ 'disabled': actionDisable('e') }"
+			ng-disabled="actionDisable('e')" 
+			ng-click="setAction('e')">
+			<i class="fa fa-fw fa-calendar fa-x2"></i>Rediger event<br>
+		</a>
+<!-- --->
+
+<!--
+		<a href="" 
+			ng-class="{ 'disabled': actionDisable('g') }"
+			ng-disabled="actionDisable('g')" 
+			ng-click="setAction('g')">
+			<i class="fa fa-fw fa-user-plus fa-x2"></i>Bliv medlem af gruppe<br>
+		</a>
+-->
+		<a href="" 
+			ng-class="{ 'disabled': actionDisable('g') }"
+			ng-disabled="actionDisable('g')" 
+			ng-click="setAction('g')">
+			<i class="fa fa-fw fa-users fa-x2"></i>Opret ny gruppe<br>
+		</a>
+		<a href="" 
+			ng-class="{ 'disabled': actionDisable('r') }"
+			ng-disabled="actionDisable('r')" 
+			ng-click="setAction('r')">
+			<i class="fa fa-fw fa-star-half-empty fa-x2"></i>Review nye brugere<br>
+		</a>
+	</div>
+
+<!--
+	<div class="layout-right-header">
+		Notifikationer
+	</div>
+	<div class="layout-right-header-content">
+		{{ user.id }}
+		<log-notifications user-id="{{ user.id }}"></log-notifications>
+	</div>
+-->
+
+	<div class="layout-right-header">
+		Reaktioner
+		<span class="pull-right">
+			<small class="text-muted" style="font-weight: 100;line-height: 10px;position:relative; top:-2px;">Seneste 7 dage</small>
+				<input type="checkbox" ng-false-value="undefined" ng-true-value="true" ng-model="Settings.recentReactionsShowAll">
+		</span>
+	</div>
+	<div class="layout-right-header-content" user-reactions></div>
+
+	<div class="layout-right-header">
+		Seneste events
+		<span class="pull-right">
+			<small class="text-muted" style="font-weight: 100;line-height: 10px;position:relative; top:-2px;">Kun ikke-sete</small>
+				<input type="checkbox" ng-false-value="undefined" ng-true-value="true" ng-model="Settings.recentEventsShowVisited">
+		</span>
+	</div>
+	<div class="layout-right-header-content" recent-events></div>
+
+	<div class="layout-right-header">
+		Nyeste artikler
+		<span class="pull-right">
+			<small class="text-muted" style="font-weight: 100;line-height: 10px;position:relative; top:-2px;">Kun ikke-sete</small>
+				<input type="checkbox" ng-false-value="undefined" ng-true-value="true" ng-model="Settings.recentArticlesShowVisited">
+		</span>
+	</div>
+	<div class="layout-right-header-content" recent-articles></div>
+
+	<div class="layout-right-header">Grupper</div>
+	<div class="layout-right-header-content">
+			<div class="list-group">
+			  <a ng-repeat="group in groups" 
+					href="#" 
+					class="list-group-item list-group-item-sm" 
+					ng-href="#/grupper/{{ group.id }}/{{ group.urlName }}">
+					{{ group.name }}
+					<i ng-if="group.is_owner"
+						class="fa fa-hand-paper-o dig-gruppe-owner-icon text-primary" 
+						title="{{ group.owner_title }}">
+					</i>
+				</a>
+			</div>
+		</div>
+	</div>
+
+		
+</div>
+
+
+

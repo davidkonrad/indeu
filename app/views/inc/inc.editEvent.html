@@ -1,0 +1,191 @@
+<div>
+		<form class="form-horizontal">
+			<div class="form-group">
+	      <label class="col-md-1 control-label" for=""></label>
+				<label class="radio-inline">
+          <input type="radio" 
+						name="event.visibility_level" 
+						ng-model="event.visibility_level"
+						ng-value="1" > Offentlig
+        </label>
+        <label class="radio-inline">
+          <input type="radio" 
+						name="event.visibility_level" 
+						ng-model="event.visibility_level"
+						ng-value="2"> Kun brugere
+        </label>
+        <label ng-if="group_id"	class="radio-inline">
+          <input type="radio" 
+						name="event.visibility_level" 
+						ng-model="event.visibility_level"
+						ng-value="3"> Kun gruppe
+        </label>
+				<div class="pull-right action-element">
+					<button class="btn btn-default btn-sm" 
+						type="button"
+						ng-class="{ 'btn-success' : eventAction.canSave() }"
+						ng-disabled="!eventAction.canSave()"
+						ng-click="eventAction.save()">
+						{{ eventAction.caption }}
+					</button>
+					<button class="btn btn-danger btn-sm" 
+						type="button"
+						ng-click="eventAction.cancel()">
+						Fortryd
+					</button>
+				</div>
+			</div>
+			<table class="col-md-12">
+				<tr>
+					<td class="col-md-7">
+						<div class="form-group">
+				      <label class="col-md-3 control-label required" for="">Hvad</label>
+							<div class="col-md-9">					
+								<input class="form-control" ng-model="event.name">
+							</div>
+						</div>
+						<div class="form-group">
+				      <label class="col-md-3 control-label required" for="">Hvornår</label>
+							<div class="col-md-9">					
+								<div class="input-group registration-date-time">
+									<span class="input-group-addon" id="basic-addon1">
+										<span class="fa fa-calendar" aria-hidden="true"></span>
+									</span>
+									<input class="form-control event-date" 
+										bs-datepicker
+										data-container="body"
+										data-placement="bottom"
+										data-autoclose="true" 
+										ng-model="event.date">
+		           		<span class="input-group-addon" id="basic-addon1">
+										<span class="fa fa-clock-o" aria-hidden="true"></span>
+									</span>
+		           		<input class="form-control event-from" 
+										bs-timepicker
+										data-container="body"
+										data-placement="bottom"
+										data-time-format="HH:mm" 
+										data-time-type="string" 
+										data-length="1" 
+										data-minute-step="15" 
+										data-arrow-behavior="picker" 
+										data-autoclose="true" 
+										ng-model="event.from">
+		           		<input class="form-control event-to" 
+										bs-timepicker
+										data-container="body"
+										data-placement="bottom"
+										data-time-format="HH:mm" 
+										data-time-type="string" 
+										data-length="1" 
+										data-minute-step="15" 
+										data-arrow-behavior="picker" 
+										data-autoclose="true" 
+										ng-model="event.to">
+		           	</div>
+							</div>
+						</div>
+						<div class="form-group">
+				      <label class="col-md-3 control-label required" for="">Sted</label>
+							<div class="col-md-9">					
+								<input class="form-control" 
+									select-on-click
+									adresse-opslag
+									adresse-type="adresser"
+									adresse-on-select="eventAdresseSelect"
+									ng-model="event.address">
+							</div>
+						</div>
+						<div class="form-group">
+				      <label class="col-md-3 control-label" for=""></label>
+							<div class="col-md-9">					
+								<div class="input-group">
+									<input class="form-control event-postalcode" ng-model="event.postal_code">									
+									<input class="form-control event-city" ng-model="event.city">									
+								</div>
+							</div>
+						</div>
+					</td>
+					<td class="col-md-5 no-padding no-margin">
+						<leaflet class="event-leaflet-map"
+							id="eventMapId"
+							center="eventMap.center" 
+							defaults="eventMap.defaults" 
+							layers="eventMap.layers" 
+							markers="eventMap.markers" 
+							events="eventMap.events">
+						</leaflet>
+					</td>
+				</tr>
+<!-- contact persons -->
+				<tr>
+					<td colspan="2">
+				    <div class="form-group">
+							<div class="col-md-12">
+								<span ng-repeat="cp in event_contactpersons">
+									<button class="btn btn-default btn-xs" 
+										ng-class="{ 'pull-left' : cp.user.id == user_id }"
+										type="button">
+										{{ cp.user.full_name }}
+										<i ng-if="cp.user.id != user_id"
+											class="fa fa-remove text-danger"
+											title="Fjern kontaktperson"
+											ng-click="eventAction.removeContact(cp.id, cp.user.id)">
+										</i>
+										<i ng-if="cp.user.id == user_id"
+											ng-click="eventAction.cannotRemoveContact()"
+											class="fa fa-remove text-muted">
+										</i>
+									</button>
+								</span>
+								<button class="btn btn-primary btn-xs" 
+									type="button"
+									ng-click="eventAction.addContact()">
+									<i class="fa fa-plus"></i>
+									Kontakt
+								</buttun>
+							</div>
+						</div>
+					</td>
+				</tr>
+<!-- groups -->
+				<tr>
+					<td colspan="2">
+				    <div class="form-group">
+							<div class="col-md-12">
+								<span ng-repeat="g in event_groups">
+									<button class="btn btn-default btn-xs" type="button">
+										{{ g.name }}
+										<i class="fa fa-remove text-danger"
+											title="Fjern gruppe"
+											ng-click="eventAction.removeGroup(g.id, g.group_id)">
+										</i>
+									</button>
+								</span>
+								<button class="btn btn-primary btn-xs" 
+									type="button"
+									ng-click="eventAction.addGroup()">
+									<i class="fa fa-plus"></i>
+									Gruppe
+								</buttun>
+							</div>
+						</div>
+					</td>
+				</tr>
+<!-- about -->
+				<tr>
+					<td colspan="2">
+				    <div class="form-group">
+							<div class="col-md-12">
+								<text-angular ng-model="event.about" 
+									ta-text-editor-class="form-control ta-editor-small"
+									ta-toolbar="[['h2','h3'],['bold','italics','underline','strikeThrough'],['insertLink'], ['html']]">
+								</text-angular>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<br><br><br><br>				
+		</form>
+</div>
