@@ -63,6 +63,11 @@ angular.module('indeuApp', [
 
     $routeProvider
       .when('/', {
+        templateUrl: 'views/blank.forside.html',
+        controller: 'BlankCtrl',
+        controllerAs: 'frontpage'
+      })
+      .when('/forside', {
         templateUrl: 'views/frontpage.html',
         controller: 'FrontpageCtrl',
         controllerAs: 'frontpage'

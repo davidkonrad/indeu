@@ -205,4 +205,19 @@ h3.search {
 	white-space: nowrap;
 }
 
+/* additional styling **/
+.text-white {
+	color: #fff;
+}
+.text-underline {
+	border-bottom: 1px solid #fff;
+}
+.text-code {
+	font-family: 'courier new';
+}
+.margin-bottom-15 {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
 

@@ -68,6 +68,11 @@ angular.module('indeuApp')
 			});
 		}
 
+		$scope.isBlank = function() {
+			console.log('isBklabk', $location.path());
+			return $location.path() == '/'
+		}
+
 		$scope.showSearchBox = function() {
 			return $location.path() != '/soeg'
 		}
@@ -109,6 +114,6 @@ angular.module('indeuApp')
 		if (!$scope.groups) $scope.reloadGroups();
 
 
-
-
 });
+
+
