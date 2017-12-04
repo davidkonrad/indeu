@@ -210,7 +210,8 @@ h3.search {
 	color: #fff;
 }
 .text-underline {
-	border-bottom: 1px solid #fff;
+	padding-bottom: 2px;
+	border-bottom: 2px dotted #fff;
 }
 .text-code {
 	font-family: 'courier new';
