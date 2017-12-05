@@ -5,7 +5,9 @@
  *
  */
 angular.module('indeuApp')
-  .controller('KalenderForsideCtrl', function($scope, $location, Login, $timeout, leafletData, ESPBA, Lookup, Meta, Utils, Const) {
+  .controller('KalenderForsideCtrl', function($scope, $location, Login, $timeout, leafletData, ESPBA, Lookup, Meta, Utils, Const, uiCalendarConfig) {
+
+		Lookup.init();
 
 		Meta.setTitle('indeu.org');
 		Meta.setTitle('Kalender');
@@ -32,7 +34,7 @@ angular.module('indeuApp')
 		$scope.eventMap.layers.baselayers = {};
 		$scope.eventMap.layers.baselayers.bw = {
 			visible: true,
-			name: '123',
+			name: 'Nedtonet sort / hvidt',
 			type: 'xyz',
 			maxZoom: 18,
 			minZoom: 5,
@@ -41,7 +43,7 @@ angular.module('indeuApp')
 				subdomains: ['a', 'b', 'c'],
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 				continuousWorld: true
-			 }
+			}
 		}
 		$.extend($scope.eventMap.layers.baselayers, def);
 
@@ -68,52 +70,50 @@ angular.module('indeuApp')
 			})
 		});
 
-		ESPBA.prepared('RecentEvents', recentParams).then(function(r) {
-			$scope.eventMap.markers = [];
-			r.data.forEach(function(e) {
-				var lat = parseFloat(e.lat);
-				var lng = parseFloat(e.lng);
-				if (lat && lng) {
-					$scope.eventMap.markers.push({
-						lat: lat,
-						lng: lng,
-						icon: iconBlue
-					});
-				}
-			});
-			//console.log('recentEvents', r);
-		});
+		$scope.uiConfig = {
+			calendar: {
+				height: 'auto',
+				editable: false,
+				displayEventTime: false,
+				header: {
+					center: '',
+					right: 'prev,next'
+				},
+				eventClick: $scope.eventClick,
+				dayClick: $scope.dayClick,
+				viewRender: function(view, element) {
+					var params = { start_date: view.start.format("YYYY-MM-DD"), end_date: view.end.format("YYYY-MM-DD") };
+					ESPBA.prepared('EventsByPeriod', params).then(function(r) {
+						var events = [];
+						$scope.eventMap.markers = [];
+						r.data.forEach(function(e) {
+							//markers
+							var lat = parseFloat(e.lat);
+							var lng = parseFloat(e.lng);
+							if (lat && lng) {
+								$scope.eventMap.markers.push({
+									lat: lat,
+									lng: lng,
+									icon: iconBlue
+								});
+							}
+							//calendar
+							events.push({
+								title: e.name,
+								date: new Date(e.date),
+								event_id: e.id,
+								color: '#257e4a'
+							})
+						});
 
-		ESPBA.get('event', params).then(function(e) {
-			$scope.events = [];
-			e.data.forEach(function(event) {
-				$scope.events.push({
-					title: event.name,
-					date: new Date(event.date),
-					event_id: event.id,
-					color: '#257e4a'
-				});
-			});
-			$scope.eventSources = { events: $scope.events };
-
-			$scope.uiConfig = {
-				calendar:{
-	        height: 'auto',
-	        editable: false,
-					displayEventTime: false,
-					header:{
-						center: 'title',
-						right:   'prev,next'
-					},
-	        eventDrop: $scope.alertOnDrop,
-	        eventResize: $scope.alertOnResize,
-	        eventRender: $scope.eventRender,
-					eventSources: $scope.eventSources,
-	        eventClick: $scope.eventClick,
-					dayClick: $scope.dayClick
+						$timeout(function() {
+							uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
+							uiCalendarConfig.calendars.calendar.fullCalendar('addEventSource', events);
+						})
+					})
 				}
-			};
-		});
+			}
+		}
 
 		$scope.eventClick = function(indeuEvent, element, constructor) {
 			//var path = Utils.isLocalHost() ? '/event/' : '/event/';
@@ -124,23 +124,7 @@ angular.module('indeuApp')
 		}
 
 		$scope.dayClick = function(date) {
-			alert('ok')
+			//alert('ok')
 		}
-
-		$scope.eventRender = function(indeuEvent, element, constructor) {
-			//indeuEvent.className.push('text-danger');
-			//console.log(indeuEvent);
-			//console.log(element);
-			$(element).addClass('text-muted');
-			//console.log($(element))
-		}
-
-		function init() {
-		}
-
-		Lookup.init().then(function() {
-			init();
-		});
-
 
 });

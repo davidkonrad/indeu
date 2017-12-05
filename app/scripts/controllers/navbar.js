@@ -69,7 +69,6 @@ angular.module('indeuApp')
 		}
 
 		$scope.isBlank = function() {
-			console.log('isBklabk', $location.path());
 			return $location.path() == '/'
 		}
 

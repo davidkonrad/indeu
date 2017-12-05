@@ -1,6 +1,6 @@
 <?
 /**
- * espda.php		Database driver for the ESPBA angular 1.x service
+ * espba.php		Database driver for the ESPBA angular 1.x service
  * @copyright   Copyright (C) 2017 david konrad, davidkonrad at gmail com
  * @license     Licensed under the MIT License; see LICENSE.md
  */
@@ -13,9 +13,10 @@ session_start();
 include('Db.php');
 include('prepared.php');
 include('UserReactions.php');
+include('events.php'); //events related prepared statements
 
 class ESPBA extends DbPDO {
-	use Prepared, UserReactions;
+	use Prepared, UserReactions, Events;
 
 	private $table;
 	private $action;
