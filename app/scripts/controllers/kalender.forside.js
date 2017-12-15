@@ -84,6 +84,7 @@ angular.module('indeuApp')
 				viewRender: function(view, element) {
 					var params = { start_date: view.start.format("YYYY-MM-DD"), end_date: view.end.format("YYYY-MM-DD") };
 					ESPBA.prepared('EventsByPeriod', params).then(function(r) {
+						console.log(r.data);
 						var events = [];
 						$scope.eventMap.markers = [];
 						r.data.forEach(function(e) {

@@ -7,6 +7,9 @@ body {
   margin-bottom: 60px;
 	font: 130%/1.618 sans-serif;
 	font: sans-serif;
+	/* sunsetted in recent browsers */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 @media screen and (min-width: 768px) {

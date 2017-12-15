@@ -105,9 +105,12 @@ $SQL = <<<SQL
 				e.group_id,
 				e.date,
 				e.from,
-				e.to
+				e.to,
+
+				g.name as group_name
 
 				from event e
+				left join `group` g on g.id = e.group_id
 SQL;
 
 		$d = '';
