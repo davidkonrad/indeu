@@ -6,7 +6,7 @@
  */
 angular.module('indeuApp')
 	.factory('SelectArtikelModal', 
-	function($modal, $q, ESPBA, Lookup, Utils, Const, DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions) {
+	function($modal, $q, ESPBA, Lookup, Utils, Const, DTOptionsBuilder, DTColumnBuilder) {
 
 	var deferred = null;
 	var modal = null;
@@ -24,8 +24,6 @@ angular.module('indeuApp')
 				btnOk: 'Vælg og luk',
 				title: 'Vælg en artikel'
 			};
-
-			DTDefaultOptions.setLoadingTemplate('<img src="images/ajax-loader.gif">');
 
 			$scope.__modal.dtInstanceCallback = function(instance) {
 				$scope.__modal.dtInstance = instance;

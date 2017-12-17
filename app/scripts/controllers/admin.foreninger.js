@@ -5,9 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('AdminForeningerCtrl', 
-	function($scope, $q, ESPBA, Utils, Const, Log, Login, ForeningModal, DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions) {
-
-		DTDefaultOptions.setLoadingTemplate('<img src="images/ajax-loader.gif">');
+	function($scope, $q, ESPBA, Utils, Const, Log, Login, ForeningModal, DTOptionsBuilder, DTColumnBuilder) {
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;

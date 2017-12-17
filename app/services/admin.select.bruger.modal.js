@@ -5,8 +5,7 @@
  *
  */
 angular.module('indeuApp')
-	.factory('SelectBrugerModal', 
-	function($modal, $q, ESPBA, Lookup, Utils, Const, DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions) {
+	.factory('SelectBrugerModal', function($modal, $q, ESPBA, Lookup, Utils, Const, DTOptionsBuilder, DTColumnBuilder) {
 
 	var deferred = null;
 	var modal = null;
@@ -23,8 +22,6 @@ angular.module('indeuApp')
 				btnOk: 'Gem og luk',
 				title: multi ? 'Vælg en eller flere brugere' : 'Vælg en bruger'
 			};
-
-			DTDefaultOptions.setLoadingTemplate('<img src="images/ajax-loader.gif">');
 
 			$scope.__modal.dtInstanceCallback = function(instance) {
 				$scope.__modal.dtInstance = instance;

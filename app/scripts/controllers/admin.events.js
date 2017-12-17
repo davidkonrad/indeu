@@ -6,9 +6,7 @@
  */
 angular.module('indeuApp')
   .controller('AdminEventsCtrl', 
-	function($scope, $q, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions, EventModal, Lookup, Const) {
-
-		DTDefaultOptions.setLoadingTemplate('<img src="images/ajax-loader.gif">');
+	function($scope, $q, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, EventModal, Lookup, Const) {
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;

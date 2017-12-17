@@ -4,9 +4,8 @@
  *
  *
  */
-angular.module('indeuApp').factory('ForeningModal', 
-	function($modal, $q, ESPBA, Lookup, Utils, Login, Const, Log, SelectBrugerModal, SelectGruppeModal, 
-						DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions) {
+angular.module('indeuApp')
+	.factory('ForeningModal', function($modal, $q, ESPBA, Lookup, Utils, Login, Const, Log, SelectBrugerModal, SelectGruppeModal, DTOptionsBuilder, DTColumnBuilder) {
 
 	var deferred = null;
 	var modal = null;
@@ -191,6 +190,7 @@ angular.module('indeuApp').factory('ForeningModal',
 				keyboard: false
 			});
 
+			/*
 			modal.$promise.then(function() {
 				console.log('modal promise');
 			});
@@ -198,6 +198,7 @@ angular.module('indeuApp').factory('ForeningModal',
 			modal.$promise.then(modal.show).then(function() {
 				console.log('modal show');
 			});
+			*/
 
 			$scope.__forModal.modalClose = function(value) {
 

@@ -182,7 +182,7 @@ angular.module('indeuApp', [
       });
 
   })
-	.run(function($rootScope, $location, Lookup, ESPBA, Meta, Login) {
+	.run(function($rootScope, $location, Lookup, ESPBA, Meta, Login, DTDefaultOptions) {
 
 		$rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error){ 
 			// this is required if you want to prevent the $UrlRouter reverting the URL to the previous valid location
@@ -192,6 +192,9 @@ angular.module('indeuApp', [
 		$rootScope.$on('$routeChangeSuccess', function () {
 			Login.updateLastSeen()
 		});
+
+		//set ajax wheel on all datatables
+		DTDefaultOptions.setLoadingTemplate('<img src="images/ajax-loader.gif">');
 
 		if ($location.host() === 'localhost') {
 			ESPBA.setHost('http://localhost/html/indeu/app/');

@@ -6,9 +6,7 @@
  */
 angular.module('indeuApp')
   .controller('AdminGrupperCtrl', 
-	function($scope, $q, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions, GruppeModal, Lookup, Const) {
-
-		DTDefaultOptions.setLoadingTemplate('<img src="images/ajax-loader.gif">');
+	function($scope, $q, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, GruppeModal, Lookup, Const) {
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;

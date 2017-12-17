@@ -3,7 +3,7 @@
 angular.module('indeuApp')
 	.directive('editGruppe', 
 	function($q, Utils, ESPBA, Lookup, Form, ImageUploadModal, SelectBrugerModal, Notification, Const, Log, Login, Settings,
-					DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions) {
+					DTOptionsBuilder, DTColumnBuilder) {
 
 	return {
 		templateUrl: "views/inc/editGruppe.directive.html",

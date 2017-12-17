@@ -5,8 +5,7 @@
  *
  */
 angular.module('indeuApp').factory('GruppeModal', 
-	function($modal, $q, ESPBA, Lookup, Const, Utils, SelectBrugerModal, DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions, 
-					ImageUploadModal, Login, Log) {
+	function($modal, $q, ESPBA, Lookup, Const, Utils, SelectBrugerModal, DTOptionsBuilder, DTColumnBuilder, ImageUploadModal, Login, Log) {
 
 	var deferred = null;
 	var modal = null;

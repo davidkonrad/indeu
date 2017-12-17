@@ -4,8 +4,8 @@
  *
  *
  */
-angular.module('indeuApp').factory('ArtikelModal', function($modal, $q, ESPBA, Lookup, Utils, Login, 
-	SelectBrugerModal, SelectGruppeModal, DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions) {
+angular.module('indeuApp')
+	.factory('ArtikelModal', function($modal, $q, ESPBA, Lookup, Utils, Login, SelectBrugerModal, SelectGruppeModal, DTOptionsBuilder, DTColumnBuilder) {
 
 	var deferred = null;
 	var modal = null;

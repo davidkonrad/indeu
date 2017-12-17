@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').factory('EventModal', 
-	function($modal, $q, ESPBA, KR, Lookup, Utils, Const, SelectBrugerModal, DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions) {
+	function($modal, $q, ESPBA, KR, Lookup, Utils, Const, SelectBrugerModal, DTOptionsBuilder, DTColumnBuilder) {
 
 	var deferred = null;
 	var modal = null;

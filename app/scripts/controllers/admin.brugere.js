@@ -6,9 +6,7 @@
  */
 angular.module('indeuApp')
   .controller('AdminBrugereCtrl', 
-	function($scope, $q, Utils, $timeout, ESPBA, DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions, BrugerModal, Const) {
-
-		DTDefaultOptions.setLoadingTemplate('<img src="images/ajax-loader.gif">');
+	function($scope, $q, Utils, $timeout, ESPBA, DTOptionsBuilder, DTColumnBuilder, BrugerModal, Const) {
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;

@@ -5,10 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('AdminArtiklerCtrl', 
-	function($scope, $q, $timeout, ESPBA, Lookup, Meta, Utils, 	DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions, ArtikelModal, Const) {
-
-
-		DTDefaultOptions.setLoadingTemplate('<img src="images/ajax-loader.gif">');
+	function($scope, $q, $timeout, ESPBA, Lookup, Meta, Utils, 	DTOptionsBuilder, DTColumnBuilder, ArtikelModal, Const) {
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;

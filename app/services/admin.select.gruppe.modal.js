@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp')
-	.factory('SelectGruppeModal', function($modal, $q, ESPBA, Lookup, Utils, DTOptionsBuilder, DTColumnBuilder, DTDefaultOptions) {
+	.factory('SelectGruppeModal', function($modal, $q, ESPBA, Lookup, Utils, DTOptionsBuilder, DTColumnBuilder) {
 
 	var deferred = null;
 	var modal = null;
@@ -23,8 +23,6 @@ angular.module('indeuApp')
 				btnOk: 'Gem og luk',
 				title: multi ? 'Vælg en eller flere grupper' : 'Vælg en gruppe'
 			};
-
-			DTDefaultOptions.setLoadingTemplate('<img src="images/ajax-loader.gif">');
 
 			$scope.__modal.dtInstanceCallback = function(instance) {
 				$scope.__modal.dtInstance = instance;
