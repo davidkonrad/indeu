@@ -54,10 +54,10 @@ angular.module('indeuApp').factory('ForeningModal',
 			};
 
 			$scope.__forModal.selectOwner = function() {
-				SelectBrugerModal.show($scope, false, $scope.edit.author_id).then(function(author) {
-					if (author) {
-						$scope.edit.owner_id = author[0].id;
-						$scope.__forModal.owner_btn_caption = author[0].full_name;
+				SelectBrugerModal.show($scope, false, $scope.edit.author_id).then(function(owner) {
+					if (owner) {
+						$scope.edit.owner_id = owner.id;
+						$scope.__forModal.owner_btn_caption = owner.full_name;
 					}
 				})
 			}
