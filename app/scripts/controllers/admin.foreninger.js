@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('AdminForeningerCtrl', 
-	function($scope, $q, ESPBA, Utils, Const, Log, Login, ForeningModal, DTOptionsBuilder, DTColumnBuilder) {
+	function($scope, $q, ESPBA, Utils, Const, Log, Lookup, ForeningModal, DTOptionsBuilder, DTColumnBuilder) {
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;
@@ -24,12 +24,6 @@ angular.module('indeuApp').controller('AdminForeningerCtrl',
 					}
 				}),
 
-      DTColumnBuilder.newColumn('created_timestamp')
-				.withTitle('Oprettet')
-				.renderWith(function(data) {
-					return moment(data).calendar()
-				}),
-
       DTColumnBuilder.newColumn('active')
 				.withTitle('')
 				.renderWith(function(data) {
@@ -38,8 +32,28 @@ angular.module('indeuApp').controller('AdminForeningerCtrl',
 						: '<i class="fa fa-remove"></i>';
 				}),
 
+      DTColumnBuilder.newColumn('created_timestamp')
+				.withTitle('Oprettet')
+				.renderWith(function(data) {
+					return moment(data).calendar()
+				}),
+
       DTColumnBuilder.newColumn('name')
-				.withTitle('Navn')
+				.withTitle('Navn'),
+
+      DTColumnBuilder.newColumn('owner_id')
+				.withTitle('Ejer')
+				.renderWith(function(data, type /*, full, meta*/) {
+					if (type === 'display') {
+						if (!isNaN(data)) {
+							var id = parseInt(data);
+							return Lookup.getUser(id).full_name
+						}
+						return data
+					} else {
+						return data;
+					}
+				}),
 
 		];
 

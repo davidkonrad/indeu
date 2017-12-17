@@ -57,6 +57,10 @@ angular.module('indeuApp')
 						scope.defaultImage = '<i class="fa fa-group"></i>';
 						_target = 'gruppe';
 						break;
+					case 'f' :
+						scope.defaultImage = '<i class="fa fa-handshake-o"></i>';
+						_target = 'forening';
+						break;
 					default:
 						break;
 				};

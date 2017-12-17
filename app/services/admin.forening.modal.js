@@ -28,6 +28,7 @@ angular.module('indeuApp')
 			};
 
 			$scope.edit = {};
+
 			if (association_id) {
 				ESPBA.get('association', { id: association_id }).then(function(r) {
 					$scope.edit = r.data[0];
@@ -44,7 +45,11 @@ angular.module('indeuApp')
 			} else {
 				$scope.__forModal.title = 'Opret ny forening';
 				$scope.__forModal.create = true;
-			}
+
+				$scope.edit.user_id = Login.currentUser().id;
+				$scope.edit.owner_id = Login.currentUser().id;
+				$scope.__forModal.owner_btn_caption = Login.currentUser().full_name;
+			};
 
 			$scope.canSave = function() {
 				return $scope.edit.owner_id != undefined &&	
@@ -190,7 +195,6 @@ angular.module('indeuApp')
 				keyboard: false
 			});
 
-			/*
 			modal.$promise.then(function() {
 				console.log('modal promise');
 			});
@@ -198,7 +202,6 @@ angular.module('indeuApp')
 			modal.$promise.then(modal.show).then(function() {
 				console.log('modal show');
 			});
-			*/
 
 			$scope.__forModal.modalClose = function(value) {
 

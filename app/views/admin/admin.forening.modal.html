@@ -56,7 +56,7 @@
 
 					    <div class="form-group">
 					      <label class="col-md-3 control-label" for=""></label>
-								<div class="col-md-10 checkbox">
+								<div class="col-md-4 Xcheckbox">
 
 									<label class="checkbox-inline">
 										<input type="checkbox" 
@@ -65,20 +65,32 @@
 											ng-true-value="'1'">Aktiv
 									</label>
 
-									<label class="control-label checkbox-inline">
-										<input type="checkbox" 
-											ng-model="edit.allow_comments"
-											ng-false-value="'0'" 
-											ng-true-value="'1'">Kommentarer
-									</label>
-
 								</div>
 							</div>
 
 						</form>
 					</div>
 
-					<div bs-pane data-title="Tekst & logo">
+					<div bs-pane data-title="Tekst">
+						<form role="form" class="form-horizontal" autocomplete="off">
+							<br>
+					    <div class="form-group">
+								<div class="col-md-12">
+									<text-angular ng-model="edit.about" 
+										ta-text-editor-class="form-control col-md-12"
+										ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'html']]">
+									</text-angular>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div bs-pane data-title="logo">
+						<br>
+						<div class="col-md-10 col-md-offset-1">
+							<attach-image ng-model="edit.image" type="f" size="auto" height="200"></attach-image>
+						</div>
+						<br>
 					</div>
 
 					<div bs-pane data-title="Medlemmer" ng-if="edit.id != null">
@@ -124,3 +136,4 @@
 		</div>
 	</div>
 </div>
+

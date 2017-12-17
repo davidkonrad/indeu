@@ -51,7 +51,7 @@ angular.module('indeuApp').factory('Log', function(ESPBA) {
 				hash: opt.hash || null
 			};
 			ESPBA.insert('log', params).then(function(m) {
-				console.log('log', m);
+				//console.log('log', m);
 			})
 		},
 

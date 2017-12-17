@@ -1,12 +1,32 @@
 <?
 	header('Access-Control-Allow-Origin: *');	
 
+	function getExt($src) {
+		$path_info = pathinfo($src);
+		return strtolower($path_info['extension']);
+	}
 
-	//https://stackoverflow.com/a/44323040/1407478
 	function make_thumb($src, $dest, $desired_width) {
 
+		$ext = getExt($src);
+
 		/* read the source image */
-		$source_image = imagecreatefromjpeg($src);
+		switch ($ext) {
+			case 'jpg' :
+			case 'jpeg' :
+				$source_image = imagecreatefromjpeg($src);
+				break;
+			case 'png' :
+				$source_image = imagecreatefrompng($src);
+				break;
+			case 'gif' :
+				$source_image = imagecreatefromgif($src);
+				break;
+			default :
+				//do not create thumb
+				return;
+		}
+
 		$width = imagesx($source_image);
 		$height = imagesy($source_image);
 
@@ -20,7 +40,22 @@
 		imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
 
 		/* create the physical thumbnail image to its destination */
-		imagejpeg($virtual_image, $dest);
+		switch ($ext) {
+			case 'jpg' :
+			case 'jpeg' :
+				imagejpeg($virtual_image, $dest);
+				break;
+			case 'png' :
+				imagepng($virtual_image, $dest);
+				break;
+			case 'gif' :
+				imagegif($virtual_image, $dest);
+				break;
+			default :
+				//we should really never land here but exited above
+				return;
+		}
+
 	}
 
 	$filename = $_FILES['file']['name'];
