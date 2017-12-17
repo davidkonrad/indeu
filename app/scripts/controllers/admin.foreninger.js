@@ -1,9 +1,5 @@
 'use strict';
 
-/**
- *
- *
- */
 angular.module('indeuApp').controller('AdminForeningerCtrl', 
 	function($scope, $q, ESPBA, Utils, Const, Log, Lookup, ForeningModal, DTOptionsBuilder, DTColumnBuilder) {
 
@@ -25,11 +21,21 @@ angular.module('indeuApp').controller('AdminForeningerCtrl',
 				}),
 
       DTColumnBuilder.newColumn('active')
-				.withTitle('')
+				.withTitle('Aktiv')
 				.renderWith(function(data) {
 					return data == '1'
 						? '<i class="fa fa-check text-success"></i>'
 						: '<i class="fa fa-remove"></i>';
+				}),
+
+      DTColumnBuilder.newColumn('visibility_level')
+				.withTitle('Synlighed')
+				.renderWith(function(data, type /*, full, meta*/) {
+					if (type === 'display') {
+						return Lookup.visibilityLevelName(data)
+					} else {
+						return data;
+					}
 				}),
 
       DTColumnBuilder.newColumn('created_timestamp')
@@ -54,15 +60,16 @@ angular.module('indeuApp').controller('AdminForeningerCtrl',
 						return data;
 					}
 				}),
-
 		];
 
 		$scope.dtOptions = DTOptionsBuilder
 			.fromFnPromise(function() {
 				var defer = $q.defer();
-				ESPBA.get('association', {}).then(function(res) {
-					$scope.data = res.data;
-					defer.resolve($scope.data);
+				Lookup.init().then(function() {
+					ESPBA.get('association', {}).then(function(res) {
+						$scope.data = res.data;
+						defer.resolve($scope.data);
+					})
 				});
 				return defer.promise;
 	    })
@@ -89,6 +96,7 @@ angular.module('indeuApp').controller('AdminForeningerCtrl',
  					}
 				}
 			]);
+		
 
 		angular.element('#table-foreninger').on('click', 'tbody td:not(.no-click)', function(e) {
 			var id=$(this).parent().attr('forening-id');
