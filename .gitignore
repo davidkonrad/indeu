@@ -3,7 +3,7 @@
 /.tmp
 /.sass-cache
 /bower_components
-/app/media-uploads
+/app/media
 /app/api/pw.php
 /convert/
 log.txt
