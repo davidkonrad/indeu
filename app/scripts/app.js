@@ -126,6 +126,13 @@ angular.module('indeuApp', [
         controllerAs: 'eventforside'
       })
 
+			//official "open" forening frontpage
+      .when('/forening/:id/:navn', {
+        templateUrl: 'views/forening.forside.html',
+        controller: 'ForeningForsideCtrl',
+        controllerAs: 'foreningforside'
+      })
+
 			//official "open" event summary / calendar
       .when('/det-sker', {
         templateUrl: 'views/kalender.forside.html',

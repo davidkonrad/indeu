@@ -7,6 +7,10 @@
 angular.module('indeuApp')
   .controller('KalenderForsideCtrl', function($scope, $location, Login, $timeout, leafletData, ESPBA, Lookup, Meta, Utils, Const, uiCalendarConfig) {
 
+		ESPBA.get('user', {}).then(function(r) {
+			console.log(r);
+		})
+
 		Lookup.init();
 
 		Meta.setTitle('indeu.org');

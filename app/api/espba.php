@@ -36,7 +36,7 @@ class ESPBA extends DbPDO {
 		//file_put_contents('test.txt', json_encode($_SERVER, JSON_PRETTY_PRINT));
 
 		if ($this->isLocalhost()) {
-			header('Access-Control-Allow-Origin	: *');
+			//header('Access-Control-Allow-Origin	: "*"');
 		}
 
 		if ($_SERVER['HTTP_ACCEPT'] != 'application/json, text/plain, */*') {
