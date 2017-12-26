@@ -8,10 +8,10 @@
 			<div class="col-md-12">
 				<img ng-if="forening.image != ''" 
 					class="pull-left" 
-					src="media/forening/thumbs/{{ forening.image }}" 
+					ng-src="media/forening/thumbs/{{ forening.image }}" 
 					style="padding-right:10px;"
 					title="{{ forening.name }}">
-				<p ng-bind-html="forening.about"></p>
+				<p ng-bind-html="forening.about" read-more></p>
 			</div>
 
 	</div>
@@ -34,6 +34,22 @@
 <div class="col-md-3">
 	<div class="layout-right-header">Handlinger</div>
 	<div class="layout-right-header-content">
+		<a href="" 
+			ng-class="{ 'disabled': actionDisable('p') }"
+			ng-disabled="actionDisable('p')"
+			ng-click="setAction('p')">
+			<i class="fa fa-fw fa-wrench fa-x2"></i>
+			Rediger foreningsinfo<br>
+		</a>
+		<a href="" 
+			ng-class="{ 'disabled': actionDisable('a') }"
+			ng-disabled="actionDisable('a')"
+			ng-click="setAction('a')">
+			<i class="fa fa-fw fa-file-code-o fa-x2"></i>
+			Skriv artikel
+			<span ng-if="edit_article_id != undefined ">Rediger artikel</span>
+			<br>
+		</a>
 		<a ng-if="user.id == event.user_id"
 			href="" 
 			ng-class="{ 'disabled': actionDisable('e') }"
@@ -47,22 +63,24 @@
 			ng-disabled="actionDisable('n')" 
 			ng-click="setAction('n')">
 			<i class="fa fa-fw fa-calendar fa-x2"></i>
-			Ny event
+			Opret en event
 		</a>
 	</div>
 
-	<div ng-if="user.id != event.user_id">
-		<div class="layout-right-header">Oprettet af</div>
+	<div ng-if="hasAddress == true">
+		<div class="layout-right-header">Adresse</div>
 		<div class="layout-right-header-content">
-			<a ng-href="/medlemmer/{{ event_user.id }}/{{ event_user.urlName }}" debug-link>{{ event_user.full_name }}</a>
+			<span ng-if="address.address">{{ address.address }}<br></span>
+			<span ng-if="address.postal_code">{{ address.postal_code }} {{ address.city }}<br></span>
+			<span ng-if="address.municiplality">{{ address.municipality }}<br></span>
+			<span ng-if="address.region">{{ address.region }}<br></span>
+			<span ng-if="address.country">{{ address.country }}</span>
 		</div>
 	</div>
 
-	<div class="layout-right-header">Kontakt</div>
+	<div class="layout-right-header">Administrator</div>
 	<div class="layout-right-header-content">
-		<span ng-repeat="cp in event_contactpersons">
-			<a ng-href="/medlemmer/{{ cp.user.id }}/{{ cp.user.urlName }}" debug-link>{{ cp.user.full_name }}</a><br>
-		</span>
+		<a ng-href="{{ forening.admin.url }}">{{ forening.admin.full_name }}</a>
 	</div>
 
 	<div class="layout-right-header">Grupper</div>

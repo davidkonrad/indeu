@@ -16,8 +16,24 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 		var id = $routeParams.id;
 		ESPBA.get('association', { id: id }).then(function(r) {
 			$scope.forening = r.data[0];
+
+			ESPBA.get('address', { hash: $scope.forening.hash }).then(function(a) {
+				if (a.data && a.data[0]) {
+					a = a.data[0];
+					$scope.address = a;
+					$scope.hasAddress = a.address != '';
+				}
+			})
+
+			ESPBA.get('user', { id: $scope.forening.owner_id }).then(function(u) {
+				u = u.data[0];
+				$scope.forening.admin = u;
+				$scope.forening.admin.url = Utils.userUrl(u.id, u.full_name);
+			})
+
 		})
 
+		
 /*
 		$scope.reloadEvent = function() {
 			ESPBA.get('event', { id: id }).then(function(r) {

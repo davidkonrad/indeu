@@ -9,15 +9,17 @@ angular.module('indeuApp').directive('readMore', function($timeout) {
 
 			$timeout(function() {
 
-				if (element[0].offsetHeight > 60) {
+				if (element[0].offsetHeight > 100) {
 
 					var linkSuffix = new Date().getTime();
 					var readMoreClass = 'readMore'+linkSuffix;
 					var moreText = ' ▼  Læs mere';
+					//var moreText = '<i class="fa fa-chevron-down"></i> Læs mere';
 					var lessText = ' ▲  Læs mindre';
-					var link = 	'<code><a href="#" class="unstyled ' + readMoreClass + '">' + moreText + '</a></code><br><br>';
+					//var lessText = '<i class="fa fa-chevron-up"></i> Læs mindre';
+					var link = 	'<h5 class="no-padding"><a class="unstyled text-primary ' + readMoreClass + '">' + moreText + '</a></h5>';
 
-					element[0].style.height = '70px';				
+					element[0].style.height = '100px';				
 					element[0].style.overflowY = 'hidden';
 					
 					$(element).after(link);
@@ -25,12 +27,12 @@ angular.module('indeuApp').directive('readMore', function($timeout) {
 						if ($(this).text() == moreText) {
 							element[0].style.height = 'auto';
 							element[0].style.overflowY = 'visible';
-							$(this).text(lessText);
+							$(this).html(lessText);
 						} else {
-							element[0].style.height = '70px';				
+							element[0].style.height = '100px';				
 							element[0].style.overflowY = 'hidden';
-							$(this).text(moreText);
-							$("body").animate({scrollTop: $(this).offset().top -70}, "fast");
+							$(this).html(moreText);
+							$("body").animate({scrollTop: $(this).offset().top -100}, "slow");
 						}
 					});
 				}
