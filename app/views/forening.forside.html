@@ -1,62 +1,19 @@
 <div class="col-md-9">
 	<div ng-if="action == '' ">		
 
-			<h4>
-				<small>
-					<a href="{{ event.userUrlLink }} ">{{ event.userFullName }}</a>,
-					uploadet <span title="{{ event.realDate }}">{{ event.dateStamp }}</span>
-				</small>
-			</h4>
+			<h1>
+				{{ forening.name }} 
+			</h1>
 
+			<div class="col-md-12">
+				<img ng-if="forening.image != ''" 
+					class="pull-left" 
+					src="media/forening/thumbs/{{ forening.image }}" 
+					style="padding-right:10px;"
+					title="{{ forening.name }}">
+				<p ng-bind-html="forening.about"></p>
+			</div>
 
-		<h1> {{ event.name }} </h1>
-		<div class="col-md-8">
-			<div class="well well-lg">
-				<h4 class="no-margin">
-					Hvornår: <strong class="text-primary">{{ event.date | date : "dd/MM/yyyy" }} </strong> 
-					kl. <strong class="text-primary">{{ event.from | date : "HH:mm" }}</strong>
-					<span ng-if="event.to != null">
-						til kl. <strong class="text-primary">{{ event.to | date : "HH:mm" }} </strong>
-					</span>
-				</h4>
-				<h4 class="no-margin" style="padding-top:15px;">
-					Sted: <strong class="text-primary">{{ event.address }}</strong> 
-				</h4>
-			</div>
-			<div ng-bind-html="event.about"></div>
-			<entity-rating hash="{{ event.hash }}" user-id="{{ user.id }}" class="pull-right"></entity-rating>
-		</div>
-		<div class="col-md-4 no-padding">
-			<leaflet class="event-leaflet-map"
-				center="eventMap.center" 
-				defaults="eventMap.defaults" 
-				layers="eventMap.layers" 
-				markers="eventMap.markers" 
-				events="eventMap.events">
-			</leaflet>
-		</div>
-		<div class="col-md-12" ng-if="user">
-			<hr>
-			<span>Hvad vil du?&nbsp;&nbsp;</span>
-			<div class="btn-group" ng-model="feedback.feedback" bs-radio-group>
-			  <label class="btn btn-default btn-sm" 
-					ng-class="{ 'btn-danger' : feedback.feedback == 0 }"
-					ng-click="setFeedback(0)">
-					<input type="radio" class="btn btn-default" value="0" > Deltager ikke
-				</label>
-			  <label class="btn btn-default btn-sm" 
-					ng-class="{ 'btn-primary' : feedback.feedback == 1 }"
-					ng-click="setFeedback(1)">
-					<input type="radio" class="btn btn-default" value="1"> Deltager måske
-				</label>
-			  <label class="btn btn-default btn-sm" 
-					ng-class="{ 'btn-success' : feedback.feedback == 2 }"
-					ng-click="setFeedback(2)">
-					<input type="radio" class="btn btn-default" value="2"> Jeg deltager
-				</label>		
-			</div>
-			<hr>
-		</div>
 	</div>
 
 	<div ng-if="action == 'e'">

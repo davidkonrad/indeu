@@ -9,11 +9,14 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 
 		$scope.eventMap = Const.defaultMap();
 
-		var id = $routeParams.id;
-
 		if (Login.isLoggedIn()) {
 			$scope.user = Login.currentUser()
 		}
+
+		var id = $routeParams.id;
+		ESPBA.get('association', { id: id }).then(function(r) {
+			$scope.forening = r.data[0];
+		})
 
 /*
 		$scope.reloadEvent = function() {
@@ -95,46 +98,6 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 		$scope.reloadEvent();
 	*/
 
-		//for some reason, two way binding does not work with bs-radio-group and 2.1.13
-		$scope.setFeedback = function(value) {
-			var ev = $scope.event.id;
-			$scope.event.id = undefined;
-			if (value == 0 && $scope.feedback.id) {
-				$scope.feedback.feedback = value;
-				ESPBA.delete('event_user_feedback', { id: $scope.feedback.id }).then(function() {
-					$scope.feedback.id = null;
-					$scope.event.id = ev;
-					
-					Log.log({ 
-						type: Log.EVENT_FEEDBACK_REMOVE,
-						user_id: $scope.user.id,
-						hash: $scope.event.hash
-					});
-
-				})
-			} else {
-				$scope.feedback.feedback = value;
-
-				var logParams = { 
-					type: value == 1 ? Log.EVENT_FEEDBACK_1 : Log.EVENT_FEEDBACK_2,
-					user_id: $scope.user.id,
-					hash: $scope.event.hash
-				};
-
-				if ($scope.feedback.id) {
-					ESPBA.update('event_user_feedback', $scope.feedback).then(function() {
-						$scope.event.id = ev;
-						Log.log(logParams);
-					})
-				} else {
-					ESPBA.insert('event_user_feedback', $scope.feedback).then(function(f) {
-						$scope.feedback = f.data[0];
-						$scope.event.id = ev;
-						Log.log(logParams);
-					})
-				}
-			}
-		}
 
 		$scope.action = '';
 

@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp')
-  .controller('NavbarCtrl', function($scope, $location, $timeout, $compile, Login, Lookup, RememberMe, ESPBA, Utils) {
+  .controller('NavbarCtrl', function($scope, $rootScope, $location, $timeout, $compile, Login, Lookup, RememberMe, ESPBA, Utils) {
 
 		$scope.isLoggedIn = function() {
 			if (Login.isLoggedIn()) {
@@ -34,7 +34,8 @@ angular.module('indeuApp')
 			$scope.showSearch = false;
 			Login.logout();
 			$location.path('/');
-			$scope.reloadGroups();
+			reloadGroups();
+			reloadAssociations();
 		};
 
 		$scope.login = {
@@ -56,7 +57,7 @@ angular.module('indeuApp')
 					$scope.error = '';
 					$scope.isAdmin = Login.isAdmin();
 					$location.path('/dig');
-					$scope.reloadGroups();
+					//reloadGroups();
 					$timeout(function() {
 						$scope.showSearch = true;
 						//$compile(angular.element('#indeu-navbar'))($scope);
@@ -76,7 +77,7 @@ angular.module('indeuApp')
 			return $location.path() != '/soeg'
 		}
 
-		$scope.reloadGroups = function() {
+		function reloadGroups() {
 			var params = Login.isLoggedIn() ? {	user_id: Login.currentUser().id } : {};
 			ESPBA.prepared('MenuGroups', params).then(function(g) {
 				//console.log('g', g);
@@ -110,7 +111,7 @@ angular.module('indeuApp')
 				}
 			});
 		}
-		if (!$scope.groups) $scope.reloadGroups();
+		reloadGroups();
 
 		function reloadAssociations() {
 			var params = Login.isLoggedIn() ? {	user_id: Login.currentUser().id } : {};
@@ -121,8 +122,13 @@ angular.module('indeuApp')
 				$scope.associations = a.data
 			})
 		}
-		reloadAssociations()
+		reloadAssociations();
 
+		$rootScope.$on('indeu.login', function() {
+			reloadAssociations();
+			reloadGroups();
+			console.log('Login,rootscope indeu.log');
+		})
 
 });
 

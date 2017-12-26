@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('indeuApp')
-  .factory('Login', ['$cookies', '$timeout', '$q', '$location', 'ESPBA', 'RememberMe', 
-	function($cookies, $timeout, $q, $location, ESPBA, RememberMe) {
+  .factory('Login', function($rootScope, $cookies, $timeout, $q, $location, ESPBA, RememberMe) {
     
 	var cookieName = 'indeu.org';
 	var	currentUser = null;
@@ -40,6 +39,7 @@ angular.module('indeuApp')
 					updateOnlineStatus(currentUser, 1);
 					self.reloadGroups();
 					setCookie(currentUser);
+					$rootScope.$emit('indeu.login');
 		      deferred.resolve(currentUser);
 				} else {
 					deferred.resolve({ error : 'Email eller password ikke korrekt.' })
@@ -109,4 +109,4 @@ angular.module('indeuApp')
 
 	}
 
-}]);
+});
