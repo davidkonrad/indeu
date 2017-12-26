@@ -47,6 +47,9 @@ angular.module('indeuApp').controller('AdminForeningerCtrl',
       DTColumnBuilder.newColumn('name')
 				.withTitle('Navn'),
 
+      DTColumnBuilder.newColumn('short_name')
+				.withTitle('Kort Navn'),
+
       DTColumnBuilder.newColumn('owner_id')
 				.withTitle('Ejer')
 				.renderWith(function(data, type /*, full, meta*/) {

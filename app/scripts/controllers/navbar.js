@@ -112,6 +112,17 @@ angular.module('indeuApp')
 		}
 		if (!$scope.groups) $scope.reloadGroups();
 
+		function reloadAssociations() {
+			var params = Login.isLoggedIn() ? {	user_id: Login.currentUser().id } : {};
+			ESPBA.prepared('Associations', params).then(function(a) {
+				a.data.forEach(function(item) {
+					item.url = Utils.foreningUrl(item.id, Utils.urlName(item.name))
+				})
+				$scope.associations = a.data
+			})
+		}
+		reloadAssociations()
+
 
 });
 

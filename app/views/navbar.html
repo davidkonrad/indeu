@@ -81,24 +81,11 @@
 							<span class="caret"></span>
 						</a>				
 						<ul class="dropdown-menu mega-dropdown-menu">
-							<li class="col-sm-6">
-								<ul>
-									<li class="dropdown-header">header</li>
-									<li><a href="">item item item</a></li>
-									<li><a href="">item item item</a></li>
-									<li><a href="">item item item</a></li>
-									<li><a href="">item item item</a></li>
-									<li><a href="">item item item</a></li>
-								</ul>
-							</li>
-							<li class="col-sm-6">
-								<ul>
-									<li class="dropdown-header">header</li>
-									<li><a href="">item item item</a></li>
-									<li><a href="">item item item</a></li>
-									<li><a href="">item item item</a></li>
-									<li><a href="">item item item</a></li>
-									<li><a href="">item item item</a></li>
+							<li class="col-sm-4">
+								<ul class="list-unstyled">
+									<li ng-repeat="a in associations">
+										<a href="{{ a.url }}"> {{ a.name }} </a>
+									</li>
 								</ul>
 							</li>
 						</ul>
