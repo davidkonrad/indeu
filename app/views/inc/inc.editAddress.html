@@ -1,0 +1,79 @@
+
+	<form role="form" class="form-horizontal" autocomplete="off">
+
+		<div class="form-group">
+      <label class="col-md-3 control-label" for="country">Land</label>
+			<div class="col-md-8">
+		    <input class="form-control" 
+					type="text"
+					id="country"
+					select-on-click
+					ng-model="edit.country" 
+					placeholder="Land">
+			</div>
+		</div>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label required" for="street_name">Adresse</label>
+			<div class="col-md-8">
+		    <input class="form-control" 
+					type="text"
+					id="adresse"
+					select-on-click
+					ng-model="edit.address" 
+					placeholder="Adresse">
+			</div>
+		</div>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label required" for="postal_code">Postnr</label>
+			<div class="col-md-2">
+		    <input class="form-control" 
+					type="text"
+					id="postal_code"
+					select-on-click
+					only-numbers
+					ng-model="edit.postal_code" 
+					placeholder="Postnr">
+			</div>
+		</div>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label required" for="city">By</label>
+			<div class="col-md-5">
+		    <input class="form-control" 
+					type="text"
+					id="city"
+					select-on-click
+					ng-model="edit.city" 
+					placeholder="By">
+			</div>
+		</div>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label" for="municipality">Kommune</label>
+			<div class="col-md-5">
+		    <input class="form-control" 
+					type="text"
+					id="munciplaity"
+					select-on-click
+					ng-model="edit.municipality" 
+					placeholder="Kommune">
+			</div>
+		</div>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label" for="region">Region</label>
+			<div class="col-md-5">
+		    <input class="form-control" 
+					type="text"
+					id="region"
+					select-on-click
+					ng-model="edit.region" 
+					placeholder="Region">
+			</div>
+		</div>
+
+
+</form>
+

@@ -1,5 +1,5 @@
 <?
-	header('Access-Control-Allow-Origin: *');	
+	//header('Access-Control-Allow-Origin: *');	
 
 	function getExt($src) {
 		$path_info = pathinfo($src);

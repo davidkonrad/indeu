@@ -4,7 +4,7 @@
 		<div class="indeu-navbar-left col-md-7 col-sm-6  col-xs-12">
 		  <h1><strong><code class="indeu-navbar-logo"><a href="/" class="unstyled" title="indeu,org">indeu.org</a></code></strong></h1>
 		</div>
-		<div class="indeu-navbar-right col-md-4 col-sm-12 col-xs-12 form-fade" ng-show="!isLoggedIn()" id="login-form">
+		<div class="indeu-navbar-right col-md-5 col-sm-12 col-xs-12 form-fade" ng-show="!isLoggedIn()" id="login-form">
 			<div>
 				<i ng-if="login.error != ''" class="fa fa-remove text-danger bg-warning"></i>
 				{{ login.error }} &nbsp;
@@ -14,7 +14,7 @@
 					type="text"
 					select-on-click
 					ng-model="login.email" 
-					size="16"
+					size="26"
 					name="email"
 					placeholder="Email">
 		    <input class="form-control input-sm" 

@@ -108,7 +108,7 @@ angular.module('ESPBA', [])
 					method: 'GET',
 					params: data
 				}).then(function(r) {
-					console.log('DONE', arguments)
+					//console.log('DONE', arguments)
 		      deferred.resolve( process(r) )
 				})
 	      return deferred.promise;

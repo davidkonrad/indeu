@@ -42,7 +42,6 @@ angular.module('indeuApp').factory('Log', function(ESPBA) {
 		ASSOCIATION_OWNER_CHANGED: 56,
 		ASSOCIATION_MEMBER_EXCLUDED: 57,
 
-
 		log: function(opt) {
 			var params = {
 				type: opt.type,

@@ -196,11 +196,11 @@ angular.module('indeuApp')
 			});
 
 			modal.$promise.then(function() {
-				console.log('modal promise');
+				//console.log('modal promise');
 			});
 
 			modal.$promise.then(modal.show).then(function() {
-				console.log('modal show');
+				//console.log('modal show');
 			});
 
 			$scope.__forModal.modalClose = function(value) {
@@ -215,6 +215,7 @@ angular.module('indeuApp')
 
 				if (value) {
 					if (association_id) {
+						$scope.__addressSave();
 						ESPBA.update('association', $scope.edit).then(function(r) {
 							//we should probably sanity check
 							r = r.data[0];

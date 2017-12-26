@@ -78,7 +78,7 @@ angular.module('indeuApp')
 
 		reloadGroups: function() {
 			ESPBA.get('group_user', { user_id: currentUser.id }).then(function(g) {
-				console.log('user groups', g.data);
+				//console.log('user groups', g.data);
 				currentUser.groups = g.data;
 			});
 		},
