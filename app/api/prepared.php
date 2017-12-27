@@ -31,7 +31,10 @@ $SQL = <<<SQL
 			e.id as event_id,
 
 			g.name as group_name,
-			g.id as group_id
+			g.id as group_id,
+
+			us.id as user_user_id,
+			us.full_name as user_full_name
 
 		from log l
 
@@ -41,6 +44,7 @@ $SQL = <<<SQL
 		left join article a on a.hash = l.hash
 		left join event e on e.hash = l.hash
 		left join `group` g on g.hash = l.hash
+		left join `user` us on us.hash = l.hash
 SQL;
 		//**must** have either user_id or hash
 		if ($user_id) {

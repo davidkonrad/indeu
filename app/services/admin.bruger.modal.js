@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').factory('BrugerModal', 
-	function($modal, $q, ESPBA, Utils, Lookup, ImageUploadModal, DTOptionsBuilder, DTColumnBuilder, Const) {
+	function($modal, $q, ESPBA, Utils, Lookup, ImageUploadModal, DTOptionsBuilder, DTColumnBuilder, Const, Log, Login) {
 
 	var deferred = null;
 	var modal = null;
@@ -81,11 +81,21 @@ angular.module('indeuApp').factory('BrugerModal',
 				if (value) {
 					if (user_id) {
 						ESPBA.update('user', $scope.edit).then(function(r) {
-							console.log('UPDATE', r);
+							Log.log({
+								type: Log.USER_EDITED_BY_ADMIN,
+								user_id: Login.currentUser().id,
+								hash: $scope.edit.hash
+							});
 							close()
 						})
 					} else {
+						$scope.edit.hash = Utils.getHash();
 						ESPBA.insert('user', $scope.edit).then(function(r) {
+							Log.log({
+								type: Log.USER_CREATED_BY_ADMIN,
+								user_id: Login.currentUser().id,
+								hash: $scope.edit.hash
+							});
 							close()
 						})
 					}

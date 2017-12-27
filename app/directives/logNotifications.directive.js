@@ -26,6 +26,8 @@ angular.module('indeuApp')
 					return ' eventen <a href="'+Utils.eventUrl(item.event_id, item.event_name)+'">'+item.event_name+'</a>';
 				} else if (item.forening_id) {
 					return ' foreningen <a href="'+Utils.foreningUrl(item.forening_id, item.forening_name)+'">'+item.forening_name+'</a>';
+				} else if (item.user_user_id) {
+					return ' brugeren <a href="'+Utils.userUrl(item.user_user_id, item.user_full_name)+'">'+item.user_full_name+'</a>';
 				}
 				return 'Should never happen';
 			}
@@ -48,6 +50,20 @@ angular.module('indeuApp')
 						item.action = 'gav';
 						item.action += ' '+entityLink(item);
 						item.action += ' en brugervurdering';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.USER_EDITED_BY_ADMIN :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'redigerede som administrator ';
+						item.action += ' '+entityLink(item);
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.USER_CREATED_BY_ADMIN :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'oprettede som administrator ';
+						item.action += ' '+entityLink(item);
 						item.title = item.userName + ' ' + Utils.plainText(item.action);
 						break;
 
@@ -228,6 +244,7 @@ angular.module('indeuApp')
 				if (scope.limit) params.limit = scope.limit;
 
 				ESPBA.prepared('Log', params).then(function(p) {
+					//console.log(p);
 					p.data.forEach(function(item) {
 						process(item)
 					})
