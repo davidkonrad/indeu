@@ -34,7 +34,7 @@ $SQL = <<<SQL
 			g.id as group_id,
 
 			us.id as user_user_id,
-			us.full_name as user_full_name
+			us.full_name as user_user_full_name
 
 		from log l
 

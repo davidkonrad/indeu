@@ -27,7 +27,7 @@ angular.module('indeuApp')
 				} else if (item.forening_id) {
 					return ' foreningen <a href="'+Utils.foreningUrl(item.forening_id, item.forening_name)+'">'+item.forening_name+'</a>';
 				} else if (item.user_user_id) {
-					return ' brugeren <a href="'+Utils.userUrl(item.user_user_id, item.user_full_name)+'">'+item.user_full_name+'</a>';
+					return ' brugeren <a href="'+Utils.userUrl(item.user_user_id, item.user_user_full_name)+'">'+item.user_user_full_name+'</a>';
 				}
 				return 'Should never happen';
 			}
@@ -179,7 +179,7 @@ angular.module('indeuApp')
 					case Log.EVENT_GROUP_ADDED :
 						var group = Lookup.getGroup(item.context_user_id);
 						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
-						item.action = 'tilføjede';
+						item.action = 'tilføjede gruppen ';
 						item.action += '  <a href="'+Utils.gruppeUrl(group.id, group.name) + '">'+group.name+'</a>';
 						item.action += ' til eventen <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">'+item.event_name+'</a>';
 						item.title = item.userName + ' ' + Utils.plainText(item.action);
@@ -188,7 +188,7 @@ angular.module('indeuApp')
 					case Log.EVENT_GROUP_REMOVED :
 						var group = Lookup.getGroup(item.context_user_id);
 						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
-						item.action = 'fjernede';
+						item.action = 'fjernede gruppen ';
 						item.action += '  <a href="'+Utils.gruppeUrl(group.id, group.name) + '">'+group.name+'</a>';
 						item.action += ' fra eventen <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">'+item.event_name+'</a>';
 						item.title = item.userName + ' ' + Utils.plainText(item.action);
@@ -255,6 +255,7 @@ angular.module('indeuApp')
 			attrs.$observe('userId', function() {
 				if (scope.userId) reload()
 			})
+
 			attrs.$observe('hash', function() {
 				if (scope.hash) reload()
 			})
