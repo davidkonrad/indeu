@@ -56,6 +56,15 @@ angular.module('indeuApp').factory('Log', function(ESPBA) {
 			})
 		},
 
+		//return the log variable name for a value
+		logName: function(value) {
+			if (typeof value == 'number') {
+				for (var name in this) {
+					if (this[name] === value) return name
+				}
+			}
+			return '__UNKOWN__'
+		}
 
 	}
 });

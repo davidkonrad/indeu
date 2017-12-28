@@ -80,6 +80,7 @@ angular.module('indeuApp').factory('BrugerModal',
 
 				if (value) {
 					if (user_id) {
+						$scope.__addressSave();
 						ESPBA.update('user', $scope.edit).then(function(r) {
 							Log.log({
 								type: Log.USER_EDITED_BY_ADMIN,

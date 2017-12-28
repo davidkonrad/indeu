@@ -156,6 +156,5 @@ angular.module('indeuApp')
 			$scope.reloadEvent();
 		}
 
-
 });
 
