@@ -1,31 +1,39 @@
 <div class="col-md-9">
+
+	<h1>{{ forening.name }}	
+		<small ng-if="action_caption" style="position:relative;top:-2px;"><small>&mdash;</small> {{ action_caption }}</small>
+	</h1>
+
 	<div ng-if="action == '' ">		
 
-			<h1>
-				{{ forening.name }} 
-			</h1>
-
-			<div class="col-md-12">
-				<img ng-if="forening.image != ''" 
-					class="pull-left" 
-					ng-src="media/forening/thumbs/{{ forening.image }}" 
-					style="padding-right:10px;"
-					title="{{ forening.name }}">
-				<p ng-bind-html="forening.about" read-more></p>
-			</div>
+		<div class="col-md-12">
+			<img ng-if="forening.image != ''" 
+				class="pull-left" 
+				ng-src="media/forening/thumbs/{{ forening.image }}" 
+				style="padding-right:10px;"
+				title="{{ forening.name }}">
+			<p ng-bind-html="forening.about" read-more></p>
+		</div>
 
 	</div>
 
+<!-- edit event --->
 	<div ng-if="action == 'e'">
-		<h3 class="no-padding no-margin">&nbsp;Rediger</h3>
-		<div edit-event="{{ event.id }}"  
+		<div edit-event="{{ edit_event_id }}"  
 			user-id="{{ user.id }}"
 			on-save="actionSaved(item)" 
 			on-cancel="actionCancel()">
 		</div>
 	</div>
 
-	<log-notifications hash="{{ event.hash }}"></log-notifications>
+<!-- edit article -->
+	<div ng-if="action == 'a'">
+		<div edit-article="{{ edit_article_id }}"  
+			user-id="{{ user.id }}"
+			on-save="actionSaved(item)" 
+			on-cancel="actionCancel()">
+		</div>
+	</div>
 
 	<comments hash="{{ event.hash }}" user-id="{{ user.id }}"></comments>
 

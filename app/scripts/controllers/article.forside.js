@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp')
-  .controller('ArticleForsideCtrl', function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, UserVisits, VisitCounter) {
+  .controller('ArticleForsideCtrl', function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, UserVisits, VisitCounter, ConfirmModal) {
 
 		if (Login.isLoggedIn()) {
 			$scope.user = Login.currentUser()
@@ -78,6 +78,16 @@ angular.module('indeuApp')
 		$scope.actionSaved = function(item) {
 			$scope.action = '';
 			$scope.reload();
+		}
+
+		$scope.unpublishArticle = function() {
+			ConfirmModal.show('Er du sikker på at du vil trække artiklen tilbage?').then(function(answer) {
+				if (answer) {
+					ESPBA.update('article', { published: 0, id: id }).then(function() {
+						$scope.reload();
+					})
+				}
+			})
 		}
 
 //

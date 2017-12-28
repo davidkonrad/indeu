@@ -49,12 +49,19 @@
 				class="pull-right no-padding no-margin">
 				<small>Vist {{ visitCounter }} gange</small>
 			</small>
-			<a href="" 
-				ng-class="{ 'disabled': actionDisable('e') }"
+			<a class="cursor-pointer"
+				ng-class="{ 'disabled': actionDisable('a') }"
 				ng-disabled="actionDisable('a')" 
 				ng-click="setAction('a')">
 				<i class="fa fa-fw fa-wrench fa-x2"></i>
 				Rediger artikel<br>
+			</a>
+			<a class="cursor-pointer"
+				ng-class="{ 'disabled': article.published != 1 }"
+				ng-disabled="article.published != 1" 
+				ng-click="unpublishArticle()">
+				<i class="fa fa-fw fa-remove fa-x2 text-danger"></i>
+				Træk artikel tilbage (afpubliser)<br>
 			</a>
 		</div>
 	</div>

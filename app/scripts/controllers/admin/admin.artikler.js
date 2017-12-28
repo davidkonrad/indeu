@@ -26,8 +26,17 @@ angular.module('indeuApp').controller('AdminArtiklerCtrl',
 					}
 				}),
 
+      DTColumnBuilder.newColumn('created_timestamp')
+				.withTitle('Dato')
+				.renderWith(function(data, type, full) {
+					if (type === 'display') {
+						return moment(data).calendar()
+					}
+					return data
+				}),
+
       DTColumnBuilder.newColumn('accepted')
-				.withTitle('★')
+				.withTitle('Godk.')
 				.renderWith(function(data, type, full) {
 					if (type === 'display') {
 						data = parseInt(data);
@@ -47,13 +56,35 @@ angular.module('indeuApp').controller('AdminArtiklerCtrl',
 					}
 				}),
 
-      DTColumnBuilder.newColumn('created_timestamp')
-				.withTitle('Dato')
+      DTColumnBuilder.newColumn('published')
+				.withTitle('Publ.')
 				.renderWith(function(data, type, full) {
 					if (type === 'display') {
-						return moment(data).calendar()
+						data = parseInt(data);
+						switch (data) {
+							case 0:
+								return '<i class="fa fa-remove text-danger"></i>';
+								break;
+							case 1:
+								return '<i class="fa fa-check text-success"></i>';
+								break;
+							default:
+								return '<i class="fa fa-question text-primary"></i>';
+								break;
+						}
+					} else {
+						return data;
 					}
-					return data
+				}),
+
+      DTColumnBuilder.newColumn('visibility_level')
+				.withTitle('Synlighed')
+				.renderWith(function(data, type /*, full, meta*/) {
+					if (type === 'display') {
+						return Lookup.visibilityLevelName(data)
+					} else {
+						return data;
+					}
 				}),
 
       DTColumnBuilder.newColumn('user_id')
@@ -66,6 +97,7 @@ angular.module('indeuApp').controller('AdminArtiklerCtrl',
 					}
 				}),
 
+/*
       DTColumnBuilder.newColumn('author_id')
 				.withTitle('Forfatter')
 				.renderWith(function(data, type, full) {
@@ -77,20 +109,12 @@ angular.module('indeuApp').controller('AdminArtiklerCtrl',
 						return data;
 					}
 				}),
+*/
 
       DTColumnBuilder.newColumn('header')
 				.withClass('td-about-text')
 				.withTitle('Overskrift'),
 
-      DTColumnBuilder.newColumn('visibility_level')
-				.withTitle('Synlighed')
-				.renderWith(function(data, type /*, full, meta*/) {
-					if (type === 'display') {
-						return Lookup.visibilityLevelName(data)
-					} else {
-						return data;
-					}
-				}),
 		];
 
 		$scope.dtOptions = DTOptionsBuilder

@@ -44,7 +44,7 @@ angular.module('indeuApp', [
 		}
 
 		NotificationProvider.setOptions({
-			delay: 4000,
+			delay: 10000,
 			startTop: 20,
 			startRight: 10,
 			verticalSpacing: 20,
@@ -164,7 +164,7 @@ angular.module('indeuApp', [
         controllerAs: 'administration'
       })
       .when('/admin-artikler', {
-        templateUrl: 'views/admin.artikler.html',
+        templateUrl: 'views/admin/admin.artikler.html',
         controller: 'AdminArtiklerCtrl',
         controllerAs: 'administration'
       })

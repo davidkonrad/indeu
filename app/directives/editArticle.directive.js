@@ -73,9 +73,9 @@ angular.module('indeuApp')
 
 			scope.articleAction.save = function() {
 				if (article_id) {
-					ESPBA.update('article', scope.article).then(function() {
-						Notification.primary('<strong>' + scope.article.header +'</strong> er opdateret');
-						if (onSave) scope.onSave();
+					ESPBA.update('article', scope.article).then(function(a) {
+						Notification.primary('Artiklen <strong>' + scope.article.header +'</strong> er opdateret');
+						if (onSave) scope.onSave(a.data[0]);
 
 						Log.log({
 							type: Log.ARTICLE_EDITED,
@@ -87,20 +87,30 @@ angular.module('indeuApp')
 				} else {
 					scope.article.user_id = scope.user_id;
 					scope.article.hash = Utils.getHash();
-					ESPBA.insert('article', scope.article).then(function(e) {
-						Notification.primary('<strong>' + scope.article.header +'</strong> er oprettet');
+			
+					var extra_message = '';
+					//we dont care about accepted or published articles if they are none public
+					if (scope.article.visibility_level > 1) {
+						scope.article.accepted = 1;
+						scope.article.published = 1;
+					} else {
+						extra_message = '<br>Fordi artiklen er offentlig skal den godkendes før den bliver endeligt publiseret.';	
+					}
+
+					ESPBA.insert('article', scope.article).then(function(a) {
+						Notification.primary('Artiklen <strong>' + scope.article.header +'</strong> er oprettet. '+extra_message);
 						if (scope.group_id) {
-							ESPBA.insert('group_articles', { group_id: scope.group_id, article_id: e.data[0].id }).then(function() {			
-								if (onSave) scope.onSave();
+							ESPBA.insert('group_articles', { group_id: scope.group_id, article_id: a.data[0].id }).then(function() {			
+								if (onSave) scope.onSave(a.data[0]);
 							})
 						} else {
-							if (onSave) scope.onSave();
+							if (onSave) scope.onSave.call('test')//a.data[0]);
 						}
 
 						Log.log({
 							type: Log.ARTICLE_CREATED,
 							user_id: Login.currentUser().id,
-							hash: e.data[0].hash
+							hash: a.data[0].hash
 						});
 
 					})
