@@ -11,7 +11,8 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 			$scope.user = Login.currentUser()
 		}
 
-		var id = $routeParams.id;
+		let id = $routeParams.id;
+
 		ESPBA.get('association', { id: id }).then(function(r) {
 			$scope.forening = r.data[0];
 
@@ -31,6 +32,22 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 
 		})
 
+		function loadArticles() {
+			ESPBA.prepared('AssociationArticles', { association_id: id }).then(function(a) {
+				a.data.forEach(function(item) {
+					item.url = Utils.articleUrl(item.id, item.header)
+				})
+				$scope.articles = a.data
+			})
+		}
+		loadArticles();
+
+		function loadEvents() {
+		}
+		loadEvents();
+
+		//----------------------------------------
+		//actions
 		$scope.action = '';
 
 		$scope.setAction = function(action) {
@@ -39,8 +56,12 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 		}
 
 		$scope.actionCancel = function() {
+			switch ($scope.action) {
+				case 'a' : loadArticles(); break;
+				case 'e' : loadEvents(); break;
+				default: break;
+			}
 			$scope.action = '';
-			$scope.reloadEvent(); //??
 		}
 
 		$scope.actionDisable = function(action) {

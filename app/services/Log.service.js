@@ -30,6 +30,7 @@ angular.module('indeuApp').factory('Log', function(ESPBA) {
 		GROUP_MEMBER_ADDED: 33,
 		GROUP_MEMBER_REMOVED: 35,
 		GROUP_MEMBER_EXCLUDED: 36,
+		GROUP_ARTICLE_CREATED: 37,
 
 		COMMENT_ENTITY: 40,
 		COMMENT_COMMENT: 41,
@@ -43,6 +44,8 @@ angular.module('indeuApp').factory('Log', function(ESPBA) {
 		ASSOCIATION_MEMBER_REMOVED: 55,
 		ASSOCIATION_OWNER_CHANGED: 56,
 		ASSOCIATION_MEMBER_EXCLUDED: 57,
+		ASSOCIATION_ARTICLE_CREATED: 58,
+	
 
 		log: function(opt) {
 			var params = {

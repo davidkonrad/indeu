@@ -32,6 +32,31 @@ SQL;
 		return $SQL;		
 	}
 
+
+	//******************
+	//List of articles for an association
+	//@association_id
+	//@limit
+	public function AssociationArticles() {
+		$association_id = isset($this->array['association_id']) ? $this->array['association_id'] : false;
+		$limit = isset($this->array['limit']) ? $this->array['limit'] : false;
+
+$SQL = <<<SQL
+			select 
+				a.* from article a, association_articles aa
+			where 
+				a.id = aa.article_id
+			and
+				aa.association_id = $association_id
+			order by a.id desc
+SQL;
+		if ($limit) $SQL.=' limit '.$limit;
+
+		return $SQL;		
+	}
+				
+
+
 }
 
 

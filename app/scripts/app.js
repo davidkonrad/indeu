@@ -45,7 +45,7 @@ angular.module('indeuApp', [
 		}
 
 		NotificationProvider.setOptions({
-			delay: 10000,
+			delay: 5000,
 			startTop: 20,
 			startRight: 10,
 			verticalSpacing: 20,

@@ -12,7 +12,8 @@ angular.module('indeuApp')
 			onSave: '&',
 			onCancel: '&',
 			userId: '@',
-			groupId: '@'
+			groupId: '@',
+			associationId: '@'
 		},
 		replace: true,
 		controller: function($scope) {
@@ -29,7 +30,8 @@ angular.module('indeuApp')
 		link: function(scope, element, attrs) {
 			scope.group_id = attrs['groupId'] || false;
 			scope.user_id = attrs['userId'] || false;
-			
+			scope.association_id = attrs['associationId'] || false;
+
 			scope.article.user_id = scope.user_id;
 
 			var user_id = attrs['userId'] || false;
@@ -100,11 +102,14 @@ angular.module('indeuApp')
 					ESPBA.insert('article', scope.article).then(function(a) {
 						Notification.primary('Artiklen <strong>' + scope.article.header +'</strong> er oprettet. '+extra_message);
 						if (scope.group_id) {
-							ESPBA.insert('group_articles', { group_id: scope.group_id, article_id: a.data[0].id }).then(function() {			
-								if (onSave) scope.onSave(a.data[0]);
+							ESPBA.insert('group_articles', { group_id: scope.group_id, article_id: a.data[0].id }).then(function() {
+								//
 							})
-						} else {
-							if (onSave) scope.onSave.call('test')//a.data[0]);
+						}
+						if (scope.association_id) {
+							ESPBA.insert('association_articles', { association_id: scope.association_id, article_id: a.data[0].id }).then(function() {			
+								//
+							})
 						}
 
 						Log.log({
@@ -112,6 +117,10 @@ angular.module('indeuApp')
 							user_id: Login.currentUser().id,
 							hash: a.data[0].hash
 						});
+
+						$timeout(function() {
+							if (onSave) scope.onSave();
+						})
 
 					})
 				}
