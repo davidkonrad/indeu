@@ -33,7 +33,7 @@ angular.module('indeuApp', [
 	'angular-smilies',
 	'angularTrix'
   ])
-  .config(function ($locationProvider, $routeProvider, cfpLoadingBarProvider, NotificationProvider, $tooltipProvider) {
+  .config(function ($locationProvider, $routeProvider, cfpLoadingBarProvider, NotificationProvider, $tooltipProvider, $provide) {
 
     cfpLoadingBarProvider.includeSpinner = false;
 	
@@ -52,6 +52,30 @@ angular.module('indeuApp', [
 			horizontalSpacing: 20,
 			positionX: 'left',
 			positionY: 'top'
+		});
+
+		$provide.decorator('taTranslations', function($delegate) {
+			$delegate.heading.tooltip = 'Overskrift ';
+			$delegate.quote.tooltip = 'Citeret tekst';
+			$delegate.ul.tooltip = 'Punkt liste';
+			$delegate.ol.tooltip = 'Nummereret liste';
+			$delegate.html.tooltip = 'Skift mellem tekst / HTML';
+			$delegate.justifyLeft.tooltip = 'Venstrejustér';
+			$delegate.justifyCenter.tooltip = 'Centrér';
+			$delegate.justifyRight.tooltip = 'Højrejustér';
+			$delegate.bold.tooltip = 'Fed skrift';
+			$delegate.italic.tooltip = 'Kursiv skrift';
+			$delegate.underline.tooltip = 'Understreget skrift';
+			$delegate.strikeThrough.tooltip = 'Overstreget skrift';
+			$delegate.insertLink.tooltip = 'Indsæt / redigér link';
+			$delegate.insertLink.dialogPrompt = "Skriv link URL";
+			$delegate.editLink.targetToggle.buttontext = "Åbn i nyt vindue";
+			$delegate.editLink.reLinkButton.tooltip = "Rediger link";
+			$delegate.editLink.unLinkButton.tooltip = "Fjern link";
+			$delegate.insertVideo.tooltip = 'Indsæt video';
+			$delegate.insertVideo.dialogPrompt = 'Skriv Youtube video URL, der skal indsættes';
+			$delegate.clear.tooltip = 'Ryd formattering';
+			return $delegate;
 		});
 
 	  angular.extend($tooltipProvider.defaults, {
