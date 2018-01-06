@@ -44,7 +44,6 @@ angular.module('indeuApp').factory('GruppeModal',
 			}
 
 			$scope.__gruppeModal.canSave = function() {
-				//console.log('gruppe cansave', $scope.edit);
 				return $scope.edit.name != undefined &&
 					$scope.edit.owner_id != undefined &&
 					$scope.edit.visibility_level != undefined &&
@@ -129,7 +128,7 @@ angular.module('indeuApp').factory('GruppeModal',
 
 			modal = $modal({
 				scope: $scope,
-				templateUrl: 'views/admin.gruppe.modal.html',
+				templateUrl: 'views/admin/admin.gruppe.modal.html',
 				backdrop: 'static',
 				show: false,
 				keyboard: false
