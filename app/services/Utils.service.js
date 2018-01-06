@@ -202,3 +202,14 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 	}
 
 });
+
+
+angular.module('indeuApp').directive('debugCss', function() {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			console.log('debugCSS', element)
+		}
+	}
+});
+

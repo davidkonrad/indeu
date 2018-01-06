@@ -30,7 +30,8 @@ angular.module('indeuApp', [
 	'leaflet-directive',
 	'ui-notification',
 	'ngRateIt',
-	'angular-smilies'
+	'angular-smilies',
+	'angularTrix'
   ])
   .config(function ($locationProvider, $routeProvider, cfpLoadingBarProvider, NotificationProvider, $tooltipProvider) {
 

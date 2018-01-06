@@ -105,6 +105,8 @@ module.exports = function(config) {
       'bower_components/angular-rateit/dist/ng-rateit.js',
       'bower_components/moment-timezone/builds/moment-timezone-with-data-2012-2022.js',
       'bower_components/angular-smilies/dist/angular-smilies.js',
+      'bower_components/trix/dist/trix.js',
+      'bower_components/angular-trix/dist/angular-trix.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
