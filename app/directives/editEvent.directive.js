@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('indeuApp')
-	.directive('editEvent', function(Utils, ESPBA, Lookup, Login, SelectBrugerModal, SelectGruppeModal, Notification, Const, Log) {
+	.directive('editEvent', 
+	function($timeout, Utils, ESPBA, Lookup, Login, SelectBrugerModal, SelectGruppeModal, Notification, Const, Log) {
 
 	return {
 		templateUrl: "views/inc/inc.editEvent.html",
@@ -12,6 +13,7 @@ angular.module('indeuApp')
 			onCancel: '&',
 			userId: '@',
 			groupId: '@',
+			associationId: '@',
 			eventParticipants: '='
 		},
 		replace: true,
@@ -55,6 +57,7 @@ angular.module('indeuApp')
 		},
 		link: function(scope, element, attrs) {
 			scope.group_id = attrs['groupId'] || false;
+			scope.association_id = attrs['associationId'] || false;
 			scope.user_id = attrs['userId'] || false;
 
 			var user_id = attrs['userId'] || false;
@@ -77,7 +80,6 @@ angular.module('indeuApp')
 						scope.eventMap.center = latLng;
 					}
 				});
-
 			}
 
 			scope.reloadContactPersons = function() {
@@ -182,8 +184,8 @@ angular.module('indeuApp')
 			scope.eventAction.save = function() {
 				if (event_id) {
 					ESPBA.update('event', scope.event).then(function() {
+						Notification.primary('Eventen <strong>' + scope.event.name +'</strong> er opdateret');
 						if (onSave) scope.onSave();
-
 						Log.log({
 							type: Log.EVENT_EDITED,
 							user_id: Login.currentUser().id,
@@ -195,23 +197,28 @@ angular.module('indeuApp')
 					scope.event.user_id = scope.user_id;
 					scope.event.hash = Utils.getHash();
 					ESPBA.insert('event', scope.event).then(function(e) {
-
+						Notification.primary('Eventen <strong>' + scope.event.name +'</strong> er oprettet');
 						if (scope.group_id) {
 							ESPBA.insert('group_events', { group_id: scope.group_id, event_id: e.data[0].id }).then(function() {			
-								if (onSave) scope.onSave();
+								//
 							})
 							ESPBA.insert('event_contactperson', { event_id: e.data[0].id, user_id: scope.user_id }).then(function() {			
-								if (onSave) scope.onSave();
+								//
 							})
-						} else {
-							if (onSave) scope.onSave();
+						} 
+						if (scope.association_id) {
+							ESPBA.insert('association_events', { association_id: scope.association_id, event_id: e.data[0].id }).then(function() {			
+							})
 						}
-
 						Log.log({
 							type: Log.EVENT_CREATED,
 							user_id: Login.currentUser().id,
 							hash: e.data[0].hash
 						});
+
+						$timeout(function() {
+							if (onSave) scope.onSave();
+						})
 
 					})
 				}

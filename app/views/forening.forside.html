@@ -30,6 +30,7 @@
 	<div ng-if="action == 'e'">
 		<div edit-event="{{ edit_event_id }}"  
 			user-id="{{ user.id }}"
+			association-id="{{ forening.id }}"
 			on-save="actionSaved(item)" 
 			on-cancel="actionCancel()">
 		</div>
@@ -45,7 +46,9 @@
 		</div>
 	</div>
 
-	<comments hash="{{ event.hash }}" user-id="{{ user.id }}"></comments>
+<!--
+	<comments hash="{{ forening.hash }}" user-id="{{ user.id }}"></comments>
+-->
 
 </div>
 	
@@ -79,7 +82,7 @@
 		<a href="" 
 			ng-class="{ 'disabled': actionDisable('e') }"
 			ng-disabled="actionDisable('n')" 
-			ng-click="setAction('n')">
+			ng-click="setAction('e')">
 			<i class="fa fa-fw fa-calendar fa-x2"></i>
 			Opret en event
 		</a>

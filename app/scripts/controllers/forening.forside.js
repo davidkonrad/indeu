@@ -56,11 +56,6 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 		}
 
 		$scope.actionCancel = function() {
-			switch ($scope.action) {
-				case 'a' : loadArticles(); break;
-				case 'e' : loadEvents(); break;
-				default: break;
-			}
 			$scope.action = '';
 		}
 
@@ -69,7 +64,11 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 		}	
 
 		$scope.actionSaved = function(item) {
-			console.log('actionSaved', arguments);
+			switch ($scope.action) {
+				case 'a' : loadArticles(); break;
+				case 'e' : loadEvents(); break;
+				default: break;
+			}
 			$scope.action = '';
 		}
 
