@@ -7,11 +7,12 @@
 angular.module('indeuApp').controller('ForeningForsideCtrl', 
 	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log, AlertModal) {
 
-		if (Login.isLoggedIn()) {
-			$scope.user = Login.currentUser()
-		}
-
 		let id = $routeParams.id;
+
+		if (Login.isLoggedIn()) {
+			$scope.user = Login.currentUser();
+			$scope.userIsMember = Login.isAssociationMember(id);
+		}
 
 		ESPBA.get('association', { id: id }).then(function(r) {
 			$scope.forening = r.data[0];
