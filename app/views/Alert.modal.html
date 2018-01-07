@@ -7,13 +7,14 @@
 			</div>
 
 			<div class="modal-body">
-				<div class="pull-left" style="padding-right:15px;">
-					<i class="fa fa-info-circle fa-5x text-primary"></i>
+				<div class="row">
+					<div class="col-md-2">
+						<i class="fa fa-info-circle fa-5x text-primary"></i>
+					</div>
+					<div style="vertical-align: top;" class="col-md-10">
+						<h4 ng-bind-html="message"></h4>
+					</div>
 				</div>
-				<div style="vertical-align: top;">
-					<h4 ng-bind-html="message"></h4>
-				</div>
-				<br>
 			</div>
 
 			<div class="modal-footer clearfix">

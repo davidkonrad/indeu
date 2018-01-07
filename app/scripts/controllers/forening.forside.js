@@ -53,6 +53,12 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 		$scope.setAction = function(action) {
 			if (action != '' && $scope.action != '' && $scope.action != action) return;
 			$scope.action = action;
+			
+			if ($scope.action == 'r') {
+				AlertModal.show('Du har rettigheder til at redigere foreningen, men funktionaliteten er endnu ikke implementeret på brugerniveau', 'Desværre').then(function() {
+					$scope.setAction('');
+				})
+			}
 		}
 
 		$scope.actionCancel = function() {
@@ -77,7 +83,7 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 				case 'a' : 
 					$scope.action_caption = $scope.edit_article_id ? 'rediger artikel' : 'opret artikel';
 					break;
-				case 'g' : 
+				case 'f' : 
 					$scope.action_caption = $scope.edit_gruppe_id ? 'rediger gruppe' : 'opret gruppe';
 					break;
 				case 'e' : 
