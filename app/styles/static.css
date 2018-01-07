@@ -38,17 +38,6 @@ table.dataTable thead .sorting_desc:after {
 	color: blue;
 }
 
-/*
-table.dataTable thead .sorting, 
-table.dataTable thead .sorting_asc, 
-table.dataTable thead .sorting_desc {
-	background: none !important;
-}
-*/
-
-.modal-open {
-	overflow: scroll;
-}
 
 .navbar-default {
 	padding-right: 20px !important;
@@ -59,7 +48,7 @@ table.dataTable thead .sorting_desc {
 	margin-bottom: 0px;
 }
 
-/*' */
+/* */
 .element-even {
 	background-color: rgb(251, 251, 251) !important;
 }
@@ -311,10 +300,7 @@ img {
 /* different glow border? */
 .white-glow-control:focus {
   border-color: #FF0000;
- /*
-	 box-shadow: inset 0px 0px 3px 3px rgba(0, 0, 0, 0.075), 3px 3px 2px rgba(255, 0, 0, 0.6); 
-*/
- border-color: rgba(126, 239, 104, 0.8);
+	border-color: rgba(126, 239, 104, 0.8);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
   outline: 0 none;
 }
@@ -329,18 +315,6 @@ img {
 	font-size: 17px;
 	max-width: 250px;
 }
-
-/*
-.tooltip .tooltip-inner {
-	font-family: verdana, Arial;
-	xxword-break: nowrap;
-	max-width: 200px;
-	font-weight: 500;
-	font-size: 15px;
-	color: white;
-  text-shadow: 2px 2px #ff0000;
-}
-*/
 
 /* full calendar */
 .fc button {
@@ -378,5 +352,12 @@ img {
 	Xmargin-left: 0px;
 }
 
+/* prevent modals from generating scrollbar in main window */
+.modal {
+	overflow-y: auto;
+}
+.modal-open {
+	overflow: auto;
+}
 
 
