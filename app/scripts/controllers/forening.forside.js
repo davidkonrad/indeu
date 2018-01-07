@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('ForeningForsideCtrl', 
-	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log) {
+	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log, AlertModal) {
 
 		if (Login.isLoggedIn()) {
 			$scope.user = Login.currentUser()
