@@ -11,7 +11,7 @@ angular.module('indeuApp')
 			$scope.user = Login.currentUser()
 		}
 
-		var id = $routeParams.id;
+		let id = $routeParams.id;
 
 		$scope.reload = function(update) {
 			ESPBA.get('article', { id: id }).then(function(r) {
@@ -43,6 +43,16 @@ angular.module('indeuApp')
 					})				
 				}
 
+				//association
+				ESPBA.get('association_articles', { article_id: id }).then(function(aa) {
+					if (aa.data && aa.data.length>0) {
+						ESPBA.get('association', { id: aa.data[0].association_id }).then(function(as) {
+							$scope.association = as.data[0];
+							$scope.association.url = Utils.foreningUrl(as.data[0].id, as.data[0].name)
+						})
+					}
+				})
+
 				//groups
 				ESPBA.get('group_articles', { article_id: id }).then(function(gr) {
 					gr.data.forEach(function(g) {
@@ -50,7 +60,8 @@ angular.module('indeuApp')
 						g.name = group.name;
 						g.urlName = Utils.urlName(group.name);
 					})
-					$scope.article_groups = gr.data;
+					$scope.groups = gr.data;
+					console.log($scope.groups);
 				});
 
 

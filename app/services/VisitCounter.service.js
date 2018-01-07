@@ -7,26 +7,12 @@ angular.module('indeuApp').factory('VisitCounter', function($q, $timeout, Login,
 
 	return {
 
-		/*
-		count: function(hash) {
-			if (cache[hash]) return cache[hash];
-			var self = this;
-			self.get(hash);
-			var i = setInterval(function() {
-				cc++;
-				console.log('count interval', cc);
-				clearInterval(i);
-				return self.count(hash)
-			}, 500);
-		},
-		*/
 		get: function(hash) {
 			ESPBA.get('visit_counter', { hash: hash }).then(function(v) {
 				if (v.data && v.data.length) {
 					var v = v.data[0];
-					console.log('get', v);
+					//console.log('get', v);
 					cache[v.hash] = v.counter;
-					
 				}
 			})
 		},

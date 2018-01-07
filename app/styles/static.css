@@ -93,6 +93,20 @@ a.disabled:hover, a.disabled:active, a.disabled:focus {
 	text-decoration: none;
 }
 
+
+a.hover-effect {
+	display: block;
+	XXborder: 1px solid #fff;
+	padding-bottom: 12px;
+}
+a.hover-effect:hover{
+	background-color: #fdfdfd;
+	XXborder:1px solid #ebebeb;
+	opacity: 0.8;
+}
+
+
+/* std container-fluid */
 .container-fluid {
 	padding-right: 0px; !important;
 	padding-left: 0px; !important;

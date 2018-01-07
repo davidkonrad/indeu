@@ -41,6 +41,14 @@
 	
 <div class="col-md-3">
 
+	<div ng-if="association" class="text-center">
+		<a href="{{ association.url }}" class="unstyled hover-effect">
+			<h4> {{ association.name }} </h4>
+			<img ng-if="association.image != '' " ng-src="media/forening/thumbs/{{ association.image }}">
+		</a>
+	</div>
+
+
 	<div ng-if="user.id == article.user_id">
 		<div class="layout-right-header">Handlinger</div>
 		<div class="layout-right-header-content">
@@ -66,16 +74,20 @@
 		</div>
 	</div>
 
-	<div ng-if="article_groups.length">
-		<div class="layout-right-header">Grupper</div>
+	<div ng-if="groups != undefined">
+		<div class="layout-right-header">&nbsp;Grupper
+		</div>
 		<div class="layout-right-header-content">
-			<span ng-repeat="g in article_groups">
-				<a ng-href="/grupper/{{ g.group_id }}/{{ g.urlName }}" debug-link>{{ g.name }}</a><br>
+			<span ng-repeat="g in groups">
+				<a ng-href="/grupper/{{ g.group_id }}/{{ g.urlName }}" debug-link>
+					<i class="fa fa-fw fa-x2 fa-users text-muted"></i>
+					{{ g.name }}
+				</a><br>
 			</span>
 		</div>
 	</div>
 
-	<div class="layout-right-header">Kommentarer</div>
+	<div class="layout-right-header">&nbsp;Kommentarer</div>
 	<div class="layout-right-header-content" recent-comments="{{ article.hash }}" limit="5"></div>
 
 </div>

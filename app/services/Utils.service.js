@@ -176,8 +176,8 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 
 		scrollTo: function(selector, speed) {
 			if (!speed) speed = 300;
-			var e = angular.element(selector);
-			angular.element('body').animate({scrollTop: e.offset().top - 50}, speed);
+			var e = $(selector);
+			$('html, body').animate({scrollTop: e.offset().top - 50}, speed);
 		},
 
 		//https://gist.github.com/gordonbrander/2230317
