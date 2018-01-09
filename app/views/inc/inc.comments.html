@@ -70,6 +70,11 @@
 							</span>
 							{{ _c.dateStamp }}
 
+							<span ng-if="_c.edited_timestamp">
+								&nbsp;
+								<span class="text-muted" title="Redigeret {{ _c.edited_timestamp }}">(redigeret)</span>
+							</span>
+					
 						</span>
 						<pre smilies="_c.content">{{ _c.content }}</pre>
 						<span class="clearfix"></span>
@@ -79,16 +84,23 @@
 							ng-click="setActionAnswer(_c.id)">
 							Svar
 						</a>
-		
-						<span class="comment-answer-box indent1" ng-if="actionAnswer == _c.id">
 
-							<textarea class="form-control" 
+						<a ng-if="user.id == _c.user_id"
+							class="answer-comment"
+							href="" 
+							ng-click="setActionEdit(_c.id)">
+							Rediger
+						</a>
+
+						<! -- new comment box -->		
+						<span class="comment-answer-box indent1" ng-if="actionAnswer == _c.id">
+							<textarea spellcheck="false"
+								class="form-control comment-textarea" 
 								id="answer-comment-content{{_c.id}}"
 								ng-keyup="textAreaAdjust('answer-comment-content'+_c.id)"
 								rows="3" 
 								ng-model="comment.contentAnswer">
 							</textarea>
-
 							<span class="answer-comment-action pull-right">
 								<button class="btn btn-xs btn-default"
 									ng-click="actionCancel()">
@@ -96,6 +108,29 @@
 								</button>
 								<button class="btn btn-xs"
 									ng-click="actionSave()"
+									ng-class="{ 'btn-primary' : canSave('contentAnswer') }"
+									ng-disabled="!canSave('contentAnswer')">
+									<strong>Gem</strong>
+								</button>
+							</span>
+						</span>
+
+						<! -- edit existing comment box -->		
+						<span class="comment-answer-box indent1" ng-if="actionEdit == _c.id">
+							<textarea spellcheck="false"
+								class="form-control comment-textarea" 
+								id="edit-comment-content{{_c.id}}"
+								ng-keyup="textAreaAdjust('edit-comment-content'+_c.id)"
+								rows="3" 
+								ng-model="comment.contentAnswer">
+							</textarea>
+							<span class="answer-comment-action pull-right">
+								<button class="btn btn-xs btn-default"
+									ng-click="actionCancel()">
+									Fortryd
+								</button>
+								<button class="btn btn-xs"
+									ng-click="actionSaveEdit()"
 									ng-class="{ 'btn-primary' : canSave('contentAnswer') }"
 									ng-disabled="!canSave('contentAnswer')">
 									<strong>Gem</strong>

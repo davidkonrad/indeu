@@ -74,7 +74,7 @@
 		</div>
 	</div>
 
-	<div ng-if="groups != undefined">
+	<div ng-if="groups != ''">
 		<div class="layout-right-header">&nbsp;Grupper
 		</div>
 		<div class="layout-right-header-content">
@@ -87,7 +87,22 @@
 		</div>
 	</div>
 
-	<div class="layout-right-header">&nbsp;Kommentarer</div>
+	<div ng-if="groups == ''">
+		<div class="layout-right-header">&nbsp;Andre artikler
+		</div>
+		<div class="layout-right-header-content">
+			<span ng-repeat="g in groups">
+				<a ng-href="/grupper/{{ g.group_id }}/{{ g.urlName }}" debug-link>
+					<i class="fa fa-fw fa-x2 fa-users text-muted"></i>
+					{{ g.name }}
+				</a><br>
+			</span>
+		</div>
+	</div>
+
+
+
+	<div class="layout-right-header">&nbsp;Seneste kommentarer</div>
 	<div class="layout-right-header-content" recent-comments="{{ article.hash }}" limit="5"></div>
 
 </div>

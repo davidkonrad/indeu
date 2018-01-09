@@ -35,6 +35,7 @@ angular.module('indeuApp').factory('Log', function(ESPBA) {
 		COMMENT_ENTITY: 40,
 		COMMENT_COMMENT: 41,
 		COMMENT_OWN_COMMENT: 42,
+		COMMENT_EDIT: 43,
 
 		ASSOCIATION_CREATED: 50,
 		ASSOCIATION_EDITED: 51,

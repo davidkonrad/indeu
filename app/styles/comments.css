@@ -81,6 +81,8 @@
 .comment pre {
 	background-color: #fff;
 	font: inherit;
+	font-size: 14px;
+	line-height: 18px;
 	font-family: Helvetica, Arial, sans-serif;
 	border: none;
 	display: inline-block;
@@ -102,12 +104,14 @@
 	clear: both;
 }
 .comment-answer-box textarea {
-	width: 400px;
+	min-width: 400px;
 	resize: vertical; 
 }
+
 .answer-comment-action {
 	margin-top: 2px;
 }
+
 .indent1 {
 	margin-left: 40px !important;
 	clear: left;

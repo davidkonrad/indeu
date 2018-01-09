@@ -61,9 +61,7 @@ angular.module('indeuApp')
 						g.urlName = Utils.urlName(group.name);
 					})
 					$scope.groups = gr.data;
-					console.log($scope.groups);
 				});
-
 
 			})
 		}

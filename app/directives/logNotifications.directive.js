@@ -120,6 +120,13 @@ angular.module('indeuApp')
 						item.action += ' i '+entityLink(item);
 						item.title = Utils.plainText(item.action);	
 						break;
+
+					case Log.COMMENT_EDIT :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'redigerede en kommentar';
+						item.action += ' i '+entityLink(item);
+						item.title = Utils.plainText(item.action);	
+						break;
 					
 					//groups
 					case Log.GROUP_MEMBER_ADDED :

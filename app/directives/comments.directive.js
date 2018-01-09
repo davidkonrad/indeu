@@ -10,7 +10,6 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 	return {
 		templateUrl: "views/inc/inc.comments.html",
 		restrict: 'E',
-		//priority: 1000,
 		scope: {
 			onCommentAdded: '@',
 			userId: '@',
@@ -44,6 +43,7 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 
 			$scope.actionCancel = function(element) {
 				$scope.actionAnswer = '';
+				$scope.actionEdit = '';
 				$scope.comment = {
 					hash: $scope.hash,
 					user_id: $scope.user.id,
@@ -55,6 +55,7 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 				});
 			}
 
+			//insert a new comment
 			$scope.actionSave = function() {
 		
 				var getParentUser = function(comment_id) {
@@ -89,6 +90,34 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 						$("body").animate({scrollTop: element.offset().top-60}, "slow");
 						$timeout(function() {
 							Notification.primary('Din kommentar er blevet offentliggjort');
+						}, 50);
+					}, 200);
+				});
+			}
+
+			//update edits to an existing comment
+			$scope.actionSaveEdit = function() {
+				var update = {
+					id: $scope.comment.id,
+					content: $scope.comment.contentAnswer,
+					edited_timestamp: 'CURRENT_TIMESTAMP'
+				}
+
+				var logParams = {
+					user_id: $scope.comment.user_id,
+					hash: $scope.comment.hash,
+					type: Log.COMMENT_EDIT
+				}
+
+				ESPBA.update('comment', update).then(function(c) {
+					Log.log(logParams);
+					$scope.actionCancel();
+					$scope.reloadComments();
+					$timeout(function() {
+						var element = angular.element('#comment'+c.data[0].id);
+						$("body").animate({scrollTop: element.offset().top-60}, "slow");
+						$timeout(function() {
+							Notification.primary('Din kommentar er blevet opdateret');
 						}, 50);
 					}, 200);
 				});
@@ -156,7 +185,7 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 			$scope.commentById = function(id) {
 				var c = $scope.comments;
 				for (var i=0,l=c.length; i<l; i++) {
-					if (c[i].id == id) return c[id]
+					if (c[i].id == id) return c[i]
 				}
 				return false
 			}
@@ -189,7 +218,9 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 				}
 			}
 
+			//reply to a comment 
 			$scope.setActionAnswer = function(comment_id) {
+				$scope.actionEdit = '';
 				$scope.comment = {
 					hash: $scope.hash,
 					user_id: $scope.user.id,
@@ -200,6 +231,17 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 				$scope.actionAnswer = comment_id;
 				$timeout(function() {
 					$('#answer-comment-content'+comment_id).focus().trigger('keyup');
+				})
+			},
+
+			//edit existing comment
+			$scope.setActionEdit = function(comment_id) {
+				$scope.actionAnswer = '';
+				$scope.comment = $scope.commentById(comment_id);
+				$scope.comment.contentAnswer = $scope.comment.content;
+				$scope.actionEdit = comment_id;
+				$timeout(function() {
+					$('#edit-comment-content'+comment_id).focus().trigger('keyup');
 				})
 			},
 

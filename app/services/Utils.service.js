@@ -55,6 +55,7 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 		//fix name with spaces and æøå for url use
 		urlName: function(s) {
 			if (!s) return '';
+			s = s.replace(/’/g, '');
 			s = s.replace(/ /g, '-');
 			s = s.replace(/[\/]/g, '-');
 			s = s.replace(/æ/g, 'ae');
