@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp')
-  .controller('DigForsideCtrl', function($scope, $location, Settings, Login, ESPBA, Lookup, Meta, Utils, ImageUploadModal, Redirect) {
+  .controller('DigForsideCtrl', function($scope, $location, Settings, Login, ESPBA, Lookup, Meta, Utils, ImageUploadModal, Redirect, AlertModal) {
 
 		Redirect.checkLogin('Du skal være logget ind for at kunne se din egen forside');
 
@@ -69,6 +69,11 @@ angular.module('indeuApp')
 				case 'e' : 
 					$scope.action_caption = $scope.edit_gruppe_id ? 'rediger event' : 'opret event';
 					break;
+				case 'r' :
+					AlertModal.show('Du har rettigheder til at reviewe nye brugere, men funktionaliteten er endnu ikke implementeret på brugerniveau', 'Desværre').then(function() {
+						$scope.setAction('');
+					})
+					break;
 				default: 
 					$scope.action_caption = undefined
 					break;
@@ -81,7 +86,6 @@ angular.module('indeuApp')
 			ESPBA.get('user', { id: user_id }).then(function(r) {
 				$scope.user = r.data[0];
 				$scope.user.image = $scope.user.image || '';
-
 				var a = $scope.user.about;
 				if (!a || a.trim() == '') $scope.user.about = 'Du har endnu ikke udfyldt en beskrivelse af dig selv. Klik på linket "Rediger profil" til højre. '
 			});
@@ -183,6 +187,7 @@ angular.module('indeuApp')
 			$scope.groups = groups;
 		});
 
+		
 
 
 });

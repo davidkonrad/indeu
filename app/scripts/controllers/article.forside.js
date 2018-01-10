@@ -16,9 +16,9 @@ angular.module('indeuApp')
 		$scope.reload = function(update) {
 			ESPBA.get('article', { id: id }).then(function(r) {
 				var a = r.data[0];
-				a.dateStamp = moment(a.created_timestamp).calendar(); 
+				a.dateStamp = moment(a.created_timestamp).fromNow(); 
 				a.realDate = moment(a.created_timestamp); 
-				if (a.edited_timestamp) a.editedDateStamp = moment(a.edited_timestamp).calendar(); 
+				if (a.edited_timestamp) a.editedDateStamp = moment(a.edited_timestamp).fromNow(); 
 
 				var user = Lookup.getUser(a.user_id);
 				a.userFullName = user.full_name;
@@ -40,6 +40,7 @@ angular.module('indeuApp')
 						if (v.data && v.data.length) {
 							var v = v.data[0];
 							$scope.visitCounter = v.counter;
+							$scope.visitCounter += v.counter == 1 ? ' gang' : ' gange';
 						}
 					})				
 				}
@@ -80,7 +81,9 @@ angular.module('indeuApp')
 
 			})
 		}
-		$scope.reload(true);
+		Lookup.init().then(function() {
+			$scope.reload(true);
+		})
 
 		//actions copy paste
 		$scope.action = '';

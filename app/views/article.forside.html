@@ -5,9 +5,9 @@
 		<div class="artikel">
 			<h4>
 				<small>
-					Oprettet <span title="{{ article.realDate }}">{{ article.dateStamp }}</span>
+					Oprettet <span title="{{ article.realDate }}">for {{ article.dateStamp }}</span>
 					af <a href="{{ article.userUrlLink }} ">{{ article.userFullName }}</a>
-					<span ng-if="article.editedDateStamp != undefined">, redigeret {{ article.editedDateStamp }}</span>
+					<span ng-if="article.editedDateStamp != undefined">, redigeret for {{ article.editedDateStamp }}</span>
 				</small>
 			</h4>
 			<h1> {{ article.header }} </h1>
@@ -60,12 +60,12 @@
 	</div>
 
 	<div class="layout-right-header">Handlinger</div>
-	<div ng-if="user.id == article.user_id">
-		<div class="layout-right-header-content">
+	<div class="layout-right-header-content">
+		<div ng-if="user.id == article.user_id">
 			<small ng-if="visitCounter != false "
 				style="display: inline-block; position: relative; top: -9px;"
 				class="pull-right no-padding no-margin">
-				<small>Vist {{ visitCounter }} gange</small>
+				<small>Vist {{ visitCounter }}</small>
 			</small>
 			<a class="cursor-pointer"
 				ng-class="{ 'disabled': actionDisable('a') }"
@@ -82,16 +82,15 @@
 				Træk artikel tilbage (afpubliser)<br>
 			</a>
 		</div>
-	</div>
-	<div ng-if="user.id != article.user_id">
-		<div class="layout-right-header-content">
-			<a href="" 
-				ng-class="{ 'disabled': actionDisable('n') }"
-				ng-disabled="actionDisable('n')"
-				ng-click="setAction('n')">
-				<i class="fa fa-fw fa-file-code-o fa-x2"></i>Skriv artikel
-			</a>
-		</div>
+		<!-- everybody logged in can write a new article -->
+		<a ng-if="user.id != undefined"
+			href="" 
+			ng-class="{ 'disabled': actionDisable('n') }"
+			ng-disabled="actionDisable('n')"
+			ng-click="setAction('n')">
+			<i class="fa fa-fw fa-file-code-o fa-x2"></i>
+			Skriv ny artikel
+		</a>
 	</div>
 
 	<div ng-if="groups != ''">

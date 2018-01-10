@@ -2,7 +2,7 @@
 
 angular.module('indeuApp')
 	.directive('editArticle', 
-	function($timeout, Utils, ESPBA, Login, Log, ImageUploadModal, Notification, SelectGruppeModal, Lookup) {
+	function($location, $timeout, Utils, ESPBA, Login, Log, ImageUploadModal, Notification, SelectGruppeModal, Lookup) {
 
 	return {
 		templateUrl: "views/inc/inc.editArticle.html",
@@ -104,7 +104,6 @@ angular.module('indeuApp')
 					}
 
 					ESPBA.insert('article', scope.article).then(function(a) {
-						Notification.primary('Artiklen <strong>' + scope.article.header +'</strong> er oprettet. '+extra_message);
 						if (scope.group_id) {
 							ESPBA.insert('group_articles', { group_id: scope.group_id, article_id: a.data[0].id }).then(function() {
 								//
@@ -122,8 +121,12 @@ angular.module('indeuApp')
 							hash: a.data[0].hash
 						});
 
+						//jump to article immediately
 						$timeout(function() {
-							if (onSave) scope.onSave();
+							$location.path( Utils.articleUrl(a.data[0].id, a.data[0].header).replace('/#/', '') );
+							$timeout(function() {							
+								Notification.primary('Artiklen <strong>' + a.data[0].header +'</strong> er oprettet. '+extra_message);
+							})
 						})
 
 					})
