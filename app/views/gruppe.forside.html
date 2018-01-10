@@ -126,8 +126,8 @@
 	<div class="layout-right-header">Medlemmer</div>
 	<div class="layout-right-header-content">
 		<span ng-repeat="user in group_users">
-			<a ng-href="{{ user.url }}">{{ user.full_name }}</a>
-			<span ng-if="!$last">,&nbsp;</span>
+			<a ng-href="{{ user.url }}" class="pull-left">{{ user.full_name }}</a>
+			<span ng-if="!$last" class="pull-left">,&nbsp;</span>
 		</span>
 	</div>
 

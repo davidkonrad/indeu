@@ -107,8 +107,7 @@
 	</div>
 
 	<div ng-if="author_popular_articles != ''">
-		<div class="layout-right-header">&nbsp;Populære artikler fra samme bruger
-		</div>
+		<div class="layout-right-header">&nbsp;Populære artikler fra samme bruger</div>
 		<div class="layout-right-header-content">
 			<span ng-repeat="a in author_popular_articles">
 
@@ -125,6 +124,7 @@
 					{{ a.header }}
 				</a><span class="clearfix"></span>
 			</span>
+			<span ng-if="author_popular_articles == undfined">Brugeren har ikke bidraget med flere artikler</span>
 		</div>
 	</div>
 
