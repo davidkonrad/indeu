@@ -16,7 +16,7 @@
 				<img ng-src="media/artikel/{{ article.image }}">
 			</div>
 
-			<div class="artikel-content"	ng-bind-html="article.content"></div>
+			<div class="artikel-content" ng-bind-html="article.content"></div>
 
 			<div class="col-md-12 clearfix">
 				<entity-rating hash="{{ article.hash }}" user-id="{{ user.id }}" class="pull-right"></entity-rating>
@@ -87,15 +87,24 @@
 		</div>
 	</div>
 
-	<div ng-if="groups == ''">
-		<div class="layout-right-header">&nbsp;Andre artikler
+	<div ng-if="author_popular_articles != ''">
+		<div class="layout-right-header">&nbsp;Populære artikler fra samme bruger
 		</div>
 		<div class="layout-right-header-content">
-			<span ng-repeat="g in groups">
-				<a ng-href="/grupper/{{ g.group_id }}/{{ g.urlName }}" debug-link>
-					<i class="fa fa-fw fa-x2 fa-users text-muted"></i>
-					{{ g.name }}
-				</a><br>
+			<span ng-repeat="a in author_popular_articles">
+
+				<ng-rate-it 
+					max="1"
+					title="{{ a.title }}"
+					ng-model="a.stars" 
+					read-only="true"
+					resetable="false">
+				</ng-rate-it>
+
+				&nbsp;
+				<a ng-href="{{ a.url }}" title="{{ a.header }}">
+					{{ a.header }}
+				</a><span class="clearfix"></span>
 			</span>
 		</div>
 	</div>

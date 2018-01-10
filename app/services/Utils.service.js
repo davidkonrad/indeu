@@ -63,8 +63,10 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 			s = s.replace(/ø/g, 'oe');
 			s = s.replace(/å/g, 'aa');
 			s = s.replace(/é/g, 'e');
+			s = s.replace(/\W/g, '-');
 			s = s.replace(/---/g, '-');
 			s = s.replace(/--/g, '-');
+
 			return s.toLowerCase();
 		},
 

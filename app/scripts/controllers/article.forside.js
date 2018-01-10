@@ -63,6 +63,20 @@ angular.module('indeuApp')
 					$scope.groups = gr.data;
 				});
 
+				//popular articles from same user
+				ESPBA.prepared('ArticlesByUser', { user_id: $scope.article.user_id, scope: 'stars', limit: 6 }).then(function(a) {
+					//console.log(a);
+					if (a.data && a.data.length > 1) {
+						$scope.author_popular_articles = a.data.filter(function(item) {
+							item.url = Utils.articleUrl(item.id, item.header);
+							item.title = 'Vurdering '+parseFloat(item.stars).toFixed(1)+' af '+item.votes;
+							item.title += (item.votes == 1) ? ' bedømmelse' : ' bedømmelser';
+							if (item.id != $scope.article.id) return item
+						})
+					}
+				});
+
+
 			})
 		}
 		$scope.reload(true);
