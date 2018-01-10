@@ -6,7 +6,7 @@
  */
 angular.module('indeuApp')
   .controller('GruppeForsideCtrl', 
-	function($scope, Login, $routeParams, Const, ESPBA, Lookup, Meta, Utils, Log, Notification) {
+	function($scope, Login, $routeParams, Const, ESPBA, Lookup, Meta, Utils, Log, Notification, ConfirmModal) {
 
 		var id = $routeParams.id;
 
@@ -106,9 +106,32 @@ angular.module('indeuApp')
 						context_user_id: $scope.user.id,
 						hash: $scope.group.hash
 					})
+					reloadMembers();
 				})
 			}
 		}
+
+		$scope.unFollow = function() {
+			ConfirmModal.show('Er du sikker på du ikke længere vil følge <strong>'+$scope.group.name+'</strong>?').then(function(answer) {
+				if (answer) {
+					ESPBA.get('group_user', { group_id: $scope.group.id, user_id: $scope.user.id }).then(function(gu) {
+						var id = gu.data[0].id;
+						ESPBA.delete('group_user', { id: id }).then(function() {
+							Notification.primary('Du følger nu ikke længere <strong>' + $scope.group.name + '</strong>');
+							$scope.userIsMember = false;
+							Log.log({
+								type: Log.GROUP_MEMBER_REMOVED,
+								user_id: $scope.user.id,
+								context_user_id: $scope.user.id,
+								hash: $scope.group.hash
+							})
+							reloadMembers();
+						})
+					})
+				}
+			})
+		}
+
 
 /*
 		$scope.loadEvents = function() {
@@ -146,14 +169,17 @@ angular.module('indeuApp')
 			$scope.setAction('');
 		}
 
-		ESPBA.get('group_user', { group_id: id }).then(function(r) {
-			$scope.group_users = [];
-			r.data.forEach(function(e) {
-				var user = Lookup.getUser(e.user_id);
-				user.urlName = Utils.urlName(user.full_name);
-				$scope.group_users.push(user);
-			})
-		});
+		function reloadMembers() {		
+			ESPBA.get('group_user', { group_id: id }).then(function(r) {
+				$scope.group_users = [];
+				r.data.forEach(function(e) {
+					var user = Lookup.getUser(e.user_id);
+					user.url = Utils.userUrl(user.id, user.full_name);
+					$scope.group_users.push(user);
+				})
+			});
+		}
+		reloadMembers();
 
 
 });

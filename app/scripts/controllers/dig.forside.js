@@ -81,6 +81,9 @@ angular.module('indeuApp')
 			ESPBA.get('user', { id: user_id }).then(function(r) {
 				$scope.user = r.data[0];
 				$scope.user.image = $scope.user.image || '';
+
+				var a = $scope.user.about;
+				if (!a || a.trim() == '') $scope.user.about = 'Du har endnu ikke udfyldt en beskrivelse af dig selv. Klik på linket "Rediger profil" til højre. '
 			});
 		}
 		$scope.reload();
@@ -120,7 +123,6 @@ angular.module('indeuApp')
 				right: 'prev,next'
 			},
 			eventClick: function(event) {
-				console.log(arguments);
 				var url = '/event/'+event.event_id+'/'+event.urlName;
 				$location.path(url);
 			}

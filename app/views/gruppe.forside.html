@@ -20,6 +20,8 @@
 			<span ng-bind-html="group.about"></span>
 		</div>
 
+		<div class="clearfix col-md-12">&nbsp;</div>
+
 		<div ng-if="group.events_enabled">
 			<div class="layout-right-header no-bottom-margin">Kommende events</div>
 			<div entity-events="{{ group.id }}" entity-type="group" user-id="{{ user.id }}" on-edit="editEvent"></div>
@@ -75,44 +77,39 @@
 
 	<div class="layout-right-header">Handlinger</div>
 	<div class="layout-right-header-content">
-		<div ng-if="userIsOwner || userIsMember">
-			<a ng-if="userIsOwner" 
-				ng-disabled="actionDisable('g')" 
-				ng-click="setAction('g')"
-				href="">
-				<i class="fa fa-fw fa-wrench fa-x2"></i>Rediger gruppe<br>
-			</a>
+		<a ng-if="userIsOwner" 
+			ng-disabled="actionDisable('g')" 
+			ng-click="setAction('g')"
+			href="">
+			<i class="fa fa-fw fa-wrench fa-x2"></i>Rediger gruppe<br>
+		</a>
 
-			<a ng-if="group.articles_enabled"
-				ng-disabled="actionDisable('a')" 
-				ng-click="setAction('a')"
-				href="">
-				<i class="fa fa-fw fa-file-code-o fa-x2"></i>Opret ny artikel<br>
-			</a>
+		<a ng-if="group.articles_enabled && (userIsOwner || userIsMember)"
+			ng-disabled="actionDisable('a')" 
+			ng-click="setAction('a')"
+			href="">
+			<i class="fa fa-fw fa-file-code-o fa-x2"></i>Opret ny artikel<br>
+		</a>
 
-			<a ng-if="group.events_enabled"
-				ng-disabled="actionDisable('e')" 
-				ng-click="setAction('e')"
-				href="">
-				<i class="fa fa-fw fa-calendar fa-x2"></i>Opret ny event<br>
-			</a>
+		<a ng-if="group.events_enabled && (userIsOwner || userIsMember)"
+			ng-disabled="actionDisable('e')" 
+			ng-click="setAction('e')"
+			href="">
+			<i class="fa fa-fw fa-calendar fa-x2"></i>Opret ny event<br>
+		</a>
 
-			<a ng-if="userIsMember && !userIsOwner" href="">
-				<i class="fa fa-fw fa-remove fa-x2 text-danger"></i>Følg ikke længere<br>
-			</a>
-		</div>
+		<a ng-if="userIsMember && !userIsOwner" href="" ng-click="unFollow()">
+			<i class="fa fa-fw fa-remove fa-x2 text-danger"></i>Følg ikke længere<br>
+		</a>
 
 		<a href="" 
 			ng-class="{ 'disabled': actionDisable('n') }"
 			ng-disabled="actionDisable('n')" 
 			ng-click="setAction('n')">
-			<i class="fa fa-fw fa-users fa-x2"></i>Opret ny gruppe<br>
+			<i class="fa fa-fw fa-users fa-x2"></i>Opret en anden gruppe<br>
 		</a>
 
 	</div>
-
-
-
 
 
 	<div class="layout-right-header">Gruppestatus</div>
@@ -127,8 +124,11 @@
 	</div>
 
 	<div class="layout-right-header">Medlemmer</div>
-	<div ng-repeat="user in group_users" class="layout-right-header-content">
-		<a ng-href="/medlemmer/{{ user.id }}/{{ user.urlName }}" debug-link style="float: left; clear: none; display: inline; margin-right: 10px;">{{ user.full_name }}</a>
+	<div class="layout-right-header-content">
+		<span ng-repeat="user in group_users">
+			<a ng-href="{{ user.url }}">{{ user.full_name }}</a>
+			<span ng-if="!$last">,&nbsp;</span>
+		</span>
 	</div>
 
 </div>

@@ -136,6 +136,13 @@ angular.module('indeuApp')
 						item.action = 'følger nu gruppen <a href="'+item.url+'">' + item.group_name +'</a>';
 						break;
 
+					case Log.GROUP_MEMBER_REMOVED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.url = Utils.gruppeUrl(item.group_id, item.group_name);
+						item.title = item.userName + ' ' + item.action + ' ' + item.group_name;
+						item.action = 'følger ikke længere gruppen <a href="'+item.url+'">' + item.group_name +'</a>';
+						break;
+
 					case Log.GROUP_CREATED :
 						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
 						item.action = 'oprettede gruppen';
