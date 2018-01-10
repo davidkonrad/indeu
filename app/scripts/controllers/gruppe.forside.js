@@ -20,7 +20,7 @@ angular.module('indeuApp')
 		}
 
 		$scope.actionDisable = function(action) {
-			return $scope.action != action && $scope.action != '';
+			return $scope.action == action //&& $scope.action != '';
 		}	
 
 		$scope.editEvent = function(event_id) {
@@ -72,6 +72,12 @@ angular.module('indeuApp')
 			if (Login.isLoggedIn()) {
 				$scope.userIsOwner = Login.currentUser().id == $scope.group.owner_id;
 				$scope.userIsMember = Login.isGroupMember(id);
+
+				var owner = Lookup.getUser($scope.group.owner_id);
+				$scope.owner = {
+					full_name: owner.full_name,
+					url: Utils.userUrl(owner.id, owner.full_name)
+				}
 
 				if (!$scope.userIsMember) {
 					ESPBA.get('group_request', { group_id: $scope.group.id, user_id: $scope.user.id }).then(function(r) {

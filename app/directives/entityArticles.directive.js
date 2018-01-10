@@ -10,6 +10,7 @@ angular.module('indeuApp')
 		priority: 500,
 		scope: {
 			entityType: '@',
+			hash: '@',
 			onEdit: '='
 		},
 		replace: true,
@@ -41,6 +42,18 @@ angular.module('indeuApp')
 
 					case 'group': 
 						ESPBA.get('group_articles', { group_id: id }).then(function(r) {
+							var articles = [];
+							for (var i=0, l=r.data.length; i<l; i++) {
+								ESPBA.get('article', { id: r.data[i].article_id }).then(function(a) {
+									articles.push(a.data[0]);
+									if (i >= l-1) process(articles);
+								})
+							}
+						});
+						break;
+
+					case 'association': 
+						ESPBA.get('association_articles', { group_id: id }).then(function(r) {
 							var articles = [];
 							for (var i=0, l=r.data.length; i<l; i++) {
 								ESPBA.get('article', { id: r.data[i].article_id }).then(function(a) {

@@ -7,10 +7,6 @@
 angular.module('indeuApp')
   .controller('KalenderForsideCtrl', function($scope, $location, Login, $timeout, leafletData, ESPBA, Lookup, Meta, Utils, Const, uiCalendarConfig) {
 
-		ESPBA.get('user', {}).then(function(r) {
-			console.log(r);
-		})
-
 		Lookup.init();
 
 		Meta.setTitle('indeu.org');
@@ -88,7 +84,6 @@ angular.module('indeuApp')
 				viewRender: function(view, element) {
 					var params = { start_date: view.start.format("YYYY-MM-DD"), end_date: view.end.format("YYYY-MM-DD") };
 					ESPBA.prepared('EventsByPeriod', params).then(function(r) {
-						console.log(r.data);
 						var events = [];
 						$scope.eventMap.markers = [];
 						r.data.forEach(function(e) {
