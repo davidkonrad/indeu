@@ -25,6 +25,9 @@ angular.module('indeuApp')
 				$scope.event.realDate = moment($scope.event.created_timestamp); 
 				if ($scope.event.edited_timestamp) $scope.event.edited_timestamp = moment($scope.event.edited_timestamp).calendar(); 
 
+				//date due
+				$scope.dateDue = new Date().valueOf() > new Date($scope.event.date).valueOf();
+
 				//user info
 				var user = Lookup.getUser($scope.event.user_id);
 				$scope.event.userFullName = user.full_name;
@@ -51,7 +54,6 @@ angular.module('indeuApp')
 						zoom: 13
 					}
 
-					//console.log($scope.event.visibility_level);
 					switch ($scope.event.visibility_level) {
 						case '1': 
 							break;

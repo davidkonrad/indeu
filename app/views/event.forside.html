@@ -34,27 +34,34 @@
 				events="eventMap.events">
 			</leaflet>
 		</div>
+
 		<div class="col-md-12" ng-if="user">
 			<hr>
-			<span>Hvad vil du?&nbsp;&nbsp;</span>
-			<div class="btn-group" ng-model="feedback.feedback" bs-radio-group>
-			  <label class="btn btn-default btn-sm" 
-					ng-class="{ 'btn-danger' : feedback.feedback == 0 }"
-					ng-click="setFeedback(0)">
-					<input type="radio" class="btn btn-default" value="0" > Deltager ikke
-				</label>
-			  <label class="btn btn-default btn-sm" 
-					ng-class="{ 'btn-primary' : feedback.feedback == 1 }"
-					ng-click="setFeedback(1)">
-					<input type="radio" class="btn btn-default" value="1"> Deltager måske
-				</label>
-			  <label class="btn btn-default btn-sm" 
-					ng-class="{ 'btn-success' : feedback.feedback == 2 }"
-					ng-click="setFeedback(2)">
-					<input type="radio" class="btn btn-default" value="2"> Jeg deltager
-				</label>		
+			<div ng-if="dateDue == false">
+				<span>Hvad vil du?&nbsp;&nbsp;</span>
+				<div class="btn-group" ng-model="feedback.feedback" bs-radio-group>
+				  <label class="btn btn-default btn-sm" 
+						ng-class="{ 'btn-danger' : feedback.feedback == 0 }"
+						ng-click="setFeedback(0)">
+						<input type="radio" class="btn btn-default" value="0" > Deltager ikke
+					</label>
+				  <label class="btn btn-default btn-sm" 
+						ng-class="{ 'btn-primary' : feedback.feedback == 1 }"
+						ng-click="setFeedback(1)">
+						<input type="radio" class="btn btn-default" value="1"> Deltager måske
+					</label>
+				  <label class="btn btn-default btn-sm" 
+						ng-class="{ 'btn-success' : feedback.feedback == 2 }"
+						ng-click="setFeedback(2)">
+						<input type="radio" class="btn btn-default" value="2"> Jeg deltager
+					</label>		
+				</div>
+				<hr>
 			</div>
-			<hr>
+
+			<div ng-if="dateDue == true">
+				<div class="alert alert-danger" role="alert">Eventen er allerede blev afholdt. Tilmelding / framelding ikke længere mulig</div>
+			</div>
 		</div>
 	</div>
 
