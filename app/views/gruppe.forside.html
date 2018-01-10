@@ -73,17 +73,9 @@
 
 <div class="col-md-3">
 
-	<div>
-		<div class="layout-right-header">Gruppestatus</div>
-		<div class="layout-right-header-content">
-			{{ group.visibility_status }}
-			{{ group.access_status }}
-		</div>
-	</div>	
-
-	<div ng-if="userIsOwner || userIsMember">
-		<div class="layout-right-header">Handlinger</div>
-		<div class="layout-right-header-content">
+	<div class="layout-right-header">Handlinger</div>
+	<div class="layout-right-header-content">
+		<div ng-if="userIsOwner || userIsMember">
 			<a ng-if="userIsOwner" 
 				ng-disabled="actionDisable('g')" 
 				ng-click="setAction('g')"
@@ -108,9 +100,26 @@
 			<a ng-if="userIsMember && !userIsOwner" href="">
 				<i class="fa fa-fw fa-remove fa-x2 text-danger"></i>Følg ikke længere<br>
 			</a>
-
 		</div>
-	</div>	
+
+		<a href="" 
+			ng-class="{ 'disabled': actionDisable('n') }"
+			ng-disabled="actionDisable('n')" 
+			ng-click="setAction('n')">
+			<i class="fa fa-fw fa-users fa-x2"></i>Opret ny gruppe<br>
+		</a>
+
+	</div>
+
+
+
+
+
+	<div class="layout-right-header">Gruppestatus</div>
+	<div class="layout-right-header-content">
+		{{ group.visibility_status }}
+		{{ group.access_status }}
+	</div>
 
 	<div ng-if="group.visible_social">
 		<div class="layout-right-header">Socialt</div>

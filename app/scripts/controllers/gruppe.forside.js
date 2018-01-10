@@ -87,7 +87,7 @@ angular.module('indeuApp')
 
 		$scope.followRequest = function() {
 			if ($scope.group.visibility_level == 3) {
-				ESPBA.insert('group_reqest', { group_id: $scope.group.id, user_id: $scope.user.id }).then(function() {
+				ESPBA.insert('group_request', { group_id: $scope.group.id, user_id: $scope.user.id }).then(function() {
 					$scope.btn_follow_caption = 'Afventer ...'
 					Notification('Anmodning om at følge gruppen afsendt');
 					Log.log({

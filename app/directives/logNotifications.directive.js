@@ -150,6 +150,13 @@ angular.module('indeuApp')
 						item.title = item.userName + ' ' + Utils.plainText(item.action);
 						break;
 
+					case Log.GROUP_MEMBER_REQUEST :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'anmodede om at følge den lukkede gruppe';
+						item.action += ' <a href="'+Utils.gruppeUrl(item.group_id, item.group_name) + '">'+item.group_name+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
 					//events
 					case Log.EVENT_CREATED :
 						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;

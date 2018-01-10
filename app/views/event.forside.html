@@ -3,8 +3,8 @@
 
 			<h4>
 				<small>
-					<a href="{{ event.userUrlLink }} ">{{ event.userFullName }}</a>,
-					uploadet <span title="{{ event.realDate }}">{{ event.dateStamp }}</span>
+					Oprettet af <a href="{{ event.userUrlLink }} ">{{ event.userFullName }}</a>,
+					<span title="{{ event.realDate }}">{{ event.dateStamp }}</span>
 				</small>
 			</h4>
 
@@ -103,15 +103,23 @@
 	<div class="layout-right-header">Kontakt</div>
 	<div class="layout-right-header-content">
 		<span ng-repeat="cp in event_contactpersons">
+<!--
 			<a ng-href="/medlemmer/{{ cp.user.id }}/{{ cp.user.urlName }}" debug-link>{{ cp.user.full_name }}</a><br>
+-->
+			<a ng-href="{{ cp.url }}">{{ cp.user.full_name }}</a><br>			
 		</span>
+		<span ng-if="event_contactpersons == undefined">Der er ikke tilknyttet nogle kontaktpersoner</span>
 	</div>
 
 	<div class="layout-right-header">Grupper</div>
 	<div class="layout-right-header-content">
 		<span ng-repeat="g in event_groups">
+<!--
 			<a ng-href="/grupper/{{ g.group_id }}/{{ g.urlName }}" debug-link>{{ g.name }}</a><br>
+-->
+			<a ng-href="{{ g.url }}">{{ g.group.name }}</a><br>
 		</span>
+		<span ng-if="event_groups == undefined">Eventen er ikke knyttet til nogle grupper</span>
 	</div>
 
 	<div class="layout-right-header">Deltagere</div>

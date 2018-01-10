@@ -5,8 +5,9 @@
 		<div class="artikel">
 			<h4>
 				<small>
-					<a href="{{ article.userUrlLink }} ">{{ article.userFullName }}</a>,
-					uploadet <span title="{{ article.realDate }}">{{ article.dateStamp }}</span>
+					Oprettet <span title="{{ article.realDate }}">{{ article.dateStamp }}</span>
+					af <a href="{{ article.userUrlLink }} ">{{ article.userFullName }}</a>
+					<span ng-if="article.editedDateStamp != undefined">, redigeret {{ article.editedDateStamp }}</span>
 				</small>
 			</h4>
 			<h1> {{ article.header }} </h1>
@@ -26,10 +27,20 @@
 		</div>
 
 	</div>
-	
+
+<!-- edit article -->	
 	<div ng-if="action == 'a'">
 		<h3 class="no-padding no-margin">&nbsp;Rediger</h3>
 		<div edit-article="{{ article.id }}"  
+			user-id="{{ user.id }}"
+			on-save="actionSaved(item)" 
+			on-cancel="actionCancel()">
+		</div>
+	</div>
+
+<!-- new article -->
+	<div ng-if="action == 'n'">
+		<div edit-article=""  
 			user-id="{{ user.id }}"
 			on-save="actionSaved(item)" 
 			on-cancel="actionCancel()">
@@ -48,9 +59,8 @@
 		</a>
 	</div>
 
-
+	<div class="layout-right-header">Handlinger</div>
 	<div ng-if="user.id == article.user_id">
-		<div class="layout-right-header">Handlinger</div>
 		<div class="layout-right-header-content">
 			<small ng-if="visitCounter != false "
 				style="display: inline-block; position: relative; top: -9px;"
@@ -70,6 +80,16 @@
 				ng-click="unpublishArticle()">
 				<i class="fa fa-fw fa-remove fa-x2 text-danger"></i>
 				Træk artikel tilbage (afpubliser)<br>
+			</a>
+		</div>
+	</div>
+	<div ng-if="user.id != article.user_id">
+		<div class="layout-right-header-content">
+			<a href="" 
+				ng-class="{ 'disabled': actionDisable('n') }"
+				ng-disabled="actionDisable('n')"
+				ng-click="setAction('n')">
+				<i class="fa fa-fw fa-file-code-o fa-x2"></i>Skriv artikel
 			</a>
 		</div>
 	</div>

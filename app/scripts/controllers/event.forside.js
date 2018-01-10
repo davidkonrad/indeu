@@ -20,6 +20,16 @@ angular.module('indeuApp')
 			ESPBA.get('event', { id: id }).then(function(r) {
 				$scope.event = r.data[0];
 
+				//timestamps
+				$scope.event.dateStamp = moment($scope.event.created_timestamp).calendar(); 
+				$scope.event.realDate = moment($scope.event.created_timestamp); 
+				if ($scope.event.edited_timestamp) $scope.event.edited_timestamp = moment($scope.event.edited_timestamp).calendar(); 
+
+				//user info
+				var user = Lookup.getUser($scope.event.user_id);
+				$scope.event.userFullName = user.full_name;
+				$scope.event.userUrlLink = Utils.userUrl(user.id, user.full_name);
+
 				UserVisits.visit($scope.event.hash);
 
 				$scope.event.from = Utils.createTime( $scope.event.from );
@@ -59,21 +69,24 @@ angular.module('indeuApp')
 				$scope.event_user.urlName = Utils.urlName( $scope.event_user.full_name );
 
 				ESPBA.get('event_contactperson', { event_id: id }).then(function(c) {
-					var contactpersons = c.data.map(function(cp) {
-						cp.user = Lookup.getUser(cp.user_id);
-						return cp
-					})
-					$scope.event_contactpersons = contactpersons;
+					if (c.data && c.data.length > 0) {
+						$scope.event_contactpersons = c.data.map(function(cp) {
+							cp.user = Lookup.getUser(cp.user_id);
+							cp.url = Utils.userUrl(cp.user.id, cp.user.full_name)
+							return cp
+						})
+					}
 				});
 
 				//groups
 				ESPBA.get('group_events', { event_id: id }).then(function(gr) {
-					gr.data.forEach(function(g) {
-						var group = Lookup.getGroup(g.group_id);
-						g.name = group.name;
-						g.urlName = Utils.urlName(group.name);
-					})
-					$scope.event_groups = gr.data;
+					if (gr.data && gr.data.length > 0) {
+						$scope.event_groups = gr.data.map(function(item) {
+							item.group = Lookup.getGroup(item.group_id);
+							item.url = Utils.gruppeUrl(item.group.id, item.group.name);
+							return item
+						})
+					}
 				});
 
 			});

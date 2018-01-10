@@ -21,7 +21,8 @@
 				<img ng-if="user.image != null " ng-src="../media/medlem/{{ user.image }}">
 			</span>
 			<span class="comment-comment col-md-10">
-				<textarea class="form-control" 
+				<textarea spellcheck="false"
+					class="form-control" 
 					ng-disabled="actionAnswer != '' "
 					id="comment-content"
 					ng-keyup="textAreaAdjust('comment-content')"

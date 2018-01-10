@@ -75,6 +75,7 @@ angular.module('indeuApp')
 
 			scope.articleAction.save = function() {
 				if (article_id) {
+					scope.article.edited_timestamp = 'CURRENT_TIMESTAMP';
 					ESPBA.update('article', scope.article).then(function(a) {
 						Notification.primary('Artiklen <strong>' + scope.article.header +'</strong> er opdateret');
 						if (onSave) scope.onSave(a.data[0]);
@@ -84,6 +85,9 @@ angular.module('indeuApp')
 							user_id: Login.currentUser().id,
 							hash: scope.article.hash
 						});
+
+						//refresh article info
+						scope.article = a.data[0];
 
 					})
 				} else {

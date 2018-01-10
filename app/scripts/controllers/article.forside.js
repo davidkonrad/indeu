@@ -18,6 +18,7 @@ angular.module('indeuApp')
 				var a = r.data[0];
 				a.dateStamp = moment(a.created_timestamp).calendar(); 
 				a.realDate = moment(a.created_timestamp); 
+				if (a.edited_timestamp) a.editedDateStamp = moment(a.edited_timestamp).calendar(); 
 
 				var user = Lookup.getUser(a.user_id);
 				a.userFullName = user.full_name;

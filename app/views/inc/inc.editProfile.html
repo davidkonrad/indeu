@@ -1,9 +1,8 @@
 <div>
 
 	<div class="col-md-12">
-		<div class="medlem-image medlem-image-edit cursor-pointer" ng-click="changeImage()">
-			<i ng-if="edit.image == ''" class="fa fa-user medlem-default-image"></i>
-			<img ng-if="edit.image != ''" ng-src="../media/medlem/{{ edit.image }}">
+		<div class="col-md-4">
+			<attach-image ng-model="edit.image" type="u" size="auto" height="200"></attach-image>
 		</div>
 
 		<div class="pull-right action-element">
@@ -19,6 +18,9 @@
 			</button>
 		</div>
 	</div>
+
+	<div class="col-md-12 clearfix">&nbsp;</div>
+
 	<div class="col-md-12">
 		<div class="">
 			<text-angular ng-model="edit.about" 
