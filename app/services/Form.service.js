@@ -97,13 +97,10 @@ angular.module('indeuApp').factory('Form', function(Utils, Login, ESPBA) {
 						isDatePicker = e.getAttribute('bs-datepicker');
 						isCheckbox = this.elementType(e) == 'checkbox';
 
-						//console.log('isDatePicker', isDatePicker, e.getAttribute('bs-datepicker'));
-
 						if (name) {
 							if (isDatePicker) {
 								obj[name] = 'qwerty' //Utils.systemDate(e.value);
 							} else if (isCheckbox) {
-								console.log('e.value', e.value);
 								obj[name] = e.value == 'on' ? 1 : 0;
 							} else {
 								obj[name] = e.value;

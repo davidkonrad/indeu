@@ -71,7 +71,7 @@ angular.module('indeuApp').factory('Const', ['$q', function($q) {
 							visible: true,
 							layerOptions: {
 								mapOptions: {
-									styles: this.defaultGoogleStyles
+									styles: this.defaultGoogleStyles()
 							  }
 							}
 					  },
@@ -82,7 +82,7 @@ angular.module('indeuApp').factory('Const', ['$q', function($q) {
 							visible: false,
 							layerOptions: {
 								mapOptions: {
-									styles: this.defaultGoogleStyles
+									styles: this.defaultGoogleStyles()
 							  }
 							}
 					  }

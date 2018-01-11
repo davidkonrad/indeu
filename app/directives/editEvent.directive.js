@@ -102,7 +102,6 @@ angular.module('indeuApp')
 			}
 			scope.reloadGroups();
 
-			
 			scope.eventAction = {};
 			scope.eventAction.caption = event_id ? 'Gem og afslut' : 'Opret og afslut';
 

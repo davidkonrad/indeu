@@ -182,6 +182,7 @@ angular.module('indeuApp')
 				//group.owner_title = !personal ? 'Du er administrator af denne gruppe' : personal+' er administrator af denne gruppe';
 				group.urlName = Utils.urlName(group.name);
 				group.urlTitle = Utils.plainText(group.about, 200);
+				group.url = Utils.gruppeUrl(group.id, group.name);
 				groups.push(group);
 			});
 			$scope.groups = groups;

@@ -60,7 +60,6 @@ angular.module('indeuApp')
 					//reloadGroups();
 					$timeout(function() {
 						$scope.showSearch = true;
-						//$compile(angular.element('#indeu-navbar'))($scope);
 					}, 800);
 				}
 			})
@@ -80,9 +79,6 @@ angular.module('indeuApp')
 		function reloadGroups() {
 			var params = Login.isLoggedIn() ? {	user_id: Login.currentUser().id } : {};
 			ESPBA.prepared('MenuGroups', params).then(function(g) {
-				//console.log('g', g);
-				//if ($scope.groups) delete $scope.groups; //$scope.groups.lerngth = 0;// = [];
-				//if ($scope.groups) $scope.groups = []; //$scope.groups.lerngth = 0;// = [];
 
 				if (g.data.length) {
 					if ($scope.groups) delete $scope.groups; 
@@ -92,21 +88,16 @@ angular.module('indeuApp')
 					var third = Math.abs(g.data.length / 3);					
 					var c = 0;
 					g.data.forEach(function(e) {
+						e.showName = e.name.length>25 ? e.name.substring(0,22)+' ..' : e.name;
 						e.url = Utils.gruppeUrl(e.id, e.name);
 						a[i].push(e);
 						c++;
-						if (c>third) i='s';
-						if (c>third*2) i='t';
+						if (c>=third) i='s';
+						if (c>=third*2) i='t';
 					});
-					//$scope.groups = a;
 					$timeout(function() {
-						//angular.extend($scope.groups, a);
 						$scope.groups = a;
             $scope.$apply();
-						//$compile(angular.element('#nav-indeu-groups'))($scope);
-						//console.log($scope.groups);
-						//$scope.groups = a;
-						//$compile(angular.element('#indeu-navbar'))($scope);
 					})
 				}
 			});
@@ -123,6 +114,10 @@ angular.module('indeuApp')
 			})
 		}
 		reloadAssociations();
+
+		$rootScope.$on('indeu.groupChange', function() {
+			reloadGroups();
+		})
 
 		$rootScope.$on('indeu.login', function() {
 			reloadAssociations();

@@ -193,11 +193,11 @@
 
 	<div class="layout-right-header">Grupper</div>
 	<div class="layout-right-header-content">
-			<div class="list-group">
-			  <a ng-repeat="group in groups" 
-					href="#" 
-					class="list-group-item list-group-item-sm" 
-					ng-href="#/grupper/{{ group.id }}/{{ group.urlName }}">
+		<div class="list-group">
+		  <a ng-repeat="group in groups" 
+				href="" 
+				class="list-group-item list-group-item-sm" 
+				ng-href="{{ group.url }}">
 					{{ group.name }}
 					<i ng-if="group.is_owner"
 						class="fa fa-hand-paper-o dig-gruppe-owner-icon text-primary" 

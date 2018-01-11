@@ -118,7 +118,7 @@
 					</td>
 				</tr>
 <!-- contact persons -->
-				<tr>
+				<tr ng-if="event.id != undefined">
 					<td colspan="2">
 				    <div class="form-group">
 							<div class="col-md-12">
@@ -149,7 +149,7 @@
 					</td>
 				</tr>
 <!-- groups -->
-				<tr>
+				<tr ng-if="event.id != undefined">
 					<td colspan="2">
 				    <div class="form-group">
 							<div class="col-md-12">
@@ -170,6 +170,12 @@
 								</buttun>
 							</div>
 						</div>
+					</td>
+				</tr>
+<!-- message -->
+				<tr ng-if="event.id == undefined">
+					<td colspan="2">
+						<div class="alert alert-success col-md-5" role="alert">Du kan tilføje kontaktpersoner og knytte eventen<br>til flere grupper, efter eventen er blevet oprettet</div>
 					</td>
 				</tr>
 <!-- about -->

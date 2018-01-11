@@ -32,14 +32,15 @@
 			<div entity-articles="{{ group.id }}" entity-type="group" user-id="{{ user.id }}" on-edit="editArticle"></div>
 		</div>
 
-		<comments ng-if="group.allow_comments" hash="{{ group.hash }}" on-comment-added="onCommentAdded"></comments>
+		<comments ng-if="group.comments_enabled == true" hash="{{ group.hash }}" on-comment-added="onCommentAdded"></comments>
 
 	</div>
 
 <!-- edit group -->
 	<div ng-if="action == 'g'">
+		<h1>{{ group.name }} </h1>
 		<div edit-gruppe="{{ group.id }}"  
-			on-save="onEventSave()" 
+			on-save="onGroupSave()" 
 			on-cancel="onActionCancel()">
 		</div>
 	</div>
@@ -58,6 +59,7 @@
 
 <!-- article -->
 	<div ng-if="action == 'a'">
+		<h1>{{ group.name }} </h1>
 		<h3 class="no-padding no-margin">&nbsp;Skriv ny artikel</h3>
 		<div edit-article="{{ edit_article_id }}"  
 			user-id="{{ user.id }}"
@@ -87,6 +89,8 @@
 	<div class="layout-right-header">Handlinger</div>
 	<div class="layout-right-header-content">
 		<a ng-if="userIsOwner" 
+			title="Rediger gruppens indstillinger"
+			ng-class="{ 'disabled': actionDisable('g') }"
 			ng-disabled="actionDisable('g')" 
 			ng-click="setAction('g')"
 			href="">
@@ -94,6 +98,8 @@
 		</a>
 
 		<a ng-if="group.articles_enabled && (userIsOwner || userIsMember)"
+			title="Opret en ny artikel og knyt den til gruppen"
+			ng-class="{ 'disabled': actionDisable('a') }"
 			ng-disabled="actionDisable('a')" 
 			ng-click="setAction('a')"
 			href="">
@@ -101,6 +107,8 @@
 		</a>
 
 		<a ng-if="group.events_enabled && (userIsOwner || userIsMember)"
+			title="Opret en ny event og knyt den til gruppen"
+			ng-class="{ 'disabled': actionDisable('e') }"
 			ng-disabled="actionDisable('e')" 
 			ng-click="setAction('e')"
 			href="">
@@ -112,6 +120,7 @@
 		</a>
 
 		<a href="" 
+			title="Opret en helt ny gruppe"
 			ng-class="{ 'disabled': actionDisable('n') }"
 			ng-disabled="actionDisable('n')" 
 			ng-click="setAction('n')">

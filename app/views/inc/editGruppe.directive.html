@@ -6,19 +6,19 @@
 				<input type="radio" 
 					name="visibility_level" 
 					ng-model="edit.visibility_level"
-					ng-value="1" > Offentlig
+					ng-value="'1'" > Offentlig
 			</label>
 			<label class="radio-inline">
 				<input type="radio" 
 					name="visibility_level" 
 					ng-model="edit.visibility_level"
-					ng-value="2"> Kun brugere
+					ng-value="'2'"> Kun brugere
 			</label>
 			<label class="radio-inline">
 				<input type="radio" 
-					name="edit.visibility_level" 
+					name="visibility_level" 
 					ng-model="edit.visibility_level"
-					ng-value="3"> Kun gruppe
+					ng-value="'3'"> Kun gruppe
 			</label>
 
 			<div class="pull-right action-element">
@@ -101,7 +101,7 @@
 
 				    <div class="form-group">
 				      <label class="col-md-2 control-label" for="owner">Gruppeejer</label>
-							<div class="col-md-10">
+							<div class="col-md-3">
 						    <button class="btn btn-default btn-sm"
 									id="owner_id"
 									ng-click="selectOwner()"
@@ -113,6 +113,15 @@
 			    	<div class="form-group">
 				      <label class="col-md-2 control-label" for=""></label>
 							<div class="col-md-4">
+								<div class="checkbox">
+								  <label class="control-label">
+										<input type="checkbox" 
+											ng-false-value="'0'"
+											ng-true-value="'1'"
+											name="active"
+											ng-model="edit.active">Aktiv
+									</label>
+								</div>
 								<div class="checkbox">
 								  <label class="control-label">
 										<input type="checkbox" 
@@ -131,15 +140,6 @@
 											ng-model="edit.articles_enabled">Tillad artikler
 									</label>
 								</div>
-								<div class="checkbox">
-								  <label class="control-label">
-										<input type="checkbox" 
-											ng-false-value="'0'"
-											ng-true-value="'1'"
-											name="allow_comments"
-											ng-model="edit.allow_comments">Kommentarer slået til
-									</label>
-								</div>
 							</div>
 				    	<div class="col-md-5">
 								<div class="checkbox">
@@ -147,8 +147,8 @@
 										<input type="checkbox" 
 											ng-false-value="'0'"
 											ng-true-value="'1'"
-											name="visible_members"
-											ng-model="edit.visible_members">Medlemmer offentlige
+											name="comments_enabled"
+											ng-model="edit.comments_enabled">Kommentarer slået til
 									</label>
 								</div>
 								<div class="checkbox">
@@ -157,7 +157,7 @@
 											ng-false-value="'0'"
 											ng-true-value="'1'"
 											name="visible_members"
-											ng-model="edit.visible_members">Kontakt offentlige
+											ng-model="edit.visible_members">Medlemmer offentlige
 									</label>
 								</div>
 				      </div>
@@ -245,7 +245,7 @@
 	  </div>
 
 <!-- group members -->
-	  <div class="panel panel-default">
+	  <div ng-if="edit.id > -1" class="panel panel-default">
 	    <div class="panel-heading" role="tab">
 	      <h4 class="panel-title">
 	        <a bs-collapse-toggle>

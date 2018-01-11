@@ -6,9 +6,9 @@
  */
 angular.module('indeuApp')
   .controller('GruppeForsideCtrl', 
-	function($scope, Login, $routeParams, Const, ESPBA, Lookup, Meta, Utils, Log, Notification, ConfirmModal) {
+	function($scope, Login, $route, $routeParams, Const, ESPBA, Lookup, Meta, Utils, Log, Notification, ConfirmModal) {
 
-		var id = $routeParams.id;
+		let id = $routeParams.id;
 
 		if (Login.isLoggedIn()) {
 			$scope.user = Login.currentUser()
@@ -20,7 +20,7 @@ angular.module('indeuApp')
 		}
 
 		$scope.actionDisable = function(action) {
-			return $scope.action == action //&& $scope.action != '';
+			return $scope.action != action && $scope.action != '';
 		}	
 
 		$scope.editEvent = function(event_id) {
@@ -58,38 +58,42 @@ angular.module('indeuApp')
 
 		$scope.btn_follow_caption = 'Følg gruppe';
 
-		ESPBA.get('group', { id: id }).then(function(r) {
-			$scope.group = r.data[0];
+		function reloadGroup() {
+			ESPBA.get('group', { id: id }).then(function(r) {
+				$scope.group = r.data[0];
 
-			$scope.group.visible_members = $scope.group.visible_members == 1 ? true : false;
-			$scope.group.visible_social = $scope.group.visible_social == 1 ? true : false;
-			$scope.group.events_enabled = $scope.group.events_enabled == 1 ? true : false;
-			$scope.group.articles_enabled = $scope.group.articles_enabled == 1 ? true : false;
+				$scope.group.visible_members = $scope.group.visible_members == 1 ? true : false;
+				$scope.group.visible_social = $scope.group.visible_social == 1 ? true : false;
+				$scope.group.events_enabled = $scope.group.events_enabled == 1 ? true : false;
+				$scope.group.articles_enabled = $scope.group.articles_enabled == 1 ? true : false;
+				$scope.group.comments_enabled = $scope.group.comments_enabled == 1 ? true : false;
 
-			$scope.group.access_status = getAccessStatus($scope.group.access_level);
-			$scope.group.visibility_status = getVisibilityStatus($scope.group.visibility_level);
+				$scope.group.access_status = getAccessStatus($scope.group.access_level);
+				$scope.group.visibility_status = getVisibilityStatus($scope.group.visibility_level);
 
-			if (Login.isLoggedIn()) {
-				$scope.userIsOwner = Login.currentUser().id == $scope.group.owner_id;
-				$scope.userIsMember = Login.isGroupMember(id);
+				if (Login.isLoggedIn()) {
+					$scope.userIsOwner = Login.currentUser().id == $scope.group.owner_id;
+					$scope.userIsMember = Login.isGroupMember(id);
 
-				var owner = Lookup.getUser($scope.group.owner_id);
-				$scope.owner = {
-					full_name: owner.full_name,
-					url: Utils.userUrl(owner.id, owner.full_name)
+					var owner = Lookup.getUser($scope.group.owner_id);
+					$scope.owner = {
+						full_name: owner.full_name,
+						url: Utils.userUrl(owner.id, owner.full_name)
+					}
+
+					if (!$scope.userIsMember) {
+						ESPBA.get('group_request', { group_id: $scope.group.id, user_id: $scope.user.id }).then(function(r) {
+							if (r.data.length) $scope.btn_follow_caption = 'Afventer ...'
+						})
+					}
+				} else {
+					if ($scope.group.visibility_level == Const.VISIBILITY_LEVEL_PUBLIC) {
+						Utils.refreshPage('/');
+					}
 				}
-
-				if (!$scope.userIsMember) {
-					ESPBA.get('group_request', { group_id: $scope.group.id, user_id: $scope.user.id }).then(function(r) {
-						if (r.data.length) $scope.btn_follow_caption = 'Afventer ...'
-					})
-				}
-			} else {
-				if ($scope.group.visibility_level == Const.VISIBILITY_LEVEL_PUBLIC) {
-					Utils.refreshPage('/');
-				}
-			}
-		});
+			})
+		}
+		reloadGroup();
 
 		$scope.followRequest = function() {
 			if ($scope.group.visibility_level == 3) {
@@ -161,18 +165,32 @@ angular.module('indeuApp')
 		$scope.loadEvents();
 */
 
+		$scope.onGroupSave = function() {
+			$scope.setAction('');
+			$route.reload();
+		}
+
 		$scope.onEventSave = function() {
 			$scope.setAction('');
-			$scope.loadEvents();
+			$scope.edit_event_id = undefined;
 		}
 
 		$scope.onArticleSave = function() {
+			console.log('save!!!');
 			$scope.setAction('');
-			$scope.loadArticles();
+			$route.reload();
+			/*
+			reloadGroup();
+			reloadMembers();
+			$timeout(function() {
+				$scope.$apply()
+			})
+			*/			
 		}
 
 		$scope.onActionCancel = function() {
 			$scope.setAction('');
+			$scope.edit_event_id = undefined;
 		}
 
 		function reloadMembers() {		

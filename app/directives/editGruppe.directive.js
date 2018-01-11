@@ -2,8 +2,8 @@
 
 angular.module('indeuApp')
 	.directive('editGruppe', 
-	function($q, Utils, ESPBA, Lookup, Form, ImageUploadModal, SelectBrugerModal, Notification, Const, Log, Login, Settings,
-					DTOptionsBuilder, DTColumnBuilder) {
+	function($rootScope, $q, $timeout, $location, Utils, ESPBA, Lookup, Form, ImageUploadModal, SelectBrugerModal, Notification, 
+		Const, Log, Login, Settings,	DTOptionsBuilder, DTColumnBuilder, AlertModal, ConfirmModal) {
 
 	return {
 		templateUrl: "views/inc/editGruppe.directive.html",
@@ -42,17 +42,26 @@ angular.module('indeuApp')
 			$scope.changed = false;
 
 			$scope.formSaveEnabled = function(formId) {
-				return Form.isEdited(formId)
+				return Form.isEdited(formId) && $scope.edit.id;
 			}
 
 			$scope.canSave = function() {
-				var e = $scope.edit;// || {};
+				var e = $scope.edit;
 				if (!e) return false;
-				//console.log(e);
 				return e.name !='' && e.about !='' && e.visibility_level !='' && e.owner_id !=''
 			}
 
 			$scope.formSave = function(formId) {
+				var params = Form.toObj(formId);
+				params.id = $scope.edit.id;
+				ESPBA.update('group', params).then(function() {
+					Log.log({
+						type: Log.GROUP_EDITED,
+						hash: $scope.edit.hash,
+						user_id: Login.currentUser().id
+					});
+					Form.reset(formId);
+				})
 			}
 
 			$scope.selectOwner = function() {
@@ -95,7 +104,7 @@ angular.module('indeuApp')
 						action: function( /* e, dt, node, config */) {
 							SelectBrugerModal.show($scope, false, $scope.current_user_ids).then(function(user) {
 								if (user) {
-									ESPBA.insert('group_user', { group_id: group_id, user_id: user[0].id }).then(function() {
+									ESPBA.insert('group_user', { group_id: $scope.edit.id, user_id: user.id }).then(function() {
 										$scope.dtInstance.reloadData();
 									})
 								}
@@ -124,14 +133,17 @@ angular.module('indeuApp')
 			];
 
 			$('body').on('click', '.remove-medlem', function() {
-				if (confirm('Fjern medlem fra gruppe?')) {
-					ESPBA.delete('group_user', { group_id: group_id, user_id: $(this).data('user-id') }).then(function() {
+				var user_id = $(this).data('user-id');
+				if (user_id == $scope.edit.owner_id) {
+					AlertModal.show('Gruppeejeren kan ikke fjernes fra medlemslisten', 'No can do');
+					return
+				}
+				ConfirmModal.show('Fjern medlem fra gruppe?').then(function() {
+					ESPBA.delete('group_user', { group_id: $scope.edit.id, user_id: user_id }).then(function() {
 						$scope.dtInstance.reloadData();
 					})
-				}
+				})
 			});
-
-
 		},
 
 
@@ -142,24 +154,20 @@ angular.module('indeuApp')
 			
 			attrs.$observe('editGruppe', function(newVal) {
 				scope.edit.id = attrs['editGruppe'];
-				console.log(scope.edit.id);
+				
 				if (parseInt(scope.edit.id)) ESPBA.get('group', { id: scope.edit.id }).then(function(u) {
-					//test for errors
-					console.log('GROUP LOAD!!!!');
+					scope.save_btn_caption = 'Gem og luk';
 					scope.edit = u.data[0];
-
 					scope.$watch('edit.about', function(newVal, oldVal) {
 						if (newVal && newVal != oldVal) scope.changed = true
 					}, true);
-				
-					//$('.panel-collapse:not(".in")').collapse('show');
 				})
 			});
 
 			scope.doSaveClose = function() {
 				if (scope.edit.id) {
 					ESPBA.update('group', scope.edit).then(function(g) {
-						console.log(g);
+						$rootScope.$emit('indeu.groupChange');
 						Notification('Gruppe opdateret ...');
 						if (onSave) scope.onSave();
 						Log.log({
@@ -170,9 +178,12 @@ angular.module('indeuApp')
 					})
 				} else {
 					scope.edit.hash = Utils.getHash();
+					scope.active = true;
+					scope.accepted = true;
 					ESPBA.insert('group', scope.edit).then(function(g) {
+						$rootScope.$emit('indeu.groupChange');
 						g = g.data[0];
-						Notification('Gruppen <strong>'+g.name+'</strong> er oprettet.');
+						Notification('Gruppen <strong>'+g.name+'</strong> er oprettet');
 						if (onSave) scope.onSave();
 						Log.log({
 							type: Log.GROUP_CREATED,
@@ -181,14 +192,20 @@ angular.module('indeuApp')
 						});
 
 						//add user as group member
-						ESPBA.insert('group_user', { user_id: Login.currentUser().id, group_id: g.id }).then(function(x) {
+						ESPBA.insert('group_user', { user_id: Login.currentUser().id, group_id: g.id }).then(function(u) {
 							Log.log({
 								type: Log.GROUP_MEMBER_ADDED,
 								hash: g.hash,
 								user_id: Login.currentUser().id
 							})
 							Notification('Du følger nu gruppen <strong>'+g.name+'</strong>');
+
+							//jump to group immediately
+							$timeout(function() {
+								$location.path( Utils.gruppeUrl(g.id, g.name).replace('/#/', '') );
+							})
 						})
+
 					})
 				} 
 			}

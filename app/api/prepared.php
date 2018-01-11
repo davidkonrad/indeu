@@ -92,6 +92,7 @@ $SQL = <<<SQL
 			g.id,
 			g.visibility_level,
 			g.name,
+			g.owner_id,
 			u.user_id,
 			(select count(*) from group_user where group_id	= g.id) as user_count
 		from `group` g
