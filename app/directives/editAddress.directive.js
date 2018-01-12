@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('indeuApp')
-	.directive('editAddress', function(Utils, ESPBA, Lookup, Login, SelectBrugerModal, SelectGruppeModal, Notification, Const, Log) {
+	.directive('editAddress', function(Utils, ESPBA, Lookup, Form, KR, Notification, Const, Log) {
 
 	return {
 		templateUrl: "views/inc/inc.editAddress.html",
@@ -15,6 +15,39 @@ angular.module('indeuApp')
 		controller: function($scope) {
 			$scope.edit = {
 			};
+
+			$scope.formSave = function() {
+				if ($scope.edit.id) {
+					ESPBA.update('address', $scope.edit).then(function(a) {
+						//
+					})
+				} else {
+					ESPBA.insert('address', $scope.edit).then(function(a) {
+						//
+					})
+				}
+				Form.reset('#address');
+			}
+
+			$scope.formSaveEnabled = function() {
+				return Form.isEdited('#address');
+			}
+
+			$scope.addressSelect = function(item) {
+				//console.log(item);
+				$scope.edit.postal_code = item.postCodeIdentifier;
+				$scope.edit.city = item.districtName;
+				$scope.edit.lat = item.y || item.yMin;
+				$scope.edit.lng = item.x || item.xMin;
+				$scope.edit.municipality = item.municipalityName;
+				$scope.edit.country = 'Danmark';
+				if (item.municipalityCode) {
+					$scope.edit.region = KR.regionByKommuneNr(item.municipalityCode);
+				}
+				$scope.$apply();
+			}
+
+
 		},
 
 		link: function(scope, element, attrs) {
@@ -31,6 +64,7 @@ angular.module('indeuApp')
 				})
 			})
 
+			//add a method so changes can be saved from outside the directive
 			scope.$root.__addressSave = function() {
 				if (scope.edit.id) {
 					ESPBA.update('address', scope.edit).then(function(a) {
@@ -42,33 +76,6 @@ angular.module('indeuApp')
 					})
 				}
 			}
-
-
-
-
-/*
-			var user_id = attrs['userId'] || false;
-			var onSave = attrs['onSave'] || false;
-			var onCancel = attrs['onCancel'] || false;
-			var event_id = attrs['editEvent'] || false;
-			if (event_id) {
-				ESPBA.get('event', { id: event_id }).then(function(e) {
-					scope.event = e.data[0];
-					scope.event.visibility_level = parseInt(scope.event.visibility_level);
-					scope.event.from = Utils.removeSecs(scope.event.from);
-					scope.event.to = Utils.removeSecs(scope.event.to);
-					if (e.data[0].lat && e.data[0].lng) {
-						var latLng = {
-							lat: parseFloat(e.data[0].lat),
-							lng: parseFloat(e.data[0].lng)
-						};
-						scope.eventMap.markers.marker = latLng;
-						latLng.zoom = 11;
-						scope.eventMap.center = latLng;
-					}
-				});
-			}
-*/
 
 		}
 	}

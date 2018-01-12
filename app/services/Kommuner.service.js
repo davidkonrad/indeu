@@ -23,6 +23,14 @@ angular.module('indeuApp')
 					if (kommuner[i].nr.trim() == kommuneNr ) return kommuner[i]
 				}
 				return false
+			},
+
+			regionByKommuneNr: function(kommuneNr) {
+				kommuneNr = kommuneNr ? kommuneNr.trim() : ''
+				for (var i=0, l=kommuner.length; i<l; i++) {
+					if (kommuner[i].nr.trim() == kommuneNr ) return kommuner[i].region.navn
+				}
+				return false
 			}
 				
 		}

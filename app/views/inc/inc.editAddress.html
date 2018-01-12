@@ -1,98 +1,115 @@
+<div class="col-md-12">
+	<form role="form" id="address" class="form-horizontal" autocomplete="off">
 
-	<form role="form" class="form-horizontal" autocomplete="off">
+		<div class="col-md-11">
+			<br>
 
-		<div class="form-group">
-      <label class="col-md-2 control-label" for="country">Land</label>
-			<div class="col-md-8">
-		    <input class="form-control" 
-					type="text"
-					id="country"
-					select-on-click
-					ng-model="edit.country" 
-					placeholder="Land">
+			<div class="form-group">
+	      <label class="col-md-2 control-label" for="country">Land</label>
+				<div class="col-md-8">
+			    <input class="form-control" 
+						type="text"
+						id="country"
+						select-on-click
+						ng-model="edit.country" 
+						placeholder="Land">
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label required" for="street_name">Adresse</label>
+				<div class="col-md-8">
+			    <input class="form-control" 
+						type="text"
+						id="adresse"
+						select-on-click
+						ng-model="edit.address" 
+						adresse-opslag
+						adresse-type="adresser"
+						adresse-on-select="addressSelect"
+						placeholder="Adresse">
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label required" for="postal_code">Postnr</label>
+				<div class="col-md-3">
+			    <input class="form-control" 
+						type="text"
+						id="postal_code"
+						select-on-click
+						only-numbers
+						ng-model="edit.postal_code" 
+						placeholder="Postnr">
+				</div>
+	      <label class="col-md-1 control-label required" for="city" style="padding-right:0px;width: auto;">By</label>
+				<div class="col-md-5">
+			    <input class="form-control" 
+						type="text"
+						id="city"
+						select-on-click
+						ng-model="edit.city" 
+						placeholder="By">
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label" for="municipality">Kommune</label>
+				<div class="col-md-5">
+			    <input class="form-control" 
+						type="text"
+						id="munciplaity"
+						select-on-click
+						ng-model="edit.municipality" 
+						placeholder="Kommune">
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label" for="region">Region</label>
+				<div class="col-md-5">
+			    <input class="form-control" 
+						type="text"
+						id="region"
+						select-on-click
+						ng-model="edit.region" 
+						placeholder="Region">
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label" for="phone1">Telefon #1</label>
+				<div class="col-md-3">
+			    <input class="form-control" 
+						type="text"
+						id="phone1"
+						select-on-click
+						ng-model="edit.phone1" 
+						placeholder="*Telefon">
+				</div>
+	      <label class="col-md-2 control-label" for="phone2" style="padding-left:0px;padding-right:0px;width: auto;">Telefon #2</label>
+				<div class="col-md-3">
+			    <input class="form-control" 
+						type="text"
+						id="phone2"
+						select-on-click
+						ng-model="edit.phone2" 
+						placeholder="*Telefon #2">
+				</div>
 			</div>
 		</div>
 
-    <div class="form-group">
-      <label class="col-md-2 control-label required" for="street_name">Adresse</label>
-			<div class="col-md-8">
-		    <input class="form-control" 
-					type="text"
-					id="adresse"
-					select-on-click
-					ng-model="edit.address" 
-					placeholder="Adresse">
-			</div>
+		<div class="col-md-1 no-padding no-margin">
+			<br>
+			<button class="btn btn-xs btn-default pull-right"
+				ng-click="formSave('#social')"
+				ng-class="{ 'btn-primary' : formSaveEnabled() }"
+				ng-disabled="!formSaveEnabled('#social')">
+					Gem
+			</button>
 		</div>
 
-    <div class="form-group">
-      <label class="col-md-2 control-label required" for="postal_code">Postnr</label>
-			<div class="col-md-2">
-		    <input class="form-control" 
-					type="text"
-					id="postal_code"
-					select-on-click
-					only-numbers
-					ng-model="edit.postal_code" 
-					placeholder="Postnr">
-			</div>
-      <label class="col-md-1 control-label required" for="city" style="padding-right:0px;">By</label>
-			<div class="col-md-5">
-		    <input class="form-control" 
-					type="text"
-					id="city"
-					select-on-click
-					ng-model="edit.city" 
-					placeholder="By">
-			</div>
-		</div>
+	</form>
+</div>
 
-    <div class="form-group">
-      <label class="col-md-2 control-label" for="municipality">Kommune</label>
-			<div class="col-md-5">
-		    <input class="form-control" 
-					type="text"
-					id="munciplaity"
-					select-on-click
-					ng-model="edit.municipality" 
-					placeholder="Kommune">
-			</div>
-		</div>
-
-    <div class="form-group">
-      <label class="col-md-2 control-label" for="region">Region</label>
-			<div class="col-md-5">
-		    <input class="form-control" 
-					type="text"
-					id="region"
-					select-on-click
-					ng-model="edit.region" 
-					placeholder="Region">
-			</div>
-		</div>
-
-    <div class="form-group">
-      <label class="col-md-2 control-label" for="phone1">Telefon #1</label>
-			<div class="col-md-3">
-		    <input class="form-control" 
-					type="text"
-					id="phone1"
-					select-on-click
-					ng-model="edit.phone1" 
-					placeholder="*Telefon #1">
-			</div>
-      <label class="col-md-2 control-label" for="phone2" style="padding-left:0px;padding-right:0px;">Telefon #2</label>
-			<div class="col-md-3">
-		    <input class="form-control" 
-					type="text"
-					id="phone2"
-					select-on-click
-					ng-model="edit.phone2" 
-					placeholder="*Telefon #2">
-			</div>
-
-		</div>
-
-
-</form>
 

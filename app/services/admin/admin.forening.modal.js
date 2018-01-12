@@ -192,6 +192,7 @@ angular.module('indeuApp')
 				templateUrl: 'views/admin/admin.forening.modal.html',
 				backdrop: 'static',
 				show: false,
+				size: 'lg',
 				keyboard: false
 			});
 
