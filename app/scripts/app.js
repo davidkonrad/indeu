@@ -184,7 +184,7 @@ angular.module('indeuApp', [
         controllerAs: 'administration'
       })
       .when('/admin-foreninger', {
-        templateUrl: 'views/admin.foreninger.html',
+        templateUrl: 'views/admin/admin.foreninger.html',
         controller: 'AdminForeningerCtrl',
         controllerAs: 'administration'
       })

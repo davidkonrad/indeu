@@ -109,9 +109,13 @@
 						<br>
 					</div>
 
-					<div bs-pane data-title="Adresse">
+					<div bs-pane data-title="Adresse" ng-if="edit.hash != undefined">
 						<br>
 						<edit-address hash="{{ edit.hash }}"></edit-address>	
+					</div>
+
+					<div bs-pane data-title="Web / SoMe" ng-if="edit.hash != undefined">
+						<edit-social-media hash="{{ edit.hash }}"></edit-social-media>	
 					</div>
 
 					<div bs-pane data-title="Medlemmer" ng-if="edit.id != null">

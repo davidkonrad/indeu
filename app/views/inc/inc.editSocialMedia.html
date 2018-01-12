@@ -1,0 +1,81 @@
+<div class="col-md-12">
+	<form id="social" role="form" class="form-horizontal" autocomplete="off">
+
+		<div class="col-md-11">
+			<br>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label" for="homepage">Hjemmeside</label>
+				<div class="col-md-8">
+			    <input class="form-control input-sm" 
+						type="text"
+						id="homepage"
+						select-on-click
+						ng-model="edit.homepage" 
+						placeholder="Hjemmeside adresse">
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label" for="facebook">Facebook</label>
+				<div class="col-md-8">
+			    <input class="form-control input-sm" 
+						type="text"
+						id="facebook"
+						select-on-click
+						ng-model="edit.facebook" 
+						placeholder="Facebook url">
+				</div>
+			</div>
+
+		   <div class="form-group">
+					<label class="col-md-2 control-label" for="twitter">Twitter</label>
+					<div class="col-md-8">
+				    <input class="form-control input-sm" 
+							type="text"
+							id="twitter"
+							select-on-click
+							ng-model="edit.twitter" 
+							placeholder="Twitter konto">
+					</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label" for="linkedin">LinkedIn</label>
+				<div class="col-md-8">
+			    <input class="form-control input-sm" 
+						type="text"
+						id="linkedin"
+						select-on-click
+						ng-model="edit.linkedin" 
+						placeholder="LinkedIn konto">
+				</div>
+			</div>
+
+	    <div class="form-group">
+	      <label class="col-md-2 control-label" for="linkedin">Instagram</label>
+				<div class="col-md-8">
+			    <input class="form-control input-sm" 
+						type="text"
+						id="instagram"
+						select-on-click
+						ng-model="edit.instagram" 
+						placeholder="Instagram konto">
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-md-1 no-padding no-margin">
+			<br>
+			<button class="btn btn-xs btn-default pull-right"
+				ng-click="formSave('#social')"
+				ng-class="{ 'btn-primary' : formSaveEnabled() }"
+				ng-disabled="!formSaveEnabled('#social')">
+					Gem
+			</button>
+		</div>
+
+	</form>
+</div>
+
