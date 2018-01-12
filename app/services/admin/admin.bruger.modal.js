@@ -61,13 +61,6 @@ angular.module('indeuApp').factory('BrugerModal',
 				//console.log('modal show');
 			});
 
-			$scope.__brugerModal.uploadImage = function() {
-				ImageUploadModal.show($scope, 'medlem').then(function(image) {
-					if (image) {
-						$scope.edit.image = image.filename;
-					}
-				});
-			}
 
 			$scope.brugerModalClose = function(value) {
 
@@ -140,14 +133,6 @@ angular.module('indeuApp').factory('BrugerModal',
 
 		$scope.dtOptions_grupper = DTOptionsBuilder
 			.fromFnPromise(function() {
-				/*
-				var defer = $q.defer();
-				ESPBA.get('group_user', { user_id: user_id }).then(function(res) {
-					$scope.data = res.data;
-					defer.resolve($scope.data);
-				});
-				return defer.promise;
-				*/
 				return Lookup.getGroupsByUser(user_id)
 	    })
 			.withOption('drawCallback', function() {

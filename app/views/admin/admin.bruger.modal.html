@@ -244,9 +244,9 @@
 
 <!---- billede --->
 					<div bs-pane data-title="Billede">
-						<div class="bruger-modal-image" ng-click="__brugerModal.uploadImage()">
-							<i ng-if="edit.image == '' " class="fa fa-user medlem-default-image"></i>
-							<img ng-if="edit.image != '' " ng-src="../media/medlem/{{ edit.image }}">
+						<br>
+						<div class="col-md-4 col-md-offset-4">
+							<attach-image ng-model="edit.image" type="u"></attach-image>
 						</div>
 					</div>
 

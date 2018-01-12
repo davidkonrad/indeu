@@ -65,7 +65,7 @@ angular.module('indeuApp')
 				        'targetPath' : '../media/' + $scope.__upload.target + '/'
 							}
 						}).then(function(r) {
-							console.log(r);
+							//console.log(r);
 							modal.hide();
 				      deferred.resolve(r.data);
 						});

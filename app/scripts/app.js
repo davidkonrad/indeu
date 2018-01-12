@@ -194,7 +194,7 @@ angular.module('indeuApp', [
         controllerAs: 'administration'
       })
       .when('/admin-brugere', {
-        templateUrl: 'views/admin.brugere.html',
+        templateUrl: 'views/admin/admin.brugere.html',
         controller: 'AdminBrugereCtrl',
         controllerAs: 'brugere'
       })
