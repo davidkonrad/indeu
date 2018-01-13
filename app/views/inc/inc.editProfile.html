@@ -53,10 +53,74 @@
 	    </div>
 	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
 	      <div class="panel-body">
-					<div class="col-md-1"></div>
 					<form id="settings" role="form" class="form-horizontal" autocomplete="off">
 
-						<div class="col-md-12 no-padding no-margin">
+						<div class="col-md-11">
+				    	<div class="form-group col-md-3">
+								<div class="checkbox">
+								  <label class="control-label">
+										<input type="checkbox" 
+											ng-false-value="'0'"
+											ng-true-value="'1'"
+											name="visible_email"
+											ng-model="edit.visible_email">Synlig email
+									</label>
+								</div>
+								<div class="checkbox">
+								  <label class="control-label">
+										<input type="checkbox" 
+											ng-false-value="'0'"
+											ng-true-value="'1'"
+											name="visible_phone"
+											ng-model="edit.visible_phone">Synlig telefon
+										</label>
+								</div>
+								<div class="checkbox">
+								  <label class="control-label">
+										<input type="checkbox" 
+											ng-false-value="'0'"
+											ng-true-value="'1'"
+											name="visible_address"
+											ng-model="edit.visible_address">Synlig adresse
+									</label>
+								</div>
+				      </div>
+
+				    	<div class="form-group col-md-3">
+								<div class="checkbox">
+								  <label class="control-label">
+										<input type="checkbox" 
+											ng-false-value="'0'"
+											ng-true-value="'1'"
+											name="visible_social_media"
+											ng-model="edit.visible_social_media">Synlig SoMe
+									</label>
+								</div>
+
+								<div class="checkbox">
+								  <label class="control-label">
+										<input type="checkbox" 
+											ng-false-value="'0'"
+											ng-true-value="'1'"
+											name="visible_calendar"
+											ng-model="edit.visible_calendar">Synlig kalender
+									</label>
+								</div>
+							</div>
+
+				    	<div class="form-group col-md-3">
+								<div class="radio">
+								  <label class="no-padding">Signatur</label><br>
+									&nbsp;&nbsp;<label><input type="radio" name="signatur">Alias</label><br>
+									&nbsp;&nbsp;<label><input type="radio" name="signatur">Fulde navn</label><br>
+									&nbsp;&nbsp;<label><input type="radio" name="signatur">Fornavn</label><br>
+									&nbsp;&nbsp;<label><input type="radio" name="signatur">Efternavn</label><br>
+								</div>
+				      </div>
+						</div>
+
+						<div class="col-md-1">
+							<br>
 							<button class="btn btn-xs btn-default pull-right"
 								ng-click="formSave('#settings')"
 								ng-class="{ 'btn-primary' : formSaveEnabled('#settings') }"
@@ -64,55 +128,6 @@
 								Gem
 							</button>
 						</div>
-												
-			    	<div class="form-group col-md-4">
-							<div class="checkbox">
-							  <label class="control-label">
-									<input type="checkbox" 
-										ng-false-value="'0'"
-										ng-true-value="'1'"
-										name="visible_address"
-										ng-model="edit.visible_address">Synlig adresse
-								</label>
-							</div>
-							<div class="checkbox">
-							  <label class="control-label">
-									<input type="checkbox" 
-										ng-false-value="'0'"
-										ng-true-value="'1'"
-										name="visible_email"
-										ng-model="edit.visible_email">Synlig email
-								</label>
-							</div>
-							<div class="checkbox">
-							  <label class="control-label">
-									<input type="checkbox" 
-										ng-false-value="'0'"
-										ng-true-value="'1'"
-										name="visible_phone"
-										ng-model="edit.visible_phone">Synlig telefon
-								</label>
-							</div>
-			      </div>
-
-			    	<div class="form-group col-md-4">
-							<div class="checkbox">
-							  <label class="control-label">
-									<input type="checkbox" 
-										ng-false-value="'0'"
-										ng-true-value="'1'"
-										name="visible_calendar"
-										ng-model="edit.visible_calendar">Synlig kalender
-								</label>
-							</div>
-							<div class="radio">
-							  <label class="no-padding">Signatur</label><br>
-								&nbsp;&nbsp;<label><input type="radio" name="signatur">Alias</label><br>
-								&nbsp;&nbsp;<label><input type="radio" name="signatur">Fulde navn</label><br>
-								&nbsp;&nbsp;<label><input type="radio" name="signatur">Fornavn</label><br>
-								&nbsp;&nbsp;<label><input type="radio" name="signatur">Efternavn</label><br>
-							</div>
-			      </div>
 
 					</form>
 		    </div>
@@ -133,15 +148,8 @@
 	      <div class="panel-body">
 					<form id="personal" role="form" class="form-horizontal" autocomplete="off">
 
-						<div class="col-md-12 no-padding no-margin">
-							<button class="btn btn-xs btn-default pull-right"
-								ng-click="formSave('#personal')"
-								ng-class="{ 'btn-primary' : formSaveEnabled('#personal') }"
-								ng-disabled="!formSaveEnabled('#personal')">
-								Gem
-							</button>
-						</div>
-
+						<div class="col-md-11">
+							<br>
 					    <div class="form-group">
 					      <label class="col-md-2 control-label required" for="first_name">Fornavn</label>
 								<div class="col-md-4">
@@ -217,9 +225,19 @@
 										placeholder="Password">
 								</div>
 							</div>
+						</div>
 
-						</form>
+						<div class="col-md-1">
+							<br>
+							<button class="btn btn-xs btn-default pull-right"
+								ng-click="formSave('#personal')"
+								ng-class="{ 'btn-primary' : formSaveEnabled('#personal') }"
+								ng-disabled="!formSaveEnabled('#personal')">
+								Gem
+							</button>
+						</div>
 
+					</form>
 	      </div>
 	    </div>
 	  </div>

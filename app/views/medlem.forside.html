@@ -22,8 +22,38 @@
 </div>
 
 <div class="col-md-3">
-	<div class="layout-right-header">Socialt</div>
-	<div class="layout-right-header-content" social-links="{{ user }}"></div>
+
+	<div ng-if="is_self == true">
+		<div class="layout-right-header">Handlinger</div>
+		<div class="layout-right-header-content">
+			<a href="/dig" debug-link
+				title="Rediger din profil, opret event, artikler, grupper mm">
+				<i class="fa fa-fw fa-wrench fa-x2"></i>Gå til personlig profil<br>
+			</a>
+		</div>
+	</div>
+
+	<div ng-if="showAddress || showEmail || showPhone">
+		<div class="layout-right-header">Kontakt</div>
+		<div class="layout-right-header-content">
+			<span ng-if="showEmail">
+				<i class="fa fa-fw fa-envelope-o fa-x2"></i><a ng-href="mailto:{{ user.email }}">{{ user.email }}</a><br>
+			</span>
+			<span ng-if="showAddress">
+				<i class="fa fa-fw fa-address-book-o fa-x2"></i>{{ user.address.address }}<br>
+			</span>
+			<span ng-if="showPhone">
+				<i class="fa fa-fw fa-phone fa-x2"></i>{{ user.address.phone1 }}
+			</span>
+		</div>
+	</div>
+
+	<div ng-if="showSocial">
+		<div class="layout-right-header">Web / SoMe</div>
+		<div class="layout-right-header-content">
+			<social-media-links record="{{ user.social }}"></social-media-links>
+		</div>
+	</div>
 
 	<div class="layout-right-header">Deltager i kommende events</div>
 	<div class="layout-right-header-content">

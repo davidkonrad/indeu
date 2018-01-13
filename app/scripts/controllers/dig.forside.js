@@ -86,6 +86,7 @@ angular.module('indeuApp')
 			ESPBA.get('user', { id: user_id }).then(function(r) {
 				$scope.user = r.data[0];
 				$scope.user.image = $scope.user.image || '';
+				$scope.user.url = Utils.userUrl($scope.user.id, $scope.user.full_name);
 				var a = $scope.user.about;
 				if (!a || a.trim() == '') $scope.user.about = 'Du har endnu ikke udfyldt en beskrivelse af dig selv. Klik på linket "Rediger profil" til højre. '
 			});
