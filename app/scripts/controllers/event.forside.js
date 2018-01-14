@@ -51,7 +51,7 @@ angular.module('indeuApp')
 					$scope.eventMap.center = {
 						lat: lat,
 						lng: lng,
-						zoom: 13
+						zoom: 11
 					}
 
 					switch ($scope.event.visibility_level) {

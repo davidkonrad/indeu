@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp')
-  .controller('KalenderForsideCtrl', function($scope, $location, Login, $timeout, leafletData, ESPBA, Lookup, Meta, Utils, Const, uiCalendarConfig) {
+  .controller('KalenderForsideCtrl', function($scope, Login, $timeout, ESPBA, Lookup, Meta, Utils, Const, uiCalendarConfig) {
 
 		Lookup.init();
 
@@ -62,6 +62,7 @@ angular.module('indeuApp')
 			popupAnchor: [-4, -20] 
 		};
 
+		/*
 		$scope.$on('leafletDirectiveMarker.click', function(e, args) {
 			leafletData.getMap().then(function(map) {
 				var center = $.extend( {}, args.leafletObject._latlng);
@@ -69,6 +70,7 @@ angular.module('indeuApp')
 				$scope.eventMap.center = center;
 			})
 		});
+		*/
 
 		$scope.uiConfig = {
 			calendar: {
@@ -79,14 +81,33 @@ angular.module('indeuApp')
 					center: '',
 					right: 'prev,next'
 				},
-				eventClick: $scope.eventClick,
-				dayClick: $scope.dayClick,
 				viewRender: function(view, element) {
 					var params = { start_date: view.start.format("YYYY-MM-DD"), end_date: view.end.format("YYYY-MM-DD") };
+					var now = new Date().valueOf();
+
+					function getMessage(e) {
+						var eUrl = Utils.eventUrl(e.id, e.name);
+						console.log(moment('2002-12-12').format() )
+						var m = '<h4><a href="'+eUrl+'">'+e.name+'</a></h4>';
+						m += '<h5>';
+						m += '<strong>'+moment(e.date).format('DD/MM/YYYY')+'</strong>';
+						m += ' fra kl. <strong>'+Utils.removeSecs(e.from)+'</strong>';
+						if (e.to && e.to != '00:00:00') m+= ' til <strong>'+Utils.removeSecs(e.to)+'</strong>';
+						m += '</h5>';
+						if (e.association_name) {
+							var url = Utils.foreningUrl(e.association_id, e.association_name);
+							var title = 'Besøg '+e.association_name+'s forside';
+							m+='<h5>Eventen er arrangeret af <a href="'+url+'" title="'+title+'">' + e.association_name + '</a></h5>';
+						}
+						return m
+					}
+
 					ESPBA.prepared('EventsByPeriod', params).then(function(r) {
 						var events = [];
 						$scope.eventMap.markers = [];
 						r.data.forEach(function(e) {
+							var eDate = new Date(e.date);
+
 							//markers
 							var lat = parseFloat(e.lat);
 							var lng = parseFloat(e.lng);
@@ -94,20 +115,23 @@ angular.module('indeuApp')
 								$scope.eventMap.markers.push({
 									lat: lat,
 									lng: lng,
-									icon: iconBlue
+									icon: eDate.valueOf() > now ? iconGreen : iconBlue,
+									message: getMessage(e)
 								});
 							}
+
 							//calendar
 							events.push({
 								title: e.name,
-								date: new Date(e.date),
+								date: eDate,
 								event_id: e.id,
-								color: '#257e4a'
+								color: eDate.valueOf() > now ? '#257e4a' : '#7F7F7F',
+								url: Utils.eventUrl(e.id, e.name)
 							})
+
 						});
 
 						$timeout(function() {
-							uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
 							uiCalendarConfig.calendars.calendar.fullCalendar('addEventSource', events);
 						})
 					})
@@ -115,16 +139,5 @@ angular.module('indeuApp')
 			}
 		}
 
-		$scope.eventClick = function(indeuEvent, element, constructor) {
-			//var path = Utils.isLocalHost() ? '/event/' : '/event/';
-			var path = '/event/';
-			path += indeuEvent.event_id +'/';
-			path += Utils.urlName(indeuEvent.title);
-			$location.path(path);
-		}
-
-		$scope.dayClick = function(date) {
-			//alert('ok')
-		}
 
 });

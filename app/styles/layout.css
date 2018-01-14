@@ -143,17 +143,18 @@ a.list-group-item-new:hover {
 .list-group-item-sm {
 	padding: 0px;
 	border: 2px solid #fff;
-	padding-top: 2px;
-	padding-bottom: 2px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 	padding-left: 4px;
 	border-top: 1px dotted white;
 	border-bottom: 1px dotted white;
-
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-
+.list-group-item-sm:hover {
+	background-color: #F8F8F8;
+}
 
 
 /* exp */

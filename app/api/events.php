@@ -87,14 +87,12 @@ SQL;
 
 	//******************
 	//EventsByPeriod
-	// user_id, start_date, end_date	
+	//user_id, start_date, end_date	
 	public function EventsByPeriod() {
 		$user_id = isset($this->array['user_id']) ? $this->array['user_id'] : false;
 		$start_date = isset($this->array['start_date']) ? $this->s($this->array['start_date']) : false;
 		$end_date = isset($this->array['end_date']) ? $this->s($this->array['end_date']) : false;
 		
-		//'2011-05-01'
-
 $SQL = <<<SQL
 			select 
 				e.id,
@@ -102,15 +100,21 @@ $SQL = <<<SQL
 				e.name,
 				e.lat,
 				e.lng,
-				e.group_id,
 				e.date,
 				e.from,
 				e.to,
 
-				g.name as group_name
+				ge.group_id,
+				g.name as group_name,
+
+				ae.association_id,
+				a.name as association_name
 
 				from event e
-				left join `group` g on g.id = e.group_id
+				left join `group_events` ge on ge.event_id = e.id
+				left join `group` g on g.id = ge.group_id
+				left join `association_events` ae on ae.event_id = e.id
+				left join `association` a on a.id = ae.association_id
 SQL;
 
 		$d = '';
@@ -134,27 +138,9 @@ SQL;
 
 		$SQL.=$where;
 		return $SQL;
-/*
-
-	} else {
-$SQL = <<<SQL
-			select 
-				e.*,
-				u.created_timestamp as user_visited,
-				g.name as group_name,
-				g.id as group_id
-			from event e 
-SQL;
-			$SQL.= ' left join user_visits u on e.hash = u.hash and u.user_id ='.$user_id;
-			$SQL.= ' left join group_events ge on e.id = ge.id';
-			$SQL.= ' left join `group` g on g.id = ge.group_id';
-			$SQL.= ' order by e.created_timestamp desc 	';
-			$SQL.= ' limit 10 ';
-		}
-		//echo $SQL;
-		return $SQL;
-*/
 	}
+
+
 }
 
 
