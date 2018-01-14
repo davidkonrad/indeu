@@ -43,15 +43,18 @@ angular.module('indeuApp')
 			}, 10)			
 		});
 
-		ESPBA.get('group_user', { user_id: user_id }).then(function(r) {
-			$scope.groups = [];
+		ESPBA.prepared('GroupsByUser', { user_id: user_id }).then(function(r) {
 			r.data.forEach(function(g) {
-				var gruppe = Lookup.getGroup(g.group_id);
-				gruppe.is_owner = gruppe.owner_id == user_id;
-				gruppe.urlName = Utils.urlName(gruppe.name);
-				gruppe.urlTitle = Utils.plainText(gruppe.about, 200);
-				$scope.groups.push(gruppe);
+				g.is_owner = g.owner_id == user_id;
+				g.url = Utils.gruppeUrl(g.id, g.name);
+				g.active = g.active == 1;
+
+				var followersText = g.followers == 1 ? ' følger' : ' følgere';
+				var html = '<strong>'+g.followers + followersText + '</strong><br>';
+				html += Utils.plainText(g.about, 100);
+				g.popoverHtml = html;
 			});
+			$scope.groups = r.data
 		});
 
 		ESPBA.get('event', { user_id: user_id }).then(function(r) {

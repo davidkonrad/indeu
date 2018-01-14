@@ -87,7 +87,6 @@ angular.module('indeuApp')
 
 					function getMessage(e) {
 						var eUrl = Utils.eventUrl(e.id, e.name);
-						console.log(moment('2002-12-12').format() )
 						var m = '<h4><a href="'+eUrl+'">'+e.name+'</a></h4>';
 						m += '<h5>';
 						m += '<strong>'+moment(e.date).format('DD/MM/YYYY')+'</strong>';

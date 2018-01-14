@@ -19,7 +19,21 @@
 	<div class="col-md-12 clearfix">&nbsp;</div>
 
 	<div class="layout-right-header">Grupper</div>
-	<div user-groups="{{ user.id }}" personal="{{ user.first_name }}"></div>
+		<a ng-repeat="g in groups" 
+			bs-popover
+			data-html="true"
+			data-content="{{ g.popoverHtml }}"
+			data-trigger="hover"
+			data-placement="top"
+			data-container="html"
+			style="margin-left:7px;margin-bottom:5px;"
+			class="btn btn-default btn-xs" 
+			ng-class="{ 'btn-primary' : g.active }"	
+			ng-href="{{ g.url }}">
+			<i ng-if="g.is_owner"	class="fa fa-hand-paper-o" ng-class="{ 'text-danger': !g.active }"></i>
+				<span ng-class="{ 'text-danger': !g.active }">{{ g.name }}</span>
+		</a>
+		
 
 	<div class="col-md-12 clearfix">&nbsp;</div>
 

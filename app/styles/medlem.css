@@ -5,7 +5,6 @@
 	width: 140px;
 	height: auto;
 	margin-right: 30px;
-	xxmargin-bottom: 16px;
 	background-color: #F8F8F8;
 	color: gray;
 	text-align: center;
@@ -92,49 +91,4 @@
 	cursor:pointer; 
 }
 
-/* medlems events */
-.medlem-details a  {
-	margin-left: 6px;
-	font-size: 10px;
-}
-
-/* medlem grupper */
-span.medlem-gruppe {
-	background-color: #F8F8F8;
-	border-radius: 10px;
-	border-top-left-radius: 24px;
-	border-bottom-left-radius: 24px;
-	font-size: 110%;
-	display: inline;
-	padding: 1px;
-	padding-right: 10px;
-	padding-bottom: 0px;
-	line-height: 40px;
-	margin-bottom: 1px;
-	margin-top: 10px;
-	margin-right: 10px;
-	font-weight: bold;
-	clear: none;
-	float: left;
-}
-span.medlem-gruppe-logo {
-	border-radius: 50%;	
-	background-color: #fff;
-	text-align: center;
-	color: gray;
-	font-size: 130%;
-	display: inline-block;
-	width: 40px;
-	height: 40px;
-	max-width: 40px;
-	max-height: 40px;
-}
-.medlem-gruppe .medlem-gruppe-owner-icon {
-	position: relative;
-	top: -20px;
-	right: -1px;
-	display: inline;
-	float: none;
-	clear: none;
-}
 
