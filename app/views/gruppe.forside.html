@@ -79,6 +79,11 @@
 
 <div class="col-md-3">
 
+	<small class="layout-right-header-content">
+		{{ group.visibility_status }}
+		{{ group.access_status }}
+	</small>
+
 	<div ng-if="user && !userIsMember && !userIsOwner">
 		<button role="button"
 			ng-click="followRequest()"
@@ -133,12 +138,13 @@
 
 	</div>
 
-
+<!--
 	<div class="layout-right-header">Gruppestatus</div>
 	<div class="layout-right-header-content">
 		{{ group.visibility_status }}
 		{{ group.access_status }}
 	</div>
+-->
 
 	<div class="layout-right-header">Gruppeejer</div>
 	<div class="layout-right-header-content">

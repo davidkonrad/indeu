@@ -29,7 +29,7 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 
 		gruppeUrl: function(id, navn) {
 			var u = this.isLocalHost() ? '/#/' : '/';
-			return u + 'grupper/' + id + '/' + this.urlName(navn);
+			return u + 'gruppe/' + id + '/' + this.urlName(navn);
 		},
 
 		eventUrl: function(id, name) {
@@ -44,7 +44,7 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 
 		userUrl: function(id, full_name) {
 			var u = this.isLocalHost() ? '/#/' : '/';
-			return u + 'medlemmer/' + id + '/' + this.urlName(full_name);
+			return u + 'medlem/' + id + '/' + this.urlName(full_name);
 		},
 
 		isEmpty: function(obj) {

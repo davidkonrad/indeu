@@ -108,14 +108,6 @@ angular.module('indeuApp', [
         controllerAs: 'medlem'
       })
 
-			//static
-			.when('/s/:url*', {
-				templateUrl: function(urlattr) {
-					return '/pages/' + urlattr.name + '.html';
-				},
-				 controller: 'CMSController'
-			})
-
 			//member frontpage
       .when('/dig', {
         templateUrl: 'views/dig.forside.html',
@@ -124,14 +116,14 @@ angular.module('indeuApp', [
       })
 
 			//official "open" member frontpage
-      .when('/medlemmer/:id/:navn', {
+      .when('/medlem/:id/:navn', {
         templateUrl: 'views/medlem.forside.html',
         controller: 'MedlemForsideCtrl',
         controllerAs: 'medlemforside'
       })
 
 			//official "open" group frontpage
-      .when('/grupper/:id/:navn', {
+      .when('/gruppe/:id/:navn', {
         templateUrl: 'views/gruppe.forside.html',
         controller: 'GruppeForsideCtrl',
         controllerAs: 'gruppeforside'
@@ -210,7 +202,7 @@ angular.module('indeuApp', [
       })
 
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/forside'
       });
 
   })
