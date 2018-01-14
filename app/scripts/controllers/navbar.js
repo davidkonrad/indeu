@@ -33,7 +33,7 @@ angular.module('indeuApp')
 		$scope.logout = function() {
 			$scope.showSearch = false;
 			Login.logout();
-			$location.path('/');
+			$location.path('/forside');
 			reloadGroups();
 			reloadAssociations();
 		};

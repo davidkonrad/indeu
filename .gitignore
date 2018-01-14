@@ -6,5 +6,6 @@
 /app/media
 /app/api/pw.php
 /convert/
+/db
 log.txt
 old_Gruntfile.js

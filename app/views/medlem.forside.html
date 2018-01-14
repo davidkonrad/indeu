@@ -11,15 +11,22 @@
 		<span ng-bind-html="user.about"></span>
 	</div>
 
+	<div class="col-md-12 clearfix">&nbsp;</div>
+
+	<div class="layout-right-header">Artikler</div>
+	<articles-box-list articles="{{ articles.articles }}"></articles-box-list>
+
+	<div class="col-md-12 clearfix">&nbsp;</div>
+
 	<div class="layout-right-header">Grupper</div>
 	<div user-groups="{{ user.id }}" personal="{{ user.first_name }}"></div>
 
-	<div class="clearfix">
-		<br>
-		</div>
+	<div class="col-md-12 clearfix">&nbsp;</div>
+
 	<div class="layout-right-header">Kontaktoplysninger</div>
 
 </div>
+
 
 <div class="col-md-3">
 
@@ -32,6 +39,7 @@
 			</a>
 		</div>
 	</div>
+
 
 	<div ng-if="showAddress || showEmail || showPhone">
 		<div class="layout-right-header">Kontakt</div>
@@ -60,22 +68,6 @@
 		<div user-events-participate="{{ user }}"></div>
 	</div>
 
-	<div class="layout-right-header">Seneste artikler</div>
-	<div class="layout-right-header-content" user-recent-articles="{{ user.id }}"></div>
-<!--
-		<span ng-repeat="article in articles">
-			<a ng-href="#/artikel/{{ article.id }}/{{ article.headerUrl }}" debug-link>
-				<span class="medlem-event-name">
-					<strong>				
-						{{ article.header }}
-					</strong>
-				</span>
-			</a>
-		</span>
-	</div>
--->
-
-
 	<div class="layout-right-header">Seneste events</div>
 	<div class="layout-right-header-content">
 		<span ng-repeat="event in events">
@@ -91,7 +83,6 @@
 			</a>
 		</span>
 	</div>
-			
 
 	<div class="layout-right-header">Seneste kommentarer</div>
 

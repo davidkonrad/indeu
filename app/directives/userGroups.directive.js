@@ -16,7 +16,7 @@ angular.module('indeuApp')
 		link: function(scope, element, attrs) {
 			attrs.$observe('userGroups', function(user_id) {
 				var personal = attrs['personal'] || false;
-				//console.log(personal, attrs['personal']);
+
 				ESPBA.get('group_user', { user_id: user_id }).then(function(r) {
 					scope.groups = [];
 					r.data.forEach(function(g) {
@@ -25,6 +25,7 @@ angular.module('indeuApp')
 						group.owner_title = !personal ? 'Du er administrator af denne gruppe' : personal+' er administrator af denne gruppe';
 						group.urlName = Utils.urlName(group.name);
 						group.urlTitle = Utils.plainText(group.about, 200);
+						//console.log(group.is_owner, group.owner_title, group.urlName, group.about, group.urlTitle);
 						scope.groups.push(group);
 					});
 				});

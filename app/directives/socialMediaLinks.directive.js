@@ -66,7 +66,6 @@ angular.module('indeuApp')
 						showUrl = showUrl.replace(/\/$/, "");
 					
 						link.showUrl = showUrl;
-						console.log(link);
 					}
 				}
 			})

@@ -87,11 +87,19 @@ angular.module('indeuApp')
 						})
 					}
 				} else {
-					if ($scope.group.visibility_level == Const.VISIBILITY_LEVEL_PUBLIC) {
+					if ($scope.group.visibility_level != Const.VISIBILITY_LEVEL_PUBLIC) {
 						Utils.refreshPage('/');
 					}
 				}
 			})
+
+			ESPBA.prepared('ArticlesByGroupFull', { group_id: id }).then(function(g) {
+				$scope.articles = {
+					articles: g.data,
+					orderBy: ''
+				}
+			})
+
 		}
 		reloadGroup();
 

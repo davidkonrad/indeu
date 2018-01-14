@@ -15,16 +15,12 @@
 			<p ng-bind-html="forening.about" read-more></p>
 		</div>
 
-		<h2>Seneste artikler</h2>
-		<div ng-repeat="a in articles">
-			<a href="{{ a.url }}" class="unstyled">
-				<div class="well well-sm col-md-6">
-					<h4 class="no-padding no-margin">{{ a.header }}</h4>
-					<p> {{ a.sub_header }} </p>
-				</div>
-			</div>
-		</a>
+		<div class="clearfix col-md-12">&nbsp;</div>
+
+		<div class="layout-right-header">Artikler</div>
+		<articles-box-list articles="{{ articles.articles }}"></articles-box-list>
 	</div>
+
 
 <!-- edit event --->
 	<div ng-if="action == 'e'">

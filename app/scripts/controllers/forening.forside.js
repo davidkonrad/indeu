@@ -34,11 +34,11 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 		})
 
 		function loadArticles() {
-			ESPBA.prepared('AssociationArticles', { association_id: id }).then(function(a) {
-				a.data.forEach(function(item) {
-					item.url = Utils.articleUrl(item.id, item.header)
-				})
-				$scope.articles = a.data
+			ESPBA.prepared('ArticlesByAssociationFull', { association_id: id }).then(function(a) {
+				$scope.articles = {
+					articles: a.data,
+					orderBy: ''
+				}
 			})
 		}
 		loadArticles();

@@ -1,0 +1,24 @@
+<div>
+	<span ng-if="!articles || articles.length == 0">
+		<em>der er ingen artikler at vise</em>
+	</span>
+	<div ng-repeat="a in articles">
+		<a ng-href="{{ a.url }}" 
+			ng-style="getBackgroundStyle(a.image)"
+			title="{{ a. header }}"
+			class="article-box unstyled hover-effect">
+			<span class="header" ng-class="{ 'image-header': a.image }">{{ a.showHeader }}</span>
+			<span class="rating">
+				<ng-rate-it 
+					max="6"
+					title="{{ a.ratingTitle }}""
+					star-width="10"
+					star-height="10"
+					ng-model="a.stars" 
+					read-only="true"
+					resetable="false">
+				</ng-rate-it>
+			</span>
+		</a>
+	</div>
+</div>

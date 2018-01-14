@@ -102,6 +102,7 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 
 		//return plain text from HTML snippet
 		plainText: function(snippet, maxLength) {
+			if (!snippet) return '';
 			var div = document.createElement("div"); //will be garbage collected, no need to remove
 			div.innerHTML = snippet;
 			var text = div.textContent || div.innerText || "";

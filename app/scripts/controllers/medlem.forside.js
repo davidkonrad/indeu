@@ -31,6 +31,13 @@ angular.module('indeuApp')
 				$scope.showSocial = $scope.user.visible_social_media && $scope.user.social;
 			})
 
+			ESPBA.prepared('ArticlesByUserFull', { user_id: user_id }).then(function(a) {
+				$scope.articles = {
+					articles: a.data,
+					orderBy: '',
+				}
+			})
+
 			$timeout(function() {
 				$scope.$apply();
 			}, 10)			
@@ -49,13 +56,6 @@ angular.module('indeuApp')
 
 		ESPBA.get('event', { user_id: user_id }).then(function(r) {
 			$scope.events = r.data;
-		});
-
-		ESPBA.get('article', { user_id: user_id }).then(function(r) {
-			$scope.articles = r.data;
-			$scope.articles.forEach(function(a) {
-				a.headerUrl = Utils.urlName(a.header);
-			});
 		});
 
 

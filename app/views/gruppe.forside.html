@@ -9,28 +9,21 @@
 
 		<div class="medlem-info">
 			<h1>{{ group.name }} </h1>
-				<button role="button"
-					ng-if="!userIsMember && !userIsOwner"	
-					ng-click="followRequest()"
-					title="Følg denne gruppe. Er gruppen lukket skal du godkendes først."
-					class="btn btn-xs btn-primary pull-right">
-					<i class="fa fa-user-plus"></i> 
-					{{ btn_follow_caption }}
-				</button>
 			<span ng-bind-html="group.about"></span>
 		</div>
 
 		<div class="clearfix col-md-12">&nbsp;</div>
+
+		<div ng-if="group.articles_enabled">
+			<div class="layout-right-header">Artikler</div>
+			<articles-box-list articles="{{ articles.articles }}"></articles-box-list>
+		</div>
 
 		<div ng-if="group.events_enabled">
 			<div class="layout-right-header no-bottom-margin">Kommende events</div>
 			<div entity-events="{{ group.id }}" entity-type="group" user-id="{{ user.id }}" on-edit="editEvent"></div>
 		</div>
 
-		<div ng-if="group.articles_enabled">
-			<div class="layout-right-header no-bottom-margin">Artikler</div>
-			<div entity-articles="{{ group.id }}" entity-type="group" user-id="{{ user.id }}" on-edit="editArticle"></div>
-		</div>
 
 		<comments ng-if="group.comments_enabled == true" hash="{{ group.hash }}" on-comment-added="onCommentAdded"></comments>
 
@@ -85,6 +78,17 @@
 </div>
 
 <div class="col-md-3">
+
+	<div ng-if="user && !userIsMember && !userIsOwner">
+		<button role="button"
+			ng-click="followRequest()"
+			title="Følg denne gruppe. Er gruppen lukket skal du godkendes først."
+			class="btn btn-xs btn-primary">
+			<i class="fa fa-user-plus"></i> 
+			{{ btn_follow_caption }}&nbsp;
+		</button>
+		<div class="col-md-12 clearfix">&nbsp;</div>
+	</div>
 
 	<div class="layout-right-header">Handlinger</div>
 	<div class="layout-right-header-content">
