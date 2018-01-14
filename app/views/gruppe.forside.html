@@ -21,7 +21,9 @@
 
 		<div ng-if="group.events_enabled">
 			<div class="layout-right-header no-bottom-margin">Kommende events</div>
+<!--
 			<div entity-events="{{ group.id }}" entity-type="group" user-id="{{ user.id }}" on-edit="editEvent"></div>
+-->
 		</div>
 
 
@@ -31,7 +33,6 @@
 
 <!-- edit group -->
 	<div ng-if="action == 'g'">
-		<h1>{{ group.name }} </h1>
 		<div edit-gruppe="{{ group.id }}"  
 			on-save="onGroupSave()" 
 			on-cancel="onActionCancel()">
@@ -64,7 +65,6 @@
 
 <!-- new group -->
 	<div ng-if="action == 'n'">
-		<h2>Opret en ny gruppe</h2>
 		<div edit-gruppe=""  
 			on-save="onEventSave()" 
 			on-cancel="onActionCancel()">

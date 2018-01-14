@@ -31,13 +31,13 @@ angular.module('indeuApp')
 		function getAccessStatus(status) {
 			switch (parseInt(status)) {
 				case Const.ACCESS_LEVEL_PUBLIC :
-					return 'Gruppen kan tilgåes af alle. ';	
+					return 'Gruppens indhold kan tilgåes af alle. ';	
 					break;
 				case Const.ACCESS_LEVEL_USERS :
-					return 'Gruppen kan kun tilgåes af brugere der er logget ind. ';	
+					return 'Gruppens indhold kan kun tilgåes af brugere der er logget ind. ';	
 					break;
 				default : 
-					return 'Gruppen er lukket, kan kun tilgåes af medlemmer. ';	
+					return 'Gruppen er lukket, indhold kan kun tilgåes af medlemmer. ';	
 					break;
 			}
 		}

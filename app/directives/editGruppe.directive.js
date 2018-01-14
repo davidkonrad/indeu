@@ -38,6 +38,7 @@ angular.module('indeuApp')
 
 			$scope.owner_btn_caption = Lookup.getUser( Login.currentUser().id ).full_name;
 			$scope.save_btn_caption = 'Opret og gem';
+			$scope.header = 'Opret ny gruppe';
 
 			$scope.changed = false;
 
@@ -122,7 +123,11 @@ angular.module('indeuApp')
 					.withTitle('#')
 					.renderWith(function(data, type, full) {
 						if (type === 'display') {
-							return '<i class="fa fa-remove text-danger remove-medlem" data-user-id="'+data+'" title="Fjern medlem"></i>'
+							if (data != $scope.edit.owner_id) {
+								return '<i class="fa fa-remove text-danger remove-medlem" data-user-id="'+data+'" title="Fjern medlem"></i>'
+							} else {
+								return '<i class="fa fa-user text-primary"></i>'
+							}
 						} else {
 							return data;
 						}
@@ -138,10 +143,12 @@ angular.module('indeuApp')
 					AlertModal.show('Gruppeejeren kan ikke fjernes fra medlemslisten', 'No can do');
 					return
 				}
-				ConfirmModal.show('Fjern medlem fra gruppe?').then(function() {
-					ESPBA.delete('group_user', { group_id: $scope.edit.id, user_id: user_id }).then(function() {
-						$scope.dtInstance.reloadData();
-					})
+				ConfirmModal.show('Fjern medlem fra gruppe?').then(function(answer) {
+					if (answer) {
+						ESPBA.delete('group_user', { group_id: $scope.edit.id, user_id: user_id }).then(function() {
+							$scope.dtInstance.reloadData();
+						})
+					}
 				})
 			});
 		},
@@ -157,6 +164,7 @@ angular.module('indeuApp')
 				
 				if (parseInt(scope.edit.id)) ESPBA.get('group', { id: scope.edit.id }).then(function(u) {
 					scope.save_btn_caption = 'Gem og luk';
+					scope.header = 'Rediger gruppe';
 					scope.edit = u.data[0];
 					scope.$watch('edit.about', function(newVal, oldVal) {
 						if (newVal && newVal != oldVal) scope.changed = true

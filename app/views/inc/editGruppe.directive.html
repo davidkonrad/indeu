@@ -1,27 +1,9 @@
 <div>
 	<form class="form-horizontal">
-		<div class="form-group">
-      <label class="col-md-1 control-label" for=""></label>
-			<label class="radio-inline">
-				<input type="radio" 
-					name="visibility_level" 
-					ng-model="edit.visibility_level"
-					ng-value="'1'" > Offentlig
-			</label>
-			<label class="radio-inline">
-				<input type="radio" 
-					name="visibility_level" 
-					ng-model="edit.visibility_level"
-					ng-value="'2'"> Kun brugere
-			</label>
-			<label class="radio-inline">
-				<input type="radio" 
-					name="visibility_level" 
-					ng-model="edit.visibility_level"
-					ng-value="'3'"> Kun gruppe
-			</label>
 
-			<div class="pull-right action-element">
+		<div class="col-md-12 no-padding">
+			<span class="h2 col-md-4 no-margin">{{ header }}</span>
+			<span class="col-md-4">
 				<button class="btn btn-default btn-sm" 
 					type="button"
 					ng-class="{ 'btn-success' : canSave() }"
@@ -32,8 +14,11 @@
 					type="button"
 					ng-click="doCancel()">Fortryd
 				</button>
-			</div>
+			</span>
 		</div>
+
+		<div class="col-md-12 clearfix"><br></div>
+
 		<table class="col-md-12">
 			<tr>
 				<td class="col-md-8">
@@ -87,82 +72,144 @@
 	    </div>
 	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
 	      <div class="panel-body">
-					<div class="col-md-1"></div>
-					<form id="settings" role="form" class="form-horizontal" autocomplete="off">
+					<div class="col-md-11">
+						<br>
+						<form id="settings" role="form" class="form-horizontal" autocomplete="off">
 
-						<div class="col-md-12 no-padding no-margin">
-							<button class="btn btn-xs btn-default pull-right"
-								ng-click="formSave('#settings')"
-								ng-class="{ 'btn-primary' : formSaveEnabled('#settings') }"
-								ng-disabled="!formSaveEnabled('#settings')">
-								Gem
-							</button>
-						</div>
-
-				    <div class="form-group">
-				      <label class="col-md-2 control-label" for="owner">Gruppeejer</label>
-							<div class="col-md-3">
-						    <button class="btn btn-default btn-sm"
-									id="owner_id"
-									ng-click="selectOwner()"
-									ng-model="edit.owner_id">
-										{{ owner_btn_caption }}
-								</button>
-							</div>
-						</div>
-			    	<div class="form-group">
-				      <label class="col-md-2 control-label" for=""></label>
-							<div class="col-md-4">
-								<div class="checkbox">
-								  <label class="control-label">
-										<input type="checkbox" 
-											ng-false-value="'0'"
-											ng-true-value="'1'"
-											name="active"
-											ng-model="edit.active">Aktiv
+							<div class="form-group">
+					      <label class="col-md-2 control-label" for="">Synlighed </label>
+									<div class="col-md-7">
+									<label class="radio-inline">
+										<input type="radio" 
+											name="visibility_level" 
+											ng-model="edit.visibility_level"
+											ng-value="'1'" > Offentlig
 									</label>
-								</div>
-								<div class="checkbox">
-								  <label class="control-label">
-										<input type="checkbox" 
-											ng-false-value="'0'"
-											ng-true-value="'1'"
-											name="events_enabled"
-											ng-model="edit.events_enabled">Tillad events
+									<label class="radio-inline">
+										<input type="radio" 
+											name="visibility_level" 
+											ng-model="edit.visibility_level"
+											ng-value="'2'"> Kun brugere
 									</label>
-								</div>
-								<div class="checkbox">
-								  <label class="control-label">
-										<input type="checkbox" 
-											ng-false-value="'0'"
-											ng-true-value="'1'"
-											name="articles_enabled"
-											ng-model="edit.articles_enabled">Tillad artikler
+									<label class="radio-inline">
+										<input type="radio" 
+											name="visibility_level" 
+											ng-model="edit.visibility_level"
+											ng-value="'3'"> Kun gruppe
 									</label>
 								</div>
 							</div>
-				    	<div class="col-md-5">
-								<div class="checkbox">
-								  <label class="control-label">
-										<input type="checkbox" 
-											ng-false-value="'0'"
-											ng-true-value="'1'"
-											name="comments_enabled"
-											ng-model="edit.comments_enabled">Kommentarer slået til
+
+							<div class="form-group">
+					      <label class="col-md-2 control-label" for="">Indhold </label>
+									<div class="col-md-7">
+									<label class="radio-inline">
+										<input type="radio" 
+											name="access_level" 
+											ng-model="edit.access_level"
+											ng-value="'1'" > Offentlig
+									</label>
+									<label class="radio-inline">
+										<input type="radio" 
+											name="access_level" 
+											ng-model="edit.access_level"
+											ng-value="'2'"> Kun brugere
+									</label>
+									<label class="radio-inline">
+										<input type="radio" 
+											name="access_level" 
+											ng-model="edit.access_level"
+											ng-value="'3'"> Kun gruppe
 									</label>
 								</div>
-								<div class="checkbox">
-								  <label class="control-label">
-										<input type="checkbox" 
-											ng-false-value="'0'"
-											ng-true-value="'1'"
-											name="visible_members"
-											ng-model="edit.visible_members">Medlemmer offentlige
-									</label>
+							</div>
+
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="owner">Gruppeejer</label>
+								<div class="col-md-3">
+							    <button class="btn btn-default btn-sm"
+										id="owner_id"
+										ng-click="selectOwner()"
+										ng-model="edit.owner_id">
+											{{ owner_btn_caption }}
+									</button>
 								</div>
-				      </div>
-						</div>
-					</form>
+							</div>
+				    	<div class="form-group">
+					      <label class="col-md-2 control-label" for=""></label>
+								<div class="col-md-3">
+									<div class="checkbox">
+									  <label class="control-label">
+											<input type="checkbox" 
+												ng-false-value="'0'"
+												ng-true-value="'1'"
+												name="active"
+												ng-model="edit.active">Aktiv
+										</label>
+									</div>
+									<div class="checkbox">
+									  <label class="control-label">
+											<input type="checkbox" 
+												ng-false-value="'0'"
+												ng-true-value="'1'"
+												name="events_enabled"
+												ng-model="edit.events_enabled">Tillad events
+										</label>
+									</div>
+									<div class="checkbox">
+									  <label class="control-label">
+											<input type="checkbox" 
+												ng-false-value="'0'"
+												ng-true-value="'1'"
+												name="articles_enabled"
+												ng-model="edit.articles_enabled">Tillad artikler
+										</label>
+									</div>
+								</div>
+					    	<div class="col-md-4">
+									<div class="checkbox">
+									  <label class="control-label">
+											<input type="checkbox" 
+												ng-false-value="'0'"
+												ng-true-value="'1'"
+												name="comments_enabled"
+												ng-model="edit.comments_enabled">Kommentarer slået til
+										</label>
+									</div>
+									<div class="checkbox">
+									  <label class="control-label">
+											<input type="checkbox" 
+												ng-false-value="'0'"
+												ng-true-value="'1'"
+												name="visible_members"
+												ng-model="edit.visible_members">Medlemmer synlige
+										</label>
+									</div>
+									<div class="checkbox">
+									  <label class="control-label">
+											<input type="checkbox" 
+												ng-false-value="'0'"
+												ng-true-value="'1'"
+												name="visible_social_media"
+												ng-model="edit.visible_social_media">Web / SoMe synlig
+										</label>
+									</div>
+
+					      </div>
+							</div>
+						</form>
+					</div>
+
+					<div class="col-md-1">
+						<br>
+						<button class="btn btn-xs btn-default pull-right"
+							ng-click="formSave('#settings')"
+							ng-class="{ 'btn-primary' : formSaveEnabled('#settings') }"
+							ng-disabled="!formSaveEnabled('#settings')">
+							Gem
+						</button>
+					</div>
+
 		    </div>
 			</div>
 		</div>
@@ -179,67 +226,7 @@
 	    </div>
 	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
 	      <div class="panel-body">
-					<form id="social" role="form" class="form-horizontal" autocomplete="off">
-
-						<div class="col-md-12 no-padding no-margin">
-							<button class="btn btn-xs btn-default pull-right"
-								ng-click="formSave('#social')"
-								ng-class="{ 'btn-primary' : formSaveEnabled('#social') }"
-								ng-disabled="!formSaveEnabled('#social')">
-								Gem
-							</button>
-						</div>
-
-					    <div class="form-group">
-					      <label class="col-md-2 control-label" for="homepage">Hjemmeside</label>
-								<div class="col-md-8">
-							    <input class="form-control input-sm" 
-										type="text"
-										id="homepage"
-										select-on-click
-										ng-model="edit.homepage" 
-										placeholder="Hjemmeside adresse">
-								</div>
-							</div>
-
-					    <div class="form-group">
-					      <label class="col-md-2 control-label" for="facebook">Facebook</label>
-								<div class="col-md-8">
-							    <input class="form-control input-sm" 
-										type="text"
-										id="facebook"
-										select-on-click
-										ng-model="edit.facebook" 
-										placeholder="Facebook url">
-								</div>
-							</div>
-
-					    <div class="form-group">
-					      <label class="col-md-2 control-label" for="twitter">Twitter</label>
-								<div class="col-md-8">
-							    <input class="form-control input-sm" 
-										type="text"
-										id="twitter"
-										select-on-click
-										ng-model="edit.twitter" 
-										placeholder="Twitter konto">
-								</div>
-							</div>
-
-					    <div class="form-group">
-					      <label class="col-md-2 control-label" for="linkedin">LinkedIn</label>
-								<div class="col-md-8">
-							    <input class="form-control input-sm" 
-										type="text"
-										id="linkedin"
-										select-on-click
-										ng-model="edit.linkedin" 
-										placeholder="LinkedIn konto">
-								</div>
-							</div>
-
-						</form>
-
+					<edit-social-media hash="{{ edit.hash }}"></edit-social-media>
 	      </div>
 	    </div>
 	  </div>
@@ -255,6 +242,7 @@
 	    </div>
 	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
 	      <div class="panel-body">
+					<br>
 					<table datatable="" 
 						ng-enabled="edit.id > -1"
 						id="table-gruppe-medlemmer"

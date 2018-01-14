@@ -88,7 +88,7 @@ angular.module('indeuApp').factory('Form', function(Utils, Login, ESPBA) {
 				var obj = {};
 
 				if (form) {
-					var e, name, isDatePicker, isCheckbox;
+					var e, name, isDatePicker, isCheckbox, isRadio;
 					var inputs = form.querySelectorAll('input, textarea');
 
 					for (var i=0, l=inputs.length; i<l; i++) {
@@ -96,12 +96,15 @@ angular.module('indeuApp').factory('Form', function(Utils, Login, ESPBA) {
 						name = e.getAttribute('name');
 						isDatePicker = e.getAttribute('bs-datepicker');
 						isCheckbox = this.elementType(e) == 'checkbox';
+						isRadio = this.elementType(e) == 'radio';
 
 						if (name) {
 							if (isDatePicker) {
 								obj[name] = 'qwerty' //Utils.systemDate(e.value);
 							} else if (isCheckbox) {
 								obj[name] = e.value == 'on' ? 1 : 0;
+							} else if (isRadio) {
+								obj[name] = $('input[name="'+name+'"]:checked').val()
 							} else {
 								obj[name] = e.value;
 							}

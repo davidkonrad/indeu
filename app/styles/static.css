@@ -101,7 +101,6 @@ a.hover-effect {
 }
 a.hover-effect:hover{
 	background-color: #fdfdfd;
-	XXborder:1px solid #ebebeb;
 	opacity: 0.8;
 }
 

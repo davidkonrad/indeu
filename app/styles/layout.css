@@ -164,16 +164,15 @@ a.list-group-item-new:hover {
 	text-decoration: none;
 }
 .panel {
-  padding-bottom: 1px;
-    padding-top: 4px;
-    border-radius: 2px;
-    background-color: #F8F8F8;
-    width: 100%;
-    clear: both;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-weight: 900;
-    border: 1px solid #ebebeb;
+	padding-bottom: 1px;
+	padding-top: 4px;
+	border-radius: 2px;
+	background-color: #F8F8F8;
+	width: 100%;
+	clear: both;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	border: 1px solid #ebebeb;
 }
 .panel-heading {
 	padding-top: 5px;
