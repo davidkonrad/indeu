@@ -12,7 +12,9 @@ angular.module('indeuApp')
 		templateUrl: "views/inc/inc.articlesBoxList.html",
 		restrict: 'E',
 		scope: {
-			articles: '@'
+			articles: '@',
+			orderBy: '@',
+			limitTo: '@'
 		},
 		link: function(scope, element, attrs) {
 

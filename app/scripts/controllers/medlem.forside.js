@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp')
-  .controller('MedlemForsideCtrl', function($scope, $q, $routeParams, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect) {
+  .controller('MedlemForsideCtrl', function($scope, $q, $routeParams, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect, Const) {
 
 		Redirect.checkLogin('Du skal være logget ind for at kunne se medlemsprofiler');
 			
@@ -14,6 +14,10 @@ angular.module('indeuApp')
 		if (Login.isLoggedIn()) {
 			$scope.is_self = Login.currentUser().id == user_id;
 		}
+
+		//sort articles
+		$scope.orderByItems = Const.articleOrderByItems;
+		$scope.limitToItems = Const.articleLimitToItems;
 
 		ESPBA.get('user', { id: user_id }).then(function(r) {
 			$scope.user = r.data[0];
@@ -32,9 +36,15 @@ angular.module('indeuApp')
 			})
 
 			ESPBA.prepared('ArticlesByUserFull', { user_id: user_id }).then(function(a) {
+				//sanitize
+				a.data.forEach(function(item) {
+					item.stars = parseFloat(item.stars, 10) || 0;
+					item.counter = parseInt(item.counter, 10) || 0;
+				})
 				$scope.articles = {
 					articles: a.data,
-					orderBy: '',
+					orderBy: $scope.orderByItems[0].id,
+					limitTo: $scope.limitToItems[0].id
 				}
 			})
 
@@ -61,6 +71,7 @@ angular.module('indeuApp')
 			$scope.events = r.data;
 		});
 
+		
 
 });
 

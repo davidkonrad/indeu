@@ -38,6 +38,19 @@ angular.module('indeuApp').factory('Const', ['$q', function($q) {
 		VISIBILITY_LEVEL_CLOSED: 3,
 
 		//
+		articleLimitToItems: [
+			{ id: '12', navn: '12' },
+			{ id: '24', navn: '24' },
+			{ id: '', navn: 'Alle' }
+		],
+
+		articleOrderByItems: [
+			{ id: '-created_timestamp', navn: 'Nyeste' },
+			{ id: '-stars', navn: 'Højest ratede' },
+			{ id: '-counter', navn: 'Mest læste' }
+		],
+
+		//
 		defaultMap: function() {
 			var defaultMap = {
 				events: {

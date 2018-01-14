@@ -15,8 +15,27 @@
 		<div class="clearfix col-md-12">&nbsp;</div>
 
 		<div ng-if="group.articles_enabled">
-			<div class="layout-right-header">Artikler</div>
-			<articles-box-list articles="{{ articles.articles }}"></articles-box-list>
+			<div class="layout-right-header">Artikler
+				<button type="button" 
+					class="btn btn-xs btn-default pull-right" 
+					ng-model="articles.limitTo" 
+					data-toggle="true"
+					placeholder="Antal"
+					bs-select
+					bs-options="sort.id as sort.navn for sort in limitToItems">
+				  <span class="caret"></span>
+				</button>
+				<button type="button" 
+					class="btn btn-xs btn-default pull-right" 
+					ng-model="articles.orderBy" 
+					data-toggle="true"
+					placeholder="Sorter"
+					bs-select
+					bs-options="sort.id as sort.navn for sort in orderByItems">
+				  <span class="caret"></span>
+				</button>
+			</div>
+			<articles-box-list articles="{{ articles.articles }}" order-by="{{ articles.orderBy }}" limit-to="{{ articles.limitTo }}></articles-box-list>
 		</div>
 
 		<div ng-if="group.events_enabled">

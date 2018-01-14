@@ -2,7 +2,7 @@
 	<span ng-if="!articles || articles.length == 0">
 		<em>der er ingen artikler at vise</em>
 	</span>
-	<div ng-repeat="a in articles">
+	<div ng-repeat="a in articles | orderBy:orderBy | limitTo:limitTo">
 		<a ng-href="{{ a.url }}" 
 			ng-style="getBackgroundStyle(a.image)"
 			title="{{ a. header }}"

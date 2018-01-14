@@ -14,6 +14,10 @@ angular.module('indeuApp')
 			$scope.user = Login.currentUser()
 		};
 
+		//sort articles
+		$scope.orderByItems = Const.articleOrderByItems;
+		$scope.limitToItems = Const.articleLimitToItems;
+
 		$scope.action = '';
 		$scope.setAction = function(action) {
 			$scope.action = action
@@ -93,10 +97,16 @@ angular.module('indeuApp')
 				}
 			})
 
-			ESPBA.prepared('ArticlesByGroupFull', { group_id: id }).then(function(g) {
+			ESPBA.prepared('ArticlesByGroupFull', { group_id: id }).then(function(a) {
+				//sanitize
+				a.data.forEach(function(item) {
+					item.stars = parseFloat(item.stars, 10) || 0;
+					item.counter = parseInt(item.counter, 10) || 0;
+				})
 				$scope.articles = {
-					articles: g.data,
-					orderBy: ''
+					articles: a.data,
+					orderBy: $scope.orderByItems[0].id,
+					limitTo: $scope.limitToItems[0].id
 				}
 			})
 

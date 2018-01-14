@@ -14,6 +14,10 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 			$scope.userIsMember = Login.isAssociationMember(id);
 		}
 
+		//sort articles
+		$scope.orderByItems = Const.articleOrderByItems;
+		$scope.limitToItems = Const.articleLimitToItems;
+
 		ESPBA.get('association', { id: id }).then(function(r) {
 			$scope.forening = r.data[0];
 
@@ -35,9 +39,15 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 
 		function loadArticles() {
 			ESPBA.prepared('ArticlesByAssociationFull', { association_id: id }).then(function(a) {
+				//sanitize
+				a.data.forEach(function(item) {
+					item.stars = parseFloat(item.stars, 10) || 0;
+					item.counter = parseInt(item.counter, 10) || 0;
+				})
 				$scope.articles = {
 					articles: a.data,
-					orderBy: ''
+					orderBy: $scope.orderByItems[0].id,
+					limitTo: $scope.limitToItems[0].id
 				}
 			})
 		}
