@@ -14,9 +14,10 @@ angular.module('indeuApp')
 			$scope.user = Login.currentUser()
 		};
 
-		//sort articles
-		$scope.orderByItems = Const.articleOrderByItems;
+		//sort
 		$scope.limitToItems = Const.articleLimitToItems;
+		$scope.articleOrderByItems = Const.articleOrderByItems;
+		$scope.eventOrderByItems = Const.eventOrderByItems;
 
 		$scope.action = '';
 		$scope.setAction = function(action) {
@@ -105,10 +106,24 @@ angular.module('indeuApp')
 				})
 				$scope.articles = {
 					articles: a.data,
-					orderBy: $scope.orderByItems[0].id,
+					orderBy: $scope.articleOrderByItems[0].id,
 					limitTo: $scope.limitToItems[0].id
 				}
 			})
+
+			ESPBA.prepared('EventsByGroup', { group_id: id }).then(function(g) {
+				//sanitize
+				g.data.forEach(function(item) {
+					item.feedback1 = parseInt(item.feedback1, 10) || 0;
+					item.feedback2 = parseInt(item.feedback2, 10) || 0;
+				})
+				$scope.events = {
+					events: g.data,
+					orderBy: $scope.eventOrderByItems[0].id,
+					limitTo: $scope.limitToItems[0].id
+				}
+			})
+				
 
 		}
 		reloadGroup();
@@ -159,29 +174,6 @@ angular.module('indeuApp')
 				}
 			})
 		}
-
-
-/*
-		$scope.loadEvents = function() {
-			ESPBA.get('group_events', { group_id: id }).then(function(r) {
-				var events = [];
-				r.data.forEach(function(e) {
-					ESPBA.get('event', { id: e.event_id }).then(function(event) {
-						var t = event.data[0];
-						t.urlName = Utils.urlName(t.name);
-						t.from = Utils.removeSecs(t.from);
-						t.to = t.to !== '00:00:00' ? Utils.removeSecs(t.to) : '?';
-						t.dateInt = new Date(t.date+' '+t.from).valueOf();
-						events.push(t);
-					})
-				})
-				$timeout(function() {
-					$scope.events = events;
-				})
-			});
-		}
-		$scope.loadEvents();
-*/
 
 		$scope.onGroupSave = function() {
 			$scope.setAction('');

@@ -20,7 +20,6 @@
 
 /* boxes */
 .article-box {
-	xposition: relative;
 	height: 100px;
 	max-height: 100px;
 	width: 246px;
@@ -60,3 +59,16 @@
 	display: inline-block;
 }	
 
+.event-box {
+	color: #333 !important;
+}
+.event-box h4 {
+	padding-left: 4px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+.event-box h5 {
+	padding-left: 4px;
+	margin-top: 3px;
+	margin-bottom: 0px;
+}

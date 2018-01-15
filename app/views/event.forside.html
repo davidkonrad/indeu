@@ -12,8 +12,8 @@
 		<div class="col-md-8">
 			<div class="well well-lg">
 				<h4 class="no-margin">
-					Hvornår: <strong class="text-primary">{{ event.date | date : "dd/MM/yyyy" }} </strong> 
-					kl. <strong class="text-primary">{{ event.from | date : "HH:mm" }}</strong>
+					Hvornår: <strong class="text-primary">{{ event.showDate }} </strong> 
+					fra kl. <strong class="text-primary">{{ event.from | date : "HH:mm" }}</strong>
 					<span ng-if="event.to != null">
 						til kl. <strong class="text-primary">{{ event.to | date : "HH:mm" }} </strong>
 					</span>

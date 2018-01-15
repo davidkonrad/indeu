@@ -1,0 +1,18 @@
+<div>
+	<span ng-if="!events || events.length == 0">
+		<em>der er ingen events at vise</em>
+	</span>
+	<div ng-repeat="e in events | orderBy: orderBy | limitTo: limitTo">
+		<a ng-href="{{ e.url }}" 
+			title="{{ e.name }}"
+			ng-class="{ 'bg-success' : e.dateDue, 'bg-warning' : !e.dateDue }"
+			class="article-box event-box unstyled hover-effect">
+
+			<h4> {{ e.name }}</h4>
+			<h5>Hvor: <strong>{{ e.where }}</strong> </h5>				
+			<h5>Tid: <strong>{{ e.when }}</strong> fra kl. <strong> {{ e.whenFrom }}</strong></h5>
+			<h5>{{ e.feedback2Text }} {{ e.feedback1Text }}</h5>
+
+		</a>
+	</div>
+</div>

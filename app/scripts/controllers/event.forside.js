@@ -26,7 +26,7 @@ angular.module('indeuApp')
 				if ($scope.event.edited_timestamp) $scope.event.edited_timestamp = moment($scope.event.edited_timestamp).calendar(); 
 
 				//date due
-				$scope.dateDue = new Date().valueOf() > new Date($scope.event.date).valueOf();
+				$scope.dateDue = new Date().valueOf() > new Date($scope.event.date+' '+$scope.event.from).valueOf();
 
 				//user info
 				var user = Lookup.getUser($scope.event.user_id);
@@ -37,6 +37,7 @@ angular.module('indeuApp')
 
 				$scope.event.from = Utils.createTime( $scope.event.from );
 				$scope.event.to = Utils.createTime( $scope.event.to );
+				$scope.event.showDate = Utils.calendarDate($scope.event.date);
 
 				var lat = parseFloat($scope.event.lat);
 				var lng = parseFloat($scope.event.lng);

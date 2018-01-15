@@ -29,12 +29,36 @@
 			data-toggle="true"
 			placeholder="Sorter"
 			bs-select
-			bs-options="sort.id as sort.navn for sort in orderByItems">
+			bs-options="sort.id as sort.navn for sort in articleOrderByItems">
 		  <span class="caret"></span>
 		</button>
 	</div>
 	<articles-box-list articles="{{ articles.articles }}" order-by="{{ articles.orderBy }}" limit-to="{{ articles.limitTo }}"></articles-box-list>
 
+	<div class="col-md-12 clearfix">&nbsp;</div>
+
+	<div class="layout-right-header">Events
+		<button type="button" 
+			class="btn btn-xs btn-default pull-right" 
+			ng-model="events.limitTo" 
+			data-toggle="true"
+			placeholder="Antal"
+			bs-select
+			bs-options="sort.id as sort.navn for sort in limitToItems">
+		  <span class="caret"></span>
+		</button>
+		<button type="button" 
+			class="btn btn-xs btn-default pull-right" 
+			ng-model="events.orderBy" 
+			data-toggle="true"
+			placeholder="Sorter"
+			bs-select
+			bs-options="sort.id as sort.navn for sort in eventOrderByItems">
+		  <span class="caret"></span>
+		</button>
+	</div>
+	<events-box-list events="{{ events.events }}" order-by="{{ events.orderBy }}" limit-to="{{ events.limitTo }}"></events-box-list>
+	
 	<div class="col-md-12 clearfix">&nbsp;</div>
 
 	<div class="layout-right-header">Grupper</div>
@@ -101,6 +125,7 @@
 		<div user-events-participate="{{ user }}"></div>
 	</div>
 
+<!--
 	<div class="layout-right-header">Seneste events</div>
 	<div class="layout-right-header-content">
 		<span ng-repeat="event in events">
@@ -116,6 +141,7 @@
 			</a>
 		</span>
 	</div>
+-->
 
 	<div class="layout-right-header">Seneste kommentarer</div>
 

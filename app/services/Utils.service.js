@@ -92,6 +92,17 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 			return time.join(':');
 		},
 
+		calendarDate: function(date) {
+			return moment(date).calendar(null, {
+		    lastDay : '[I går]',
+		    sameDay : '[I dag]',
+		    nextDay : '[I morgen]',
+		    lastWeek : '[Forrige] dddd',
+		    nextWeek : '[på] dddd',
+		    sameElse : 'L'
+			})
+		},
+
 		ratingStr: function(r) {
 			do {
 				r = r.slice(0, -1)

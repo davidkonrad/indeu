@@ -16,8 +16,9 @@ angular.module('indeuApp')
 		}
 
 		//sort articles
-		$scope.orderByItems = Const.articleOrderByItems;
 		$scope.limitToItems = Const.articleLimitToItems;
+		$scope.articleOrderByItems = Const.articleOrderByItems;
+		$scope.eventOrderByItems = Const.eventOrderByItems;
 
 		ESPBA.get('user', { id: user_id }).then(function(r) {
 			$scope.user = r.data[0];
@@ -43,7 +44,20 @@ angular.module('indeuApp')
 				})
 				$scope.articles = {
 					articles: a.data,
-					orderBy: $scope.orderByItems[0].id,
+					orderBy: $scope.articleOrderByItems[0].id,
+					limitTo: $scope.limitToItems[0].id
+				}
+			})
+
+			ESPBA.prepared('EventsByUser', { user_id: user_id }).then(function(e) {
+				//sanitize
+				e.data.forEach(function(item) {
+					item.feedback1 = parseInt(item.feedback1, 10) || 0;
+					item.feedback2 = parseInt(item.feedback2, 10) || 0;
+				})
+				$scope.events = {
+					events: e.data,
+					orderBy: $scope.eventOrderByItems[0].id,
 					limitTo: $scope.limitToItems[0].id
 				}
 			})
@@ -67,10 +81,11 @@ angular.module('indeuApp')
 			$scope.groups = r.data
 		});
 
+/*
 		ESPBA.get('event', { user_id: user_id }).then(function(r) {
 			$scope.events = r.data;
 		});
-
+*/
 		
 
 });

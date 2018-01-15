@@ -141,6 +141,99 @@ SQL;
 	}
 
 
+	//******************
+	//EventsByUser
+	//user_id
+	public function EventsByUser() {
+		$user_id = isset($this->array['user_id']) ? $this->array['user_id'] : false;
+
+$SQL = <<<SQL
+			select 
+				e.created_timestamp,
+				e.id,
+				e.visibility_level,
+				e.name,
+				e.address,
+				e.city,
+				e.lat,
+				e.lng,
+				e.date,
+				e.from,
+				e.to,
+				(select count(*) from event_user_feedback where event_id = e.id and feedback = 1) as feedback1,
+				(select count(*) from event_user_feedback where event_id = e.id and feedback = 2) as feedback2
+
+			from event e
+				left join `association_events` ae on ae.event_id = e.id
+				left join `association` a on a.id = ae.association_id
+			where e.user_id = $user_id
+SQL;
+		return $SQL;	
+	}
+
+
+	//******************
+	//EventsByGroup
+	//group_id
+	public function EventsByGroup() {
+		$group_id = isset($this->array['group_id']) ? $this->array['group_id'] : false;
+
+$SQL = <<<SQL
+			select 
+				e.created_timestamp,
+				e.id,
+				e.visibility_level,
+				e.name,
+				e.address,
+				e.city,
+				e.lat,
+				e.lng,
+				e.date,
+				e.from,
+				e.to,
+				(select count(*) from event_user_feedback where event_id = e.id and feedback = 1) as feedback1,
+				(select count(*) from event_user_feedback where event_id = e.id and feedback = 2) as feedback2
+
+			from group_events ge
+				left join `event` e on e.id = ge.event_id
+			where 
+				ge.group_id = $group_id
+SQL;
+		return $SQL;	
+	}
+
+
+	//******************
+	//EventsByAssociation
+	//association_id
+	public function EventsByAssociation() {
+		$association_id = isset($this->array['association_id']) ? $this->array['association_id'] : false;
+
+$SQL = <<<SQL
+			select 
+				e.created_timestamp,
+				e.id,
+				e.visibility_level,
+				e.name,
+				e.address,
+				e.city,
+				e.lat,
+				e.lng,
+				e.date,
+				e.from,
+				e.to,
+				(select count(*) from event_user_feedback where event_id = e.id and feedback = 1) as feedback1,
+				(select count(*) from event_user_feedback where event_id = e.id and feedback = 2) as feedback2
+
+			from association_events ae
+				left join `event` e on e.id = ae.event_id
+			where 
+				ae.association_id = $association_id
+SQL;
+		return $SQL;	
+	}
+
+
 }
 
 

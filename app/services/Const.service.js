@@ -39,15 +39,28 @@ angular.module('indeuApp').factory('Const', ['$q', function($q) {
 
 		//
 		articleLimitToItems: [
+			{ id: '6', navn: '6' },
 			{ id: '12', navn: '12' },
 			{ id: '24', navn: '24' },
 			{ id: '', navn: 'Alle' }
 		],
-
 		articleOrderByItems: [
 			{ id: '-created_timestamp', navn: 'Nyeste' },
 			{ id: '-stars', navn: 'Højest ratede' },
 			{ id: '-counter', navn: 'Mest læste' }
+		],
+
+		//
+		eventLimitToItems: [
+			{ id: '6', navn: '6' },
+			{ id: '12', navn: '12' },
+			{ id: '24', navn: '24' },
+			{ id: '', navn: 'Alle' }
+		],
+		eventOrderByItems: [
+			{ id: '-dateExact', navn: 'Tidspunkt' },
+			{ id: '-feedback2', navn: 'Tilmeldte' },
+			{ id: '-created_timestamp', navn: 'Oprettet' }
 		],
 
 		//
