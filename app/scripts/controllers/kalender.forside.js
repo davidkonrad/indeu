@@ -102,6 +102,7 @@ angular.module('indeuApp')
 					}
 
 					ESPBA.prepared('EventsByPeriod', params).then(function(r) {
+						//console.log(r.data);
 						var events = [];
 						$scope.eventMap.markers = [];
 						r.data.forEach(function(e) {
@@ -131,6 +132,7 @@ angular.module('indeuApp')
 						});
 
 						$timeout(function() {
+							uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
 							uiCalendarConfig.calendars.calendar.fullCalendar('addEventSource', events);
 						})
 					})

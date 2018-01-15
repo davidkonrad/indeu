@@ -215,7 +215,7 @@
 		</div>
 
 <!-- sociale links -->
-	  <div class="panel panel-default">
+	  <div class="panel panel-default" ng-if="edit.id">
 	    <div class="panel-heading" role="tab">
 	      <h4 class="panel-title">
 	        <a bs-collapse-toggle>
@@ -232,7 +232,7 @@
 	  </div>
 
 <!-- group members -->
-	  <div ng-if="edit.id > -1" class="panel panel-default">
+	  <div class="panel panel-default" ng-if="edit.id">
 	    <div class="panel-heading" role="tab">
 	      <h4 class="panel-title">
 	        <a bs-collapse-toggle>

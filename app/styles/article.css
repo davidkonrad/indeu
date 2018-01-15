@@ -1,7 +1,4 @@
 
-.artikel {
-}
-
 .artikel-image {
 	float: left;
 	display: inline-block;
@@ -13,9 +10,6 @@
 	max-height: 250px;
 	max-width: 100%;
 	padding-right: 10px;
-}
-
-.artikel-content {
 }
 
 /* boxes */
@@ -71,4 +65,14 @@
 	padding-left: 4px;
 	margin-top: 3px;
 	margin-bottom: 0px;
+}
+
+/* Populære artikler fra samme bruger */
+span.user-article-popular {
+	width: 225px;
+	max-width: 225px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: block;
+	white-space: nowrap;
 }

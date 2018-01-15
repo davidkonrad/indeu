@@ -31,12 +31,12 @@ angular.module('indeuApp')
 				//user info
 				var user = Lookup.getUser($scope.event.user_id);
 				$scope.event.userFullName = user.full_name;
-				$scope.event.userUrlLink = Utils.userUrl(user.id, user.full_name);
+				$scope.event.userUrl = Utils.userUrl(user.id, user.full_name);
 
 				UserVisits.visit($scope.event.hash);
 
-				$scope.event.from = Utils.createTime( $scope.event.from );
-				$scope.event.to = Utils.createTime( $scope.event.to );
+				$scope.event.from = Utils.createTime($scope.event.from);
+				$scope.event.to = $scope.event.to != '00:00:00' ? Utils.createTime($scope.event.to) : undefined;
 				$scope.event.showDate = Utils.calendarDate($scope.event.date);
 
 				var lat = parseFloat($scope.event.lat);

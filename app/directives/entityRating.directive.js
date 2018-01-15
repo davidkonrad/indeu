@@ -9,7 +9,8 @@ angular.module('indeuApp')
 		replace: true,
 		scope: {
 			hash: '@',
-			userId: '@'
+			userId: '@',
+			isSelf: '='
 		},
 		link: function(scope, element, attrs) {
 			scope.user = {
@@ -41,7 +42,7 @@ angular.module('indeuApp')
 								title += 'for '+moment(d.created_timestamp).fromNow(); 
 							}
 						} else {
-							var title = 'Endnu ingen har vurderet dette';
+							var title = 'Ingen har vurderet dette endnu';
 						}							
 						scope.total = {
 							average: d.average,

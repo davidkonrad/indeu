@@ -110,7 +110,12 @@ angular.module('indeuApp')
 					limitTo: $scope.limitToItems[0].id
 				}
 			})
+			reloadEvents();
 
+		}
+		reloadGroup();
+
+		function reloadEvents() {
 			ESPBA.prepared('EventsByGroup', { group_id: id }).then(function(g) {
 				//sanitize
 				g.data.forEach(function(item) {
@@ -123,10 +128,7 @@ angular.module('indeuApp')
 					limitTo: $scope.limitToItems[0].id
 				}
 			})
-				
-
-		}
-		reloadGroup();
+		}				
 
 		$scope.followRequest = function() {
 			if ($scope.group.visibility_level == 3) {
@@ -181,6 +183,7 @@ angular.module('indeuApp')
 		}
 
 		$scope.onEventSave = function() {
+			reloadEvents();
 			$scope.setAction('');
 			$scope.edit_event_id = undefined;
 		}

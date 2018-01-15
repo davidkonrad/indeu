@@ -22,11 +22,18 @@ angular.module('indeuApp')
 
 				var user = Lookup.getUser(a.user_id);
 				a.userFullName = user.full_name;
+				a.userUrlLink = Utils.userUrl(user.id, user.full_name);
 
-				var userUrlLink = '/medlemmer/'+user.id+'/'+Utils.urlName(user.full_name);
-				if (Utils.isLocalHost()) userUrlLink = '#' + userUrlLink;
-				a.userUrlLink = userUrlLink;
-
+				//test image
+				if (a.image) {
+					var imageUrl = 'media/artikel/'+a.image;
+					var img = new Image();
+					img.onload = function() {
+						a.imageUrl = imageUrl;
+						console.log(img.width, img.height);
+					}
+					img.src = imageUrl;
+				}
 				$scope.article = a;
 
 				if (update) {
@@ -67,7 +74,6 @@ angular.module('indeuApp')
 
 				//popular articles from same user
 				ESPBA.prepared('ArticlesByUser', { user_id: $scope.article.user_id, scope: 'stars', limit: 6 }).then(function(a) {
-					//console.log(a);
 					if (a.data && a.data.length > 1) {
 						$scope.author_popular_articles = a.data.filter(function(item) {
 							item.url = Utils.articleUrl(item.id, item.header);

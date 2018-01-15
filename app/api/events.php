@@ -104,18 +104,22 @@ $SQL = <<<SQL
 				e.from,
 				e.to,
 
-				ge.group_id,
-				g.name as group_name,
-
 				ae.association_id,
 				a.name as association_name
 
 				from event e
-				left join `group_events` ge on ge.event_id = e.id
-				left join `group` g on g.id = ge.group_id
 				left join `association_events` ae on ae.event_id = e.id
 				left join `association` a on a.id = ae.association_id
 SQL;
+
+/*
+	removed group joins
+				ge.group_id,
+				g.name as group_name,
+
+				left join `group_events` ge on ge.event_id = e.id
+				left join `group` g on g.id = ge.group_id
+*/
 
 		$d = '';
 		if ($start_date && $end_date) {

@@ -3,7 +3,7 @@
 
 			<h4>
 				<small>
-					Oprettet af <a href="{{ event.userUrlLink }} ">{{ event.userFullName }}</a>,
+					Oprettet af <a href="{{ event.userUrl }} ">{{ event.userFullName }}</a>,
 					<span title="{{ event.realDate }}">{{ event.dateStamp }}</span>
 				</small>
 			</h4>
@@ -23,7 +23,9 @@
 				</h4>
 			</div>
 			<div ng-bind-html="event.about"></div>
-			<entity-rating hash="{{ event.hash }}" user-id="{{ user.id }}" class="pull-right"></entity-rating>
+
+			<entity-rating hash="{{ event.hash }}" user-id="{{ user.id }}" is-self="user.id == event.user_id" class="pull-right"></entity-rating>
+
 		</div>
 		<div class="col-md-4 no-padding">
 			<leaflet class="event-leaflet-map"
@@ -103,16 +105,13 @@
 	<div ng-if="user.id != event.user_id">
 		<div class="layout-right-header">Oprettet af</div>
 		<div class="layout-right-header-content">
-			<a ng-href="/medlemmer/{{ event_user.id }}/{{ event_user.urlName }}" debug-link>{{ event_user.full_name }}</a>
+			<a ng-href="{{ event.userUrl }}">{{ event.userFullName }}</a>
 		</div>
 	</div>
 
 	<div class="layout-right-header">Kontakt</div>
 	<div class="layout-right-header-content">
 		<span ng-repeat="cp in event_contactpersons">
-<!--
-			<a ng-href="/medlemmer/{{ cp.user.id }}/{{ cp.user.urlName }}" debug-link>{{ cp.user.full_name }}</a><br>
--->
 			<a ng-href="{{ cp.url }}">{{ cp.user.full_name }}</a><br>			
 		</span>
 		<span ng-if="event_contactpersons == undefined">Der er ikke tilknyttet nogle kontaktpersoner</span>
@@ -121,9 +120,6 @@
 	<div class="layout-right-header">Grupper</div>
 	<div class="layout-right-header-content">
 		<span ng-repeat="g in event_groups">
-<!--
-			<a ng-href="/grupper/{{ g.group_id }}/{{ g.urlName }}" debug-link>{{ g.name }}</a><br>
--->
 			<a ng-href="{{ g.url }}">{{ g.group.name }}</a><br>
 		</span>
 		<span ng-if="event_groups == undefined">Eventen er ikke knyttet til nogle grupper</span>

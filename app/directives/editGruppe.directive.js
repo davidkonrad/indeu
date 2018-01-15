@@ -20,20 +20,19 @@ angular.module('indeuApp')
 			Settings.init($scope);
 
 			$scope.edit = {
-				id: -1,
+				id: false,
 				name: '',
 				about: '',
-				visibility_level: 1,
-				access_level: 1,
+				visibility_level: '1',
+				access_level: '1',
 				owner_id: Login.currentUser().id,
-				events_enabled: 1,
-				articles_enabled: true,
-				visible_social: true,
-				visible_members: 1,
-				allow_comments: true,
-				active: true,
-				accepted: true,
-				
+				events_enabled: '1',
+				articles_enabled: '1',
+				visible_social_media: '1',
+				visible_members: '1',
+				comments_enabled: '1',
+				active: '1',
+				accepted: '1'
 			};
 
 			$scope.owner_btn_caption = Lookup.getUser( Login.currentUser().id ).full_name;
