@@ -9,7 +9,7 @@ angular.module('indeuApp').factory('Redirect', function($location, $window, Logi
 		checkLogin: function(redirectMessage) {
 			if (!Login.isLoggedIn()) {
 				_redirectMessage = redirectMessage;
-				$location.path('/');
+				$location.path('/forside');
 			}
 		},
 
@@ -28,7 +28,7 @@ angular.module('indeuApp').factory('Redirect', function($location, $window, Logi
 
 		home: function(redirectMessage) {
 			_redirectMessage = redirectMessage;
-			$location.path('/');
+			$location.path('/forside');
 		},
 
 		search: function(term) {

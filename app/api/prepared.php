@@ -274,28 +274,38 @@ SQL;
 		return false;
 	}
 
+
 	//******************
 	//calc StarRating
+	//hash, optionally user_id
 	public function GetStarRating() {
-		$hash = $this->array['hash'];
-		$user_id = $this->array['user_id'];
-$SQL = <<<SQL
-		select 
-			count(stars.user_id) as counter,
-			sum(stars.rating) / count(stars.user_id) as average,
-			s.user_id,
-			s.rating,
-			s.created_timestamp
-		from user_stars stars 
-SQL;
+		$hash = isset($this->array['hash']) ? $this->s($this->array['hash']) : false;
+		$user_id = isset($this->array['user_id']) ? $this->array['user_id'] : false;
+
 		if ($user_id) {
-			//$SQL.=' left join user_stars s on (stars.user_id = s.user_id and stars.hash = s.hash) ';
-			$SQL.=' left join user_stars s on stars.hash = s.hash and s.user_id = '.$user_id;
+$SQL = <<<SQL
+			select 
+				count(stars.user_id) as counter,
+				sum(stars.rating) / count(stars.user_id) as average,
+				s.user_id,
+				s.rating,
+				s.created_timestamp
+			from user_stars stars 
+			left join user_stars s on stars.hash = s.hash and s.user_id = $user_id
+			where stars.hash = $hash
+SQL;
+		} else {
+$SQL = <<<SQL
+			select 
+				count(stars.user_id) as counter,
+				sum(stars.rating) / count(stars.user_id) as average
+			from user_stars stars 
+			where stars.hash = $hash
+SQL;
 		}
-		$SQL.=' where stars.hash = '.$this->s($hash);
-		//echo $SQL;
 		return $SQL;
 	}
+
 
 	//******************
 	//update visitor_count

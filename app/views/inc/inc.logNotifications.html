@@ -1,11 +1,15 @@
-<div class="list-group">
-	<div ng-repeat="n in notifications"	class="list-group-item list-group-item-sm" title="{{ n.title }}">
-
-		[<small> {{ n.type }} </small>]
-		<span> {{ n.display_timestamp }}: </span>
-		<span> {{ n.userName }} </span>
-		<span ng-bind-html="n.action"></span>
-
+<div>
+	<div class="layout-right-header cursor-pointer no-select" ng-click="collapsed = !collapsed" data-toggle="collapse" href="#notiCollapse">
+		<i class="fa fa-fw text-muted" ng-class="{ 'fa-plus': !collapsed, 'fa-minus': collapsed }"></i>
+		Notifikationer
 	</div>
-
+	<div class="xlist-group collapse" id="notiCollapse">
+		<div ng-repeat="n in notifications"	class="list-group-item list-group-item-sm" title="{{ n.title }}">
+			[<small> {{ n.type }} </small>]
+			<span> {{ n.display_timestamp }}: </span>
+			<span> {{ n.userName }} </span>
+			<span ng-bind-html="n.action"></span>
+		</div>
+	</div>
 </div>
+

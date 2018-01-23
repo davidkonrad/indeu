@@ -1,12 +1,12 @@
 <div class="col-md-9">
 	<div ng-if="action == '' ">		
 
-			<h4>
-				<small>
-					Oprettet af <a href="{{ event.userUrl }} ">{{ event.userFullName }}</a>,
-					<span title="{{ event.realDate }}">{{ event.dateStamp }}</span>
-				</small>
-			</h4>
+		<h4>
+			<small>
+				Oprettet af <a href="{{ event.userUrl }} ">{{ event.userFullName }}</a>,
+				<span title="{{ event.realDate }}">{{ event.dateStamp }}</span>
+			</small>
+		</h4>
 
 		<h1> {{ event.name }} </h1>
 		<div class="col-md-8">
@@ -37,33 +37,32 @@
 			</leaflet>
 		</div>
 
-		<div class="col-md-12" ng-if="user">
-			<hr>
-			<div ng-if="dateDue == false">
-				<span>Hvad vil du?&nbsp;&nbsp;</span>
-				<div class="btn-group" ng-model="feedback.feedback" bs-radio-group>
-				  <label class="btn btn-default btn-sm" 
-						ng-class="{ 'btn-danger' : feedback.feedback == 0 }"
-						ng-click="setFeedback(0)">
-						<input type="radio" class="btn btn-default" value="0" > Deltager ikke
-					</label>
-				  <label class="btn btn-default btn-sm" 
-						ng-class="{ 'btn-primary' : feedback.feedback == 1 }"
-						ng-click="setFeedback(1)">
-						<input type="radio" class="btn btn-default" value="1"> Deltager måske
-					</label>
-				  <label class="btn btn-default btn-sm" 
-						ng-class="{ 'btn-success' : feedback.feedback == 2 }"
-						ng-click="setFeedback(2)">
-						<input type="radio" class="btn btn-default" value="2"> Jeg deltager
-					</label>		
-				</div>
-				<hr>
-			</div>
+		<div class="col-md-12 clearfix"></div>
 
-			<div ng-if="dateDue == true">
-				<div class="alert alert-danger" role="alert">Eventen er allerede blev afholdt. Tilmelding / framelding ikke længere mulig</div>
+		<div class="col-md-12" ng-if="user && dateDue == false">
+			<span>Hvad vil du?&nbsp;&nbsp;</span>
+			<div class="btn-group" ng-model="feedback.feedback" bs-radio-group>
+			  <label class="btn btn-default btn-sm" 
+					ng-class="{ 'btn-danger' : feedback.feedback == 0 }"
+					ng-click="setFeedback(0)">
+					<input type="radio" class="btn btn-default" value="0" > Deltager ikke
+				</label>
+			  <label class="btn btn-default btn-sm" 
+					ng-class="{ 'btn-primary' : feedback.feedback == 1 }"
+					ng-click="setFeedback(1)">
+					<input type="radio" class="btn btn-default" value="1"> Deltager måske
+				</label>
+			  <label class="btn btn-default btn-sm" 
+					ng-class="{ 'btn-success' : feedback.feedback == 2 }"
+					ng-click="setFeedback(2)">
+					<input type="radio" class="btn btn-default" value="2"> Jeg deltager
+				</label>		
 			</div>
+		</div>
+
+		<div class="col-md-12" ng-if="dateDue == true">
+			<br>
+			<div class="alert alert-danger" role="alert">Eventen er allerede blev afholdt. Tilmelding / framelding ikke længere mulig</div>
 		</div>
 	</div>
 
@@ -76,33 +75,56 @@
 		</div>
 	</div>
 
-	<log-notifications hash="{{ event.hash }}"></log-notifications>
+	<log-notifications ng-if="event.isOwner" hash="{{ event.hash }}"></log-notifications>
 
 	<comments hash="{{ event.hash }}" user-id="{{ user.id }}"></comments>
 
 </div>
 	
-<div class="col-md-3">
-	<div class="layout-right-header">Handlinger</div>
-	<div class="layout-right-header-content">
-		<a ng-if="user.id == event.user_id"
-			href="" 
-			ng-class="{ 'disabled': actionDisable('e') }"
-			ng-disabled="actionDisable('e')" 
-			ng-click="setAction('e')">
-			<i class="fa fa-fw fa-wrench fa-x2"></i>
-			Rediger event<br>
-		</a>
-		<a href="" 
-			ng-class="{ 'disabled': actionDisable('e') }"
-			ng-disabled="actionDisable('n')" 
-			ng-click="setAction('n')">
-			<i class="fa fa-fw fa-calendar fa-x2"></i>
-			Ny event
-		</a>
+<aside class="col-md-3">
+
+	<div ng-if="!user.id">
+		<div xxclass="layout-right-header-content">
+			<div class="well well-sm clearfix no-margin">
+				<div class="col-md-12">
+					<h4>Mangler der en event?</h4>
+				</div>
+				<div class="col-md-12" style="padding-right:5px;">
+					<span class="h1 no-padding no-margin pull-left" style="margin:-4px !important; padding-right:11px !important;">
+						<i class="fa fa-envelope-o text-primary"></i>
+					</span>
+					<p style="line-height:131%;">
+						Kender du til en relevant event? 
+						Selvom du ikke er medlem, kan du godt få listet dine events her på siden. 
+						Skriv til <a href="mailto:events@indeu.org"><strong>events@indeu.org</strong></a>
+					</p>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	<div ng-if="user.id != event.user_id">
+	<div ng-if="user.id">
+		<div class="layout-right-header">Handlinger</div>
+		<div class="layout-right-header-content">
+			<a ng-if="event.isOwner"
+				href="" 
+				ng-class="{ 'disabled': actionDisable('e') }"
+				ng-disabled="actionDisable('e')" 
+				ng-click="setAction('e')">
+				<i class="fa fa-fw fa-wrench fa-x2"></i>
+				Rediger event<br>
+			</a>
+			<a href="" 
+				ng-class="{ 'disabled': actionDisable('e') }"
+				ng-disabled="actionDisable('n')" 
+				ng-click="setAction('n')">
+				<i class="fa fa-fw fa-calendar fa-x2"></i>
+				Ny event
+			</a>
+		</div>
+	</div>
+
+	<div ng-if="!event.isOwner">
 		<div class="layout-right-header">Oprettet af</div>
 		<div class="layout-right-header-content">
 			<a ng-href="{{ event.userUrl }}">{{ event.userFullName }}</a>
@@ -130,7 +152,7 @@
 		<div event-participants="{{ event.id }}"></div>
 	</div>
 
-</div>
+</aside>
 
 <div class="col-md-12 clearfix">
 	<br><br>

@@ -17,8 +17,11 @@ angular.module('indeuApp')
 		}
 
 		$scope.reloadEvent = function() {
-			ESPBA.get('event', { id: id }).then(function(r) {
+			ESPBA.prepared('EventWithUser', { event_id: id }).then(function(r) {
 				$scope.event = r.data[0];
+
+				Meta.setTitle($scope.event.name);
+				Meta.setDescription( Utils.plainText($scope.event.about, 200));
 
 				//timestamps
 				$scope.event.dateStamp = moment($scope.event.created_timestamp).calendar(); 
@@ -29,9 +32,11 @@ angular.module('indeuApp')
 				$scope.dateDue = new Date().valueOf() > new Date($scope.event.date+' '+$scope.event.from).valueOf();
 
 				//user info
-				var user = Lookup.getUser($scope.event.user_id);
-				$scope.event.userFullName = user.full_name;
-				$scope.event.userUrl = Utils.userUrl(user.id, user.full_name);
+				$scope.event.userFullName = $scope.event.user_full_name; //fallback
+				$scope.event.userUrl = Utils.userUrl($scope.event.user_id, $scope.event.userFullName);
+				if ($scope.user) {
+					$scope.event.isOwner = $scope.event.user_id = $scope.user.id
+				} 
 
 				UserVisits.visit($scope.event.hash);
 

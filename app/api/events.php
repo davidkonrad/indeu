@@ -238,6 +238,22 @@ SQL;
 	}
 
 
+	//******************
+	//EventWithUser
+	//event_id
+	public function EventWithUser() {
+		$event_id = isset($this->array['event_id']) ? $this->array['event_id'] : false;
+$SQL = <<<SQL
+		select e.*,
+		u.full_name as user_full_name
+		from event e
+		left join user u on e.user_id = u.id
+		where e.id = $event_id
+SQL;
+		return $SQL;	
+	}
+
+
 }
 
 

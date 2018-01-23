@@ -35,6 +35,8 @@ angular.module('indeuApp')
 				}
 				if (r.data && r.data[0].id) {
 					currentUser = r.data[0];
+					delete currentUser.about; //the bio is irrelevant and just fill up space
+
 					RememberMe.put(email, password, rememberMe);
 					updateOnlineStatus(currentUser, 1);
 					self.getUserInfo();
