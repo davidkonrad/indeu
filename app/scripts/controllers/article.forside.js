@@ -125,7 +125,7 @@ angular.module('indeuApp')
 
 //
 		$scope.onCommentAdded = function(e) {
-			alert('ok');
+			//alert('ok');
 			console.log(arguments);
 		}
 

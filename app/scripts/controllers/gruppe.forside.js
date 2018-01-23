@@ -64,7 +64,7 @@ angular.module('indeuApp')
 		$scope.btn_follow_caption = 'Følg gruppe';
 
 		function reloadGroup() {
-			ESPBA.get('group', { id: id }).then(function(r) {
+			ESPBA.prepared('GroupWithOwner', { group_id: id }).then(function(r) {
 				$scope.group = r.data[0];
 
 				$scope.group.visible_members = $scope.group.visible_members == 1 ? true : false;
@@ -76,15 +76,11 @@ angular.module('indeuApp')
 				$scope.group.access_status = getAccessStatus($scope.group.access_level);
 				$scope.group.visibility_status = getVisibilityStatus($scope.group.visibility_level);
 
+				$scope.group.owner_url = Utils.userUrl($scope.group.owner_id, $scope.group.owner_full_name);
+
 				if (Login.isLoggedIn()) {
 					$scope.userIsOwner = Login.currentUser().id == $scope.group.owner_id;
 					$scope.userIsMember = Login.isGroupMember(id);
-
-					var owner = Lookup.getUser($scope.group.owner_id);
-					$scope.owner = {
-						full_name: owner.full_name,
-						url: Utils.userUrl(owner.id, owner.full_name)
-					}
 
 					if (!$scope.userIsMember) {
 						ESPBA.get('group_request', { group_id: $scope.group.id, user_id: $scope.user.id }).then(function(r) {
@@ -93,7 +89,7 @@ angular.module('indeuApp')
 					}
 				} else {
 					if ($scope.group.visibility_level != Const.VISIBILITY_LEVEL_PUBLIC) {
-						Utils.refreshPage('/');
+						Redirect.home('Du har ikke adgang til at frekventere denne gruppe');
 					}
 				}
 			})
@@ -118,12 +114,13 @@ angular.module('indeuApp')
 		function reloadEvents() {
 			ESPBA.prepared('EventsByGroup', { group_id: id }).then(function(g) {
 				//sanitize
-				g.data.forEach(function(item) {
+				var f = g.data.filter(function(item) {
 					item.feedback1 = parseInt(item.feedback1, 10) || 0;
 					item.feedback2 = parseInt(item.feedback2, 10) || 0;
+					if (item.name) return item //prepared statement can return null if empty
 				})
 				$scope.events = {
-					events: g.data,
+					events: f,
 					orderBy: $scope.eventOrderByItems[0].id,
 					limitTo: $scope.limitToItems[0].id
 				}
@@ -206,14 +203,13 @@ angular.module('indeuApp')
 			$scope.edit_event_id = undefined;
 		}
 
+
 		function reloadMembers() {		
-			ESPBA.get('group_user', { group_id: id }).then(function(r) {
-				$scope.group_users = [];
-				r.data.forEach(function(e) {
-					var user = Lookup.getUser(e.user_id);
+			ESPBA.prepared('GroupMembers', { group_id: id }).then(function(r) {
+				r.data.forEach(function(user) {
 					user.url = Utils.userUrl(user.id, user.full_name);
-					$scope.group_users.push(user);
 				})
+				$scope.group_users = r.data
 			});
 		}
 		reloadMembers();

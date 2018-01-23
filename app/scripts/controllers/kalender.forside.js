@@ -29,11 +29,11 @@ angular.module('indeuApp')
 			lng: 11.697741782069204, /*11.457741782069204*/
 			zoom: 6
 		};
-		$scope.eventMap.layers.baselayers.googleTerrain.visible = false;
-		var def = $scope.eventMap.layers.baselayers;
-		$scope.eventMap.layers.baselayers = {};
+		//$scope.eventMap.layers.baselayers.googleTerrain.visible = true;
+		//var def = $scope.eventMap.layers.baselayers;
+		//$scope.eventMap.layers.baselayers = {};
 		$scope.eventMap.layers.baselayers.bw = {
-			visible: true,
+			visible: false,
 			name: 'Nedtonet sort / hvidt',
 			type: 'xyz',
 			maxZoom: 18,
@@ -45,7 +45,7 @@ angular.module('indeuApp')
 				continuousWorld: true
 			}
 		}
-		$.extend($scope.eventMap.layers.baselayers, def);
+		//$.extend($scope.eventMap.layers.baselayers, def);
 
 		var iconBlue = {
 			iconUrl: 'assets/images/blue.png',

@@ -44,7 +44,6 @@ angular.module('indeuApp').factory('Settings', function($cookies, $rootScope, $t
 		},
 
 		save: function() {
-			//console.log('settings.save', settings);
 			$cookies.put(cookieName, JSON.stringify(settings), { expires: this.getExpireDate() } );
 		},
 

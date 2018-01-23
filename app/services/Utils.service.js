@@ -104,11 +104,14 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 		},
 
 		ratingStr: function(r) {
+			/*
 			do {
 				r = r.slice(0, -1)
 			} while (r.slice(-1) == '0');
 			if (r.slice(-1) == '.') r = r.slice(0, -1);
 			return r;
+			*/
+			return parseFloat(r).toFixed(2);
 		},
 
 		//return plain text from HTML snippet

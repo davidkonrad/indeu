@@ -31,7 +31,7 @@
 					data-toggle="true"
 					placeholder="Sorter"
 					bs-select
-					bs-options="sort.id as sort.navn for sort in orderByItems">
+					bs-options="sort.id as sort.navn for sort in articleOrderByItems">
 				  <span class="caret"></span>
 				</button>
 			</div>
@@ -112,71 +112,73 @@
 
 </div>
 
-<div class="col-md-3">
+<aside class="col-md-3">
 
 	<small class="layout-right-header-content">
 		{{ group.visibility_status }}
 		{{ group.access_status }}
 	</small>
 
-	<div ng-if="user && !userIsMember && !userIsOwner">
-		<button role="button"
-			ng-click="followRequest()"
-			title="Følg denne gruppe. Er gruppen lukket skal du godkendes først."
-			class="btn btn-xs btn-primary">
-			<i class="fa fa-user-plus"></i> 
-			{{ btn_follow_caption }}&nbsp;
-		</button>
-		<div class="col-md-12 clearfix">&nbsp;</div>
-	</div>
+	<div ng-if="user">
 
-	<div class="layout-right-header">Handlinger</div>
-	<div class="layout-right-header-content">
-		<a ng-if="userIsOwner" 
-			title="Rediger gruppens indstillinger"
-			ng-class="{ 'disabled': actionDisable('g') }"
-			ng-disabled="actionDisable('g')" 
-			ng-click="setAction('g')"
-			href="">
-			<i class="fa fa-fw fa-wrench fa-x2"></i>Rediger gruppe<br>
-		</a>
+		<div ng-if="!userIsMember && !userIsOwner">
+			<button role="button"
+				ng-click="followRequest()"
+				title="Følg denne gruppe. Er gruppen lukket skal du godkendes først."
+				class="btn btn-xs btn-primary">
+				<i class="fa fa-user-plus"></i> 
+				{{ btn_follow_caption }}&nbsp;
+			</button>
+			<div class="col-md-12 clearfix">&nbsp;</div>
+		</div>
 
-		<a ng-if="group.articles_enabled && (userIsOwner || userIsMember)"
-			title="Opret en ny artikel og knyt den til gruppen"
-			ng-class="{ 'disabled': actionDisable('a') }"
-			ng-disabled="actionDisable('a')" 
-			ng-click="setAction('a')"
-			href="">
-			<i class="fa fa-fw fa-file-text-o fa-x2"></i>Opret ny artikel<br>
-		</a>
+		<div class="layout-right-header">Handlinger</div>
+		<div class="layout-right-header-content">
+			<a ng-if="userIsOwner" 
+				title="Rediger gruppens indstillinger"
+				ng-class="{ 'disabled': actionDisable('g') }"
+				ng-disabled="actionDisable('g')" 
+				ng-click="setAction('g')"
+				href="">
+				<i class="fa fa-fw fa-wrench fa-x2"></i>Rediger gruppe<br>
+			</a>
 
-		<a ng-if="group.events_enabled && (userIsOwner || userIsMember)"
-			title="Opret en ny event og knyt den til gruppen"
-			ng-class="{ 'disabled': actionDisable('e') }"
-			ng-disabled="actionDisable('e')" 
-			ng-click="setAction('e')"
-			href="">
-			<i class="fa fa-fw fa-calendar fa-x2"></i>Opret ny event<br>
-		</a>
+			<a ng-if="group.articles_enabled && (userIsOwner || userIsMember)"
+				title="Opret en ny artikel og knyt den til gruppen"
+				ng-class="{ 'disabled': actionDisable('a') }"
+				ng-disabled="actionDisable('a')" 
+				ng-click="setAction('a')"
+				href="">
+				<i class="fa fa-fw fa-file-text-o fa-x2"></i>Opret ny artikel<br>
+			</a>
 
-		<a ng-if="userIsMember && !userIsOwner" href="" ng-click="unFollow()">
-			<i class="fa fa-fw fa-remove fa-x2 text-danger"></i>Følg ikke længere<br>
-		</a>
+			<a ng-if="group.events_enabled && (userIsOwner || userIsMember)"
+				title="Opret en ny event og knyt den til gruppen"
+				ng-class="{ 'disabled': actionDisable('e') }"
+				ng-disabled="actionDisable('e')" 
+				ng-click="setAction('e')"
+				href="">
+				<i class="fa fa-fw fa-calendar fa-x2"></i>Opret ny event<br>
+			</a>
 
-		<a href="" 
-			title="Opret en helt ny gruppe"
-			ng-class="{ 'disabled': actionDisable('n') }"
-			ng-disabled="actionDisable('n')" 
-			ng-click="setAction('n')">
-			<i class="fa fa-fw fa-users fa-x2"></i>Opret en anden gruppe<br>
-		</a>
+			<a ng-if="userIsMember && !userIsOwner" href="" ng-click="unFollow()">
+				<i class="fa fa-fw fa-remove fa-x2 text-danger"></i>Følg ikke længere<br>
+			</a>
 
+			<a href="" 
+				title="Opret en helt ny gruppe"
+				ng-class="{ 'disabled': actionDisable('n') }"
+				ng-disabled="actionDisable('n')" 
+				ng-click="setAction('n')">
+				<i class="fa fa-fw fa-users fa-x2"></i>Opret en anden gruppe<br>
+			</a>
+		</div>
 	</div>
 
 
 	<div class="layout-right-header">Gruppeejer</div>
 	<div class="layout-right-header-content">
-		<a ng-href="{{ owner.url }}">{{ owner.full_name }}</a>
+		<a ng-href="{{ group.owner_url }}">{{ group.owner_full_name }}</a>
 	</div>
 
 	<div ng-if="group.visible_social">
@@ -188,11 +190,11 @@
 	<div class="layout-right-header-content">
 		<span ng-repeat="user in group_users">
 			<a ng-href="{{ user.url }}" class="pull-left">{{ user.full_name }}</a>
-			<span ng-if="!$last" class="pull-left">,&nbsp;</span>
+			<span ng-if="!$last" class="pull-left">,&nbsp;</span>				
 		</span>
 	</div>
 
-</div>
+</aside>
 
 <div class="col-md-12 clearfix">
 	<br><br><br>

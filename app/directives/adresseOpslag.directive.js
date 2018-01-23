@@ -6,7 +6,7 @@ angular.module('indeuApp')
       restrict: 'A',
 			link: function(scope, element, attrs) {
 
-				var	adresseType = attrs['adresseType'];
+				var	adresseType = attrs['adresseType'] || 'adresser';
 				var	value = attrs['adresseOnSelect'];
 				var	onSelect = scope[value] ? scope[value] : null;
 

@@ -373,4 +373,15 @@ img {
 	overflow: auto;
 }
 
+/* make space between ol items */
+ol li {
+	margin-bottom: 5px;
+}
+
+/* less line-heights in paragraphs */
+p {
+	line-height: 130%;
+}	
+
+
 
