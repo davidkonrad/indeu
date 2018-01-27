@@ -191,12 +191,12 @@ angular.module('indeuApp', [
         controllerAs: 'brugere'
       })
 	   .when('/admin-grupper', {
-        templateUrl: 'views/admin.grupper.html',
+        templateUrl: 'views/admin/admin.grupper.html',
         controller: 'AdminGrupperCtrl',
         controllerAs: 'grupper'
       })
       .when('/admin-events', {
-        templateUrl: 'views/admin.events.html',
+        templateUrl: 'views/admin/admin.events.html',
         controller: 'AdminEventsCtrl',
         controllerAs: 'events'
       })

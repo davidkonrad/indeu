@@ -69,7 +69,7 @@ angular.module('indeuApp')
 				{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Ny bruger</span>',
 					className: 'btn btn-xs',
 					action: function( /* e, dt, node, config */) {
-						BrugerModal.show($scope).then(function() {
+						BrugerModal.show().then(function() {
 							$scope.dtInstance.reloadData();
 						});
  					}
@@ -81,13 +81,15 @@ angular.module('indeuApp')
 			var id=$(this).parent().attr('user-id');
 
 			//should never happen with new delegated event structure
+			/*
 			if (!id || BrugerModal.isShown()) {
 				e.preventDefault();
 				e.stopPropagation();
 				return;
 			}
-
-			BrugerModal.show($scope, id).then(function() {
+			*/
+	
+			BrugerModal.show(id).then(function() {
 				$scope.dtInstance.reloadData();
 			});	
 		});

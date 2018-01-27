@@ -4,105 +4,81 @@
  *
  *
  */
-angular.module('indeuApp').factory('BrugerModal', 
-	function($modal, $q, ESPBA, Utils, Lookup, ImageUploadModal, DTOptionsBuilder, DTColumnBuilder, Const, Log, Login) {
+angular.module('indeuApp').factory('BrugerModal', function($modal, $q) {
 
-	var deferred = null;
-	var modal = null;
+	var modal;
+	var deferred;
+	var local = this;
 
-	return {
+	local.modalInstance = ['$scope', 'ESPBA', 'Utils', 'Lookup', 'ImageUploadModal', 'DTOptionsBuilder', 'DTColumnBuilder', 'Const', 'Log', 'Login', 'user_id', 
+	function($scope, ESPBA, Utils, Lookup, ImageUploadModal, DTOptionsBuilder, DTColumnBuilder, Const, Log, Login, user_id) {
+		$scope.user_id = user_id || false;
 
-		isShown: function() {
-			return modal != null;
-		},
-		show: function($scope, user_id) {
-			deferred = $q.defer()
+		$scope.brugerModalClose = function(value) {
 
-			$scope.__brugerModal = {
-				btnOk: user_id ? 'Gem og luk' : 'Opret bruger og luk'
-			};
-
-			$scope.edit = {};
-			if (user_id) {
-				ESPBA.get('user', { id: user_id }).then(function(r) {
-					$scope.edit = r.data[0];
-					$scope.__brugerModal.title = 'Rediger #'+$scope.edit.id+', '+$scope.edit.first_name+' '+$scope.edit.last_name;
-				})
-			} else {
-				$scope.__brugerModal.title = 'Opret bruger';
+			function close() {
+				modal.hide();
+				modal.destroy();
+				modal = null;
+	      deferred.resolve(value)
 			}
 
-			$scope.__brugerModal.canSave = function() {
-				//console.log('cansave', $scope.edit);
-				return $scope.edit.first_name != undefined &&
-					$scope.edit.last_name != undefined &&
-					$scope.edit.full_name != undefined &&
-					$scope.edit.email != undefined &&
-					$scope.edit.alias != undefined &&
-					$scope.edit.password != undefined &&
-					$scope.edit.address != undefined &&
-					$scope.edit.postal_code != undefined &&
-					$scope.edit.city != undefined;
-			};
-
-			modal = $modal({
-				scope: $scope,
-				templateUrl: 'views/admin/admin.bruger.modal.html',
-				backdrop: 'static',
-				show: false,
-				keyboard: false
-			});
-
-			modal.$promise.then(function() {
-				//console.log('modal promise');
-			});
-
-			modal.$promise.then(modal.show).then(function() {
-				//console.log('modal show');
-			});
-
-
-			$scope.brugerModalClose = function(value) {
-
-				function close() {
-					modal.hide();
-					modal.destroy();
-					modal = null;
-		      deferred.resolve(value)
-				}
-
-				if (value) {
-					if (user_id) {
-						$scope.__addressSave();
-						ESPBA.update('user', $scope.edit).then(function(r) {
-							Log.log({
-								type: Log.USER_EDITED_BY_ADMIN,
-								user_id: Login.currentUser().id,
-								hash: $scope.edit.hash
-							});
-							close()
-						})
-					} else {
-						$scope.edit.hash = Utils.getHash();
-						ESPBA.insert('user', $scope.edit).then(function(r) {
-							Log.log({
-								type: Log.USER_CREATED_BY_ADMIN,
-								user_id: Login.currentUser().id,
-								hash: $scope.edit.hash
-							});
-							close()
-						})
-					}
+			if (value) {
+				if (user_id) {
+					$scope.__addressSave();
+					ESPBA.update('user', $scope.edit).then(function(r) {
+						Log.log({
+							type: Log.USER_EDITED_BY_ADMIN,
+							user_id: Login.currentUser().id,
+							hash: $scope.edit.hash
+						});
+						close()
+					})
 				} else {
-					close()
+					$scope.edit.hash = Utils.getHash();
+					ESPBA.insert('user', $scope.edit).then(function(r) {
+						Log.log({
+							type: Log.USER_CREATED_BY_ADMIN,
+							user_id: Login.currentUser().id,
+							hash: $scope.edit.hash
+						});
+						close()
+					})
 				}
-			};
+			} else {
+				close()
+			}
+		};
 
-			angular.element('body').on('keydown', function(e) {
-				if (e.charCode == 27) $scope.brugerModalClose(false)
-			});
+		$scope.__brugerModal = {
+			btnOk: user_id ? 'Gem og luk' : 'Opret bruger og luk'
+		};
 
-/************** grupper ***********/
+		$scope.edit = {};
+		if (user_id) {
+			ESPBA.get('user', { id: user_id }).then(function(r) {
+				$scope.edit = r.data[0];
+				$scope.__brugerModal.title = 'Rediger #'+$scope.edit.id+', '+$scope.edit.first_name+' '+$scope.edit.last_name;
+			})
+		} else {
+			$scope.__brugerModal.title = 'Opret bruger';
+		}
+
+		$scope.__brugerModal.canSave = function() {
+			return $scope.edit.first_name != undefined &&
+				$scope.edit.last_name != undefined &&
+				$scope.edit.full_name != undefined &&
+				$scope.edit.email != undefined &&
+				$scope.edit.alias != undefined &&
+				$scope.edit.password != undefined
+				/* now handled in address
+				$scope.edit.address != undefined &&
+				$scope.edit.postal_code != undefined &&
+				$scope.edit.city != undefined;
+				*/
+		};
+
+		//grupper
 		$scope.dtColumns_grupper = [
       DTColumnBuilder.newColumn('id')
 				.withTitle('#')
@@ -159,11 +135,31 @@ angular.module('indeuApp').factory('BrugerModal',
 				}
 				*/
 			]);
-				
-			
+		
+	}];
+
+	return {
+
+		show: function(user_id) {
+			deferred = $q.defer()
+
+			modal = $modal({
+				templateUrl: 'views/admin/admin.bruger.modal.html',
+				backdrop: 'static',
+				show: true,
+				keyboard: false,
+				controller: local.modalInstance,
+				locals: { user_id: user_id }
+			});
+
+			angular.element('body').on('keydown', function(e) {
+				if (e.charCode == 27) $scope.brugerModalClose(false)
+			});
+
       return deferred.promise;
 		}
 
 	}
 
 });
+
