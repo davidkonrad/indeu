@@ -15,10 +15,16 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 			userId: '@',
 			hash: '@'
 		},
+		controller($scope, Const) {
+			console.log(Const)
+			$scope.test = 'qwerty';
+		},
 		link: function($scope, element, attrs) {
 
 			$scope.isLoggedIn = Login.isLoggedIn();
 			$scope.user = Login.currentUser();
+
+			console.log($scope.test);
 
 			var run = function() {
 				$scope.actionCancel();
@@ -171,7 +177,7 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 						sorted.forEach(function(c) {
 							c.dateStamp = moment(c.created_timestamp).fromNow();  
 							c.user = Lookup.getUser(c.user_id);
-							c.content = self.testYoutube(c.content);
+							c.renderContent = self.testContent(c.content.substring(0));
 
 							if (c.parent_id) {
 								c.parent_user = getParentUser(c.parent_id) 
@@ -221,6 +227,7 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 			//reply to a comment 
 			$scope.setActionAnswer = function(comment_id) {
 				$scope.actionEdit = '';
+				$scope.actionAnswer = '';
 				$scope.comment = {
 					hash: $scope.hash,
 					user_id: $scope.user.id,
@@ -239,13 +246,15 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 				$scope.actionAnswer = '';
 				$scope.comment = $scope.commentById(comment_id);
 				$scope.comment.contentAnswer = $scope.comment.content;
+				//dont show in master box
+				delete $scope.comment.content; 
 				$scope.actionEdit = comment_id;
 				$timeout(function() {
 					$('#edit-comment-content'+comment_id).focus().trigger('keyup');
 				})
 			},
 
-			$scope.testYoutube = function(content) {
+			$scope.testContent = function(content) {
 				var s = '';
 				var links;
 
