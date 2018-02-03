@@ -139,7 +139,7 @@ code.indeu-navbar-logo {
 
 /* required red star */
 label.required:before {
-  content: "* ";
+  content: "★ ";
   color: red;
 }
 

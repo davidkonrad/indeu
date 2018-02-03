@@ -157,6 +157,12 @@ angular.module('indeuApp', [
         controllerAs: 'kalenderforside'
       })
 
+			//static page
+      .when('/s/:id/:header', {
+        templateUrl: 'views/staticpage.html',
+        controller: 'StaticPageCtrl'
+      })
+
 			//search
       .when('/soeg', {
         templateUrl: 'views/search.html',
@@ -198,6 +204,11 @@ angular.module('indeuApp', [
       .when('/admin-events', {
         templateUrl: 'views/admin/admin.events.html',
         controller: 'AdminEventsCtrl',
+        controllerAs: 'events'
+      })
+      .when('/admin-statiske-sider', {
+        templateUrl: 'views/admin/admin.statisk.html',
+        controller: 'AdminStatiskCtrl',
         controllerAs: 'events'
       })
 

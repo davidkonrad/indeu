@@ -47,6 +47,11 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 			return u + 'medlem/' + id + '/' + this.urlName(full_name);
 		},
 
+		staticUrl: function(id, header) {
+			var u = this.isLocalHost() ? '/#/' : '/';
+			return u + 's/' + id + '/' + this.urlName(header);
+		},
+
 		isEmpty: function(obj) {
 			//https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
 			return angular.equals({}, obj);

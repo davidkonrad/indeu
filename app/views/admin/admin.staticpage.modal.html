@@ -1,0 +1,50 @@
+<div class="modal ng-scope top am-fade-and-slide-top center large-dialog" tabindex="-1" role="dialog" style="display: block;" id="static-page-dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title" ng-bind-html="title"></h4>
+			</div>
+
+			<div class="modal-body">
+
+				<form autocomplete="off">
+				  <div class="form-group">
+				    <label class="control-label required" for="header">Overskrift</label>
+					    <input type="text" 
+								select-on-click
+								auto-focus
+								class="form-control" 
+								id="header" 
+								ng-model="edit.header"
+								placeholder="Overskrift">
+					</div>
+					<div class="form-group">
+				    <label class="control-label required" for="content">Text</label>
+						<text-angular ng-model="edit.content" 
+							ta-text-editor-class="form-control col-md-12 gruppe-dialog"
+							ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'html']]">
+						</text-angular>
+					</div>
+				</form>
+
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" 
+					class="btn" 
+					ng-click="save()" 
+					ng-class="{ 'btn-success' : canSave() }"
+					ng-enabled="canSave()">
+						{{ btnSave }}
+				</button> 
+				<button type="button" 
+					class="btn btn-default" 
+					ng-click="closeModal(false)" >
+						Fortryd
+				</button> 
+			</div>
+
+		</div>
+	</div>
+</div>
