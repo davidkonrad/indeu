@@ -234,8 +234,10 @@ angular.module('indeuApp', [
 		if ($location.host() === 'localhost') {
 			ESPBA.setHost('http://localhost/html/indeu/app/');
 		} else {
-			//ESPBA.setHost('https://indeu.org/');
-			ESPBA.setHost('https://opgavesnyd.dk/');
+			ESPBA.setHost('https://indeu.org/');
+			//ESPBA.setHost('/');
+			//ESPBA.setHost('/customers/1/b/8/indeu.org//httpd.www/');
+
 		}
 		ESPBA.setApiPath('api/espba.php');
 		ESPBA.init().then(function() {

@@ -11,7 +11,7 @@ angular.module('indeuApp')
 			$scope.user = Login.currentUser()
 		}
 
-		let id = $routeParams.id;
+		const id = $routeParams.id;
 
 		$scope.reload = function(update) {
 			ESPBA.get('article', { id: id }).then(function(r) {

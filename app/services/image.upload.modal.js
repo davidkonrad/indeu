@@ -10,8 +10,7 @@ angular.module('indeuApp')
 		if ($location.host() === 'localhost') {
 			path = 'http://localhost/html/indeu/app/api/';
 		} else {
-			//path = 'https://indeu.org/api/';
-			path = 'https://opgavesnyd.dk/api/';
+			path = 'https://indeu.org/api/';
 		}
 
 		var defaults = {

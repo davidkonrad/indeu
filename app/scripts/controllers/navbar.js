@@ -79,7 +79,7 @@ angular.module('indeuApp')
 		function reloadGroups() {
 			var params = Login.isLoggedIn() ? {	user_id: Login.currentUser().id } : {};
 			ESPBA.prepared('MenuGroups', params).then(function(g) {
-
+				console.log(g);
 				if (g.data.length) {
 					if ($scope.groups) delete $scope.groups; 
 

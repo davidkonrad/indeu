@@ -8,7 +8,7 @@
 error_reporting(E_ALL & ~E_NOTICE); 
 ini_set('display_errors', '1');
 
-session_start();
+//session_start();
 
 include('Db.php');
 include('prepared.php');
@@ -37,8 +37,9 @@ class ESPBA extends DbPDO {
 	public function __construct($array) {
 		parent::__construct();
 		
-		//file_put_contents('test.txt', json_encode($_SERVER, JSON_PRETTY_PRINT));
+		file_put_contents('test.txt', json_encode($_SERVER, JSON_PRETTY_PRINT));
 
+		//header('Access-Control-Allow-Origin	: "*"');
 		if ($this->isLocalhost()) {
 			//header('Access-Control-Allow-Origin	: "*"');
 		}

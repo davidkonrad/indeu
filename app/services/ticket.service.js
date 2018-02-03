@@ -10,7 +10,7 @@ angular.module('indeuApp')
 			get: function() {
 				var ticket = $cookies.get(cookieName)
 				if (!ticket) {
-					$.get('http://services.kortforsyningen.dk/service?service=META&request=GetTicket'+pass, function(newTicket) {
+					$.get('https://services.kortforsyningen.dk/service?service=META&request=GetTicket'+pass, function(newTicket) {
 						ticket = newTicket
 						var expireDate = new Date()
 						expireDate.setDate(expireDate.getDate() + 1);

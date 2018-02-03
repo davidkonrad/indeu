@@ -2,4 +2,4 @@
 
 User-agent: *
 Disallow:
-Sitemap: http://gulve.online/sitemap.txt
+Sitemap: https://indeu.org/sitemap.txt

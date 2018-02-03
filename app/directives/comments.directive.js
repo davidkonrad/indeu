@@ -15,16 +15,10 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 			userId: '@',
 			hash: '@'
 		},
-		controller($scope, Const) {
-			console.log(Const)
-			$scope.test = 'qwerty';
-		},
 		link: function($scope, element, attrs) {
 
 			$scope.isLoggedIn = Login.isLoggedIn();
 			$scope.user = Login.currentUser();
-
-			console.log($scope.test);
 
 			var run = function() {
 				$scope.actionCancel();

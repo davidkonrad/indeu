@@ -7,7 +7,7 @@
 angular.module('indeuApp').controller('ForeningForsideCtrl', 
 	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log, AlertModal) {
 
-		let id = $routeParams.id;
+		const id = $routeParams.id;
 
 		if (Login.isLoggedIn()) {
 			$scope.user = Login.currentUser();

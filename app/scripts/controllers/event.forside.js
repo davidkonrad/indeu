@@ -10,7 +10,7 @@ angular.module('indeuApp')
 
 		$scope.eventMap = Const.defaultMap();
 
-		var id = $routeParams.id;
+		const id = $routeParams.id;
 
 		if (Login.isLoggedIn()) {
 			$scope.user = Login.currentUser()

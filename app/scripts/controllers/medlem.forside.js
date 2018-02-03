@@ -9,7 +9,7 @@ angular.module('indeuApp')
 
 		Redirect.checkLogin('Du skal være logget ind for at kunne se medlemsprofiler');
 			
-		let user_id = $routeParams.id;
+		const user_id = $routeParams.id;
 
 		if (Login.isLoggedIn()) {
 			$scope.is_self = Login.currentUser().id == user_id;

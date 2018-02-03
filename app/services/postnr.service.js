@@ -25,7 +25,7 @@ angular.module('indeuApp')
 				var	deferred = $q.defer();
 
 				//lookup postdistrikt
-				var url='http://services.kortforsyningen.dk/?servicename=RestGeokeys_v2&method=postdistrikt&postnr=' + postnr + '&ticket='+TicketService.get();
+				var url='https://services.kortforsyningen.dk/?servicename=RestGeokeys_v2&method=postdistrikt&postnr=' + postnr + '&ticket='+TicketService.get();
 		    $.getJSON(url, function(pd) {
 					if (pd.features && pd.features.length) {
 						var x = pd.features[0].bbox;
@@ -33,7 +33,7 @@ angular.module('indeuApp')
 						var x2 = (x[1] + x[3]) / 2;
 						var georef = pd.crs.properties.name;
 						//lookup kommune
-						url='http://services.kortforsyningen.dk/?servicename=RestGeokeys_v2&method=nadresse&geop='+x1+','+x2+'&georef='+georef+'&hits=1&ticket='+TicketService.get()
+						url='https://services.kortforsyningen.dk/?servicename=RestGeokeys_v2&method=nadresse&geop='+x1+','+x2+'&georef='+georef+'&hits=1&ticket='+TicketService.get()
 						$.getJSON(url, function(kommune) {
 							var region = KR.kommuneByNr(kommune.features[0].properties.kommune_kode)
 							var result = {

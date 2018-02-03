@@ -3,7 +3,7 @@
 angular.module('indeuApp').factory('Utils', function($location, $window) {
 
 	var isLocalHost = (location.hostname === "localhost" || location.hostname === "127.0.0.1");
-	var urlLinkBase = isLocalHost ? 'http://localhost:9000/' : 'https://opgavesnyd.dk/'; // 'https://indeu.org/';
+	var urlLinkBase = isLocalHost ? 'http://localhost:9000/' : 'https://indeu.org/'; 
 
 	var redirectMessage = undefined;
 

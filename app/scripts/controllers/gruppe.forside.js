@@ -8,7 +8,7 @@ angular.module('indeuApp')
   .controller('GruppeForsideCtrl', 
 	function($scope, Login, $route, $routeParams, Const, ESPBA, Lookup, Meta, Utils, Log, Notification, ConfirmModal) {
 
-		let id = $routeParams.id;
+		const id = $routeParams.id;
 
 		if (Login.isLoggedIn()) {
 			$scope.user = Login.currentUser()
