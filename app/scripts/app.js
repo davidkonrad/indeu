@@ -207,7 +207,7 @@ angular.module('indeuApp', [
         controllerAs: 'events'
       })
       .when('/admin-statiske-sider', {
-        templateUrl: 'views/admin/admin.statisk.html',
+        templateUrl: 'views/admin/admin.staticpage.html',
         controller: 'AdminStatiskCtrl',
         controllerAs: 'events'
       })
