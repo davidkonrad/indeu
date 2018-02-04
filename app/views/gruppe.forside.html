@@ -2,7 +2,7 @@
 <div class="col-md-9">
 <!-- info -->
 	<div ng-if="action == ''">
-		<div class="medlem-image">
+		<div class="medlem-image" ng-class="{ 'medlem-image-missing' : group.image == '' }">
 			<i ng-if="group.image == '' " class="fa fa-users medlem-default-image"></i>
 			<img ng-if="group.image != '' " ng-src="../media/gruppe/{{ group.image }}" fancyboxable="{centerOnScroll:true,margin:20}">
 		</div>
@@ -149,7 +149,7 @@
 				ng-disabled="actionDisable('a')" 
 				ng-click="setAction('a')"
 				href="">
-				<i class="fa fa-fw fa-file-text-o fa-x2"></i>Opret ny artikel<br>
+				<i class="fa fa-fw fa-file-text-o fa-x2"></i>Skriv en ny artikel<br>
 			</a>
 
 			<a ng-if="group.events_enabled && (userIsOwner || userIsMember)"
@@ -158,7 +158,7 @@
 				ng-disabled="actionDisable('e')" 
 				ng-click="setAction('e')"
 				href="">
-				<i class="fa fa-fw fa-calendar fa-x2"></i>Opret ny event<br>
+				<i class="fa fa-fw fa-calendar fa-x2"></i>Opret en ny event<br>
 			</a>
 
 			<a ng-if="userIsMember && !userIsOwner" href="" ng-click="unFollow()">

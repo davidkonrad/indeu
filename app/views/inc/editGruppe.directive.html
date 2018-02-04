@@ -23,8 +23,8 @@
 			<tr>
 				<td class="col-md-8">
 					<div class="form-group">
-			      <label class="col-md-1 control-label required" for="name">Navn</label>
-						<div class="col-md-11">
+			      <label class="col-md-2 control-label required" for="name">Navn</label>
+						<div class="col-md-10">
 					    <input class="form-control" 
 								type="text"
 								id="name"
@@ -36,6 +36,7 @@
 					<div class="form-group">
 						<div class="col-md-12">
 							<text-angular ng-model="edit.about" 
+								spellcheck="false"
 								ta-text-editor-class="form-control ta-editor-md"
 								ta-toolbar="[['h2','h3'],['bold','italics','underline','strikeThrough'],['insertLink'], ['html']]">
 							</text-angular>
@@ -51,26 +52,17 @@
 	</form>
 
 
-<!-- collapsible -->
-	<div class="panel-group" 
-		ng-model="Settings.groupEditCollapse"
-		role="tablist" 
-		aria-multiselectable="true" 
-		bs-collapse 
-		bs-collapse-icons
-		data-start-collapsed="true"
-		data-allow-multiple="true">
-
 <!-- indstillinger -->
 	  <div class="panel panel-default">
 	    <div class="panel-heading" role="tab">
 	      <h4 class="panel-title">
-	        <a bs-collapse-toggle>
+	        <a data-toggle="collapse" data-target="#panel-indstillinger">
+						<i class="fa fa-minus text-muted"></i>
 						Indstillinger
 	        </a>
 	      </h4>
 	    </div>
-	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+	    <div class="panel-collapse in" role="tabpanel" id="panel-indstillinger">
 	      <div class="panel-body">
 					<div class="col-md-11">
 						<br>
@@ -83,19 +75,19 @@
 										<input type="radio" 
 											name="visibility_level" 
 											ng-model="edit.visibility_level"
-											ng-value="'1'" > Offentlig
+											ng-value="1" > Offentlig
 									</label>
 									<label class="radio-inline">
 										<input type="radio" 
 											name="visibility_level" 
 											ng-model="edit.visibility_level"
-											ng-value="'2'"> Kun brugere
+											ng-value="2"> Kun brugere
 									</label>
 									<label class="radio-inline">
 										<input type="radio" 
 											name="visibility_level" 
 											ng-model="edit.visibility_level"
-											ng-value="'3'"> Kun gruppe
+											ng-value="3"> Kun gruppe
 									</label>
 								</div>
 							</div>
@@ -107,19 +99,19 @@
 										<input type="radio" 
 											name="access_level" 
 											ng-model="edit.access_level"
-											ng-value="'1'" > Offentlig
+											ng-value="1" > Offentlig
 									</label>
 									<label class="radio-inline">
 										<input type="radio" 
 											name="access_level" 
 											ng-model="edit.access_level"
-											ng-value="'2'"> Kun brugere
+											ng-value="2"> Kun brugere
 									</label>
 									<label class="radio-inline">
 										<input type="radio" 
 											name="access_level" 
 											ng-model="edit.access_level"
-											ng-value="'3'"> Kun gruppe
+											ng-value="3"> Kun gruppe
 									</label>
 								</div>
 							</div>
@@ -141,8 +133,8 @@
 									<div class="checkbox">
 									  <label class="control-label">
 											<input type="checkbox" 
-												ng-false-value="'0'"
-												ng-true-value="'1'"
+												ng-false-value="0"
+												ng-true-value="1"
 												name="active"
 												ng-model="edit.active">Aktiv
 										</label>
@@ -150,8 +142,8 @@
 									<div class="checkbox">
 									  <label class="control-label">
 											<input type="checkbox" 
-												ng-false-value="'0'"
-												ng-true-value="'1'"
+												ng-false-value="0"
+												ng-true-value="1"
 												name="events_enabled"
 												ng-model="edit.events_enabled">Tillad events
 										</label>
@@ -159,8 +151,8 @@
 									<div class="checkbox">
 									  <label class="control-label">
 											<input type="checkbox" 
-												ng-false-value="'0'"
-												ng-true-value="'1'"
+												ng-false-value="0"
+												ng-true-value="1"
 												name="articles_enabled"
 												ng-model="edit.articles_enabled">Tillad artikler
 										</label>
@@ -170,8 +162,8 @@
 									<div class="checkbox">
 									  <label class="control-label">
 											<input type="checkbox" 
-												ng-false-value="'0'"
-												ng-true-value="'1'"
+												ng-false-value="0"
+												ng-true-value="1"
 												name="comments_enabled"
 												ng-model="edit.comments_enabled">Kommentarer slået til
 										</label>
@@ -179,8 +171,8 @@
 									<div class="checkbox">
 									  <label class="control-label">
 											<input type="checkbox" 
-												ng-false-value="'0'"
-												ng-true-value="'1'"
+												ng-false-value="0"
+												ng-true-value="1"
 												name="visible_members"
 												ng-model="edit.visible_members">Medlemmer synlige
 										</label>
@@ -188,8 +180,8 @@
 									<div class="checkbox">
 									  <label class="control-label">
 											<input type="checkbox" 
-												ng-false-value="'0'"
-												ng-true-value="'1'"
+												ng-false-value="0"
+												ng-true-value="1"
 												name="visible_social_media"
 												ng-model="edit.visible_social_media">Web / SoMe synlig
 										</label>
@@ -218,13 +210,13 @@
 	  <div class="panel panel-default" ng-if="edit.id">
 	    <div class="panel-heading" role="tab">
 	      <h4 class="panel-title">
-	        <a bs-collapse-toggle>
-						<i class="fa fa-plus text-muted"></i>
+	        <a data-toggle="collapse" data-target="#panel-social">
+						<i class="fa fa-minus text-muted"></i>
 						Socialt
 	        </a>
 	      </h4>
 	    </div>
-	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+	    <div class="panel-collapse in" role="tabpanel" id="panel-social">
 	      <div class="panel-body">
 					<edit-social-media hash="{{ edit.hash }}"></edit-social-media>
 	      </div>
@@ -235,12 +227,13 @@
 	  <div class="panel panel-default" ng-if="edit.id">
 	    <div class="panel-heading" role="tab">
 	      <h4 class="panel-title">
-	        <a bs-collapse-toggle>
+	        <a data-toggle="collapse" data-target="#panel-members">
+						<i class="fa fa-minus text-muted"></i>
 						Medlemmer
 	        </a>
 	      </h4>
 	    </div>
-	    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+	    <div class="panel-collapse in" role="tabpanel" id="panel-members">
 	      <div class="panel-body">
 					<br>
 					<table datatable="" 
@@ -255,8 +248,7 @@
 			</div>
 		</div>
 
-	</div>
-		
+
 </div>
 
 

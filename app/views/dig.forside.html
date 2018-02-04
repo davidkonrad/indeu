@@ -16,14 +16,6 @@
 
 	<div class="clearfix col-md-12">&nbsp;</div>
 
-	<div class="layout-right-header">
-		Notifikationer
-	</div>
-	<div class="layout-right-header-content">
-		<log-notifications user-id="{{ user.id }}"></log-notifications>
-	</div>
-
-		<div class="clearfix"></div>
 		
 		<div class="col-md-9 no-padding" style="padding-right:15px !important;">
 			<div class="layout-right-header">Næste 5 dage</div>
@@ -59,6 +51,12 @@
 
 		<div class="layout-right-header no-bottom-margin">Dine events</div>
 		<div entity-events="{{ user.id }}" entity-type="user" user-id="{{ user.id }}" on-edit="editEvent"></div>
+
+	<div>
+		<log-notifications user-id="{{ user.id }}"></log-notifications>
+	</div>
+
+		<div class="clearfix"></div>
 
 		<div class="clearfix">
 			<br><br><br>
@@ -120,7 +118,7 @@
 			ng-class="{ 'disabled': actionDisable('a') }"
 			ng-disabled="actionDisable('a')"
 			ng-click="setAction('a')">
-			<i class="fa fa-fw fa-file-text-o fa-x2"></i>Skriv artikel
+			<i class="fa fa-fw fa-file-text-o fa-x2"></i>Skriv en ny artikel
 			<span ng-if="edit_article_id != undefined ">Rediger artikel</span>
 			<br>
 		</a>
@@ -132,7 +130,7 @@
 			ng-class="{ 'disabled': actionDisable('e') }"
 			ng-disabled="actionDisable('e')" 
 			ng-click="setAction('e')">
-			<i class="fa fa-fw fa-calendar fa-x2"></i>Opret ny event
+			<i class="fa fa-fw fa-calendar fa-x2"></i>Opret en ny event
 			<span ng-if="edit_event_id != undefined ">Rediger event</span>
 			<br>
 		</a>
@@ -150,13 +148,13 @@
 			ng-class="{ 'disabled': actionDisable('g') }"
 			ng-disabled="actionDisable('g')" 
 			ng-click="setAction('g')">
-			<i class="fa fa-fw fa-users fa-x2"></i>Opret ny gruppe<br>
+			<i class="fa fa-fw fa-users fa-x2"></i>Opret en ny gruppe<br>
 		</a>
 		<a href="" 
 			title="Review nye brugeranmodninger"
-			ng-class="{ 'disabled': actionDisable('r') }"
-			ng-disabled="actionDisable('r')" 
-			ng-click="setAction('r')">
+			ng-class="{ 'disabled': true }"
+			ng-disabled="true" 
+			XXng-click="setAction('r')">
 			<i class="fa fa-fw fa-star-half-empty fa-x2"></i>Review nye brugere<br>
 		</a>
 		<a ng-href="{{ user.url }}" 

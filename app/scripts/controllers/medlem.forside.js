@@ -23,6 +23,8 @@ angular.module('indeuApp')
 		ESPBA.get('user', { id: user_id }).then(function(r) {
 			$scope.user = r.data[0];
 			$scope.user.image = $scope.user.image || '';
+			//for some reason timezone not work (yet)
+			$scope.user.last_seen = moment($scope.user.last_seen).add(1, 'hours').calendar();
 
 			ESPBA.get('address', { hash: $scope.user.hash }).then(function(a) {
 				if (a.data && a.data[0]) $scope.user.address = a.data[0];
@@ -81,12 +83,6 @@ angular.module('indeuApp')
 			$scope.groups = r.data
 		});
 
-/*
-		ESPBA.get('event', { user_id: user_id }).then(function(r) {
-			$scope.events = r.data;
-		});
-*/
-		
 
 });
 

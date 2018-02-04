@@ -1,18 +1,15 @@
-[
-
-]
 {
-    "protossl": "",
-    "HTTP_AUTHORIZATION": "",
     "HTTP_HOST": "localhost",
     "HTTP_CONNECTION": "keep-alive",
+    "HTTP_PRAGMA": "no-cache",
+    "HTTP_CACHE_CONTROL": "no-cache",
     "HTTP_ACCEPT": "application\/json, text\/plain, *\/*",
     "HTTP_ORIGIN": "http:\/\/localhost:9000",
-    "HTTP_USER_AGENT": "Mozilla\/5.0 (X11; Linux i686) AppleWebKit\/537.36 (KHTML, like Gecko) Ubuntu Chromium\/53.0.2785.143 Chrome\/53.0.2785.143 Safari\/537.36",
+    "HTTP_USER_AGENT": "Mozilla\/5.0 (X11; Linux i686) AppleWebKit\/537.36 (KHTML, like Gecko) Ubuntu Chromium\/63.0.3239.84 Chrome\/63.0.3239.84 Safari\/537.36",
     "HTTP_DNT": "1",
     "HTTP_REFERER": "http:\/\/localhost:9000\/",
-    "HTTP_ACCEPT_ENCODING": "gzip, deflate, sdch",
-    "HTTP_ACCEPT_LANGUAGE": "en-US,en;q=0.8",
+    "HTTP_ACCEPT_ENCODING": "gzip, deflate, br",
+    "HTTP_ACCEPT_LANGUAGE": "en-US,en;q=0.9",
     "PATH": "\/usr\/local\/sbin:\/usr\/local\/bin:\/usr\/sbin:\/usr\/bin:\/sbin:\/bin",
     "SERVER_SIGNATURE": "<address>Apache\/2.4.7 (Ubuntu) Server at localhost Port 80<\/address>\n",
     "SERVER_SOFTWARE": "Apache\/2.4.7 (Ubuntu)",
@@ -26,14 +23,14 @@
     "CONTEXT_DOCUMENT_ROOT": "\/var\/www\/",
     "SERVER_ADMIN": "webmaster@localhost",
     "SCRIPT_FILENAME": "\/var\/www\/html\/indeu\/app\/api\/espba.php",
-    "REMOTE_PORT": "44255",
+    "REMOTE_PORT": "52843",
     "GATEWAY_INTERFACE": "CGI\/1.1",
     "SERVER_PROTOCOL": "HTTP\/1.1",
     "REQUEST_METHOD": "GET",
-    "QUERY_STRING": "__action=get&__table=user&__token=ce01a53f29446132f8731f3edde029a8cc3a4118",
-    "REQUEST_URI": "\/html\/indeu\/app\/api\/espba.php?__action=get&__table=user&__token=ce01a53f29446132f8731f3edde029a8cc3a4118",
+    "QUERY_STRING": "__action=prepared&__table=Log&__token=04a9956c6c44581a93e035867ffe9020c8f2cb36&user_id=1",
+    "REQUEST_URI": "\/html\/indeu\/app\/api\/espba.php?__action=prepared&__table=Log&__token=04a9956c6c44581a93e035867ffe9020c8f2cb36&user_id=1",
     "SCRIPT_NAME": "\/html\/indeu\/app\/api\/espba.php",
     "PHP_SELF": "\/html\/indeu\/app\/api\/espba.php",
-    "REQUEST_TIME_FLOAT": 1501967355.638,
-    "REQUEST_TIME": 1501967355
+    "REQUEST_TIME_FLOAT": 1517724134.316,
+    "REQUEST_TIME": 1517724134
 }

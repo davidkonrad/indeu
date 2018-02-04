@@ -68,7 +68,7 @@ angular.module('indeuApp').factory('Const', ['$q', function($q) {
 			var defaultMap = {
 				events: {
 					map: {
-						enable: ['zoomstart', 'drag', 'click', 'dblclick', 'mouseover'],
+						enable: [], //'zoomstart', 'drag', 'click', 'dblclick', 'mouseover'],
 						logic: 'emit'
 					}
 				},

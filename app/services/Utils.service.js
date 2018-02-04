@@ -52,6 +52,15 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 			return u + 's/' + id + '/' + this.urlName(header);
 		},
 
+		//localhost db return numbers as strings
+		//convert "x" int's to x ints if in localhost mode
+		debugObj: function(obj) {
+			if (!isLocalHost) return
+			for (var p in obj) {
+				if (parseInt(obj[p]) == obj[p] && typeof obj[p] == 'string') obj[p] = parseInt(obj[p])
+			}
+		},
+
 		isEmpty: function(obj) {
 			//https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
 			return angular.equals({}, obj);
@@ -224,15 +233,5 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 
 	}
 
-});
-
-
-angular.module('indeuApp').directive('debugCss', function() {
-	return {
-		restrict: 'A',
-		link: function(scope, element, attrs) {
-			console.log('debugCSS', element)
-		}
-	}
 });
 

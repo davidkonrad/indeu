@@ -29,24 +29,22 @@ angular.module('indeuApp')
 			lng: 11.697741782069204, /*11.457741782069204*/
 			zoom: 6
 		};
-		//$scope.eventMap.layers.baselayers.googleTerrain.visible = true;
-		//var def = $scope.eventMap.layers.baselayers;
-		//$scope.eventMap.layers.baselayers = {};
+
 		$scope.eventMap.layers.baselayers.bw = {
 			visible: false,
 			name: 'Nedtonet sort / hvidt',
 			type: 'xyz',
-			maxZoom: 18,
+			maxZoom: 19,
 			minZoom: 5,
-			url: 'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
+			url: 'https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}',
 			layerOptions: {
 				subdomains: ['a', 'b', 'c'],
-				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+				attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 				continuousWorld: true
 			}
 		}
-		//$.extend($scope.eventMap.layers.baselayers, def);
 
+/*
 		var iconBlue = {
 			iconUrl: 'assets/images/blue.png',
 			iconSize: [15, 26],
@@ -61,9 +59,10 @@ angular.module('indeuApp')
 			shadowAnchor: [4, 62], 
 			popupAnchor: [-4, -20] 
 		};
+*/
 
 		/*
-		$scope.$on('leafletDirectiveMarker.click', function(e, args) {
+		$scope.$on('leafletDirectiveMarker.map.click', function(e, args) {
 			leafletData.getMap().then(function(map) {
 				var center = $.extend( {}, args.leafletObject._latlng);
 				center.zoom = map._zoom +1;
@@ -102,7 +101,6 @@ angular.module('indeuApp')
 					}
 
 					ESPBA.prepared('EventsByPeriod', params).then(function(r) {
-						//console.log(r.data);
 						var events = [];
 						$scope.eventMap.markers = [];
 						r.data.forEach(function(e) {
@@ -115,7 +113,14 @@ angular.module('indeuApp')
 								$scope.eventMap.markers.push({
 									lat: lat,
 									lng: lng,
-									icon: eDate.valueOf() > now ? iconGreen : iconBlue,
+									//icon: eDate.valueOf() > now ? iconGreen : iconBlue,
+									icon: {
+										type: 'awesomeMarker',
+										icon: eDate.valueOf() > now ? 'home' : 'times',
+										prefix: 'fa',
+										iconColor: 'white',
+										markerColor: eDate.valueOf() > now ? 'green' : 'blue'
+									},
 									message: getMessage(e)
 								});
 							}

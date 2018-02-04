@@ -19,7 +19,7 @@ angular.module('indeuApp')
 				.notSortable()
 				.renderWith(function(data, type, full, meta) {
 					if (type === 'display') {
-						return '<a href="#/medlemmer/'+full.id+'/'+Utils.urlName(full.full_name)+'"><i class="fa fa-eye"></i></a>'
+						return '<a href="'+Utils.userUrl(full.id, full.full_name)+'"><i class="fa fa-eye"></i></a>'
 					} else {
 						return data;
 					}

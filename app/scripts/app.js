@@ -30,8 +30,7 @@ angular.module('indeuApp', [
 	'leaflet-directive',
 	'ui-notification',
 	'ngRateIt',
-	'angular-smilies',
-	'angularTrix'
+	'angular-smilies'
   ])
   .config(function ($locationProvider, $routeProvider, cfpLoadingBarProvider, NotificationProvider, $tooltipProvider, $provide) {
 
@@ -235,9 +234,6 @@ angular.module('indeuApp', [
 			ESPBA.setHost('http://localhost/html/indeu/app/');
 		} else {
 			ESPBA.setHost('https://indeu.org/');
-			//ESPBA.setHost('/');
-			//ESPBA.setHost('/customers/1/b/8/indeu.org//httpd.www/');
-
 		}
 		ESPBA.setApiPath('api/espba.php');
 		ESPBA.init().then(function() {

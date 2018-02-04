@@ -14,7 +14,7 @@ angular.module('indeuApp')
 		function init() {
 			ESPBA.get('frontpage').then(function(f) {
 				var front = f.data[0];
-				ESPBA.get('article', { id: front.promoted_article_id }).then(function(a) {
+				if (front && front.promoted_article_id) ESPBA.get('article', { id: front.promoted_article_id }).then(function(a) {
 					a = a.data[0];
 					a.urlName = Utils.urlName(a.header);
 

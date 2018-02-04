@@ -156,7 +156,6 @@ angular.module('ESPBA', [])
 					method: 'POST',
 					params: data
 				}).then(function(r) {
-					//console.log(r);
 		      deferred.resolve(r);
 				})
 	      return deferred.promise;

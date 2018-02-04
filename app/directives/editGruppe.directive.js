@@ -19,6 +19,17 @@ angular.module('indeuApp')
 		controller: function($scope) {
 			Settings.init($scope);
 
+			$('body').on('click', '.panel-heading', function() {
+				var $this = $(this);
+				var $i = $(this).find('i');
+				var _in = $this.parent().find('.in').length;
+				if (_in) {
+					$i.removeClass('fa-plus').removeClass('fa-minus').addClass('fa-plus')
+				} else {
+					$i.removeClass('fa-plus').removeClass('fa-minus').addClass('fa-minus')
+				}
+			});
+
 			$scope.edit = {
 				id: false,
 				name: '',
@@ -164,10 +175,16 @@ angular.module('indeuApp')
 				if (parseInt(scope.edit.id)) ESPBA.get('group', { id: scope.edit.id }).then(function(u) {
 					scope.save_btn_caption = 'Gem og luk';
 					scope.header = 'Rediger gruppe';
+
 					scope.edit = u.data[0];
+					Utils.debugObj(scope.edit);
+
 					scope.$watch('edit.about', function(newVal, oldVal) {
 						if (newVal && newVal != oldVal) scope.changed = true
 					}, true);
+					$timeout(function() {
+						scope.$apply()
+					})
 				})
 			});
 

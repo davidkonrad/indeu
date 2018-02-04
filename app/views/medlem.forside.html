@@ -62,6 +62,7 @@
 	<div class="col-md-12 clearfix">&nbsp;</div>
 
 	<div class="layout-right-header">Grupper</div>
+		<em ng-if="groups.length == 0">{{ user.first_name }} følger ingen grupper</em>
 		<a ng-repeat="g in groups" 
 			bs-popover
 			data-html="true"
@@ -86,6 +87,11 @@
 
 
 <div class="col-md-3">
+
+	<div class="col-md-12 clearfix no-padding">
+		Sidst set {{ user.last_seen }}
+		<br><br>
+	</div>
 
 	<div ng-if="is_self == true">
 		<div class="layout-right-header">Handlinger</div>
@@ -114,7 +120,7 @@
 	</div>
 
 	<div ng-if="showSocial">
-		<div class="layout-right-header">Web / SoMe</div>
+		<div class="layout-right-header">Web / sociale medier</div>
 		<div class="layout-right-header-content">
 			<social-media-links record="{{ user.social }}"></social-media-links>
 		</div>

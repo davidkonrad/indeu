@@ -5,11 +5,11 @@ html {
 
 *::selection {
 	color: #fff;
-	background-color: green !important; /* #E31836 dannebrog */
+	background-color: gray !important; /* #E31836 dannebrog */
 }
 *::moz-selection {
 	color: #fff;
-	background-color: #E31836 !important; /* dannebrog */
+	background-color: gray !important; /* dannebrog */
 }
 
 

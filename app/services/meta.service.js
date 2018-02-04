@@ -65,6 +65,11 @@ angular.module('Meta', []).factory('Meta', ['$route', function($route) {
 				getTag('meta', 'name', 'description').setAttribute('content', d);
 			},
 
+			//shorthand alias
+			setDesc: function(d) {
+				this.setDescription(d)
+			}
+
 		}
 
 }]);

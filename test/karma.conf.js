@@ -80,7 +80,7 @@ module.exports = function(config) {
       'bower_components/angular-simple-logger/dist/angular-simple-logger.js',
       'bower_components/leaflet/dist/leaflet-src.js',
       'bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
-      'bower_components/leaflet-providers/leaflet-providers.js',
+      'bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js',
       'bower_components/leaflet-plugins/control/Distance.js',
       'bower_components/leaflet-plugins/control/Layers.Load.js',
       'bower_components/leaflet-plugins/control/Permalink.js',
@@ -105,8 +105,6 @@ module.exports = function(config) {
       'bower_components/angular-rateit/dist/ng-rateit.js',
       'bower_components/moment-timezone/builds/moment-timezone-with-data-2012-2022.js',
       'bower_components/angular-smilies/dist/angular-smilies.js',
-      'bower_components/trix/dist/trix.js',
-      'bower_components/angular-trix/dist/angular-trix.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

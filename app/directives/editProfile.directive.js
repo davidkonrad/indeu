@@ -21,7 +21,6 @@ angular.module('indeuApp')
 				var $this = $(this);
 				var $i = $(this).find('i');
 				var _in = $this.parent().find('.in').length;
-				//fa-minus-square-o fa-plus-square-o
 				if (_in) {
 					$i.removeClass('fa-plus').removeClass('fa-minus').addClass('fa-plus')
 				} else {
@@ -34,16 +33,10 @@ angular.module('indeuApp')
 			}
 
 			$scope.saveEnabled = function() {
-				return $scope.changed
+				return true //$scope.changed
 			}
 
 			$scope.formSave = function(formId) {
-				/*
-				var obj = Form.toObj(formId);
-				ESPBA.update('user', $scope.edit).then(function(x) {
-					Form.reset(formId);
-				})
-				*/
 				ESPBA.update('user', $scope.edit).then(function(x) {
 					Form.reset(formId);
 					$scope.changed = false;
@@ -82,8 +75,8 @@ angular.module('indeuApp')
 			attrs.$observe('editProfile', function(newVal) {
 				scope.user_id = attrs['editProfile'];
 				ESPBA.get('user', { id: scope.user_id }).then(function(u) {
-					//test for errors
 					scope.edit = u.data[0];
+					Utils.debugObj(scope.edit);
 
 					scope.$watch('edit.about', function(newVal, oldVal) {
 						if (newVal && newVal != oldVal) scope.changed = true

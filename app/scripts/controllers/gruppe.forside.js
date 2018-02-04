@@ -67,6 +67,9 @@ angular.module('indeuApp')
 			ESPBA.prepared('GroupWithOwner', { group_id: id }).then(function(r) {
 				$scope.group = r.data[0];
 
+				Meta.setTitle($scope.group.name);
+				Meta.setDescription($scope.group.about);
+
 				$scope.group.visible_members = $scope.group.visible_members == 1 ? true : false;
 				$scope.group.visible_social = $scope.group.visible_social == 1 ? true : false;
 				$scope.group.events_enabled = $scope.group.events_enabled == 1 ? true : false;

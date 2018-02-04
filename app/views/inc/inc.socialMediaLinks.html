@@ -1,6 +1,8 @@
 <div ng-repeat="l in links">
-	<span>
-		<i class="fa fa-fw fa-x2 {{ l.fa }}"></i>
-		<a href="{{ l.url }}" target=_blank class="social-link-200" title="{{ l.desc }}{{ l.url }}">{{ l.showUrl }}</a>
+	<span ng-if="l.url">
+		<i class="fa fa-fw fa-lg xno-padding xno-margin {{ l.fa }}"></i>
+		<a href="{{ l.url }}" target=_blank class="social-link-200" title="{{ l.desc }}{{ l.url }}">
+			{{ l.showUrl }}
+		</a>
 	</span>
 </div>
