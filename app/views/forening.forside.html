@@ -6,13 +6,13 @@
 
 	<div ng-if="action == '' ">		
 
-		<div class="col-md-12">
+		<div class="col-md-12 no-padding">
 			<img ng-if="forening.image != ''" 
 				class="pull-left" 
 				ng-src="media/forening/thumbs/{{ forening.image }}" 
-				style="padding-right:10px;"
+				style="padding-right:20px; padding-bottom: 10px;"
 				title="{{ forening.name }}">
-			<p ng-bind-html="forening.about" read-more></p>
+			<div ng-bind-html="forening.about"></div>
 		</div>
 
 		<div class="clearfix col-md-12">&nbsp;</div>

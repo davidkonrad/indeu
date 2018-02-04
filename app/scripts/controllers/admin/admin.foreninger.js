@@ -91,7 +91,7 @@ angular.module('indeuApp').controller('AdminForeningerCtrl',
 				{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Ny Forening</span>',
 					className: 'btn btn-xs',
 					action: function( /* e, dt, node, config */) {
-						ForeningModal.show($scope).then(function(f) {
+						ForeningModal.show().then(function(f) {
 							if (f) {
 								$scope.dtInstance.reloadData();
 							}
@@ -103,7 +103,7 @@ angular.module('indeuApp').controller('AdminForeningerCtrl',
 
 		angular.element('#table-foreninger').on('click', 'tbody td:not(.no-click)', function(e) {
 			var id=$(this).parent().attr('forening-id');
-			ForeningModal.show($scope, id).then(function(f) {
+			ForeningModal.show(id).then(function(f) {
 				if (f) {
 					$scope.dtInstance.reloadData();
 				}

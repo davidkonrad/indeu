@@ -75,8 +75,8 @@ td.max600 {
 
 /* std modals */
 .medium-dialog .modal-dialog {
-	min-width: 600px !important;
-	max-width: 600px !important;
+	min-width: 800px !important;
+	max-width: 800px !important;
 	width: 600px !important;
 }
 .medium-dialog .modal-body {
@@ -86,9 +86,8 @@ td.max600 {
 	font-size: 90%;
 }
 
-
 .large-dialog .modal-dialog {
-	min-width: 880px !important;
+	min-width: 1100px !important;
 }
 .large-dialog .modal-body {
 	height: 400px !important;
@@ -96,5 +95,33 @@ td.max600 {
 	max-height: 400px !important;
 	font-size: 90%;
 }
+
+/* textangular sizes relative to modal */
+.ta-editor.form-control.medium, .ta-scroll-window.form-control.medium-dialog  {
+	height: 280px;
+	min-height: 280px;
+	max-height: 280px;
+	overflow: auto;
+	font-family: inherit;
+	font-size: 100%;
+}
+.form-control.medium-dialog > .ta-bind {
+	min-height: 280px;
+	padding: 6px 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

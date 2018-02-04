@@ -20,7 +20,7 @@ angular.module('indeuApp')
 				.withClass('no-click')
 				.renderWith(function(data, type, full, meta) {
 					if (type === 'display') {
-						return '<a href="#/grupper/'+full.id+'/'+Utils.urlName(full.name)+'"><i class="fa fa-eye"></i></a>'
+						return '<a href="'+Utils.gruppeUrl(full.id, full.name)+'"><i class="fa fa-eye"></i></a>'
 					} else {
 						return data;
 					}

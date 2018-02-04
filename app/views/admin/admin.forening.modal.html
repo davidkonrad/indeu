@@ -1,9 +1,9 @@
 <div class="modal ng-scope top am-fade-and-slide-top center medium-dialog" tabindex="-1" role="dialog" style="display: block;" id="forening-dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-medium">
 		<div class="modal-content">
 			
 			<div class="modal-header">
-				<h4 class="modal-title" ng-bind-html="__forModal.title"></h4>
+				<h4 class="modal-title" ng-bind-html="title"></h4>
 			</div>
 
 			<div class="modal-body">
@@ -14,8 +14,8 @@
 						<form role="form" class="form-horizontal" autocomplete="off">
 
 					    <div class="form-group">
-					      <label class="col-md-3 control-label required" for="name">Navn</label>
-								<div class="col-md-9">
+					      <label class="col-md-2 control-label required" for="name">Navn</label>
+								<div class="col-md-7">
 							    <input class="form-control input-sm" 
 										type="text"
 										id="name"
@@ -27,32 +27,31 @@
 							</div>
 
 					    <div class="form-group">
-					      <label class="col-md-3 control-label required" for="short_name">Kort Navn</label>
-								<div class="col-md-6">
+					      <label class="col-md-2 control-label" for="short_name">Kort Navn</label>
+								<div class="col-md-5">
 							    <input class="form-control input-sm" 
 										type="text"
 										id="short_name"
 										select-on-click
-										auto-focus
 										ng-model="edit.short_name" 
 										placeholder="Kort navn / populærnavn">
 								</div>
 							</div>
 
 					    <div class="form-group">
-					      <label class="col-md-3 control-label required" for="owner_id">Ejer</label>
+					      <label class="col-md-2 control-label required" for="owner_id">Ejer</label>
 								<div class="col-md-5">
 							    <button class="btn btn-default btn-sm"
 										id="owner_id"
-										ng-click="__forModal.selectOwner()"
+										ng-click="selectOwner()"
 										ng-model="edit.owner_id">
-											{{ __forModal.owner_btn_caption }}
+											{{ owner_btn_caption }}
 									</button>
 								</div>
 							</div>
 
 					    <div class="form-group">
-					      <label class="col-md-3 control-label required" for="visibility_level">Synlighed</label>
+					      <label class="col-md-2 control-label required" for="visibility_level">Synlighed</label>
 								<div class="col-md-4">
 									<button type="button" 
 										class="btn btn-default btn-sm" 
@@ -68,16 +67,42 @@
 							</div>
 
 					    <div class="form-group">
-					      <label class="col-md-3 control-label" for=""></label>
-								<div class="col-md-4 Xcheckbox">
-
+					      <label class="col-md-2 control-label" for=""></label>
+								<div class="col-md-4">
 									<label class="checkbox-inline">
 										<input type="checkbox" 
 											ng-model="edit.active"
-											ng-false-value="'0'" 
-											ng-true-value="'1'">Aktiv
+											ng-false-value="0" 
+											ng-true-value="1">Aktiv / synlig
 									</label>
+								</div>
+							</div>
 
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for=""></label>
+								<div class="col-md-2">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit.articles_enabled"
+											ng-false-value="0" 
+											ng-true-value="1">Artikler slået til
+									</label>
+								</div>
+								<div class="col-md-2">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit.events_enabled"
+											ng-false-value="0" 
+											ng-true-value="1">Events slået til
+									</label>
+								</div>
+								<div class="col-md-3">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit.comments_enabled"
+											ng-false-value="0" 
+											ng-true-value="1">Kommentarer slået til
+									</label>
 								</div>
 							</div>
 
@@ -89,12 +114,10 @@
 							<br>
 					    <div class="form-group">
 								<div class="col-md-12">
-<!--
-									<trix-editor ng-if="true" angular-trix ng-model="edit.about"></trix-editor>
--->
 									<text-angular ng-model="edit.about" 
-										ta-text-editor-class="form-control col-md-12 gruppe-dialog"
-										ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'html']]">
+										spellcheck="false"
+										ta-text-editor-class="form-control col-md-12 medium-dialog"
+										ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo'], ['clear', 'html']]">
 									</text-angular>
 								</div>
 							</div>
@@ -122,14 +145,14 @@
 						<table datatable="" 
 							id="table-forening-medlemmer"
 							class="table table-striped col-md-12 no-padding no-margin" 
-							dt-options="__forModal.medlemmer.dtOptions" 
-							dt-columns="__forModal.medlemmer.dtColumns"
-							dt-instance="__forModal.medlemmer.dtInstanceCallback">
+							dt-options="medlemmer.dtOptions" 
+							dt-columns="medlemmer.dtColumns"
+							dt-instance="medlemmer.dtInstanceCallback">
 						</table>
 					</div>
 
-					<div bs-pane data-title="Grupper" ng-if="edit.id != null">
 <!--
+					<div bs-pane data-title="Grupper" ng-if="edit.id != null">
 						<table datatable="" 
 							id="table-forening-grupper"
 							class="table table-striped col-md-12 no-padding no-margin" 
@@ -137,8 +160,8 @@
 							dt-columns="__forModal.grupper.dtColumns"
 							dt-instance="__forModal.grupper.dtInstanceCallback">
 						</table>
--->
 					</div>
+-->
 
 				</div>
 			</div>
@@ -146,14 +169,14 @@
 			<div class="modal-footer">
 				<button type="button" 
 					class="btn" 
-					ng-click="__forModal.modalClose(true)" 
+					ng-click="modalClose(true)" 
 					ng-class="{ 'btn-success' : canSave() }"
 					ng-enabled="canSave()">
-						{{ __forModal.btnOk }}
+						{{ btnOk }}
 				</button> 
 				<button type="button" 
 					class="btn btn-default" 
-					ng-click="__forModal.modalClose(false)" >
+					ng-click="modalClose(false)" >
 						Fortryd
 				</button> 
 			</div>

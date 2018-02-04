@@ -81,6 +81,11 @@ angular.module('indeuApp')
 
 				$scope.group.owner_url = Utils.userUrl($scope.group.owner_id, $scope.group.owner_full_name);
 
+				if ($scope.group.image) {
+					$scope.group.image_url = '../media/gruppe/'+$scope.group.image;
+					$scope.group.thumb_url = '../media/gruppe/thumbs/'+$scope.group.image;
+				}
+
 				if (Login.isLoggedIn()) {
 					$scope.userIsOwner = Login.currentUser().id == $scope.group.owner_id;
 					$scope.userIsMember = Login.isGroupMember(id);

@@ -1,8 +1,6 @@
 {
     "HTTP_HOST": "localhost",
     "HTTP_CONNECTION": "keep-alive",
-    "HTTP_PRAGMA": "no-cache",
-    "HTTP_CACHE_CONTROL": "no-cache",
     "HTTP_ACCEPT": "application\/json, text\/plain, *\/*",
     "HTTP_ORIGIN": "http:\/\/localhost:9000",
     "HTTP_USER_AGENT": "Mozilla\/5.0 (X11; Linux i686) AppleWebKit\/537.36 (KHTML, like Gecko) Ubuntu Chromium\/63.0.3239.84 Chrome\/63.0.3239.84 Safari\/537.36",
@@ -23,14 +21,14 @@
     "CONTEXT_DOCUMENT_ROOT": "\/var\/www\/",
     "SERVER_ADMIN": "webmaster@localhost",
     "SCRIPT_FILENAME": "\/var\/www\/html\/indeu\/app\/api\/espba.php",
-    "REMOTE_PORT": "52843",
+    "REMOTE_PORT": "51950",
     "GATEWAY_INTERFACE": "CGI\/1.1",
     "SERVER_PROTOCOL": "HTTP\/1.1",
     "REQUEST_METHOD": "GET",
-    "QUERY_STRING": "__action=prepared&__table=Log&__token=04a9956c6c44581a93e035867ffe9020c8f2cb36&user_id=1",
-    "REQUEST_URI": "\/html\/indeu\/app\/api\/espba.php?__action=prepared&__table=Log&__token=04a9956c6c44581a93e035867ffe9020c8f2cb36&user_id=1",
+    "QUERY_STRING": "__action=get&__table=association&__token=245cada96c6ab25df3075f75a93d9280c7f0ac1c",
+    "REQUEST_URI": "\/html\/indeu\/app\/api\/espba.php?__action=get&__table=association&__token=245cada96c6ab25df3075f75a93d9280c7f0ac1c",
     "SCRIPT_NAME": "\/html\/indeu\/app\/api\/espba.php",
     "PHP_SELF": "\/html\/indeu\/app\/api\/espba.php",
-    "REQUEST_TIME_FLOAT": 1517724134.316,
-    "REQUEST_TIME": 1517724134
+    "REQUEST_TIME_FLOAT": 1517764991.434,
+    "REQUEST_TIME": 1517764991
 }

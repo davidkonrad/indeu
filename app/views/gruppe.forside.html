@@ -4,9 +4,10 @@
 	<div ng-if="action == ''">
 		<div class="medlem-image" ng-class="{ 'medlem-image-missing' : group.image == '' }">
 			<i ng-if="group.image == '' " class="fa fa-users medlem-default-image"></i>
-			<img ng-if="group.image != '' " ng-src="../media/gruppe/{{ group.image }}" fancyboxable="{centerOnScroll:true,margin:20}">
+			<img ng-if="group.image != '' " 
+				ng-src = "{{ group.image_url }}"
+				inject-fancyboxable>
 		</div>
-
 		<div class="medlem-info">
 			<h1>{{ group.name }} </h1>
 			<span ng-bind-html="group.about"></span>
