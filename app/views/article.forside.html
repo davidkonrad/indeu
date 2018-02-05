@@ -14,7 +14,8 @@
 			<h4><em> {{ article.sub_header }} </em></h4>
 
 			<div ng-if="article.imageUrl" class="artikel-image">
-				<img ng-src="{{ article.imageUrl }}">
+				<img class="cursor-pointer"
+					ng-src="{{ article.imageUrl }}" inject-fancyboxable>
 			</div>
 
 			<div class="artikel-content" ng-bind-html="article.content"></div>

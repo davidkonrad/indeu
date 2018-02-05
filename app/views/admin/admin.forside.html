@@ -1,0 +1,42 @@
+<h1>Forside</h1>
+
+<div class="admin-menu">
+	<div ng-include="'views/admin/admin.menu.html'"></div>
+</div>
+
+<div class="admin-content">
+
+	<div class="col-md-10" id="test">
+		<span class="h3 no-padding pull-left" style="margin-top: 0px;">Promoveret content</span>
+		<button class="btn btn-default btn-sm pull-right" 
+			ng-disabled="!changed"
+			ng-click="updateContent()"
+			ng-class="{ 'btn-primary': changed }">Gem
+		</button>
+
+		<div class="sortable-container" sv-root sv-part="content" sv-on-sort="setNewOrder()">
+
+			<div ng-repeat="c in content" sv-element="opts"  class="well well-sm col-md-12" style="margin-bottom:2px;">
+
+				<span class="col-md-1"> {{ c.rank }} </span>
+				<span class="col-md-2"> {{ c.type || 'Ledig' }} </span>
+				<span class="col-md-7"> {{ c.header }} </span>
+				<span class="col-md-2 pull-right no-padding">
+					<button role="button" class="btn btn-default btn-xs" ng-click="selectContent(c, 'article')">
+						<i class="fa fa-file-text-o" title="Indsæt artikel"></i>
+					</button>
+					<button role="button" class="btn btn-default btn-xs" ng-click="selectContent(c, 'event')">
+						<i class="fa fa-calendar" title="Indsæt event"></i>
+					</button>
+					<button role="button" class="btn btn-default btn-xs" ng-click="selectContent(c, 'association')">
+						<i class="fa fa-sitemap" title="Indsæt forening"></i>
+					</button>
+					<button role="button" class="btn btn-default btn-xs" ng-click="removeContent(c)" ng-disabled="!c.content_id">
+						<i class="fa fa-times text-danger" title="Fjern indhold"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+

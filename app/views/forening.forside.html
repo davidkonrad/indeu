@@ -9,8 +9,9 @@
 		<div class="col-md-12 no-padding">
 			<img ng-if="forening.image != ''" 
 				class="pull-left" 
-				ng-src="media/forening/thumbs/{{ forening.image }}" 
-				style="padding-right:20px; padding-bottom: 10px;"
+				ng-src="media/forening/{{ forening.image }}" 
+				inject-fancyboxable
+				style="max-width: 300px; padding-right:20px; padding-bottom: 10px;"
 				title="{{ forening.name }}">
 			<div ng-bind-html="forening.about"></div>
 		</div>

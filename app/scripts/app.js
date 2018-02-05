@@ -17,7 +17,6 @@ angular.module('indeuApp', [
 	'datatables.bootstrap',
 	'datatables.select',
 	'datatables.options',
-	'ngTagsInput',
 	'bootstrap3-typeahead',
 	'textAngular',
 	'textAngularSetup',
@@ -30,7 +29,8 @@ angular.module('indeuApp', [
 	'leaflet-directive',
 	'ui-notification',
 	'ngRateIt',
-	'angular-smilies'
+	'angular-smilies',
+	'angular-sortable-view'
   ])
   .config(function ($locationProvider, $routeProvider, cfpLoadingBarProvider, NotificationProvider, $tooltipProvider, $provide) {
 
@@ -44,7 +44,7 @@ angular.module('indeuApp', [
 		}
 
 		NotificationProvider.setOptions({
-			delay: 5000,
+			delay: 4000,
 			startTop: 20,
 			startRight: 10,
 			verticalSpacing: 20,
@@ -171,7 +171,7 @@ angular.module('indeuApp', [
 
 			//administration
       .when('/admin-forside', {
-        templateUrl: 'views/admin.forside.html',
+        templateUrl: 'views/admin/admin.forside.html',
         controller: 'AdminForsideCtrl',
         controllerAs: 'adminforside'
       })

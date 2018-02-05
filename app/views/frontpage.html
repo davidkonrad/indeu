@@ -1,6 +1,13 @@
 <div class="col-md-6">
-	<div class="frontpage">
+	<a ng-href="{{ promo.url }}"
+		class="frontpage-promo cursor-pointer unstyled hover-effect" 
+		ng-style="getBackgroundStyle()">
 
+		<p class="h1" ng-bind-html="promo.header"></p>
+
+		<p class="h4" ng-bind-html="promo.extract"></p>
+
+<!--
 		<h2>{{ article.header }}</h2>
 
 		<div ng-if="article.sub_header" class="frontpage-manchet">
@@ -11,7 +18,8 @@
 			<img ng-if="article.image" ng-src="media/artikel/{{ article.image }}">
 		</div>
 		<div class="frontpage-content" ng-bind-html="article.html"></div>
-	</div>
+-->
+	</a>
 </div>
 	
 <div class="col-md-3">

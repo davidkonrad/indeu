@@ -5,32 +5,71 @@
  *
  */
 angular.module('indeuApp')
-  .controller('FrontpageCtrl', function($scope, ESPBA, Lookup, Meta, Utils, Redirect, Notification) {
-
+  .controller('FrontpageCtrl', function($scope, $timeout, ESPBA, Lookup, Meta, Utils, Redirect, Notification) {
 
 		Meta.setTitle('indeu.org');
 		Meta.setDescription('bla bla.');
 
 		function init() {
-			ESPBA.get('frontpage').then(function(f) {
-				var front = f.data[0];
-				if (front && front.promoted_article_id) ESPBA.get('article', { id: front.promoted_article_id }).then(function(a) {
-					a = a.data[0];
-					a.urlName = Utils.urlName(a.header);
-
-					var html = Utils.trimHtml(a.content, 500);
-					var link = Utils.isLocalHost() 
-						? '&nbsp;&nbsp;<a href="#/artikel/'+a.id+'/'+a.urlName+'" debug-link>Læs mere ...</a>'
-						: '&nbsp;&nbsp;<a href="artikel/'+a.id+'/'+a.urlName+'" debug-link>Læs mere ...</a>';
-
-					//</p></div>
-					html = [html.slice(0, html.length-10), link, html.slice(html.length-10)].join('');
-				
-					a.html = html;
-					//console.log('html', a.html);
-					$scope.article = a;
+			ESPBA.get('frontpage_content').then(function(f) {
+				//sort by rank
+				f.data.sort(function(a,b) {
+					return a.rank > b.rank
 				})
+				//set link and images
+				f.data.forEach(function(c) {
+					switch (c.type) {
+						case 'Artikel':
+							if (c.image) c.image_url = '../media/artikel/'+c.image;
+							c.url = Utils.articleUrl(c.content_id, c.header);
+							break;
+
+						case 'Forening':
+							if (c.image) c.image_url = '..media/forening/'+c.image;
+							c.url = Utils.foreningUrl(c.content_id, c.header);
+							break;
+
+						case 'Event':
+							if (c.image) c.image_url = '..media/artikel/'+c.image;
+							c.url = Utils.eventUrl(c.content_id, c.header);
+							break;
+
+						default:
+							break; //should really never happen
+					}
+				})
+				$scope.promo = f.data[0];
+				$scope.promo.extract = $scope.promo.extract ? '»'+$scope.promo.extract+'«' : null;
+				$scope.sub_promos = f.data.slice(1);
+
+				$scope.promoBackgroundStyle = {	'background':'#dadada' };
+				if ($scope.promo.image_url) {
+					var img = new Image();
+					img.onload = function() {
+						/*
+							if height>width go for left aligned image, right aligned text
+							if width>height and width > 500 go for fuul width
+								if height < 400 place text at bottom
+						*/							
+		
+						console.log(img.width, img.height);
+						var ret = {
+							'background-image':'url(' + $scope.promo.image_url + ')',
+							'background-size': 'cover',
+							'background-repeat': 'no-repeat',
+							'background-position': 'center center'
+				    };
+	 						$scope.promoBackgroundStyle = ret
+					}
+					img.src = $scope.promo.image_url;
+				}
+
+
 			})
+		}
+
+		$scope.getBackgroundStyle = function(image) {
+			return $scope.promoBackgroundStyle;
 		}
 
 		Lookup.init().then(function() {

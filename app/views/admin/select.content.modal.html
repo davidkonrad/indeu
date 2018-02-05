@@ -1,0 +1,38 @@
+<div class="modal ng-scope top am-fade-and-slide-top center medium-dialog" tabindex="-1" role="dialog" style="display: block;" id="select-artikel-dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title" ng-bind-html="title"></h4>
+			</div>
+
+			<div class="modal-body">
+
+				<table datatable="" 
+					id="table-artikler"
+					class="table table-striped col-md-12 no-padding no-margin no-select" 
+					dt-options="dtOptions" 
+					dt-columns="dtColumns"
+					dt-instance="dtInstanceCallback">
+				</table>
+
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" 
+					class="btn" 
+					ng-click="modalClose(true)" 
+					ng-class="{ 'btn-success' : canSave() }"
+					ng-disabled="!canSave()">
+						{{ btnOk }}
+				</button> 
+				<button type="button" 
+					class="btn btn-default" 
+					ng-click="modalClose(false)" >
+						Fortryd
+				</button> 
+			</div>
+
+		</div>
+	</div>
+</div>

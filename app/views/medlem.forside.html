@@ -4,8 +4,8 @@
 	<div class="medlem-image">
 		<i ng-if="user.image == ''" class="fa fa-user medlem-default-image"></i>
 		<img ng-if="user.image != ''" 
-			ng-src="../media/medlem/thumb/{{ user.image }}" 
-			fancyboxable="{ centerOnScroll:true, margin:20, href: '../media/medlem/{{ user.image }}' }">
+			ng-src="../media/medlem/{{ user.image }}" 
+			inject-fancyboxable>
 	</div>
 
 	<div class="medlem-info">

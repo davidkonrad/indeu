@@ -59,7 +59,6 @@ module.exports = function(config) {
       'bower_components/angular-strap/dist/angular-strap.tpl.js',
       'bower_components/bootstrap3-typeahead/bootstrap3-typeahead.js',
       'bower_components/angular-bootstrap3-typeahead/angular-bootstrap3-typeahead.js',
-      'bower_components/ng-tags-input/ng-tags-input.js',
       'bower_components/rangy/rangy-core.js',
       'bower_components/rangy/rangy-classapplier.js',
       'bower_components/rangy/rangy-highlighter.js',
@@ -105,6 +104,7 @@ module.exports = function(config) {
       'bower_components/angular-rateit/dist/ng-rateit.js',
       'bower_components/moment-timezone/builds/moment-timezone-with-data-2012-2022.js',
       'bower_components/angular-smilies/dist/angular-smilies.js',
+      'bower_components/angular-sortable-view/src/angular-sortable-view.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
