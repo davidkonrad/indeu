@@ -84,7 +84,6 @@ angular.module('indeuApp', [
 			trigger: 'hover'
 	  });
 
-
     $routeProvider
       .when('/', {
         templateUrl: 'views/blank.forside.html',
@@ -176,7 +175,7 @@ angular.module('indeuApp', [
         controllerAs: 'adminforside'
       })
       .when('/admin-overblik', {
-        templateUrl: 'views/admin.overblik.html',
+        templateUrl: 'views/admin/admin.overblik.html',
         controller: 'AdminCtrl',
         controllerAs: 'administration'
       })

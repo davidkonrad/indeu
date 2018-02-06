@@ -1,0 +1,102 @@
+<h1>Administration</h1>
+
+<div class="admin-menu">
+	<div ng-include="'views/admin/admin.menu.html'"></div>
+</div>
+
+<div class="admin-content">
+
+	<div class="col-md-6">
+
+		<div class="panel panel-default no-margin">
+		  <div class="panel-heading h5 no-margin">Brugere</div>
+		  <div class="panel-body" style="padding-top:10px;">
+				<h4 class="col-md-9 no-margin">
+					<i class="fa fa-fw fa-user text-muted"></i>
+					Brugere i alt
+				</h4>
+				<h3 class="col-md-3 no-margin text-right"> {{ overview.user_count }}</h3>
+
+				<h4 class="col-md-9 no-margin">
+					<i class="fa fa-fw fa-user-md text-muted"></i>
+					Brugere logget ind
+				</h4>
+				<h3 class="col-md-3 no-margin text-right"> {{ overview.user_logged_in_count }}</h3>
+
+				<h4 class="col-md-9 no-margin">
+					<i class="fa fa-fw fa-user-plus text-muted"></i>
+					Nye brugeranmodninger
+				</h4>
+				<h3 class="col-md-3 no-margin text-right"> {{ overview.user_request_count }}</h3>
+
+				<h4 class="col-md-9 no-margin">
+					<i class="fa fa-fw fa-user-times text-muted"></i>
+					Brugere i karantæne
+				</h4>
+				<h3 class="col-md-3 no-margin text-right"> {{ overview.user_quarantine_count }}</h3>
+
+		  </div>
+		</div>
+		<br>
+		<div class="panel panel-default no-margin">
+		  <div class="panel-heading h5 no-margin">Mest kommenterede</div>
+		  <div class="panel-body" style="padding-top:10px;">
+				<span ng-repeat="mc in most_commented">
+					<h4 class="col-md-10 no-margin">
+						<i class="fa fa-fw text-muted" ng-class="mc.fa"></i>
+						<a class="unstyled"
+							href="{{ mc.url }}"
+							target=_blank
+							style="width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;top:4px;position:relative;">
+							{{ mc.name }}
+						</a>
+					</h4>
+					<h3 class="col-md-2 no-margin text-right"> 
+						{{ mc.count }}
+					</h3>
+				</span>
+		  </div>
+		</div>
+
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel panel-default no-margin">
+		  <div class="panel-heading h5 no-margin">Indhold</div>
+		  <div class="panel-body" style="padding-top:10px;">
+				<h4 class="col-md-9 no-margin">
+					<i class="fa fa-fw fa-file-text-o text-muted"></i>
+					Artikler
+				</h4>
+				<h3 class="col-md-3 no-margin text-right"> {{ overview.article_count }} </h3>
+
+				<h4 class="col-md-9 no-margin">
+					<i class="fa fa-fw fa-calendar text-muted"></i>
+					Events
+				</h4>
+				<h3 class="col-md-3 no-margin text-right"> {{ overview.event_count }}</h3>
+
+				<h4 class="col-md-9 no-margin">
+					<i class="fa fa-fw fa-sitemap text-muted"></i>
+					Foreninger
+				</h4>
+				<h3 class="col-md-3 no-margin text-right"> {{ overview.association_count }}</h3>
+
+				<h4 class="col-md-9 no-margin">
+					<i class="fa fa-fw fa-users text-muted"></i>
+					Grupper
+				</h4>
+				<h3 class="col-md-3 no-margin text-right"> {{ overview.group_count }}</h3>
+
+				<h4 class="col-md-9 no-margin">
+					<i class="fa fa-fw fa-comment-o text-muted"></i>
+					Kommentarer
+				</h4>
+				<h3 class="col-md-3 no-margin text-right"> {{ overview.comment_count }}</h3>
+
+		  </div>
+		</div>
+	</div>
+
+
+</div>
