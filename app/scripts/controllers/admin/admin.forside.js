@@ -4,7 +4,7 @@
  *
  *
  */
-angular.module('indeuApp').controller('AdminForsideCtrl', function($scope, $q, Utils, ESPBA, SelectContentModal, Notification) {
+angular.module('indeuApp').controller('AdminForsideCtrl', function($scope, $q, Log, Login, Utils, ESPBA, SelectContentModal, Notification) {
 
 	$scope.changed = false;
 
@@ -29,6 +29,14 @@ angular.module('indeuApp').controller('AdminForsideCtrl', function($scope, $q, U
 		})
 		Notification.primary('Forside indhold ændret ..');
 		$scope.changed = false;
+
+		Log.log({
+			type: Log.FRONTPAGE_CONTENT_CHANGED,
+			user_id: Login.currentUser().id,
+			context_user_id: null,
+			hash: null
+		});
+
 	}
 
 	$scope.setNewOrder = function() {

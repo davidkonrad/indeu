@@ -251,6 +251,20 @@ angular.module('indeuApp')
 						item.title = item.userName + ' ' + Utils.plainText(item.action);
 						break;
 
+					case Log.ARTICLE_RETRACTED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'trak artiklen';
+						item.action += '  <a href="'+Utils.articleUrl(item.article_id, item.article_name) + '">'+item.article_name+'</a> tilbage';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					//misc
+					case Log.FRONTPAGE_CONTENT_CHANGED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'redigerede forsidens promoverede indhold ';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
 
 					default : 
 						break;

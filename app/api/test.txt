@@ -23,14 +23,14 @@
     "CONTEXT_DOCUMENT_ROOT": "\/var\/www\/",
     "SERVER_ADMIN": "webmaster@localhost",
     "SCRIPT_FILENAME": "\/var\/www\/html\/indeu\/app\/api\/espba.php",
-    "REMOTE_PORT": "43132",
+    "REMOTE_PORT": "50632",
     "GATEWAY_INTERFACE": "CGI\/1.1",
     "SERVER_PROTOCOL": "HTTP\/1.1",
     "REQUEST_METHOD": "GET",
-    "QUERY_STRING": "__action=get&__table=visit_counter&__token=43b049b608e67c42299e203df0d956034612226b&hash=JC8M8KLVZC7YI",
-    "REQUEST_URI": "\/html\/indeu\/app\/api\/espba.php?__action=get&__table=visit_counter&__token=43b049b608e67c42299e203df0d956034612226b&hash=JC8M8KLVZC7YI",
+    "QUERY_STRING": "__action=get&__table=visit_counter&__token=c86afae6ecdb52023265a68bdb31e70a2a862147&hash=JC8MDXHVACNCF",
+    "REQUEST_URI": "\/html\/indeu\/app\/api\/espba.php?__action=get&__table=visit_counter&__token=c86afae6ecdb52023265a68bdb31e70a2a862147&hash=JC8MDXHVACNCF",
     "SCRIPT_NAME": "\/html\/indeu\/app\/api\/espba.php",
     "PHP_SELF": "\/html\/indeu\/app\/api\/espba.php",
-    "REQUEST_TIME_FLOAT": 1517873686.837,
-    "REQUEST_TIME": 1517873686
+    "REQUEST_TIME_FLOAT": 1517875481.521,
+    "REQUEST_TIME": 1517875481
 }

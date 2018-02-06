@@ -30,7 +30,7 @@ angular.module('indeuApp')
 					var img = new Image();
 					img.onload = function() {
 						a.imageUrl = imageUrl;
-						console.log(img.width, img.height);
+						//console.log(img.width, img.height);
 					}
 					img.src = imageUrl;
 				}

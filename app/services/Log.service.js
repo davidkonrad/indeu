@@ -12,6 +12,7 @@ angular.module('indeuApp').factory('Log', function(ESPBA) {
 
 		ARTICLE_CREATED: 10,
 		ARTICLE_EDITED: 11,
+		ARTICLE_RETRACTED: 12,
 
 		EVENT_CREATED: 20,
 		EVENT_EDITED: 21,
@@ -47,6 +48,9 @@ angular.module('indeuApp').factory('Log', function(ESPBA) {
 		ASSOCIATION_OWNER_CHANGED: 56,
 		ASSOCIATION_MEMBER_EXCLUDED: 57,
 		ASSOCIATION_ARTICLE_CREATED: 58,
+
+		//misc
+		FRONTPAGE_CONTENT_CHANGED: 70,	
 
 		log: function(opt) {
 			var params = {
