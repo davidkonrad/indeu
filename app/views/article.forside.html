@@ -103,9 +103,9 @@
 		</div>
 		<div class="layout-right-header-content">
 			<span ng-repeat="g in groups">
-				<a ng-href="/grupper/{{ g.group_id }}/{{ g.urlName }}" debug-link>
-					<i class="fa fa-fw fa-x2 fa-users text-muted"></i>
-					{{ g.name }}
+				<i class="fa fa-fw fa-x2 fa-users text-muted"></i>
+				<a ng-href="{{ g.url }}">
+					{{ g.group_name }}
 				</a><br>
 			</span>
 		</div>

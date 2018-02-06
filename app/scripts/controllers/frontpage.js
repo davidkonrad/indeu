@@ -42,7 +42,6 @@ angular.module('indeuApp')
 				$scope.promo.extract = $scope.promo.extract ? '»'+$scope.promo.extract+'«' : null;
 				$scope.sub_promos = f.data.slice(1);
 
-				$scope.promoBackgroundStyle = {	'background':'#dadada' };
 				if ($scope.promo.image_url) {
 					var img = new Image();
 					img.onload = function() {
@@ -62,6 +61,8 @@ angular.module('indeuApp')
 	 						$scope.promoBackgroundStyle = ret
 					}
 					img.src = $scope.promo.image_url;
+				} else {
+					$scope.promoBackgroundStyle = {	'background':'#dadada' };
 				}
 
 

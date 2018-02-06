@@ -16,7 +16,6 @@
 	font-style: normal;
 	font-weight: 900;
   background:rgba(255,255,255, 0.7);
-	XXcolor: navy;
 }
 .frontpage-promo p {
 	padding: 10px;
@@ -31,40 +30,4 @@
 	bottom: 0;
 }
 
-/*
-.frontpage {
-}
-
-.frontpage .frontpage-image {
-	float: left;
-	margin: 20px;
-	margin-left: 0px;
-	margin-top: 7px;
-	margin-bottom: 5px;
-	display: block;
-	clear: none;
-}
-
-.frontpage .frontpage-image img {
-	max-height: 160px;
-}
-
-.frontpage .frontpage-header {
-	float: left;
-	display: block;
-	width: 100%;
-}
-
-.frontpage .frontpage-manchet {
-	float: left;
-	display: block;
-	margin-bottom: 10px;
-}
-
-.frontpage .frontpage-content {
-	xxfloat: left;
-	display: block;
-	clear: none;
-}
-*/
 

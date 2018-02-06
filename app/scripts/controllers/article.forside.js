@@ -62,12 +62,10 @@ angular.module('indeuApp')
 					}
 				})
 
-				//groups
-				ESPBA.get('group_articles', { article_id: id }).then(function(gr) {
+				//get groups associated with the article
+				ESPBA.prepared('ArticleGroups', { article_id: id }).then(function(gr) {
 					gr.data.forEach(function(g) {
-						var group = Lookup.getGroup(g.group_id);
-						g.name = group.name;
-						g.urlName = Utils.urlName(group.name);
+						g.url = Utils.gruppeUrl(g.group_id, g.group_name);
 					})
 					$scope.groups = gr.data;
 				});

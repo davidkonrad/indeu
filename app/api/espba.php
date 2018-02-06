@@ -37,8 +37,7 @@ class ESPBA extends DbPDO {
 	public function __construct($array) {
 		parent::__construct();
 		
-		file_put_contents('test.txt', json_encode($_SERVER, JSON_PRETTY_PRINT));
-
+		//file_put_contents('test.txt', json_encode($_SERVER, JSON_PRETTY_PRINT));
 		//header('Access-Control-Allow-Origin	: "*"');
 		if ($this->isLocalhost()) {
 			//header('Access-Control-Allow-Origin	: "*"');

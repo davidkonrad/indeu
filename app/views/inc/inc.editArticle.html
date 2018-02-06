@@ -60,17 +60,15 @@
 						</div>
 					</td>
 					<td class="col-md-4">
-						<div class="article-image" ng-click="articleUploadImage()">
-							<i ng-if="article.image == ''" class="fa fa-image article-default-image"></i>
-							<img ng-if="article.image != ''" ng-src="../media/artikel/{{ article.image }}" XXfancyboxable="{centerOnScroll:true,margin:20}">
-						</div>
+						<br>
+						<attach-image ng-model="article.image" type="a" size="auto" height="160"></attach-image>
 					</td>
 				</tr>
 <!-- groups -->
 				<tr>
 					<td colspan="2">
 				    <div class="form-group">
-							<div class="col-md-12">
+							<div class="col-md-12" ng-if="article.id">
 								<span ng-repeat="g in article_groups">
 									<button class="btn btn-default btn-xs" type="button">
 										{{ g.name }}
@@ -84,13 +82,12 @@
 									type="button"
 									ng-click="articleAction.addGroup()">
 									<i class="fa fa-plus"></i>
-									Gruppe
+									Knyt til gruppe(r)
 								</buttun>
 							</div>
 						</div>
 					</td>
 				</tr>
-
 			</table>
 	    <div class="form-group">
 				<div class="col-md-12">

@@ -5,7 +5,7 @@
 /bower_components
 /app/media
 /app/api/pw.php
-/convert/
+/app/api/test.txt
 /db
 log.txt
 old_Gruntfile.js

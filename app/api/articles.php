@@ -148,6 +148,29 @@ SQL;
 		return $SQL;
 	}
 
+
+	//******************
+	//ArticleGroups
+	//return groups associated with an 
+	//@article_id
+	public function ArticleGroups() {
+		$article_id = isset($this->array['article_id']) ? $this->array['article_id'] : false;
+
+$SQL = <<<SQL
+		select 
+			ga.group_id,
+			g.name as group_name
+		from
+			group_articles ga 
+		left join `group` as g on g.id = ga.group_id
+		where
+			ga.article_id = $article_id
+SQL;
+		return $SQL;
+	}
+
+			
+
 }
 
 ?>
