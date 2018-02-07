@@ -4,8 +4,14 @@
  *
  *
  */
-angular.module('indeuApp').controller('AdminForsideCtrl', function($scope, $q, Log, Login, Utils, ESPBA, SelectContentModal, Notification) {
+angular.module('indeuApp').controller('AdminForsideCtrl', 
+	function($scope, $q, $location, Log, Login, Utils, ESPBA, SelectContentModal, Notification, AdminRights) {
 
+	if (!AdminRights.frontpageView()) {
+		$location.path('/admin-overblik').replace()
+	}
+
+	$scope.updateRights = AdminRights.frontpageUpdate();
 	$scope.changed = false;
 
 	ESPBA.get('frontpage_content', {}).then(function(f) {
@@ -56,6 +62,7 @@ angular.module('indeuApp').controller('AdminForsideCtrl', function($scope, $q, L
 	}
 
 	$scope.selectContent = function(item, content_type) {
+		if (!$scope.updateRights) return;
 		SelectContentModal.show(content_type).then(function(a) {
 			if (a) {
 				a = a[0];

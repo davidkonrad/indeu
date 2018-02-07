@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('indeuApp').controller('AdminForeningerCtrl', 
-	function($scope, $q, ESPBA, Utils, Const, Log, Lookup, ForeningModal, DTOptionsBuilder, DTColumnBuilder) {
+	function($scope, $q, $location, ESPBA, Utils, Const, Log, Lookup, ForeningModal, DTOptionsBuilder, DTColumnBuilder, AdminRights) {
+
+		if (!AdminRights.associationView()) {
+			$location.path('/admin-overblik').replace()
+		}
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;

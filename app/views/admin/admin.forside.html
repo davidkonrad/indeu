@@ -9,9 +9,9 @@
 	<div class="col-md-10" id="test">
 		<span class="h3 no-padding pull-left" style="margin-top: 0px;">Promoveret content</span>
 		<button class="btn btn-default btn-sm pull-right" 
-			ng-disabled="!changed"
+			ng-disabled="!changed || !updateRights"
 			ng-click="updateContent()"
-			ng-class="{ 'btn-primary': changed }">Gem
+			ng-class="{ 'btn-primary': changed && updateRights }">Gem
 		</button>
 
 		<div class="sortable-container" sv-root sv-part="content" sv-on-sort="setNewOrder()">

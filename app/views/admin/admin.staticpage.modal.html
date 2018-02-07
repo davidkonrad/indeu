@@ -35,7 +35,7 @@
 					class="btn" 
 					ng-click="save()" 
 					ng-class="{ 'btn-success' : canSave() }"
-					ng-enabled="canSave()">
+					ng-disabled="!canSave()">
 						{{ btnSave }}
 				</button> 
 				<button type="button" 

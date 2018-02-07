@@ -4,9 +4,12 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('AdminStatiskCtrl', 
-	function($scope, $q, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, StaticPageModal, Lookup, Const) {
+angular.module('indeuApp').controller('AdminStatiskCtrl', 
+	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, StaticPageModal, Lookup, Const, AdminRights) {
+
+		if (!AdminRights.static_pageView()) {
+			$location.path('/admin-overblik').replace()
+		}
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;
@@ -54,7 +57,7 @@ angular.module('indeuApp')
 					className: 'btn btn-default btn-xs colvis-btn'
 				},
 				{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Ny statisk side</span>',
-					className: 'btn btn-xs',
+					className: AdminRights.static_pageCreate() ? 'btn btn-xs' : 'btn btn-xs disabled',
 					action: function( e, dt, node, config ) {
 						StaticPageModal.show().then(function() {
 							$scope.dtInstance.reloadData();

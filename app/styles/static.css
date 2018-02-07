@@ -11,7 +11,7 @@
 .dataTables_wrapper .dataTables_paginate .paginate_button {
 	padding : 0px;
 	margin-left: 0px;
-	display: inline;
+	display: inline-block;
 	border: 0px;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
@@ -93,10 +93,8 @@ a.disabled:hover, a.disabled:active, a.disabled:focus {
 	text-decoration: none;
 }
 
-
 a.hover-effect {
 	display: block;
-	XXborder: 1px solid #fff;
 	padding-bottom: 12px;
 }
 a.hover-effect:hover{

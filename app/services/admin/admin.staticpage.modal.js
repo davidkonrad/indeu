@@ -10,8 +10,10 @@ angular.module('indeuApp').factory('StaticPageModal', function($modal, $q) {
 	var deferred;
 	var local = this;
 
-	local.modalInstance = ['$scope', 'ESPBA', 'Login', 'Utils', 'static_page_id', function($scope, ESPBA, Login, Utils, static_page_id) {
+	local.modalInstance = ['$scope', 'ESPBA', 'AdminRights', 'Login', 'Utils', 'static_page_id', 
+	function($scope, ESPBA, AdminRights, Login, Utils, static_page_id) {
 		
+		$scope.updateRights = AdminRights.static_pageEdit();
 		$scope.title = 'Opret ny statisk side';
 		$scope.btnSave = 'Opret og luk';
 
@@ -35,11 +37,11 @@ angular.module('indeuApp').factory('StaticPageModal', function($modal, $q) {
 		}
 
 		$scope.canSave = function() {
-			//console.log($scope.edit)
-			return $scope.edit && 
-			$scope.edit.header &&
-			$scope.edit.header.length > 1 && 
-			$scope.edit.content.length > 1
+			return $scope.updateRights &&
+				$scope.edit && 
+				$scope.edit.header &&
+				$scope.edit.header.length > 1 && 
+				$scope.edit.content.length > 1
 		}
 
 		if (static_page_id) {

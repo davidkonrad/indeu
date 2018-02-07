@@ -87,12 +87,94 @@
 						</form>
 					</div>
 
-<!---- adresse --->
+<!-- indstillinger -->
+					<div bs-pane data-title="Indstillinger">
+						<form role="form" class="form-horizontal" autocomplete="off">
+							<br>
+					    <div class="form-group">
+								<label class="col-md-1 control-label" for=""></label>
+								<div class="col-md-11 checkbox">
+									<label class="checkbox">
+										<input type="checkbox" 
+											ng-model="edit.visible_email"
+											ng-false-value="0" 
+											ng-true-value="1">Synlig email-adresse
+									</label>
+								</div>
+
+								<label class="col-md-1 control-label" for=""></label>
+								<div class="col-md-11 checkbox">
+									<label class="checkbox">
+										<input type="checkbox" 
+											ng-model="edit.visible_social_media"
+											ng-false-value="0" 
+											ng-true-value="1">Synlig web / sociale medier
+									</label>
+								</div>
+
+								<label class="col-md-1 control-label" for=""></label>
+								<div class="col-md-11 checkbox">
+									<label class="checkbox">
+										<input type="checkbox" 
+											ng-model="edit.visible_phone"
+											ng-false-value="0" 
+											ng-true-value="1">Synlig telefon nummer
+									</label>
+								</div>
+
+								<label class="col-md-1 control-label" for=""></label>
+								<div class="col-md-11 checkbox">
+									<label class="checkbox">
+										<input type="checkbox" 
+											ng-model="edit.visible_address"
+											ng-false-value="0" 
+											ng-true-value="1">Synlig adresse
+									</label>
+								</div>
+
+								<label class="col-md-1 control-label" for=""></label>
+								<div class="col-md-11 checkbox">
+									<label class="checkbox">
+										<input type="checkbox" 
+											ng-model="edit.visible_calendar"
+											ng-false-value="0" 
+											ng-true-value="1">Synlig kalender
+									</label>
+								</div>
+
+								<div class="col-md-12">
+									<br><br>
+								</div>
+
+								<label class="col-md-1 control-label" for=""></label>
+								<div class="col-md-11 checkbox" ng-if="adminRights.userQuarantine == true">
+									<label class="checkbox">
+										<input type="checkbox" 
+											ng-model="edit.quarantine"
+											ng-false-value="0" 
+											ng-true-value="1">Sæt i karantæne
+									</label>
+								</div>
+							
+								<label class="col-md-1 control-label" for=""></label>
+								<div class="col-md-11 checkbox" ng-if="adminRights.userGrantAdmin == true">
+									<label class="checkbox">
+										<input type="checkbox" 
+											ng-model="edit.role"
+											ng-false-value="null" 
+											ng-true-value="2">Administrator
+									</label>
+								</div>
+							</div>
+						</form>	
+					</div>
+
+<!-- adresse -->
 					<div bs-pane data-title="Adresse">
 						<edit-address hash="{{ edit.hash }}"></edit-address>	
 					</div>
 
-<!---- bio --->
+<!-- bio -->
 					<div bs-pane data-title="Bio">
 						<form role="form" class="form-horizontal" autocomplete="off">
 							<br>
@@ -107,7 +189,7 @@
 						</form>
 					</div>
 
-<!---- billede --->
+<!-- billede -->
 					<div bs-pane data-title="Billede">
 						<br>
 						<div class="col-md-4 col-md-offset-4">
@@ -115,12 +197,12 @@
 						</div>
 					</div>
 
-<!---- socialt --->
-					<div bs-pane data-title="Web / SoMe" ng-if="edit.hash != undefined">
+<!-- socialt -->
+					<div bs-pane data-title="Web / Sociale medier" ng-if="edit.hash != undefined">
 						<edit-social-media hash="{{ edit.hash }}"></edit-social-media>
 					</div>
 
-<!---- grupper --->
+<!-- grupper -->
 					<div bs-pane data-title="Grupper">
 						<table datatable="" 
 							id="table-bruger-grupper"
@@ -131,11 +213,268 @@
 						</table>
 					</div>
 
-<!---- handlinger --->
+<!-- handlinger -->
 					<div bs-pane data-title="Handlinger">
 						<log-notifications user-id="{{ edit.id }}"></log-notifications>
 					</div>
 
+<!-- administrator rettigheder -->
+					<div bs-pane data-title="Admin rettigheder" ng-if="edit.role == 2 && edit_admin_rights && adminRights.userGrantAdmin">
+						<form role="form" class="form-horizontal" autocomplete="off">
+							<br>
+					    <div class="form-group no-margin">
+					      <label class="col-md-2 control-label" for="">Forside: </label>
+								<div class="col-md-10">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.frontpageView"
+											ng-false-value="false" 
+											ng-true-value="true">Se
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.frontpageUpdate"
+											ng-false-value="false" 
+											ng-true-value="true">Redigere
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group no-margin">
+					      <label class="col-md-2 control-label" for="">Brugere: </label>
+								<div class="col-md-10">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.userView"
+											ng-false-value="false" 
+											ng-true-value="true">Se
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.userEdit"
+											ng-false-value="false" 
+											ng-true-value="true">Redigere
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.userCreate"
+											ng-false-value="false" 
+											ng-true-value="true">Oprette
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.userGrantAdmin"
+											ng-false-value="false" 
+											ng-true-value="true">Tildele admin-rettigheder
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.userQuarantine"
+											ng-false-value="false" 
+											ng-true-value="true">Sætte i karantæne
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group no-margin">
+					      <label class="col-md-2 control-label" for="">Bruger requests: </label>
+								<div class="col-md-10">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.user_requestView"
+											ng-false-value="false" 
+											ng-true-value="true">Se
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.user_requestAccept"
+											ng-false-value="false" 
+											ng-true-value="true">Acceptere
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.user_requestRemove"
+											ng-false-value="false" 
+											ng-true-value="true">Fjerne
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group no-margin">
+					      <label class="col-md-2 control-label" for="">Events: </label>
+								<div class="col-md-10">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.eventView"
+											ng-false-value="false" 
+											ng-true-value="true">Se
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.eventEdit"
+											ng-false-value="false" 
+											ng-true-value="true">Redigere
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.eventCreate"
+											ng-false-value="false" 
+											ng-true-value="true">Oprette
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.eventRemove"
+											ng-false-value="false" 
+											ng-true-value="true">Slette
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group no-margin">
+					      <label class="col-md-2 control-label" for="">Grupper: </label>
+								<div class="col-md-10">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.groupView"
+											ng-false-value="false" 
+											ng-true-value="true">Se
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.groupEdit"
+											ng-false-value="false" 
+											ng-true-value="true">Redigere
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.groupCreate"
+											ng-false-value="false" 
+											ng-true-value="true">Oprette
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.groupRemove"
+											ng-false-value="false" 
+											ng-true-value="true">Slette
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group no-margin">
+					      <label class="col-md-2 control-label" for="">Foreninger: </label>
+								<div class="col-md-10">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.associationView"
+											ng-false-value="false" 
+											ng-true-value="true">Se
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.associationEdit"
+											ng-false-value="false" 
+											ng-true-value="true">Redigere
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.associationCreate"
+											ng-false-value="false" 
+											ng-true-value="true">Oprette
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.associationRemove"
+											ng-false-value="false" 
+											ng-true-value="true">Slette
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group no-margin">
+					      <label class="col-md-2 control-label" for="">Artikler: </label>
+								<div class="col-md-10">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.articleView"
+											ng-false-value="false" 
+											ng-true-value="true">Se
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.articleEdit"
+											ng-false-value="false" 
+											ng-true-value="true">Redigere
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.articleCreate"
+											ng-false-value="false" 
+											ng-true-value="true">Oprette
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.articleRemove"
+											ng-false-value="false" 
+											ng-true-value="true">Slette
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group no-margin">
+					      <label class="col-md-2 control-label" for="">Statiske sider: </label>
+								<div class="col-md-10">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.static_pageView"
+											ng-false-value="false" 
+											ng-true-value="true">Se
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.static_pageEdit"
+											ng-false-value="false" 
+											ng-true-value="true">Redigere
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.static_pageCreate"
+											ng-false-value="false" 
+											ng-true-value="true">Oprette
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.static_pageRemove"
+											ng-false-value="false" 
+											ng-true-value="true">Slette
+									</label>
+								</div>
+							</div>
+
+					    <div class="form-group no-margin">
+					      <label class="col-md-2 control-label" for="">Kommentarer: </label>
+								<div class="col-md-10">
+									<label class="checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.commentView"
+											ng-false-value="false" 
+											ng-true-value="true">Se
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.commentEdit"
+											ng-false-value="false" 
+											ng-true-value="true">Redigere
+									</label>
+									<label class="control-label checkbox-inline">
+										<input type="checkbox" 
+											ng-model="edit_admin_rights.commentRemove"
+											ng-false-value="false" 
+											ng-true-value="true">Slette
+									</label>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 			

@@ -4,9 +4,12 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('AdminGrupperCtrl', 
-	function($scope, $q, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, GruppeModal, Lookup, Const) {
+angular.module('indeuApp').controller('AdminGrupperCtrl', 
+	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, GruppeModal, Lookup, Const, AdminRights) {
+
+		if (!AdminRights.groupView()) {
+			$location.path('/admin-overblik').replace()
+		}
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;

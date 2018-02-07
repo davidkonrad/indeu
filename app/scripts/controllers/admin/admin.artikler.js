@@ -5,7 +5,11 @@
  *
  */
 angular.module('indeuApp').controller('AdminArtiklerCtrl', 
-	function($scope, $q, $timeout, ESPBA, Lookup, Meta, Utils, 	DTOptionsBuilder, DTColumnBuilder, ArtikelModal, Const) {
+	function($scope, $location, $q, ESPBA, Lookup, Meta, Utils, DTOptionsBuilder, DTColumnBuilder, ArtikelModal, Const, AdminRights) {
+
+		if (!AdminRights.articleView()) {
+			$location.path('/admin-overblik').replace()
+		}
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;

@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp')
-  .controller('AdminCtrl', function($scope, $location, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect) {
+  .controller('AdminCtrl', function($scope, $location, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect, AdminRights) {
 
 		if (!Login.isLoggedIn()) {
 			Redirect.home('Du er ikke logget ind');
@@ -15,6 +15,14 @@ angular.module('indeuApp')
 			}
 		}
 
+		AdminRights.loadUser(Login.currentUser().id).then(function(dict) {
+			if (!dict || !dict.hasOwnProperty('frontpageView')) {
+				Redirect.home('Du har ingen administrator-rettigheder');
+			}
+			$scope.adminRights = dict;
+		})
+
+		//frontpage content
 		ESPBA.prepared('AdminContentOverview', {}).then(function(r) {
 			$scope.overview = r.data[0]
 		})

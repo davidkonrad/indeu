@@ -4,9 +4,14 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('AdminBrugereCtrl', 
-	function($scope, $q, Utils, $timeout, ESPBA, DTOptionsBuilder, DTColumnBuilder, BrugerModal, Const) {
+angular.module('indeuApp').controller('AdminBrugereCtrl', 
+	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, BrugerModal, Const, AdminRights) {
+
+		if (!AdminRights.isLoaded() || !AdminRights.userView()) {
+			$location.path('/admin-overblik').replace()
+		}
+
+		$scope.createRights = AdminRights.userCreate();
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;
@@ -53,9 +58,7 @@ angular.module('indeuApp')
 				});
 				return defer.promise;
 	    })
-			.withOption('drawCallback', function() {
-			})
-			.withOption('rowCallback', function(row, data /*, index*/) {
+			.withOption('rowCallback', function(row, data) {
 				$(row).attr('user-id', data.id);
 			})
 			.withOption('dom', 'Blfrtip')
@@ -67,8 +70,8 @@ angular.module('indeuApp')
 					className: 'btn btn-default btn-xs colvis-btn'
 				},
 				{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Ny bruger</span>',
-					className: 'btn btn-xs',
-					action: function( /* e, dt, node, config */) {
+					className: $scope.createRights ? 'btn btn-xs' : 'btn btn-xs disabled',
+					action: function() {
 						BrugerModal.show().then(function() {
 							$scope.dtInstance.reloadData();
 						});
@@ -79,16 +82,6 @@ angular.module('indeuApp')
 
 		angular.element('#table-brugere').on('click', 'tbody td:not(.no-click)', function(e) {
 			var id=$(this).parent().attr('user-id');
-
-			//should never happen with new delegated event structure
-			/*
-			if (!id || BrugerModal.isShown()) {
-				e.preventDefault();
-				e.stopPropagation();
-				return;
-			}
-			*/
-	
 			BrugerModal.show(id).then(function() {
 				$scope.dtInstance.reloadData();
 			});	

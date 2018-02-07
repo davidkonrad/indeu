@@ -26,7 +26,7 @@ angular.module('indeuApp')
 				{ 
 					name: 'facebook',
 					desc: 'Facebook konto: ',
-					fa: 'fa-facebook-square'
+					fa: 'fa-facebook-official'
 				},
 				{ 
 					name: 'linkedin',

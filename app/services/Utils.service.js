@@ -229,7 +229,19 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 				hash: parser.hash ? parser.hash : null,
 				host: parser.host ? parser.host : null
 			}
+		},
+
+		//AdminRights / AdminRightsUpdater
+		getBit: function(s, index) {
+			return s.charAt(index) == '1'
+		},
+		setBit: function(s, index, value) {
+			var t = s.split('');
+			t[index] = value ? '1' : '0';
+			s = t.join('');
+			return s
 		}
+
 
 	}
 
