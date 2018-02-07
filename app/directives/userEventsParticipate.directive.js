@@ -23,9 +23,7 @@ angular.module('indeuApp')
 					})
 					events.forEach(function(item) {
 						item.urlName = Utils.urlName(item.name);
-						item.urlLink = Utils.isLocalHost() 
-							? '#/event/'+item.event_id+'/'+item.urlName
-							: '/event/'+item.event_id+'/'+item.urlName;
+						item.urlLink = Utils.eventUrl(item.event_id, item.name);
 					})
 					scope.events = events;
 //------------
@@ -41,8 +39,6 @@ angular.module('indeuApp')
 
 				});
 			});
-			//scope.eventSources = { events: scope.calEvents };
-
 
 			scope.uiConfig = {
 				calendar:{

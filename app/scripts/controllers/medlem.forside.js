@@ -23,8 +23,13 @@ angular.module('indeuApp')
 		ESPBA.get('user', { id: user_id }).then(function(r) {
 			$scope.user = r.data[0];
 			$scope.user.image = $scope.user.image || '';
+
 			//for some reason timezone not work (yet)
-			$scope.user.last_seen = moment($scope.user.last_seen).add(1, 'hours').calendar();
+			if ($scope.user.last_seen == '0000-00-00 00:00:00') {
+				$scope.user.last_seen	= 'Har endnu ikke været logget ind'
+			} else {
+				$scope.user.last_seen = 'Sidst set '+moment($scope.user.last_seen).add(1, 'hours').calendar();
+			}
 
 			ESPBA.get('address', { hash: $scope.user.hash }).then(function(a) {
 				if (a.data && a.data[0]) $scope.user.address = a.data[0];

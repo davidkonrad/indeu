@@ -22,9 +22,10 @@ angular.module('indeuApp')
 				if (image) {
 					return {
 						'background-image':'url(' + image + ')',
-						'background-size': 'cover'
+						'background-size': 'cover',
+						'background-color':'#fff !important'
 			    }
-				}	 else {
+				} else {
 					return {
 						'background':'gray'
 			    }
@@ -36,7 +37,8 @@ angular.module('indeuApp')
 				var articles = JSON.parse(newVal);
 				articles.forEach(function(item) {
 					item.url = Utils.articleUrl(item.id, item.header);
-					item.image = item.image != '' ? 'media/artikel/thumbs/'+item.image : undefined;
+					//item.image = item.image != '' ? 'media/artikel/thumbs/'+item.image : undefined;
+					item.image = item.image != '' ? 'media/artikel/'+item.image : undefined;
 					item.showHeader = Utils.plainText(item.header, 90);
 					if (item.stars) {
 						item.ratingTitle = 'Vurdering '+parseFloat(item.stars).toFixed(1)+' af '+item.votes;

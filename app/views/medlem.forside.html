@@ -83,15 +83,13 @@
 
 	<div class="col-md-12 clearfix">&nbsp;</div>
 
-	<div class="layout-right-header">Kontaktoplysninger</div>
-
 </div>
 
 
 <div class="col-md-3">
 
 	<div class="col-md-12 clearfix no-padding">
-		Sidst set {{ user.last_seen }}
+		{{ user.last_seen }}
 		<br><br>
 	</div>
 
@@ -133,25 +131,6 @@
 		<div user-events-participate="{{ user }}"></div>
 	</div>
 
-<!--
-	<div class="layout-right-header">Seneste events</div>
-	<div class="layout-right-header-content">
-		<span ng-repeat="event in events">
-			<a ng-href="#/event/{{ event.id }}/{{ event.name }}" debug-link>
-				<span class="medlem-event-date">
-					{{ event.date | date:"dd/MM" }}
-				</span>
-				<span class="medlem-event-name">
-					<strong>				
-						{{ event.name }}
-					</strong>
-				</span>
-			</a>
-		</span>
-	</div>
--->
-
-	<div class="layout-right-header">Seneste kommentarer</div>
 
 </div>
 

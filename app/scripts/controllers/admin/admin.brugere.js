@@ -24,7 +24,7 @@ angular.module('indeuApp').controller('AdminBrugereCtrl',
 				.notSortable()
 				.renderWith(function(data, type, full, meta) {
 					if (type === 'display') {
-						return '<a href="'+Utils.userUrl(full.id, full.full_name)+'"><i class="fa fa-eye"></i></a>'
+						return '<a href="'+Utils.userUrl(full.id, full.full_name)+'" target=_blank><i class="fa fa-eye"></i></a>'
 					} else {
 						return data;
 					}

@@ -482,8 +482,8 @@
 				<button type="button" 
 					class="btn" 
 					ng-click="brugerModalClose(true)" 
-					ng-class="{ 'btn-success' : __brugerModal.canSave() }"
-					ng-disabled="!__brugerModal.canSave()">
+					ng-class="{ 'btn-success' : canSave() }"
+					ng-disabled="!canSave()">
 						{{ __brugerModal.btnOk }}
 				</button> 
 				<button type="button" 

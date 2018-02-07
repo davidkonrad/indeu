@@ -27,24 +27,27 @@
 	padding: 0px;
 	color: white !important;
 }
+.article-box .image-header {
+	opacity: 0.6;
+	background-color: #000;
+}
+
 .article-box .header {
 	position: absolute;
 	font-size: 140%;
 	line-height: 110%;
 	font-weight: bold;
-	font-family: arial, helvetica;
+	font-family: 'Signika', arial, helvetica;
 	display: inline;
 	padding-top: 4px;
-	padding-bottom: 1px;
+	padding-bottom: 4px;
 	padding-left: 8px;
 	padding-right: 3px;
 	max-width: 245px;
+	min-width: 245px;
 	word-break: keep-all;
 }
-.article-box .image-header {
-	opacity: 0.6;
-	background-color: #000;
-}
+
 .article-box .rating {
 	position: relative;
 	top: 83px;
