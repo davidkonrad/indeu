@@ -6,8 +6,7 @@
 			<h4>
 				<small>
 					Oprettet <span title="{{ article.realDate }}">for {{ article.dateStamp }}</span>
-					af <a href="{{ article.userUrlLink }} ">{{ article.userFullName }}</a>
-					<span ng-if="article.editedDateStamp != undefined">, redigeret for {{ article.editedDateStamp }}</span>
+					af <a href="{{ article.userUrlLink }} ">{{ article.userFullName }}</a><span ng-if="article.editedDateStamp != undefined">, redigeret for {{ article.editedDateStamp }}</span>
 				</small>
 			</h4>
 			<h1> {{ article.header }} </h1>

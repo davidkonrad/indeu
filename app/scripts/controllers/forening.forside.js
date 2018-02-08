@@ -31,6 +31,14 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 				}
 			})
 
+			ESPBA.get('social_media', { hash: $scope.forening.hash }).then(function(s) {
+				if (s.data && s.data[0]) {
+					s = s.data[0];
+					$scope.socialMediaLinks = s;
+					$scope.hasSocialMedia = !!s.homepage || !!s.facebook || !!s.twitter || !!s.linkedIn || !!s.instagram || !!s.youtube || !!s.googleplus
+				}
+			})
+
 			ESPBA.get('user', { id: $scope.forening.owner_id }).then(function(u) {
 				u = u.data[0];
 				$scope.forening.admin = u;

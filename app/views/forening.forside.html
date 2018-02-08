@@ -141,6 +141,13 @@
 		</div>
 	</div>
 
+	<div ng-if="hasSocialMedia == true">
+		<div class="layout-right-header">Web / sociale medier</div>
+		<div class="layout-right-header-content">
+			<social-media-links record="{{ socialMediaLinks }}"></social-media-links>
+		</div>
+	</div>
+	
 	<div class="layout-right-header">Administrator</div>
 	<div class="layout-right-header-content">
 		<a ng-href="{{ forening.admin.url }}">{{ forening.admin.full_name }}</a>
@@ -153,7 +160,7 @@
 		</span>
 	</div>
 
-	<div class="layout-right-header">Deltagere</div>
+	<div class="layout-right-header">Følgere / medlemmer</div>
 	<div class="layout-right-header-content">
 		<div event-participants="{{ event.id }}"></div>
 	</div>
