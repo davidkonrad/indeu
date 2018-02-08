@@ -51,14 +51,13 @@ angular.module('indeuApp')
 								if height < 400 place text at bottom
 						*/							
 		
-						//console.log(img.width, img.height);
 						var ret = {
 							'background-image':'url(' + $scope.promo.image_url + ')',
 							'background-size': 'cover',
 							'background-repeat': 'no-repeat',
 							'background-position': 'center center'
 				    };
-	 						$scope.promoBackgroundStyle = ret
+ 						$scope.promoBackgroundStyle = ret
 					}
 					img.src = $scope.promo.image_url;
 				} else {

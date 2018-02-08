@@ -2,6 +2,7 @@
 <div class="col-md-9">
 <!-- info -->
 	<div ng-if="action == ''">
+		<h5><small><br></small></h5>
 		<div class="medlem-image" ng-class="{ 'medlem-image-missing' : group.image == '' }">
 			<i ng-if="group.image == '' " class="fa fa-users medlem-default-image"></i>
 			<img ng-if="group.image != '' " 
@@ -187,7 +188,7 @@
 		<div class="layout-right-header-content" social-links="{{ group }}"></div>
 	</div>
 
-	<div class="layout-right-header">Medlemmer</div>
+	<div class="layout-right-header">Følgere</div>
 	<div class="layout-right-header-content">
 		<span ng-repeat="user in group_users">
 			<a ng-href="{{ user.url }}" class="pull-left">{{ user.full_name }}</a>
