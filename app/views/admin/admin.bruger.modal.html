@@ -157,7 +157,7 @@
 								</div>
 							
 								<label class="col-md-1 control-label" for=""></label>
-								<div class="col-md-11 checkbox" ng-if="adminRights.userGrantAdmin == true">
+								<div class="col-md-11 checkbox" ng-if="!is_self && adminRights.userGrantAdmin == true">
 									<label class="checkbox">
 										<input type="checkbox" 
 											ng-model="edit.role"
@@ -219,7 +219,7 @@
 					</div>
 
 <!-- administrator rettigheder -->
-					<div bs-pane data-title="Admin rettigheder" ng-if="edit.role == 2 && edit_admin_rights && adminRights.userGrantAdmin">
+					<div bs-pane data-title="Admin rettigheder" ng-if="!is_self && edit.role == 2 && edit_admin_rights && adminRights.userGrantAdmin">
 						<form role="form" class="form-horizontal" autocomplete="off">
 							<br>
 					    <div class="form-group no-margin">

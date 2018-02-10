@@ -16,6 +16,7 @@ angular.module('indeuApp').factory('BrugerModal', function($modal, $q) {
 		$scope.adminRights = AdminRights.dictionary();
 
 		$scope.user_id = user_id || false;
+		$scope.is_self = user_id == Login.currentUser().id && Login.currentUser().id != 1;
 
 		$scope.brugerModalClose = function(value) {
 
