@@ -8,6 +8,7 @@ angular.module('indeuApp')
   .controller('BlivMedlemCtrl', function($scope, ESPBA, KR, Meta, Utils, Redirect) {
 
 	$scope.reg = {};
+	$scope.error = ' ';
 
 	$scope.canRegister = function() {
 		var canRegister = $scope.reg.first_name && 
@@ -16,10 +17,31 @@ angular.module('indeuApp')
 			$scope.reg.email && 
 			$scope.reg.address && 
 			$scope.reg.postal_code && 
-			$scope.reg.city;
+			$scope.reg.city &&
+			$scope.isValidEmail
 
 		return canRegister
 	}
+
+	//https://stackoverflow.com/questions/46155/how-can-an-email-address-be-validated-in-javascript
+	function validateEmail(email) {
+		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(String(email).toLowerCase());
+	}
+
+	$scope.$watch('reg.email', function(newVal, oldVal) {
+		$scope.isValidEmail = validateEmail($scope.reg.email);
+		if ($scope.isValidEmail) {
+			ESPBA.get('user', { email: $scope.reg.email }).then(function(r) {
+				if (r.data && r.data.length>0) {
+					$scope.error = 'Emailadressen er allerede i brug';
+					$scope.isValidEmail = false;
+				} else {
+					$scope.error = ' '
+				}
+			})
+		}
+	}, true)
 
 	$scope.register = function() {
 		$scope.reg.hash = Utils.getHash()+'ur';

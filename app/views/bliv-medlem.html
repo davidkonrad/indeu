@@ -9,17 +9,18 @@
 			<li>Udfyld nedenstående ansøgnings-formular og klik "Send ansøgning"</li>
 			<li>Du modtager kort efter en mail, klik på linket i mailen for at bekræfte din email-adresse</li>
 			<li>Når du har fået tilstrækkelig mange bruger-stemmer modtager du en bekræftelses-mail</li> 
-			<li><em>I opstartsfasen vil medlems-ansøgninger blive håndteret administrativt</em></li>
+			<li><em>I opstartsfasen vil medlems-anmodninger blive håndteret administrativt</em></li>
 		</ol>
 
 		<br>
 
-		<form role="form" class="form-horizontal bliv-medlem" autocomplete="off">
+		<form role="form" name="form" class="form-horizontal bliv-medlem" autocomplete="off">
 
 	    <div class="form-group">
 	      <label class="col-md-2 control-label required" for="firstname">Fornavn</label>
 				<div class="col-md-3">
 			    <input class="form-control" 
+						spellcheck="false"
 						select-on-click
 						auto-focus
 						ng-model="reg.first_name" 
@@ -28,6 +29,7 @@
 	      <label class="col-md-2 control-label required" for="lastname">Efternavn</label>
 				<div class="col-md-4">
 			    <input class="form-control" 
+						spellcheck="false"
 						select-on-click
 						ng-model="reg.last_name" 
 						placeholder="Efternavn">
@@ -39,6 +41,7 @@
 				<div class="col-md-9">
 			    <input class="form-control" 
 						type="text"
+						spellcheck="false"
 						select-on-click
 						ng-model="reg.full_name" 
 						placeholder="Fornavn, mellemnavne og efternavn">
@@ -49,8 +52,13 @@
 	      <label class="col-md-2 control-label required" for="email">Email</label>
 				<div class="col-md-9">
 			    <input class="form-control" 
+						id="email"
+						spellcheck="false"
+						name="email"
 						select-on-click
+						class="text-danger"
 						ng-model="reg.email" 
+						ng-class="{ 'red-color': !isValidEmail, 'green-color': isValidEmail }"
 						placeholder="Email-adresse">
 				</div>
 			</div>
@@ -73,6 +81,7 @@
 	      <label class="col-md-2 control-label required" for="postnr">Postnr</label>
 				<div class="col-md-2">
 			    <input class="form-control" 
+						spellcheck="false"
 						select-on-click
 						only-numbers
 						maxlength="4"
@@ -82,16 +91,22 @@
 	      <label class="col-md-1 control-label required" for="by">By</label>
 				<div class="col-md-6">
 			    <input class="form-control" 
+						spellcheck="false"
 						select-on-click
 						ng-model="reg.city" 
 						placeholder="By">
 				</div>
 			</div>
 
-	    <div class="form-group">
+	    <div class="form-group no-margin-bottom">
 				<div class="col-md-11">
-					<hr>
+					<hr class="no-margin">
 				</div>
+			</div>
+
+			<div class="col-md-12 clearfix text-danger">
+				{{ error }}
+				<br><br>
 			</div>
 
 	    <div class="form-group">
