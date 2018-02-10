@@ -172,42 +172,46 @@ angular.module('indeuApp', [
       .when('/admin-forside', {
         templateUrl: 'views/admin/admin.forside.html',
         controller: 'AdminForsideCtrl',
-        controllerAs: 'adminforside'
+        //controllerAs: 'adminforside'
       })
       .when('/admin-overblik', {
         templateUrl: 'views/admin/admin.overblik.html',
         controller: 'AdminCtrl',
-        controllerAs: 'administration'
+        //controllerAs: 'administration'
       })
       .when('/admin-foreninger', {
         templateUrl: 'views/admin/admin.foreninger.html',
         controller: 'AdminForeningerCtrl',
-        controllerAs: 'administration'
+        //controllerAs: 'administration'
       })
       .when('/admin-artikler', {
         templateUrl: 'views/admin/admin.artikler.html',
         controller: 'AdminArtiklerCtrl',
-        controllerAs: 'administration'
+        //controllerAs: 'administration'
       })
       .when('/admin-brugere', {
         templateUrl: 'views/admin/admin.brugere.html',
         controller: 'AdminBrugereCtrl',
-        controllerAs: 'brugere'
+        //controllerAs: 'brugere'
+      })
+      .when('/admin-bruger-requests', {
+        templateUrl: 'views/admin/admin.brugerrequests.html',
+        controller: 'AdminBrugerRequestsCtrl',
       })
 	   .when('/admin-grupper', {
         templateUrl: 'views/admin/admin.grupper.html',
         controller: 'AdminGrupperCtrl',
-        controllerAs: 'grupper'
+        //controllerAs: 'grupper'
       })
       .when('/admin-events', {
         templateUrl: 'views/admin/admin.events.html',
         controller: 'AdminEventsCtrl',
-        controllerAs: 'events'
+        //controllerAs: 'events'
       })
       .when('/admin-statiske-sider', {
         templateUrl: 'views/admin/admin.staticpage.html',
         controller: 'AdminStatiskCtrl',
-        controllerAs: 'events'
+        //controllerAs: 'events'
       })
 
       .otherwise({

@@ -38,6 +38,13 @@ angular.module('indeuApp')
 
 				switch (item.type) {
 					//user
+					case Log.USER_MEMBER_ACCEPTED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'bekræftede og oprettede';
+						item.action += ' <a href="'+Utils.userUrl(item.user_user_id, item.user_user_full_name) + '">'+item.user_user_full_name+'</a> som bruger';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
 					case Log.USER_PROFILE_EDITED :
 						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
 						item.action = 'redigerede din';

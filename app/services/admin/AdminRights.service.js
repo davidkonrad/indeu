@@ -48,7 +48,7 @@ angular.module('indeuApp').factory('AdminRights', function($q, ESPBA, Utils) {
 				userGrantAdmin: this.userGrantAdmin(),
 				userQuarantine: this.userQuarantine(),
 
-				user_requesView: this.user_requestView(),
+				user_requestView: this.user_requestView(),
 				user_requestAccept: this.user_requestAccept(),
 				user_requestRemove: this.user_requestRemove(),
 

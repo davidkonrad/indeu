@@ -20,6 +20,7 @@ angular.module('indeuApp')
 				Redirect.home('Du har ingen administrator-rettigheder');
 			}
 			$scope.adminRights = dict;
+			//console.log(dict);
 		})
 
 		//frontpage content

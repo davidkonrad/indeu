@@ -1,0 +1,68 @@
+<div class="modal ng-scope top am-fade-and-slide-top center col-md-12" tabindex="-1" role="dialog" style="display: block;" id="bruger-request-dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title">Bekræft eller afvis brugeranmodning</h4>
+			</div>
+
+			<div class="modal-body">
+				<form role="form" class="form-horizontal" autocomplete="off">
+					<div class="form-group">
+			      <label class="col-md-2 control-label no-padding-top">Oprettet</label>
+						<div class="col-md-10"> {{ data.created_timestamp }}</div>
+					</div>
+					<div class="form-group">
+			      <label class="col-md-2 control-label no-padding-top">Fornavn</label>
+						<div class="col-md-10"> {{ data.first_name }}</div>
+					</div>
+					<div class="form-group">
+			      <label class="col-md-2 control-label no-padding-top">Efternavn</label>
+						<div class="col-md-10"> {{ data.last_name }}</div>
+					</div>
+					<div class="form-group">
+			      <label class="col-md-2 control-label no-padding-top">Fulde navn</label>
+						<div class="col-md-10"> {{ data.full_name }}</div>
+					</div>
+					<div class="form-group">
+			      <label class="col-md-2 control-label no-padding-top">Email</label>
+						<div class="col-md-10"> {{ data.email }}
+							<strong ng-if="data.email_confirmed == 1" class="text-success">&nbsp;Email bekræftet!</strong>
+							<strong ng-if="data.email_confirmed == 0" class="text-danger strong">&nbsp;Email ikke bekræftet!</strong>
+						</div>
+					</div>
+					<div class="form-group">
+			      <label class="col-md-2 control-label no-padding-top">Adresse</label>
+						<div class="col-md-10"> {{ data.address }}</div>
+					</div>
+					<div class="form-group">
+			      <label class="col-md-2 control-label no-padding-top">By</label>
+						<div class="col-md-10"> {{ data.city }}</div>
+					</div>
+					<div class="form-group">
+			      <label class="col-md-2 control-label no-padding-top">Kommune</label>
+						<div class="col-md-10"> {{ data.municipality }}</div>
+					</div>
+
+				</form>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" 
+					class="btn btn-default" 
+					ng-disabled="!mayAccept"
+					ng-class="{ 'btn-success': mayAccept }"
+					ng-click="confirmUser()">Bekræft og opret bruger
+				</button>
+				<button type="button" 
+					class="btn btn-default" 
+					ng-disabled="!mayRemove"
+					ng-class="{ 'btn-danger': mayRemove }"
+					ng-click="removeUser()">Fjern anmodning
+				</button>
+				<button type="button" class="btn btn-default" ng-click="modalClose(false)">Luk</button>
+			</div>
+
+		</div>
+	</div>
+</div>
