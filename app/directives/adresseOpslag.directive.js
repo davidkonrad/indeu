@@ -57,7 +57,6 @@ angular.module('indeuApp')
 							} 
 					    return $.getJSON(url, function(resp) {
 								if (resp.status == 'ERROR') {
-									console.log(resp);
 									console.error('indeu.org: services.kortforsyningen.dk virker til at være nede ...');
 								}
 								return process(resp.data || []);		
