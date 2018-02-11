@@ -27,6 +27,7 @@ angular.module('indeuApp')
 				//test image
 				if (a.image) {
 					var imageUrl = 'media/artikel/'+a.image;
+					//var imageUrl = 'media/artikel/thumbs/'+a.image;
 					var img = new Image();
 					img.onload = function() {
 						a.imageUrl = imageUrl;

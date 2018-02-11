@@ -3,7 +3,7 @@
 /**
  * ESPBA service
  *
- * @version v0.0.1 - 04-10-2017
+ * @version v0.0.2 - 12-02-2018
  * @author David Konrad (davidkonrad@gmail.com)
  * @license MIT (https://opensource.org/licenses/MIT)
 **/

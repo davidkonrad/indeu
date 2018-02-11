@@ -10,7 +10,7 @@
 
 		$ext = getExt($src);
 
-		/* read the source image */
+		//read the source image
 		switch ($ext) {
 			case 'jpg' :
 			case 'jpeg' :
@@ -30,16 +30,22 @@
 		$width = imagesx($source_image);
 		$height = imagesy($source_image);
 
-		/* find the "desired height" of this thumbnail, relative to the desired width  */
+		//find the "desired height" of this thumbnail, relative to the desired width 
 		$desired_height = floor($height * ($desired_width / $width));
 		
-		/* create a new, "virtual" image */
+		//create a new, "virtual" image
 		$virtual_image = imagecreatetruecolor($desired_width, $desired_height);
 
-		/* copy source image at a resized size */
+		//prevent black background for transparent png's
+		if ($ext == 'png') {
+			imagealphablending($virtual_image, false);
+			imagesavealpha($virtual_image, true);
+		}
+
+		//copy source image at a resized size
 		imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
 
-		/* create the physical thumbnail image to its destination */
+		//create the physical thumbnail image to its destination
 		switch ($ext) {
 			case 'jpg' :
 			case 'jpeg' :
