@@ -47,6 +47,10 @@ angular.module('indeuApp')
 				});
 			}
 
+			scope.removeImage = function() {
+				scope.article.image = '';
+			}				
+
 			scope.reloadGroups = function() {
 				ESPBA.get('group_articles', { article_id: article_id }).then(function(gr) {
 					gr.data.forEach(function(g) {
@@ -76,6 +80,7 @@ angular.module('indeuApp')
 			scope.articleAction.save = function() {
 				if (article_id) {
 					scope.article.edited_timestamp = 'CURRENT_TIMESTAMP';
+					console.log(scope.article);
 					ESPBA.update('article', scope.article).then(function(a) {
 						Notification.primary('Artiklen <strong>' + scope.article.header +'</strong> er opdateret');
 						if (onSave) scope.onSave(a.data[0]);

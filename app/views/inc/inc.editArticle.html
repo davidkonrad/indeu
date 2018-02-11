@@ -21,13 +21,15 @@
 						ng-value="3"> Kun gruppe
         </label>
 				<div class="pull-right action-element">
-					<button class="btn btn-default btn-sm" 
+					<button type="button"
+						class="btn btn-default btn-sm" 
 						ng-class="{ 'btn-success' : articleAction.canSave() }"
 						ng-disabled="!articleAction.canSave()"
 						ng-click="articleAction.save()">
 						{{ articleAction.caption }}
 					</button>
-					<button class="btn btn-danger btn-sm" 
+					<button type="button"
+						class="btn btn-danger btn-sm" 
 						ng-click="articleAction.cancel()">
 						Fortryd
 					</button>
@@ -42,7 +44,7 @@
 						    <input class="form-control input-sm" 
 									type="text"
 									id="header"
-									select-on-click
+									spellcheck="false"
 									ng-model="article.header" 
 									placeholder="Overskrift">
 							</div>
@@ -51,7 +53,7 @@
 				      <label class="col-md-3 control-label" for="sub_header">Manchet</label>
 							<div class="col-md-9">
 								<textarea class="form-control input-sm" 
-									select-on-click
+									spellcheck="false"
 									rows="3"
 									ng-model="article.sub_header" 
 									placeholder="Manchet">
@@ -62,6 +64,12 @@
 					<td class="col-md-4">
 						<br>
 						<attach-image ng-model="article.image" type="a" size="auto" height="160"></attach-image>
+						<button type="button" 
+							ng-click="removeImage()"
+							title="Fjern / nulstil billede"
+							class="btn btn-xs text-danger pull-right">
+							<i class="fa fa-times"></i>&nbsp;<small>Nulstil</small>
+						</button>
 					</td>
 				</tr>
 <!-- groups -->
@@ -92,6 +100,7 @@
 	    <div class="form-group">
 				<div class="col-md-12">
 					<text-angular ng-model="article.content" 
+						spellcheck="false"
 						ta-text-editor-class="form-control col-md-12"
 						ta-toolbar="[['h2','h3'],['bold','italics','underline','strikeThrough'],['insertLink'], ['quote'], ['ol', 'ul'], ['undo', 'redo', 'clear', 'html']]">
 					</text-angular>

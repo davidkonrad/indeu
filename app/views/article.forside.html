@@ -76,8 +76,8 @@
 					Rediger artikel<br>
 				</a>
 				<a class="cursor-pointer"
-					ng-class="{ 'disabled': article.published != 1 }"
-					ng-disabled="article.published != 1" 
+					ng-class="{ 'disabled': actionDisable('x') || article.published != 1 }"
+					ng-disabled="actionDisable('x')" 
 					ng-click="unpublishArticle()">
 					<i class="fa fa-fw fa-remove fa-x2 text-danger"></i>
 					Træk artikel tilbage (afpubliser)<br>
