@@ -80,7 +80,6 @@ angular.module('indeuApp')
 			scope.articleAction.save = function() {
 				if (article_id) {
 					scope.article.edited_timestamp = 'CURRENT_TIMESTAMP';
-					console.log(scope.article);
 					ESPBA.update('article', scope.article).then(function(a) {
 						Notification.primary('Artiklen <strong>' + scope.article.header +'</strong> er opdateret');
 						if (onSave) scope.onSave(a.data[0]);
