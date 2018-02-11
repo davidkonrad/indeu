@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp')
-  .controller('AdminCtrl', function($scope, $location, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect, AdminRights) {
+  .controller('AdminCtrl', function($scope, $location, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect, AdminRights, Email) {
 
 		if (!Login.isLoggedIn()) {
 			Redirect.home('Du er ikke logget ind');
@@ -15,12 +15,19 @@ angular.module('indeuApp')
 			}
 		}
 
+		$scope.testEmail1 = function() {
+			Email.requestConfirmation('davidkonrad@gmail.com', 'David Konrad', 'qwerty')
+		}
+
+		$scope.testEmail2 = function() {
+			Email.requestAccepted('davidkonrad@gmail.com', 'David Konrad', 'qwerty')
+		}
+ 
 		AdminRights.loadUser(Login.currentUser().id).then(function(dict) {
 			if (!dict || !dict.hasOwnProperty('frontpageView')) {
 				Redirect.home('Du har ingen administrator-rettigheder');
 			}
 			$scope.adminRights = dict;
-			//console.log(dict);
 		})
 
 		//frontpage content

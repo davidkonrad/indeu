@@ -1,0 +1,23 @@
+
+<div class="col-md-9">
+
+	<h2>Bekræftelse af email</h2>
+
+	<h3>Hej <strong>{{ data.full_name }}</strong>,</h3>
+
+	<div ng-if="!alreadyConfirmed">
+		<h4>Din email-adresse <span class="text-primary">{{ data.email }}</span> er hermed blevet bekræftet.</h4>
+		<h4>Du vil senere modtage en email med bekræftelse på brugerkonto og password.</h4>
+	</div>
+
+	<div ng-if="alreadyConfirmed">
+		<h4>Din email-adresse <span class="text-primary">{{ data.email }}</span> er allerede blevet bekræftet.</h4>
+		<h4>Du behøver ikke foretage dig yderligere.</h4>
+	</div>
+
+	<br>
+	<h4>Du vil om {{ secs }} sekunder blive redirigeret til indeu.org's forside ...</h4>
+
+	<br><br><br><br><br>
+
+</div>

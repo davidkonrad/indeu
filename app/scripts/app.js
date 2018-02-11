@@ -88,71 +88,61 @@ angular.module('indeuApp', [
       .when('/', {
         templateUrl: 'views/blank.forside.html',
         controller: 'BlankCtrl',
-        controllerAs: 'frontpage'
+        //controllerAs: 'frontpage'
       })
       .when('/forside', {
         templateUrl: 'views/frontpage.html',
-        controller: 'FrontpageCtrl',
-        controllerAs: 'frontpage'
+        controller: 'FrontpageCtrl'
       })
       .when('/bliv-medlem', {
         templateUrl: 'views/bliv-medlem.html',
-        controller: 'BlivMedlemCtrl',
-        controllerAs: 'blivmedlem'
+        controller: 'BlivMedlemCtrl'
       })
       .when('/medlem', {
         templateUrl: 'views/medlem.html',
-        controller: 'MedlemCtrl',
-        controllerAs: 'medlem'
+        controller: 'MedlemCtrl'
       })
 
 			//member frontpage
       .when('/dig', {
         templateUrl: 'views/dig.forside.html',
-        controller: 'DigForsideCtrl',
-        controllerAs: 'digside'
+        controller: 'DigForsideCtrl'
       })
 
 			//official "open" member frontpage
       .when('/medlem/:id/:navn', {
         templateUrl: 'views/medlem.forside.html',
-        controller: 'MedlemForsideCtrl',
-        controllerAs: 'medlemforside'
+        controller: 'MedlemForsideCtrl'
       })
 
 			//official "open" group frontpage
       .when('/gruppe/:id/:navn', {
         templateUrl: 'views/gruppe.forside.html',
-        controller: 'GruppeForsideCtrl',
-        controllerAs: 'gruppeforside'
+        controller: 'GruppeForsideCtrl'
       })
 
 			//official "open" article frontpage
       .when('/artikel/:id/:header', {
         templateUrl: 'views/article.forside.html',
-        controller: 'ArticleForsideCtrl',
-        controllerAs: 'articleforside'
+        controller: 'ArticleForsideCtrl'
       })
 
 			//official "open" event frontpage
       .when('/event/:id/:navn', {
         templateUrl: 'views/event.forside.html',
-        controller: 'EventForsideCtrl',
-        controllerAs: 'eventforside'
+        controller: 'EventForsideCtrl'
       })
 
 			//official "open" forening frontpage
       .when('/forening/:id/:navn', {
         templateUrl: 'views/forening.forside.html',
-        controller: 'ForeningForsideCtrl',
-        controllerAs: 'foreningforside'
+        controller: 'ForeningForsideCtrl'
       })
 
 			//official "open" event summary / calendar
       .when('/det-sker', {
         templateUrl: 'views/kalender.forside.html',
-        controller: 'KalenderForsideCtrl',
-        controllerAs: 'kalenderforside'
+        controller: 'KalenderForsideCtrl'
       })
 
 			//static page
@@ -164,35 +154,35 @@ angular.module('indeuApp', [
 			//search
       .when('/soeg', {
         templateUrl: 'views/search.html',
-        controller: 'SearchCtrl',
-        controllerAs: 'search'
+        controller: 'SearchCtrl'
+      })
+
+			//confirm email
+      .when('/confirm/:hash', {
+        templateUrl: 'views/confirm-email.html',
+        controller: 'ConfirmEmailCtrl'
       })
 
 			//administration
       .when('/admin-forside', {
         templateUrl: 'views/admin/admin.forside.html',
-        controller: 'AdminForsideCtrl',
-        //controllerAs: 'adminforside'
+        controller: 'AdminForsideCtrl'
       })
       .when('/admin-overblik', {
         templateUrl: 'views/admin/admin.overblik.html',
-        controller: 'AdminCtrl',
-        //controllerAs: 'administration'
+        controller: 'AdminCtrl'
       })
       .when('/admin-foreninger', {
         templateUrl: 'views/admin/admin.foreninger.html',
-        controller: 'AdminForeningerCtrl',
-        //controllerAs: 'administration'
+        controller: 'AdminForeningerCtrl'
       })
       .when('/admin-artikler', {
         templateUrl: 'views/admin/admin.artikler.html',
-        controller: 'AdminArtiklerCtrl',
-        //controllerAs: 'administration'
+        controller: 'AdminArtiklerCtrl'
       })
       .when('/admin-brugere', {
         templateUrl: 'views/admin/admin.brugere.html',
-        controller: 'AdminBrugereCtrl',
-        //controllerAs: 'brugere'
+        controller: 'AdminBrugereCtrl'
       })
       .when('/admin-bruger-requests', {
         templateUrl: 'views/admin/admin.brugerrequests.html',
@@ -200,18 +190,15 @@ angular.module('indeuApp', [
       })
 	   .when('/admin-grupper', {
         templateUrl: 'views/admin/admin.grupper.html',
-        controller: 'AdminGrupperCtrl',
-        //controllerAs: 'grupper'
+        controller: 'AdminGrupperCtrl'
       })
       .when('/admin-events', {
         templateUrl: 'views/admin/admin.events.html',
-        controller: 'AdminEventsCtrl',
-        //controllerAs: 'events'
+        controller: 'AdminEventsCtrl'
       })
       .when('/admin-statiske-sider', {
         templateUrl: 'views/admin/admin.staticpage.html',
-        controller: 'AdminStatiskCtrl',
-        //controllerAs: 'events'
+        controller: 'AdminStatiskCtrl'
       })
 
       .otherwise({

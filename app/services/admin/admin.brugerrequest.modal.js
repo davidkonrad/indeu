@@ -10,8 +10,8 @@ angular.module('indeuApp').factory('BrugerRequestModal', function($modal, $q) {
 	var deferred;
 	var local = this;
 
-	local.modalInstance = ['$scope', '$timeout', 'ESPBA', 'Notification', 'Log', 'Login', 'AdminRights', 'ConfirmModal', 'request_id', 
-	function($scope, $timeout, ESPBA, Notification, Log, Login, AdminRights, ConfirmModal, request_id) {
+	local.modalInstance = ['$scope', '$timeout', 'ESPBA', 'Notification', 'Log', 'Login', 'AdminRights', 'ConfirmModal', 'Email', 'request_id', 
+	function($scope, $timeout, ESPBA, Notification, Log, Login, AdminRights, ConfirmModal, Email, request_id) {
 
 		$scope.adminRights = AdminRights.dictionary();
 
@@ -63,6 +63,7 @@ angular.module('indeuApp').factory('BrugerRequestModal', function($modal, $q) {
 							ESPBA.insert('address', address).then(function() {
 								$scope.modalClose(true);
 								Notification('Bruger <strong>'+$scope.data.full_name+'</strong> er oprettet!');
+								Email.requestAccepted(user.email, user.full_name, user.hash);
 								Log.log({
 									type: Log.USER_MEMBER_ACCEPTED,
 									user_id: Login.currentUser().id,

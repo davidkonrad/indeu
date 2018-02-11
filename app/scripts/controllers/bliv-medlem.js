@@ -4,8 +4,7 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('BlivMedlemCtrl', function($scope, ESPBA, KR, Meta, Utils, Redirect) {
+angular.module('indeuApp').controller('BlivMedlemCtrl', function($scope, ESPBA, KR, Meta, Utils, Redirect, Email) {
 
 	$scope.reg = {};
 	$scope.error = ' ';
@@ -46,6 +45,8 @@ angular.module('indeuApp')
 	$scope.register = function() {
 		$scope.reg.hash = Utils.getHash()+'ur';
 		ESPBA.insert('user_request', $scope.reg).then(function(r) {
+			r = r.data[0];
+			Email.requestConfirmation(r.email, r.full_name, r.hash);
 			Redirect.home('<h3 class="no-padding">Tak for din tilmelding!</h3>Om et øjeblik vil du modtage en mail med et link du skal klikke på. <br>Det er for at validare din email-adresse. <br>Du får en mail når brugerne har godkendt dig som medlem');
 		})
 	}
