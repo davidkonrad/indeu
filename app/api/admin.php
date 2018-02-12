@@ -11,6 +11,7 @@ $SQL = <<<SQL
 			(select count(*) from article) as article_count,
 			(select count(*) from event) as event_count,
 			(select count(*) from association) as association_count,
+			(select count(*) from static_page) as static_page_count,
 			(select count(*) from `group`) as group_count,
 			(select count(*) from user_request) as user_request_count,
 			(select count(*) from user where quarantine = 1) as user_quarantine_count,
