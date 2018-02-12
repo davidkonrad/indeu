@@ -15,14 +15,6 @@ angular.module('indeuApp')
 			}
 		}
 
-		$scope.testEmail1 = function() {
-			Email.requestConfirmation('davidkonrad@gmail.com', 'David Konrad', 'qwerty')
-		}
-
-		$scope.testEmail2 = function() {
-			Email.requestAccepted('davidkonrad@gmail.com', 'David Konrad', 'qwerty')
-		}
- 
 		AdminRights.loadUser(Login.currentUser().id).then(function(dict) {
 			if (!dict || !dict.hasOwnProperty('frontpageView')) {
 				Redirect.home('Du har ingen administrator-rettigheder');
