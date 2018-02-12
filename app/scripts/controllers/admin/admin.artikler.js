@@ -147,7 +147,7 @@ angular.module('indeuApp').controller('AdminArtiklerCtrl',
 				{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Ny artikel</span>',
 					className: 'btn btn-xs',
 					action: function( /* e, dt, node, config */) {
-						ArtikelModal.show($scope).then(function() {
+						ArtikelModal.show().then(function() {
 							$scope.dtInstance.reloadData();
 						});
  					}
@@ -157,15 +157,7 @@ angular.module('indeuApp').controller('AdminArtiklerCtrl',
 
 		angular.element('#table-artikler').on('click', 'tbody td:not(.no-click)', function(e) {
 			var id=$(this).parent().attr('artikel-id');
-
-			//should never happen with new delegated event structure
-			if (!id || ArtikelModal.isShown()) {
-				e.preventDefault();
-				e.stopPropagation();
-				return;
-			}
-
-			ArtikelModal.show($scope, id).then(function() {
+			ArtikelModal.show(id).then(function() {
 				$scope.dtInstance.reloadData();
 			});	
 		});
