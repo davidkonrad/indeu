@@ -4,8 +4,8 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('MedlemForsideCtrl', function($scope, $q, $routeParams, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect, Const) {
+angular.module('indeuApp').controller('MedlemForsideCtrl', 
+	function($scope, $q, $routeParams, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect, Const) {
 
 		Redirect.checkLogin('Du skal være logget ind for at kunne se medlemsprofiler');
 			
@@ -21,6 +21,12 @@ angular.module('indeuApp')
 		$scope.eventOrderByItems = Const.eventOrderByItems;
 
 		ESPBA.get('user', { id: user_id }).then(function(r) {
+
+			if (!r.data || !r.data.length) {
+				Redirect._404();
+				return
+			}
+
 			$scope.user = r.data[0];
 			$scope.user.image = $scope.user.image || '';
 

@@ -21,6 +21,12 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 
 
 		ESPBA.get('association', { id: id }).then(function(r) {
+
+			if (!r.data || !r.data.length) {
+				Redirect._404();
+				return
+			}
+
 			$scope.forening = r.data[0];
 
 			ESPBA.get('address', { hash: $scope.forening.hash }).then(function(a) {

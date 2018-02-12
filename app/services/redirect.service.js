@@ -31,6 +31,10 @@ angular.module('indeuApp').factory('Redirect', function($location, $window, Logi
 			$location.path('/forside').replace()
 		},
 
+		_404: function() {
+			$location.path('/404').replace()
+		},
+
 		search: function(term) {
 			_redirectMessage = term;
 			var path = Utils.isLocalHost() ? '#/soeg' : '/soeg';

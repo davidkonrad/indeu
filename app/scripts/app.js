@@ -30,8 +30,7 @@ angular.module('indeuApp', [
 	'ui-notification',
 	'ngRateIt',
 	'angular-smilies',
-	'angular-sortable-view',
-	'dbaq.emoji'
+	'angular-sortable-view'
   ])
   .config(function($locationProvider, $routeProvider, cfpLoadingBarProvider, NotificationProvider, $tooltipProvider, $provide) {
 
@@ -89,7 +88,10 @@ angular.module('indeuApp', [
       .when('/', {
         templateUrl: 'views/blank.forside.html',
         controller: 'BlankCtrl',
-        //controllerAs: 'frontpage'
+	    })
+      .when('/404', {
+        templateUrl: 'views/404.html',
+        controller: 'BlankCtrl',
       })
       .when('/forside', {
         templateUrl: 'views/frontpage.html',

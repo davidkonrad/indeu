@@ -4,9 +4,8 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('GruppeForsideCtrl', 
-	function($scope, Login, $route, $routeParams, Const, ESPBA, Lookup, Meta, Utils, Log, Notification, ConfirmModal) {
+angular.module('indeuApp').controller('GruppeForsideCtrl', 
+	function($scope, Login, $route, $routeParams, Const, ESPBA, Lookup, Meta, Utils, Log, Notification, ConfirmModal, Redirect) {
 
 		const id = $routeParams.id;
 
@@ -65,6 +64,12 @@ angular.module('indeuApp')
 
 		function reloadGroup() {
 			ESPBA.prepared('GroupWithOwner', { group_id: id }).then(function(r) {
+
+				if (!r.data || !r.data.length) {
+					Redirect._404();
+					return
+				}
+
 				$scope.group = r.data[0];
 
 				Meta.setTitle($scope.group.name);

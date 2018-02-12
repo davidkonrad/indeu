@@ -4,8 +4,7 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('EventForsideCtrl', 
+angular.module('indeuApp').controller('EventForsideCtrl', 
 	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log) {
 
 		$scope.eventMap = Const.defaultMap();
@@ -18,6 +17,12 @@ angular.module('indeuApp')
 
 		$scope.reloadEvent = function() {
 			ESPBA.prepared('EventWithUser', { event_id: id }).then(function(r) {
+
+				if (!r.data || !r.data.length) {
+					Redirect._404();
+					return
+				}
+
 				$scope.event = r.data[0];
 
 				Meta.setTitle($scope.event.name);

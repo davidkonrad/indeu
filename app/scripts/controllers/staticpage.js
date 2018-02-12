@@ -4,8 +4,8 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('StaticPageCtrl', function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, UserVisits, VisitCounter, ConfirmModal) {
+angular.module('indeuApp').controller('StaticPageCtrl', 
+	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, UserVisits, VisitCounter, ConfirmModal, Redirect) {
 
 		if (Login.isLoggedIn()) {
 			$scope.user = Login.currentUser()
@@ -15,6 +15,12 @@ angular.module('indeuApp')
 
 		$scope.reload = function(update) {
 			ESPBA.get('static_page', { id: id }).then(function(r) {
+
+				if (!r.data || !r.data.length) {
+					Redirect._404();
+					return
+				}
+
 				var a = r.data[0];
 				a.dateStamp = moment(a.created_timestamp).fromNow(); 
 				a.realDate = moment(a.created_timestamp); 
