@@ -79,3 +79,14 @@ span.user-article-popular {
 	display: block;
 	white-space: nowrap;
 }
+
+/* new artikel content */
+
+div.artikel-content p {
+	word-wrap: normal;
+	white-space: pre-wrap;
+	XXbackground-color: red;
+}
+
+
+	

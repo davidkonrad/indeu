@@ -257,7 +257,7 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 					if (links) {
 						var index = links.index;
 						var link = links[0];
-						var linkName = link.length > 10 ? link.slice(0,30)+'...' : link;
+						var linkName = link.length > 30 ? link.slice(0,30)+'...' : link;
 						if (index>0) {
 							s += content.slice(0,index);
 						}

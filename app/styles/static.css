@@ -396,5 +396,12 @@ p {
 	line-height: 130%;
 }	
 
+/* update code */
+
+code {
+	color: #333;
+	font-size: 95%;
+	font-weight: 900;
+}
 
 

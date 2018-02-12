@@ -105,6 +105,7 @@ module.exports = function(config) {
       'bower_components/moment-timezone/builds/moment-timezone-with-data-2012-2022.js',
       'bower_components/angular-smilies/dist/angular-smilies.js',
       'bower_components/angular-sortable-view/src/angular-sortable-view.js',
+      'bower_components/angular-emoji-filter-hd/dist/emoji.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

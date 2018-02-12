@@ -30,9 +30,10 @@ angular.module('indeuApp', [
 	'ui-notification',
 	'ngRateIt',
 	'angular-smilies',
-	'angular-sortable-view'
+	'angular-sortable-view',
+	'dbaq.emoji'
   ])
-  .config(function ($locationProvider, $routeProvider, cfpLoadingBarProvider, NotificationProvider, $tooltipProvider, $provide) {
+  .config(function($locationProvider, $routeProvider, cfpLoadingBarProvider, NotificationProvider, $tooltipProvider, $provide) {
 
     cfpLoadingBarProvider.includeSpinner = false;
 	
