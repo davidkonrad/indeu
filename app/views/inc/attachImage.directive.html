@@ -1,8 +1,19 @@
-<div class="attach-image cursor-pointer" 
+<div class="attach-image cursor-pointer clearfix" 
 	ng-class="getSizeClass()" 
 	ng-click="loadImage()">
 	<span ng-if="image == ''" ng-bind-html="defaultImage"	title="Klik for at skifte billede"></span>
 	<span class="attach-image-center">
+
+		<span ng-if="image != '' " style="position:absolute;top:1px;">
+			<button type="button" 
+				ng-click="resetImage($event)"
+				title="Fjern / nulstil billede"
+				class="btn btn-sm text-danger">
+				<i class="fa fa-times"></i>
+			</button>
+		</span>
+
 		<img ng-if="image != ''" ng-src="{{ image }}"	title="Klik for at skifte billede">
 	</span>
 </div>
+

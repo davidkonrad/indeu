@@ -67,8 +67,8 @@ angular.module('indeuApp')
 				_url += 'media/' + _target + '/' + value;
 				scope.image = value ? _url : '';
 			}
+
 			//
-			
 			scope.loadImage = function() {
 				var options = {
 					target: _target,
@@ -85,6 +85,12 @@ angular.module('indeuApp')
 				});
 			}
 
+			//
+			scope.resetImage = function(e) {
+				e.stopPropagation();
+		    ngModel.$setViewValue('');
+				scope.image = '';
+			}
 
 		}
 
