@@ -31,6 +31,8 @@ angular.module('indeuApp')
 			if (article_id) {
 				ESPBA.get('article', { id: article_id }).then(function(r) {
 					$scope.edit = r.data[0];
+					Utils.debugObj($scope.edit);
+
 					$scope.edit.visibility_level = parseInt($scope.edit.visibility_level);
 					$scope.__artikelModal.title = 'Rediger <span class="text-muted">#'+$scope.edit.id+'</span>, <strong>'+$scope.edit.header+'</strong>';
 

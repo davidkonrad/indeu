@@ -89,7 +89,7 @@ angular.module('indeuApp').controller('AdminForeningerCtrl',
 			.withButtons([ 
 				{ extend : 'colvis',
 					columns: ':not(.no-colvis)',
-					text: 'Vis kolonner &nbsp;<i class="caret" style="position:relative;top:-3px;"></i>',
+					text: 'Vis kolonner &nbsp;<i class="caret"></i>',
 					className: 'btn btn-default btn-xs colvis-btn'
 				},
 				{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Ny Forening</span>',

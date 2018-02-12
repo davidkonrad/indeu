@@ -66,7 +66,7 @@ angular.module('indeuApp').controller('AdminBrugereCtrl',
 			.withOption('language', Const.dataTables_daDk )
 			.withButtons([ 
 				{ extend : 'colvis',
-					text: 'Vis kolonner &nbsp;<i class="caret" style="position:relative;top:-3px;"></i>',
+					text: 'Vis kolonner &nbsp;<i class="caret"></i>',
 					className: 'btn btn-default btn-xs colvis-btn'
 				},
 				{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Ny bruger</span>',
