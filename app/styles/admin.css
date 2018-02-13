@@ -86,7 +86,7 @@ td.max600 {
 	font-size: 90%;
 }
 
-.large-dialog .modal-dialog {
+.modal-dialog .large-dialog {
 	min-width: 1100px !important;
 }
 .large-dialog .modal-body {

@@ -198,7 +198,6 @@ angular.module('indeuApp').factory('BrugerModal', function($modal, $q) {
 
 		show: function(user_id) {
 			deferred = $q.defer()
-
 			modal = $modal({
 				templateUrl: 'views/admin/admin.bruger.modal.html',
 				backdrop: 'static',
@@ -207,11 +206,6 @@ angular.module('indeuApp').factory('BrugerModal', function($modal, $q) {
 				controller: local.modalInstance,
 				locals: { user_id: user_id }
 			});
-
-			angular.element('body').on('keydown', function(e) {
-				if (e.charCode == 27) $scope.brugerModalClose(false)
-			});
-
       return deferred.promise;
 		}
 

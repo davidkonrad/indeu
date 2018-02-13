@@ -32,6 +32,17 @@ angular.module('indeuApp')
 				return ret + 'attach-image-' + size;
 			}
 
+			scope.getImageStyle = function() {
+				var h = attrs['height'];
+				if (h) {
+					return {
+						'height': h+'px',
+						'max-height': h+'px'
+					}
+				}
+				return ''
+			}
+
 			scope.defaultImage = '<i class="fa fa-user"></i>';
 
 			var _title = attrs['title'] || 'Skift billede';

@@ -7,7 +7,8 @@
 angular.module('indeuApp').controller('AdminGrupperCtrl', 
 	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, GruppeModal, Lookup, Const, AdminRights) {
 
-		if (!AdminRights.groupView()) {
+		//if (!AdminRights.groupView()) {
+		if (!AdminRights.dictionary().groupView) {
 			$location.path('/admin-overblik').replace()
 		}
 
@@ -99,7 +100,7 @@ angular.module('indeuApp').controller('AdminGrupperCtrl',
 				{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Ny gruppe</span>',
 					className: 'btn btn-xs',
 					action: function( /* e, dt, node, config */) {
-						GruppeModal.show($scope).then(function() {
+						GruppeModal.show().then(function() {
 							$scope.dtInstance.reloadData();
 						});
  					}
@@ -109,19 +110,10 @@ angular.module('indeuApp').controller('AdminGrupperCtrl',
 
 		angular.element('#table-grupper').on('click', 'tbody td:not(.no-click)', function(e) {
 			var id=$(this).parent().attr('group-id');
-
-			//should never happen with new delegated event structure
-			if (!id || GruppeModal.isShown()) {
-				e.preventDefault();
-				e.stopPropagation();
-				return;
-			}
-
-			GruppeModal.show($scope, id).then(function() {
+			GruppeModal.show(id).then(function() {
 				$scope.dtInstance.reloadData();
 			});	
 		});
-
 
 });
 

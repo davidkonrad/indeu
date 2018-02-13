@@ -1,5 +1,5 @@
 <div class="modal ng-scope top am-fade-and-slide-top center col-md-12" tabindex="-1" role="dialog" style="display: block;" id="gruppe-dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog large-dialog">
 		<div class="modal-content">
 			
 			<div class="modal-header">
@@ -30,16 +30,16 @@
 								  <label class="checkbox-inline">
 										<input type="checkbox" 
 											id="accepted"
-											ng-true-value="'1'"
-											ng-false-value="'0'"
+											ng-true-value="1"
+											ng-false-value="0"
 											ng-model="edit.accepted">
 											Godkendt
 									</label>
 								  <label class="checkbox-inline">
 										<input type="checkbox" 
 											id="active"
-											ng-true-value="'1'"
-											ng-false-value="'0'"
+											ng-true-value="1"
+											ng-false-value="0"
 											ng-model="edit.active">
 											Aktiv
 									</label>
@@ -52,25 +52,25 @@
 								  <label class="checkbox-inline">
 										<input type="checkbox" 
 											id="events_enabled"
-											ng-true-value="'1'"
-											ng-false-value="'0'"
+											ng-true-value="1"
+											ng-false-value="0"
 											ng-model="edit.events_enabled">
 											Tillad events
 									</label>
 								  <label class="checkbox-inline">
 										<input type="checkbox" 
 											id="articles_enabled"
-											ng-true-value="'1'"
-											ng-false-value="'0'"
+											ng-true-value="1"
+											ng-false-value="0"
 											ng-model="edit.articles_enabled">
 											Tillad artikler
 									</label>
 								  <label class="checkbox-inline">
 										<input type="checkbox" 
 											id="allow_comments"
-											ng-true-value="'1'"
-											ng-false-value="'0'"
-											ng-model="edit.allow_comments">
+											ng-true-value="1"
+											ng-false-value="0"
+											ng-model="edit.comments_enabled">
 											Tillad kommentarer
 									</label>
 								</div>
@@ -82,17 +82,17 @@
 								  <label class="checkbox-inline">
 										<input type="checkbox" 
 											id="visible_members"
-											ng-true-value="'1'"
-											ng-false-value="'0'"
+											ng-true-value="1"
+											ng-false-value="0"
 											ng-model="edit.visible_members">
 											Medlemmer synlige
 									</label>
 								  <label class="checkbox-inline">
 										<input type="checkbox" 
 											id="visible_social"
-											ng-true-value="'1'"
-											ng-false-value="'0'"
-											ng-model="edit.visible_social">
+											ng-true-value="1"
+											ng-false-value="0"
+											ng-model="edit.visible_social_media">
 											Sociale medier synlige
 									</label>
 								</div>
@@ -145,8 +145,10 @@
 						</form>
 					</div>
 
-					<div bs-pane data-title="Socialt">
+					<div bs-pane data-title="Web / sociale medier" ng-if="edit.hash != ''">
 						<br>
+						<edit-social-media hash="{{ edit.hash }}"></edit-social-media>
+<!--					
 						<form role="form" class="form-horizontal" autocomplete="off">
 
 					    <div class="form-group">
@@ -197,6 +199,7 @@
 								</div>
 							</div>
 						</form>
+-->
 					</div>
 
 					<div bs-pane data-title="Beskrivelse">
@@ -206,17 +209,17 @@
 								<div class="col-md-12">
 									<text-angular ng-model="edit.about" 
 										ta-text-editor-class="form-control col-md-12 gruppe-dialog"
-										ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'html']]">
+										ta-toolbar="[['h2','h3','h4'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'clear', 'html']]">
 									</text-angular>
 								</div>
 							</div>
 						</form>
 					</div>
 
-					<div bs-pane data-title="Logo" data-disabled="__gruppeModal.create == true">
-						<div class="gruppe-modal-image" ng-click="__gruppeModal.uploadImage()">
-							<i ng-if="edit.image == '' " class="fa fa-users medlem-default-image"></i>
-							<img ng-if="edit.image != '' " ng-src="../media/gruppe/{{ edit.image }}">
+					<div bs-pane data-title="Logo" ng-if="edit.hash != '' ">
+						<br>
+						<div class="col-md-12">
+							<attach-image ng-model="edit.image" type="g" size="auto" height="300"></attach-image>
 						</div>
 					</div>
 
@@ -237,9 +240,9 @@
 				<button type="button" 
 					class="btn" 
 					ng-click="gruppeModalClose(true)" 
-					ng-class="{ 'btn-success' : __gruppeModal.canSave() }"
-					ng-disabled="!__gruppeModal.canSave()">
-						{{ __gruppeModal.btnOk }}
+					ng-class="{ 'btn-success' : canSave() && edit.hash == '', 'btn-primary' : canSave() && edit.hash != '' }"
+					ng-disabled="!canSave()">
+						{{ btnOk }}
 				</button> 
 				<button type="button" 
 					class="btn btn-default" 

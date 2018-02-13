@@ -13,7 +13,7 @@
 			</button>
 		</span>
 
-		<img ng-if="image != ''" ng-src="{{ image }}"	title="Klik for at skifte billede">
+		<img ng-if="image != ''" ng-src="{{ image }}"	ng-style="getImageStyle()" title="Klik for at skifte billede">
 	</span>
 </div>
 

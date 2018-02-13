@@ -1,3 +1,4 @@
+/*
 #gruppe-dialog .modal-dialog {
 	min-width: 580px !important;
 }
@@ -7,6 +8,7 @@
 	max-height: 340px !important;
 	font-size: 90%;
 }
+*/
 
 .ta-editor.form-control.gruppe-dialog, .ta-scroll-window.form-control.gruppe-dialog  {
     height: 210px;
@@ -20,7 +22,7 @@
     padding: 6px 12px;
 }
 
-
+/*
 #gruppe-dialog .gruppe-modal-image {
 	margin-top: 10px;
 	margin-left: 10px;
@@ -41,4 +43,4 @@
 	max-width: 300px;
 	max-height: 300px;
 }
-
+*/
