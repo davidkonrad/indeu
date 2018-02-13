@@ -49,13 +49,19 @@
 			
 			<div class="modal-footer">
 				<button type="button" 
-					class="btn btn-default" 
+					class="btn btn-default btn-sm pull-left"
+					ng-disabled="!mayAccept"
+					ng-class="{ 'btn-primary': mayAccept }"
+					ng-click="resendConfirmEmail()">(Gen)send email-bekræftelse
+				</button>
+				<button type="button" 
+					class="btn btn-default btn-sm"
 					ng-disabled="!mayAccept"
 					ng-class="{ 'btn-success': mayAccept }"
 					ng-click="confirmUser()">Bekræft og opret bruger
 				</button>
 				<button type="button" 
-					class="btn btn-default" 
+					class="btn btn-default btn-sm"
 					ng-disabled="!mayRemove"
 					ng-class="{ 'btn-danger': mayRemove }"
 					ng-click="removeUser()">Fjern anmodning

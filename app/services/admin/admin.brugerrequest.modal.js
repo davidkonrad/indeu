@@ -36,6 +36,23 @@ angular.module('indeuApp').factory('BrugerRequestModal', function($modal, $q) {
 			$scope.modalClose()
 		}
 
+		$scope.resendConfirmEmail = function() {
+			var confirm = 'Gensend email-bekræftelses email? ';
+			confirm += 'OBS: Bør kun benyttes hvis brugeren har anmodet om ændret email-adresse, ';
+			confirm += 'eller ved en fejl ikke har modtaget den oprindelige automail efter brugeroprettelsen';
+			ConfirmModal.show(confirm, 'Gensend bekræftelses-email?').then(function(answer) {
+				if (answer) {
+					Email.requestConfirmation($scope.data.email, $scope.data.full_name, $scope.data.hash);
+					Log.log({
+						type: Log.USER_EMAIL_CONFIRMATION_SENT,
+						user_id: Login.currentUser().id,
+						hash: $scope.data.hash
+					});
+					$scope.modalClose(true);
+				}
+			})
+		}
+
 		$scope.confirmUser = function() {
 			ConfirmModal.show('Opret bruger og send bekræftelsesemail?', 'Opret bruger').then(function(answer) {
 				if (answer) {

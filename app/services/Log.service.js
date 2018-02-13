@@ -9,6 +9,7 @@ angular.module('indeuApp').factory('Log', function(ESPBA) {
 		USER_ENTITY_RATING: 4,
 		USER_CREATED_BY_ADMIN: 5,
 		USER_EDITED_BY_ADMIN: 6,
+		USER_EMAIL_CONFIRMATION_SENT: 7,
 
 		ARTICLE_CREATED: 10,
 		ARTICLE_EDITED: 11,
