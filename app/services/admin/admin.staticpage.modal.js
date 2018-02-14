@@ -14,8 +14,8 @@ angular.module('indeuApp').factory('StaticPageModal', function($modal, $q) {
 	function($scope, ESPBA, AdminRights, Login, Utils, static_page_id) {
 		
 		$scope.updateRights = AdminRights.static_pageEdit();
-		$scope.title = 'Opret ny statisk side';
-		$scope.btnSave = 'Opret og luk';
+		$scope.title = !static_page_id  ? 'Opret ny statisk side' : 'Rediger statisk side';
+		$scope.btnSave = !static_page_id ? 'Opret og luk' : 'Gem og luk';
 
 		$scope.closeModal = function(value) {
 			$scope.$hide();					
@@ -24,7 +24,7 @@ angular.module('indeuApp').factory('StaticPageModal', function($modal, $q) {
 
 		$scope.save = function() {
 			if (static_page_id) {
-				$scope.edited_timestamp = 'CURRENT_TIMESTAMP';
+				$scope.edit.edited_timestamp = 'CURRENT_TIMESTAMP';
 				ESPBA.update('static_page', $scope.edit).then(function() {
 					$scope.closeModal(true)
 				})
@@ -44,17 +44,18 @@ angular.module('indeuApp').factory('StaticPageModal', function($modal, $q) {
 				$scope.edit.content.length > 1
 		}
 
+		$scope.edit = {
+			hash: undefined,
+			header: '',
+			content: '',
+			user_id: Login.currentUser().id
+		}
+
 		if (static_page_id) {
 			ESPBA.get('static_page', { id: static_page_id }).then(function(s) {
 				$scope.edit = s.data[0]
 			})
-		} else {
-			$scope.edit = {
-				header: '',
-				content: '',
-				user_id: Login.currentUser().id
-			}
-		}
+		} 
 		
 	}];
 

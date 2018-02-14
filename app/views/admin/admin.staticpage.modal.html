@@ -1,5 +1,5 @@
 <div class="modal ng-scope top am-fade-and-slide-top center large-dialog" tabindex="-1" role="dialog" style="display: block;" id="static-page-dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog medium-dialog">
 		<div class="modal-content">
 			
 			<div class="modal-header">
@@ -7,39 +7,83 @@
 			</div>
 
 			<div class="modal-body">
+				
+				<div bs-tabs>
+					<div bs-pane data-title="Overskrifter">
+						<br>
+						<form autocomplete="off">
+						  <div class="form-group">
+						    <label class="control-label required" for="header">Overskrift</label>
+						    <input type="text" 
+									spellcheck="false"
+									select-on-click
+									auto-focus
+									class="form-control" 
+									id="header" 
+									ng-model="edit.header"
+									placeholder="Overskrift">
+							</div>
+							<div class="form-group">
+						    <label class="control-label" for="sub_header">Manchet</label>
+						    <textarea
+									spellcheck="false"
+									cols="50"
+									rows="2"
+									class="form-control input-sm" 
+									id="sub_headerc" 
+									ng-model="edit.sub_header"
+									placeholder=""></textarea>
+							</div>
 
-				<form autocomplete="off">
-				  <div class="form-group">
-				    <label class="control-label required" for="header">Overskrift</label>
-					    <input type="text" 
-								select-on-click
-								auto-focus
-								class="form-control" 
-								id="header" 
-								ng-model="edit.header"
-								placeholder="Overskrift">
-					</div>
-					<div class="form-group">
-				    <label class="control-label required" for="content">Text</label>
-						<text-angular ng-model="edit.content" 
-							ta-text-editor-class="form-control col-md-12 gruppe-dialog"
-							ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'html']]">
-						</text-angular>
-					</div>
-				</form>
+						  <div class="form-group">
+						    <label class="control-label" for="meta_title">meta_title</label>
+						    <input type="text" 
+									spellcheck="false"
+									select-on-click
+									class="form-control input-sm" 
+									id="meta_title" 
+									ng-model="edit.meta_title"
+									placeholder="">
+							</div>
 
+							<div class="form-group">
+						    <label class="control-label" for="meta_desc">meta_desc</label>
+						    <textarea
+									spellcheck="false"
+									cols="50"
+									rows="2"
+									class="form-control input-sm" 
+									id="meta_desc" 
+									ng-model="edit.meta_desc"
+									placeholder=""></textarea>
+							</div>
+
+						</form>
+					</div>
+					<div bs-pane data-title="Tekst">
+						<form autocomplete="off">
+							<div class="form-group">
+								<text-angular ng-model="edit.content" 
+									spellcheck="false"
+									ta-text-editor-class="form-control col-md-12 static-page-dialog"
+									ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo', 'html']]">
+								</text-angular>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 			
 			<div class="modal-footer">
 				<button type="button" 
-					class="btn" 
+					class="btn btn-sm" 
 					ng-click="save()" 
-					ng-class="{ 'btn-success' : canSave() }"
+					ng-class="{ 'btn-success': canSave() && edit.hash == '', 'btn-primary': canSave() && edit.hash != '' }"
 					ng-disabled="!canSave()">
 						{{ btnSave }}
 				</button> 
 				<button type="button" 
-					class="btn btn-default" 
+					class="btn btn-sm btn-default" 
 					ng-click="closeModal(false)" >
 						Fortryd
 				</button> 

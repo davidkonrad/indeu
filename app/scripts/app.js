@@ -236,6 +236,8 @@ angular.module('indeuApp', [
 		//moment
 		moment.tz.setDefault("Europe/Copenhagen"); 
 	
+		//meta
+		Meta.setTitleSuffix(' | indeu.org');
 		
 });
 

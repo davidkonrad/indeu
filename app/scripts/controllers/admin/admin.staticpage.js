@@ -27,11 +27,10 @@ angular.module('indeuApp').controller('AdminStatiskCtrl',
 						return data;
 					}
 				}),
-
-      DTColumnBuilder.newColumn('created_timestamp').withTitle('Oprettet'),
+      DTColumnBuilder.newColumn('header').withTitle('Overskrift'),
       DTColumnBuilder.newColumn('user_full_name').withTitle('Bruger'),
-      DTColumnBuilder.newColumn('header').withTitle('Overskrift')
-
+      DTColumnBuilder.newColumn('created_timestamp').withTitle('Oprettet'),
+      DTColumnBuilder.newColumn('edited_timestamp').withTitle('Redigeret')
 		];
 
 		$scope.dtOptions = DTOptionsBuilder

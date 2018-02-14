@@ -30,6 +30,9 @@ angular.module('indeuApp').controller('StaticPageCtrl',
 				a.userFullName = user.full_name;
 				a.userUrlLink = Utils.userUrl(user.id, user.full_name);
 
+				Meta.setTitle(a.meta_title || a.header);
+				Meta.setDesc(a.meta_desc || a.sub_header);
+
 				//test image
 				if (a.image) {
 					var imageUrl = 'media/artikel/'+a.image;

@@ -81,12 +81,16 @@ span.user-article-popular {
 }
 
 /* new artikel content */
-
 div.artikel-content p {
 	word-wrap: normal;
 	white-space: pre-wrap;
-	XXbackground-color: red;
 }
 
-
+.artikel-content ul {
+	padding-left: 10px;
+	margin-left: 10px;
+}
 	
+
+
+
