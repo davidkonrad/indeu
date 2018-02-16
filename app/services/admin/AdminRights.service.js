@@ -5,7 +5,6 @@ angular.module('indeuApp').factory('AdminRights', function($q, ESPBA, Utils) {
 	var _user_id;
 	var _rights;
 	var _self;
-	var	deferred;
 
 	return {
 
@@ -13,27 +12,17 @@ angular.module('indeuApp').factory('AdminRights', function($q, ESPBA, Utils) {
 			return _rights != undefined
 		},
 
-		loadUser: function(user_id) {
-			deferred = $q.defer()
-
-			// already loaded
-			if (_rights && _user_id && _user_id == user_id) {
-				deferred.resolve( this.dictionary() )
-			}
-
+		setUser: function(user_id) {
 			_user_id = user_id;
 			_self = this;
 
 			ESPBA.get('user_admin_rights', { user_id: user_id }).then(function(r) {
 				if (r.data && r.data.length ==1) {
 					_rights = r.data[0];
-					deferred.resolve( _self.dictionary() )
 				} else {
-					deferred.resolve( false )
+					//
 				}
 			})
-
-      return deferred.promise;
 		},
 
 		//complete dictionary
@@ -246,5 +235,4 @@ angular.module('indeuApp').factory('AdminRights', function($q, ESPBA, Utils) {
 
 
 });
-		
 

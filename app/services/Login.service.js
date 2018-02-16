@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('indeuApp')
-  .factory('Login', function($rootScope, $cookies, $timeout, $q, $location, ESPBA, RememberMe) {
+angular.module('indeuApp').factory('Login', 
+	function($rootScope, $cookies, $timeout, $q, $location, ESPBA, RememberMe, AdminRights) {
     
 	var cookieName = 'indeu.org';
 	var	currentUser = null;
@@ -39,6 +39,7 @@ angular.module('indeuApp')
 
 					RememberMe.put(email, password, rememberMe);
 					updateOnlineStatus(currentUser, 1);
+					AdminRights.setUser(currentUser.id);
 					self.getUserInfo();
 					setCookie(currentUser);
 					$rootScope.$emit('indeu.login');
@@ -58,7 +59,7 @@ angular.module('indeuApp')
 						
 		isLoggedIn: function() {
 			if (currentUser) {
-				setCookie(currentUser); //force update of expire					
+				setCookie(currentUser); //force update of expire
 				return true
 			} else {
 				var s = $cookies.get(cookieName);

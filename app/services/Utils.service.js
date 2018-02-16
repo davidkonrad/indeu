@@ -234,6 +234,7 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 
 		//AdminRights / AdminRightsUpdater
 		getBit: function(s, index) {
+			if (!s) return false;
 			return s.charAt(index) == '1'
 		},
 		setBit: function(s, index, value) {

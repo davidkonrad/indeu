@@ -15,12 +15,20 @@ angular.module('indeuApp')
 			}
 		}
 
+		if (!AdminRights.dictionary().frontpageView) {
+			Redirect.home('Du har ingen administrator-rettigheder');
+		} else {
+			$scope.adminRights = AdminRights.dictionary()
+		}
+
+/*
 		AdminRights.loadUser(Login.currentUser().id).then(function(dict) {
 			if (!dict || !dict.hasOwnProperty('frontpageView')) {
 				Redirect.home('Du har ingen administrator-rettigheder');
 			}
 			$scope.adminRights = dict;
 		})
+*/
 
 		//frontpage content
 		ESPBA.prepared('AdminContentOverview', {}).then(function(r) {
