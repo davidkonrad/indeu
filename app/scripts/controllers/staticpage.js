@@ -31,7 +31,7 @@ angular.module('indeuApp').controller('StaticPageCtrl',
 				a.userUrlLink = Utils.userUrl(user.id, user.full_name);
 
 				Meta.setTitle(a.meta_title || a.header);
-				Meta.setDesc(a.meta_desc || a.sub_header);
+				Meta.setDesc(a.meta_desc || a.sub_header || '');
 
 				//test image
 				if (a.image) {
@@ -39,7 +39,7 @@ angular.module('indeuApp').controller('StaticPageCtrl',
 					var img = new Image();
 					img.onload = function() {
 						a.imageUrl = imageUrl;
-						console.log(img.width, img.height);
+						//console.log(img.width, img.height);
 					}
 					img.src = imageUrl;
 				}
@@ -69,7 +69,7 @@ angular.module('indeuApp').controller('StaticPageCtrl',
 
 //
 		$scope.onCommentAdded = function(e) {
-			console.log(arguments);
+			//console.log(arguments);
 		}
 
 

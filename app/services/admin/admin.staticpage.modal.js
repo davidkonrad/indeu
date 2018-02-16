@@ -45,7 +45,7 @@ angular.module('indeuApp').factory('StaticPageModal', function($modal, $q) {
 		}
 
 		$scope.edit = {
-			hash: undefined,
+			hash: '',
 			header: '',
 			content: '',
 			user_id: Login.currentUser().id
