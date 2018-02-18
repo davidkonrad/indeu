@@ -71,7 +71,7 @@ angular.module('Meta', []).factory('Meta', ['$route', function($route) {
 			},
 
 			//facebook
-			setOpenGraph: function(url, title, desc, image) {
+			setOpenGraph: function(url, title, desc, image, imageWidth, imageHeight) {
 				getTag('meta', 'property', 'og:type').setAttribute('content', 'article');
 				if (url) {
 					getTag('meta', 'property', 'og:url').setAttribute('content', url);
@@ -85,6 +85,13 @@ angular.module('Meta', []).factory('Meta', ['$route', function($route) {
 				if (image) {
 					getTag('meta', 'property', 'og:image').setAttribute('content', 'https://indeu.org/'+image);
 				}
+				if (imageWidth) {
+					getTag('meta', 'property', 'og:image:width').setAttribute('content', imageWidth);
+				}
+				if (imageHeight) {
+					getTag('meta', 'property', 'og:image:height').setAttribute('content', imageHeight);
+				}
+
 			}
 
 

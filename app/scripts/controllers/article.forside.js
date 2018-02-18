@@ -34,11 +34,12 @@ angular.module('indeuApp')
 				//test image
 				if (a.image) {
 					var imageUrl = 'media/artikel/'+a.image;
-					//var imageUrl = 'media/artikel/thumbs/'+a.image;
 					var img = new Image();
 					img.onload = function() {
 						a.imageUrl = imageUrl;
-						//console.log(img.width, img.height);
+						var imageHeight = img.height;
+						var imageWidth = img.width;
+						Meta.setOpenGraph(null, null, null, imageUrl, imageWidth, imageHeight);
 					}
 					img.src = imageUrl;
 				}
@@ -48,7 +49,7 @@ angular.module('indeuApp')
 				var desc = a.sub_header || Utils.plainText(a.content, 170);
 				Meta.setTitle(a.header);
 				Meta.setDesc(desc);
-				Meta.setOpenGraph(window.location, a.header, desc, imageUrl);
+				Meta.setOpenGraph(window.location, a.header, desc);
 	
 				//update visitor count
 				if (update) {
