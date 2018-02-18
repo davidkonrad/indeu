@@ -2,7 +2,7 @@
 
 /**
  * Meta service
- * Easy access to meta tags in a single page application
+ * Easy access to meta tags in a SPA
  *
  * @version v0.0.1 - sat 16 april 2017
  * @author David Konrad (davidkonrad@gmail.com)
@@ -65,10 +65,28 @@ angular.module('Meta', []).factory('Meta', ['$route', function($route) {
 				getTag('meta', 'name', 'description').setAttribute('content', d);
 			},
 
-			//shorthand alias
+			//alias
 			setDesc: function(d) {
 				this.setDescription(d)
+			},
+
+			//facebook
+			setOpenGraph: function(url, title, desc, image) {
+				getTag('meta', 'property', 'og:type').setAttribute('content', 'article');
+				if (url) {
+					getTag('meta', 'property', 'og:url').setAttribute('content', url);
+				}
+				if (title) {
+					getTag('meta', 'property', 'og:title').setAttribute('content', title);
+				}
+				if (desc) {
+					getTag('meta', 'property', 'og:description').setAttribute('content', desc);
+				}
+				if (image) {
+					getTag('meta', 'property', 'og:image').setAttribute('content', 'https://indeu.org/'+image);
+				}
 			}
+
 
 		}
 

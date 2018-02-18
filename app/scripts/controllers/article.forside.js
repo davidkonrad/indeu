@@ -44,6 +44,13 @@ angular.module('indeuApp')
 				}
 				$scope.article = a;
 
+				//meta
+				var desc = a.sub_header || Utils.plainText(a.content, 170);
+				Meta.setTitle(a.header);
+				Meta.setDesc(desc);
+				Meta.setOpenGraph(window.location, a.header, desc, imageUrl);
+	
+				//update visitor count
 				if (update) {
 					UserVisits.visit(a.hash);
 					VisitCounter.visit(a.hash);
