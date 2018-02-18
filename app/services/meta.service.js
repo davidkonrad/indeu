@@ -74,6 +74,7 @@ angular.module('Meta', []).factory('Meta', ['$route', function($route) {
 			setOpenGraph: function(url, title, desc, image, imageWidth, imageHeight) {
 				getTag('meta', 'property', 'og:type').setAttribute('content', 'article');
 				if (url) {
+					getTag('link', 'rel', 'canonical').setAttribute('href', url);
 					getTag('meta', 'property', 'og:url').setAttribute('content', url);
 				}
 				if (title) {
@@ -83,7 +84,8 @@ angular.module('Meta', []).factory('Meta', ['$route', function($route) {
 					getTag('meta', 'property', 'og:description').setAttribute('content', desc);
 				}
 				if (image) {
-					getTag('meta', 'property', 'og:image').setAttribute('content', 'https://indeu.org/'+image);
+					//for some reason, FB requires http, https fails
+					getTag('meta', 'property', 'og:image').setAttribute('content', 'http://indeu.org/'+image); 
 				}
 				if (imageWidth) {
 					getTag('meta', 'property', 'og:image:width').setAttribute('content', imageWidth);
