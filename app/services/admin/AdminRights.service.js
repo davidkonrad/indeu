@@ -233,6 +233,14 @@ angular.module('indeuApp').factory('AdminRights', function($q, ESPBA, Utils) {
 		},
 	}
 
-
 });
+
+//initialize
+angular.module('indeuApp').run(function(AdminRights, Login) {
+	if (Login.isLoggedIn()) {
+		AdminRights.setUser(Login.currentUser().id);
+	}
+});
+
+
 
