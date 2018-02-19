@@ -9,7 +9,7 @@
 			<div class="modal-body">
 
 				<table datatable="" 
-					id="table-artikler"
+					id="table-content"
 					class="table table-striped col-md-12 no-padding no-margin no-select" 
 					dt-options="dtOptions" 
 					dt-columns="dtColumns"
@@ -22,7 +22,7 @@
 				<button type="button" 
 					class="btn" 
 					ng-click="modalClose(true)" 
-					ng-class="{ 'btn-success' : canSave() }"
+					ng-class="{ 'btn-primary' : canSave() }"
 					ng-disabled="!canSave()">
 						{{ btnOk }}
 				</button> 

@@ -34,6 +34,11 @@ angular.module('indeuApp')
 							c.url = Utils.eventUrl(c.content_id, c.header);
 							break;
 
+						case 'Statisk':
+							if (c.image) c.image_url = '..media/statisk/'+c.image;
+							c.url = Utils.staticUrl(c.content_id, c.header);
+							break;
+
 						default:
 							break; //should really never happen
 					}

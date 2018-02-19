@@ -84,7 +84,7 @@ angular.module('indeuApp').factory('GruppeModal', function($modal, $q) {
 					action: function( /* e, dt, node, config */) {
 						SelectBrugerModal.show($scope, false, $scope.__gruppeModal.medlemmer.current_user_ids).then(function(user) {
 							if (user) {
-								ESPBA.insert('group_user', { group_id: group_id, user_id: user[0].id }).then(function() {
+								ESPBA.insert('group_user', { group_id: group_id, user_id: user.id }).then(function() {
 									$scope.__gruppeModal.medlemmer.dtInstance.reloadData();
 								})
 							}

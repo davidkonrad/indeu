@@ -5,7 +5,8 @@
  *
  */
 angular.module('indeuApp').controller('AdminForsideCtrl', 
-	function($scope, $q, $location, Log, Login, Utils, ESPBA, SelectContentModal, Notification, AdminRights) {
+	function($scope, $timeout, $location, Log, Login, Utils, ESPBA, SelectEventModal, SelectArtikelModal, SelectForeningModal, 
+	SelectStaticPageModal, Notification, AdminRights) {
 
 	if (!AdminRights.frontpageView()) {
 		$location.path('/admin-overblik').replace()
@@ -63,49 +64,69 @@ angular.module('indeuApp').controller('AdminForsideCtrl',
 
 	$scope.selectContent = function(item, content_type) {
 		if (!$scope.updateRights) return;
-		SelectContentModal.show(content_type).then(function(a) {
-			if (a) {
-				a = a[0];
 
-				//place on first available slot, if index.id>empty
-				var empty = firstEmpty();
-				if (item.id > empty) item = $scope.content[empty];
+		var empty = firstEmpty();
+		if (empty && item.id > empty) item = $scope.content[empty]
 
-				$scope.changed = true;
-
-				switch (content_type) {
-					case 'article' :
-						item.header = a.header;
-						item.content_id = a.id;
-						item.hash = a.hash;
-						item.type = 'Artikel';
-						item.image = a.image;
-						item.extract = a.sub_header;
-						break;
-
-					case 'association' :
-						item.header = a.name;
-						item.content_id = a.id;
-						item.hash = a.hash;
-						item.type = 'Forening';
-						item.image = a.image;
-						item.extract = Utils.plainText(a.about, 200);
-						break;
-
-					case 'event' :
-						item.header = a.name;
-						item.content_id = a.id;
-						item.hash = a.hash;
-						item.type = 'Event';
-						item.image = a.image;
-						item.extract = Utils.plainText(a.about, 200);
-						break;
-
-					default:
-						break //should never happen
+		if (content_type == 'article') {
+			SelectArtikelModal.show().then(function(a) {
+				if (a) {
+					a = a[0];
+					item.header = a.header;
+					item.content_id = a.id;
+					item.hash = a.hash;
+					item.type = 'Artikel';
+					item.image = a.image;
+					item.extract = a.sub_header || Utils.plainText(a.content, 200);
+					$scope.changed = true;
 				}
-			}	
-		})
+			})
+		}
+
+		if (content_type == 'association') {
+			SelectForeningModal.show().then(function(a) {
+				if (a) {
+					a = a[0];
+					item.header = a['name'];
+					item.content_id = a.id;
+					item.hash = a.hash;
+					item.type = 'Forening';
+					item.image = a.image;
+					item.extract = Utils.plainText(a.about, 200);
+					$scope.changed = true;
+				}
+			})
+		}
+
+		if (content_type == 'event') {
+			SelectEventModal.show().then(function(a) {
+				if (a) {
+					a = a[0];
+					item.header = a['name'];
+					item.content_id = a.id;
+					item.hash = a.hash;
+					item.type = 'Event';
+					item.image = a.image;
+					item.extract = Utils.plainText(a.about, 200);
+					$scope.changed = true;
+				}
+			})
+		}
+
+		if (content_type == 'static_page') {
+			SelectStaticPageModal.show().then(function(a) {
+				if (a) {
+					a = a[0];
+					item.header = a.header;
+					item.content_id = a.id;
+					item.hash = a.hash;
+					item.type = 'Statisk';
+					item.image = a.image;
+					item.extract = a.sub_header || Utils.plainText(a.content, 200);
+					$scope.changed = true;
+				}
+			})
+		}
 	}
 
 

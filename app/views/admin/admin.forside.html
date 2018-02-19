@@ -20,8 +20,8 @@
 
 				<span class="col-md-1"> {{ c.rank }} </span>
 				<span class="col-md-2"> {{ c.type || 'Ledig' }} </span>
-				<span class="col-md-7"> {{ c.header }} </span>
-				<span class="col-md-2 pull-right no-padding">
+				<span class="col-md-6"> {{ c.header }} </span>
+				<span class="col-md-3 pull-right no-padding">
 					<button role="button" class="btn btn-default btn-xs" ng-click="selectContent(c, 'article')">
 						<i class="fa fa-file-text-o" title="Indsæt artikel"></i>
 					</button>
@@ -30,6 +30,9 @@
 					</button>
 					<button role="button" class="btn btn-default btn-xs" ng-click="selectContent(c, 'association')">
 						<i class="fa fa-sitemap" title="Indsæt forening"></i>
+					</button>
+					<button role="button" class="btn btn-default btn-xs" ng-click="selectContent(c, 'static_page')">
+						<i class="fa fa-file-code-o" title="Indsæt statisk side"></i>
 					</button>
 					<button role="button" class="btn btn-default btn-xs" ng-click="removeContent(c)" ng-disabled="!c.content_id">
 						<i class="fa fa-times text-danger" title="Fjern indhold"></i>
