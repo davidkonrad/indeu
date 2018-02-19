@@ -1,10 +1,15 @@
 RewriteEngine on
 
-#https
+#redirect facebook share to script
+RewriteCond %{HTTP_USER_AGENT} facebookexternalhit/[0-9]
+RewriteCond %{REQUEST_URI} !(\.png)$ [NC]
+RewriteRule ^(.*)$ opengraph.php [L]
+
+#force https
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-#html5
+#use html5
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
