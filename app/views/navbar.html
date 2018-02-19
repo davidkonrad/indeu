@@ -101,6 +101,9 @@
 						<ul class="dropdown-menu mega-dropdown-menu">
 							<li class="col-sm-4">
 								<ul class="list-unstyled">
+									<li ng-if="associations.length == 0">
+										<em>Ingen offentlige foreninger at vise</em>
+									</li>
 									<li ng-repeat="a in associations">
 										<a href="{{ a.url }}"> {{ a.name }} </a>
 									</li>

@@ -45,10 +45,10 @@ angular.module('indeuApp')
 
 					c.image_style = {	'background':'#dadada' };
 					if (c.image_url) {
-						console.log(c.image_url)
+						//console.log(c.image_url)
 						var img = new Image();
 						img.onload = function() {
-							console.log('onload', c.id, c.image_url);
+							//console.log('onload', c.id, c.image_url);
 							var ret = {
 								'background-image':'url(' + c.image_url + ')',
 								'background-size': 'cover',

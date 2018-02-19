@@ -26,16 +26,15 @@
 		ng-href="{{ sub_promos[0].url }}"
 		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding" 
 		ng-style="sub_promos[0].image_style">
-		<p class="h3 no-padding-left">&nbsp;{{ sub_promos[0].header | limitTo: 50 }}{{sub_promos[0].header.length > 50 ? '&hellip;' : ''}}</p>
-		<p class="h5 no-padding-left" ng-bind-html="sub_promos[0].extract"></p>
+		<p class="h3 no-padding-left">{{ sub_promos[0].header | limitTo: 40 }}{{sub_promos[0].header.length > 40 ? '&hellip;' : ''}}</p>
+		<p class="h5 no-padding-left">{{ sub_promos[0].extract | limitTo: 80 }}{{sub_promos[0].extract.length > 80 ? '&hellip;' : ''}}</p>
 	</a>
-	<div class="col-md-12 clearfix">&nbsp;</div>
 	<a ng-if="sub_promos[1].url"
 		ng-href="{{ sub_promos[1].url }}"
-		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding" 
+		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding promo-margin-top" 
 		ng-style="sub_promos[1].image_style">
-		<p class="h3 no-padding-left">&nbsp;{{ sub_promos[1].header | limitTo: 50 }}{{sub_promos[1].header.length > 50 ? '&hellip;' : ''}}</p>
-		<p class="h5 no-padding-left" ng-bind-html="sub_promos[1].extract"></p>
+		<p class="h3 no-padding-left">{{ sub_promos[1].header | limitTo: 40 }}{{sub_promos[1].header.length > 40 ? '&hellip;' : ''}}</p>
+		<p class="h5 no-padding-left">{{ sub_promos[1].extract | limitTo: 80 }}{{sub_promos[1].extract.length > 80 ? '&hellip;' : ''}}</p>
 	</a>
 </div>
 
@@ -52,7 +51,8 @@
 	<div ng-repeat="p in sub_promos" 
 		class="col-md-4 no-padding-left" 
 		ng-class="{ 'no-padding-right': $index == 5 }"
-		ng-if="$index>2">
+		ng-if="$index>2 && p.url != '' ">
+<!--
 		<a ng-href="{{ p.url }}"
 			class="frontpage-promo-medium cursor-pointer unstyled hover-effect" 
 			style="margin-top: 12px;"
@@ -60,6 +60,15 @@
 			<p class="h3 no-padding-left">&nbsp;{{ p.header | limitTo: 50 }}{{p.header.length > 50 ? '&hellip;' : ''}}</p>
 			<p class="h5 no-padding-left" ng-bind-html="p.extract"></p>
 		</a>
+-->
+	<a ng-if="p.url"
+		ng-href="{{ p.url }}"
+		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding promo-margin-top" 
+		ng-style="p.image_style">
+		<p class="h3 no-padding-left">{{ p.header | limitTo: 40 }}{{p.header.length > 40 ? '&hellip;' : ''}}</p>
+		<p class="h5 no-padding-left">{{ p.extract | limitTo: 80 }}{{p.extract.length > 80 ? '&hellip;' : ''}}</p>
+	</a>
+
 	</div>
 </div>
 

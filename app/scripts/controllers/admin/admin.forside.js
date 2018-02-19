@@ -6,7 +6,7 @@
  */
 angular.module('indeuApp').controller('AdminForsideCtrl', 
 	function($scope, $timeout, $location, Log, Login, Utils, ESPBA, SelectEventModal, SelectArtikelModal, SelectForeningModal, 
-	SelectStaticPageModal, Notification, AdminRights) {
+	SelectStaticPageModal, Notification, AdminRights, ConfirmModal) {
 
 	if (!AdminRights.frontpageView()) {
 		$location.path('/admin-overblik').replace()
@@ -15,13 +15,16 @@ angular.module('indeuApp').controller('AdminForsideCtrl',
 	$scope.updateRights = AdminRights.frontpageUpdate();
 	$scope.changed = false;
 
-	ESPBA.get('frontpage_content', {}).then(function(f) {
-		//sort by rank
-		f.data.sort(function(a,b) {
-			return a.rank > b.rank
-		})
-		$scope.content = f.data
-	});
+	function reloadContent() {
+		ESPBA.get('frontpage_content', {}).then(function(f) {
+			//sort by rank
+			f.data.sort(function(a,b) {
+				return a.rank > b.rank
+			})
+			$scope.content = f.data
+		});
+	}
+	reloadContent();
 
 	$scope.updateContent = function() {
 		$scope.content.forEach(function(c) {
@@ -43,7 +46,6 @@ angular.module('indeuApp').controller('AdminForsideCtrl',
 			context_user_id: null,
 			hash: null
 		});
-
 	}
 
 	$scope.setNewOrder = function() {
@@ -53,6 +55,25 @@ angular.module('indeuApp').controller('AdminForsideCtrl',
 			c.rank = rank;
 		})
 		$scope.changed = true;
+	}
+
+	$scope.removeContent = function(item) {
+		ConfirmModal.show('Fjern dette indhold fra forsiden?').then(function(answer) {
+			if (answer) {
+				var update = {
+					id: item.id,
+					content_id: '',
+					hash: '',
+					type: '',
+					header: '',
+					image: '', 
+					extract: ''
+				}					
+				ESPBA.update('frontpage_content', update ).then(function(r) {
+					reloadContent();
+				})
+			}
+		})
 	}
 
 	function firstEmpty() {
