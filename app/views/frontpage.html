@@ -1,10 +1,9 @@
 <div class="col-md-6">
 	<a ng-href="{{ promo.url }}"
-		class="frontpage-promo cursor-pointer unstyled hover-effect" 
+		class="frontpage-promo cursor-pointer unstyled hover-effect col-md-12" 
 		ng-style="getBackgroundStyle()">
 
 		<p class="h1" ng-bind-html="promo.header"></p>
-
 		<p class="h4" ng-bind-html="promo.extract"></p>
 
 <!--
@@ -22,17 +21,46 @@
 	</a>
 </div>
 	
-<div class="col-md-3">
+<div class="col-md-3 no-padding-left">
+	<a ng-if="sub_promos[0].url"
+		ng-href="{{ sub_promos[0].url }}"
+		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding" 
+		ng-style="sub_promos[0].image_style">
+		<p class="h3 no-padding-left">&nbsp;{{ sub_promos[0].header | limitTo: 50 }}{{sub_promos[0].header.length > 50 ? '&hellip;' : ''}}</p>
+		<p class="h5 no-padding-left" ng-bind-html="sub_promos[0].extract"></p>
+	</a>
+	<div class="col-md-12 clearfix">&nbsp;</div>
+	<a ng-if="sub_promos[1].url"
+		ng-href="{{ sub_promos[1].url }}"
+		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding" 
+		ng-style="sub_promos[1].image_style">
+		<p class="h3 no-padding-left">&nbsp;{{ sub_promos[1].header | limitTo: 50 }}{{sub_promos[1].header.length > 50 ? '&hellip;' : ''}}</p>
+		<p class="h5 no-padding-left" ng-bind-html="sub_promos[1].extract"></p>
+	</a>
+</div>
+
+<div class="col-md-3 no-padding-left">
+	<div class="layout-right-header no-margin">Kommende 30 dage</div>
+	<div class="layout-right-header-content" upcoming-events></div>
+
 	<div class="layout-right-header">Nye Artikler</div>
 	<div class="layout-right-header-content" recent-articles></div>
 
 </div>
 
-<div class="col-md-3">
-	<div class="layout-right-header">Kommende 30 dage</div>
-	<div class="layout-right-header-content" upcoming-events></div>
-
+<div class="col-md-12 clearfix">
+	<div ng-repeat="p in sub_promos" 
+		class="col-md-4 no-padding-left" 
+		ng-class="{ 'no-padding-right': $index == 5 }"
+		ng-if="$index>2">
+		<a ng-href="{{ p.url }}"
+			class="frontpage-promo-medium cursor-pointer unstyled hover-effect" 
+			style="margin-top: 12px;"
+			ng-style="p.image_style">
+			<p class="h3 no-padding-left">&nbsp;{{ p.header | limitTo: 50 }}{{p.header.length > 50 ? '&hellip;' : ''}}</p>
+			<p class="h5 no-padding-left" ng-bind-html="p.extract"></p>
+		</a>
+	</div>
 </div>
-
 
 
