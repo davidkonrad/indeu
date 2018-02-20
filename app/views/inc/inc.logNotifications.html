@@ -1,33 +1,16 @@
-<!--
-<div>
-	<div class="layout-right-header cursor-pointer no-select" ng-click="collapsed = !collapsed" data-toggle="collapse" href="#notiCollapse">
-		<i class="fa fa-fw text-muted" ng-class="{ 'fa-plus': !collapsed, 'fa-minus': collapsed }"></i>
-		Notifikationer
-	</div>
-	<div class="xlist-group collapse" id="notiCollapse">
-		<div ng-repeat="n in notifications"	class="list-group-item list-group-item-sm" title="{{ n.title }}">
-			[<small> {{ n.type }} </small>]
-			<span> {{ n.display_timestamp }}: </span>
-			<span> {{ n.userName }} </span>
-			<span ng-bind-html="n.action"></span>
-		</div>
-	</div>
-</div>
--->
-
-<table class="table table-hover">
+<table class="table table-hover" id="log-notifications">
 	<thead>
 		<tr>
 			<th>Type</th>
-			<th title="Hold musen over tidsangivelsen for at se det nøjagtige timestamp">Tid</th>
-			<th>Aktion</th>
+			<th title="Hold musen over tidsangivelsen for at se det nøjagtige timestamp">Hvornår</th>
+			<th>Handling</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr ng-repeat="n in notifications" xclass="list-group-item list-group-item-sm" title="{{ n.title }}">
 			<th> <small> {{ n.type_name }} </small> </td>
 			<td title="{{ n.created_timestamp }}" class="cursor-pointer"> {{ n.display_timestamp }} </td>
-			<td> {{ n.userName }} <span ng-bind-html="n.action"></span> </td>
+			<td style="white-space: normal;"> {{ n.userName }} <span ng-bind-html="n.action"></span> </td>
 		</tr>
 	</tbody>
 </table>

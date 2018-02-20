@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('indeuApp').directive('logNotifications', function(Utils, Login, ESPBA, Log, Lookup) {
+angular.module('indeuApp').directive('logNotifications', function($timeout, $compile, Utils, Login, ESPBA, Log, Lookup) {
 
 	return {
 		templateUrl: "views/inc/inc.logNotifications.html",
@@ -10,7 +10,7 @@ angular.module('indeuApp').directive('logNotifications', function(Utils, Login, 
 			userId: '@',
 			hash: '@',
 			limit: '=',
-			notSeen: '=',
+			notSeen: '='
 		},
 		link: function(scope, element, attrs) {
 
@@ -289,7 +289,12 @@ angular.module('indeuApp').directive('logNotifications', function(Utils, Login, 
 					p.data.forEach(function(item) {
 						process(item)
 					})
-					scope.notifications = p.data
+					scope.notifications = p.data;
+
+					$timeout(function() {
+						//element.attr('datatable', 'ng');
+						//$compile(element.contents())(scope);
+					}, 1000)
 				})
 			}
 

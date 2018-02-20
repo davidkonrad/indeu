@@ -14,8 +14,7 @@
 			<span ng-bind-html="user.about"></span>
 		</div>
 
-	<div class="clearfix col-md-12">&nbsp;</div>
-
+		<div class="clearfix col-md-12">&nbsp;</div>
 		
 		<div class="col-md-9 no-padding" style="padding-right:15px !important;">
 			<div class="layout-right-header">Næste 5 dage</div>
@@ -52,13 +51,7 @@
 		<div class="layout-right-header no-bottom-margin">Dine events</div>
 		<div entity-events="{{ user.id }}" entity-type="user" user-id="{{ user.id }}" on-edit="editEvent"></div>
 
-	<div>
-		<log-notifications user-id="{{ user.id }}"></log-notifications>
-	</div>
-
-		<div class="clearfix"></div>
-
-		<div class="clearfix">
+		<div class="col-md-12 clearfix">
 			<br><br><br>
 		</div>
 
@@ -97,6 +90,11 @@
 			on-save="actionProfileSaved(item)" 
 			on-cancel="actionCancel()">
 		</div>
+	</div>
+
+<!-- log -->
+	<div ng-if="action == 'l'">
+		<log-notifications user-id="{{ user.id }}"></log-notifications>
 	</div>
 
 
@@ -156,6 +154,12 @@
 			ng-disabled="true" 
 			XXng-click="setAction('r')">
 			<i class="fa fa-fw fa-star-half-empty fa-x2"></i>Review nye brugere<br>
+		</a>
+		<a href="" 
+			ng-class="{ 'disabled': actionDisable('l') }"
+			ng-disabled="actionDisable('l')" 
+			ng-click="setAction('l')">
+			<i class="fa fa-fw fa-cog fa-x2"></i>Se din handlings-log<br>
 		</a>
 		<a ng-href="{{ user.url }}" 
 			title="Vis din profil som andre ser den"

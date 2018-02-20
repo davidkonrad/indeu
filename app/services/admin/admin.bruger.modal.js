@@ -10,8 +10,8 @@ angular.module('indeuApp').factory('BrugerModal', function($modal, $q) {
 	var deferred;
 	var local = this;
 
-	local.modalInstance = ['$scope', '$timeout', 'ESPBA', 'Utils', 'Lookup', 'ImageUploadModal', 'DTOptionsBuilder', 'DTColumnBuilder', 'Const', 'Log', 'Login', 'AdminRights', 'AdminRightsUpdater', 'user_id', 
-	function($scope, $timeout, ESPBA, Utils, Lookup, ImageUploadModal, DTOptionsBuilder, DTColumnBuilder, Const, Log, Login, AdminRights, AdminRightsUpdater, user_id) {
+	local.modalInstance = ['$scope', '$timeout', '$compile', 'ESPBA', 'Utils', 'Lookup', 'ImageUploadModal', 'DTOptionsBuilder', 'DTColumnBuilder', 'Const', 'Log', 'Login', 'AdminRights', 'AdminRightsUpdater', 'user_id', 
+	function($scope, $timeout, $compile, ESPBA, Utils, Lookup, ImageUploadModal, DTOptionsBuilder, DTColumnBuilder, Const, Log, Login, AdminRights, AdminRightsUpdater, user_id) {
 
 		$scope.adminRights = AdminRights.dictionary();
 
@@ -192,6 +192,19 @@ angular.module('indeuApp').factory('BrugerModal', function($modal, $q) {
 				AdminRightsUpdater.updateUser();
 			})
 		}
+
+		//make log-notifications to a fully qualified DataTable
+		$timeout(function() {
+			$scope.dtColumns_log = [
+	      DTColumnBuilder.newColumn(0),
+	      DTColumnBuilder.newColumn(1),
+	      DTColumnBuilder.newColumn(2)
+			];
+			//$('#log-notifications').attr('datatable', '');
+			//$('#log-notifications').attr('dtColumns', 'dtColumns_log');
+			//$compile($('#log-notifications')[0])($scope)
+		}, 200);
+
 	}];
 
 	return {
