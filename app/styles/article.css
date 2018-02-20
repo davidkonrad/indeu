@@ -1,17 +1,4 @@
 
-.artikel-image {
-	float: left;
-	display: inline-block;
-	clear: none;
-}
-
-.artikel-image img {
-	padding: 0px;
-	max-height: 250px;
-	max-width: 100%;
-	padding-right: 10px;
-}
-
 /* boxes */
 .article-box {
 	height: 100px;

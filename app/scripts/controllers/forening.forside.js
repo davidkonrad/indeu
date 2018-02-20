@@ -29,6 +29,10 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 
 			$scope.forening = r.data[0];
 
+			if ($scope.forening.image) {
+				$scope.forening.image_url = 'media/forening/'+$scope.forening.image
+			}
+
 			ESPBA.get('address', { hash: $scope.forening.hash }).then(function(a) {
 				if (a.data && a.data[0]) {
 					a = a.data[0];

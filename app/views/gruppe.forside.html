@@ -2,15 +2,12 @@
 <div class="col-md-9">
 <!-- info -->
 	<div ng-if="action == ''">
-		<h5><small><br></small></h5>
-		<div class="medlem-image" ng-class="{ 'medlem-image-missing' : group.image == '' }">
-			<i ng-if="group.image == '' " class="fa fa-users medlem-default-image"></i>
-			<img ng-if="group.image != '' " 
-				ng-src = "{{ group.image_url }}"
-				inject-fancyboxable>
+		<h1>{{ group.name }} </h1>
+		<auto-image ng-if="group.image != ''"  src="{{ group.image_url }}"></auto-image>
+		<div ng-if="group.image == ''" class="medlem-image medlem-image-missing">
+			<i class="fa fa-users medlem-default-image"></i>
 		</div>
 		<div class="medlem-info">
-			<h1>{{ group.name }} </h1>
 			<span ng-bind-html="group.about"></span>
 		</div>
 

@@ -7,12 +7,7 @@
 	<div ng-if="action == '' ">		
 
 		<div class="col-md-12 no-padding">
-			<img ng-if="forening.image != ''" 
-				class="pull-left" 
-				ng-src="media/forening/{{ forening.image }}" 
-				inject-fancyboxable
-				style="max-width: 300px; padding-right:20px; padding-bottom: 10px;"
-				title="{{ forening.name }}">
+			<auto-image ng-if="forening.image != ''" src="{{ forening.image_url }}"></auto-image>
 			<div ng-bind-html="forening.about"></div>
 		</div>
 

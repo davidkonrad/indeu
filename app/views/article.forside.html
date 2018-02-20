@@ -12,10 +12,7 @@
 			<h1> {{ article.header }} </h1>
 			<h4><em> {{ article.sub_header }} </em></h4>
 
-			<div ng-if="article.imageUrl" class="artikel-image">
-				<img class="cursor-pointer"
-					ng-src="{{ article.imageUrl }}" inject-fancyboxable>
-			</div>
+			<auto-image ng-if="article.imageUrl" src="{{ article.imageUrl }}"></auto-image>
 
 			<div class="artikel-content" ng-bind-html="article.content"></div>
 
