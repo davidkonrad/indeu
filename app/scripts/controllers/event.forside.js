@@ -31,7 +31,9 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 				//timestamps
 				$scope.event.dateStamp = moment($scope.event.created_timestamp).calendar(); 
 				$scope.event.realDate = moment($scope.event.created_timestamp); 
-				if ($scope.event.edited_timestamp) $scope.event.edited_timestamp = moment($scope.event.edited_timestamp).calendar(); 
+				if ($scope.event.edited_timestamp) {
+					$scope.event.edited_timestamp_display = moment($scope.event.edited_timestamp).calendar()
+				}
 
 				//date due
 				$scope.dateDue = new Date().valueOf() > new Date($scope.event.date+' '+$scope.event.from).valueOf();

@@ -182,6 +182,7 @@ angular.module('indeuApp')
 
 			scope.eventAction.save = function() {
 				if (event_id) {
+					scope.event.edited_timestamp = 'CURRENT_TIMESTAMP';
 					ESPBA.update('event', scope.event).then(function() {
 						Notification.primary('Eventen <strong>' + scope.event.name +'</strong> er opdateret');
 						if (onSave) scope.onSave();
@@ -190,7 +191,6 @@ angular.module('indeuApp')
 							user_id: Login.currentUser().id,
 							hash: scope.event.hash
 						});
-
 					})
 				} else {
 					scope.event.user_id = scope.user_id;
@@ -216,7 +216,7 @@ angular.module('indeuApp')
 						});
 
 						$timeout(function() {
-							if (onSave) scope.onSave();
+							if (onSave) scope.onSave.call(this, scope.event);
 						})
 
 					})

@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('indeuApp')
-	.directive('logNotifications', function(Utils, Login, ESPBA, Log, Lookup) {
+angular.module('indeuApp').directive('logNotifications', function(Utils, Login, ESPBA, Log, Lookup) {
 
 	return {
 		templateUrl: "views/inc/inc.logNotifications.html",
@@ -34,8 +33,9 @@ angular.module('indeuApp')
 
 			function process(item) {
 				item.type = parseInt(item.type);
+				item.type_name = Log.logName(item.type);
 				item.display_timestamp = moment(item.created_timestamp).fromNow().capitalize();
-
+				
 				switch (item.type) {
 					//user
 					case Log.USER_MEMBER_ACCEPTED :
@@ -174,7 +174,7 @@ angular.module('indeuApp')
 					//events
 					case Log.EVENT_CREATED :
 						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
-						item.action = 'oprettede en ny event ';
+						item.action = 'oprettede eventen ';
 						item.action += '  <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">'+item.event_name+'</a>';
 						item.title = item.userName + ' ' + Utils.plainText(item.action);
 						break;
@@ -286,7 +286,6 @@ angular.module('indeuApp')
 				if (scope.limit) params.limit = scope.limit;
 
 				ESPBA.prepared('Log', params).then(function(p) {
-					//console.log(p);
 					p.data.forEach(function(item) {
 						process(item)
 					})

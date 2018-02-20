@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('indeuApp').factory('Log', function(ESPBA) {
+angular.module('indeuApp').factory('Log', function(ESPBA, Utils) {
 
 	return {
 		USER_MEMBER_REQUEST: 1,

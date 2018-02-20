@@ -4,7 +4,7 @@
 		<h4>
 			<small>
 				Oprettet af <a href="{{ event.userUrl }} ">{{ event.userFullName }}</a>,
-				<span title="{{ event.realDate }}">{{ event.dateStamp }}</span>
+				<span title="{{ event.realDate }}">{{ event.dateStamp }}</span><span ng-if="event.edited_timestamp_display" title="{{ event.edited_timestamp }}">, redigeret {{ event.edited_timestamp_display }}</span>
 			</small>
 		</h4>
 
@@ -67,7 +67,13 @@
 	</div>
 
 	<div ng-if="action == 'e'">
-		<h3 class="no-padding no-margin">&nbsp;Rediger</h3>
+		<h4>
+			<small>
+				Oprettet af <a href="{{ event.userUrl }} ">{{ event.userFullName }}</a>,
+				<span title="{{ event.realDate }}">{{ event.dateStamp }}</span><span ng-if="event.edited_timestamp_display" title="{{ event.edited_timestamp }}">, redigeret {{ event.edited_timestamp_display }}</span>
+			</small>
+		</h4>
+		<h1> {{ event.name }}	</h1>
 		<div edit-event="{{ event.id }}"  
 			user-id="{{ user.id }}"
 			on-save="actionSaved(item)" 
@@ -75,7 +81,22 @@
 		</div>
 	</div>
 
-	<log-notifications ng-if="event.isOwner" hash="{{ event.hash }}"></log-notifications>
+	<div ng-if="action == 'l'">
+		<h4>
+			<small>
+				Oprettet af <a href="{{ event.userUrl }} ">{{ event.userFullName }}</a>,
+				<span title="{{ event.realDate }}">{{ event.dateStamp }}</span><span ng-if="event.edited_timestamp_display" title="{{ event.edited_timestamp }}">, redigeret {{ event.edited_timestamp_display }}</span>
+			</small>
+		</h4>
+		<h1> 
+			{{ event.name }} - Log
+			<button class="btn btn-primary btn-sm pull-right" ng-click="setAction('')">
+				<i class="fa fa-angle-right fa-fw"></i>
+				Tilbage
+			</button>
+		</h1>
+		<log-notifications ng-if="event.isOwner" hash="{{ event.hash }}"></log-notifications>
+	</div>
 
 	<comments hash="{{ event.hash }}" user-id="{{ user.id }}"></comments>
 
@@ -114,12 +135,13 @@
 				<i class="fa fa-fw fa-wrench fa-x2"></i>
 				Rediger event<br>
 			</a>
-			<a href="" 
-				ng-class="{ 'disabled': actionDisable('e') }"
-				ng-disabled="actionDisable('n')" 
-				ng-click="setAction('n')">
-				<i class="fa fa-fw fa-calendar fa-x2"></i>
-				Ny event
+			<a ng-if="event.isOwner"
+				href="" 
+				ng-class="{ 'disabled': actionDisable('l') }"
+				ng-disabled="actionDisable('l')" 
+				ng-click="setAction('l')">
+				<i class="fa fa-fw fa-cog fa-x2"></i>
+				Se eventens log<br>
 			</a>
 		</div>
 	</div>
