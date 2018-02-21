@@ -11,6 +11,7 @@ angular.module('indeuApp').controller('AdminForsideCtrl', function($scope, $time
 		$location.path('/admin-overblik').replace()
 	}
 
+
 	$scope.updateRights = $adminRights.frontpageUpdate;
 	$scope.changed = false;
 

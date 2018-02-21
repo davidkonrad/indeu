@@ -7,7 +7,7 @@
 angular.module('indeuApp').controller('AdminEventsCtrl', 
 	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, EventModal, Lookup, Const, $adminRights) {
 
-		if (!$adminRights || $adminRights.eventView) {
+		if (!$adminRights || !$adminRights.eventView) {
 			$location.path('/admin-overblik').replace()
 		}
 
@@ -82,7 +82,7 @@ angular.module('indeuApp').controller('AdminEventsCtrl',
 				{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Ny event</span>',
 					className: 'btn btn-xs',
 					action: function( /* e, dt, node, config */) {
-						EventModal.show($scope).then(function() {
+						EventModal.show().then(function() {
 							$scope.dtInstance.reloadData();
 						});
  					}
@@ -92,15 +92,7 @@ angular.module('indeuApp').controller('AdminEventsCtrl',
 
 		angular.element('#table-events').on('click', 'tbody td:not(.no-click)', function(e) {
 			var id=$(this).parent().attr('event-id');
-
-			//should never happen with new delegated event structure
-			if (!id || EventModal.isShown()) {
-				e.preventDefault();
-				e.stopPropagation();
-				return;
-			}
-
-			EventModal.show($scope, id).then(function() {
+			EventModal.show(id).then(function() {
 				$scope.dtInstance.reloadData();
 			});	
 		});

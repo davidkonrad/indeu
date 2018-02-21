@@ -262,6 +262,7 @@ angular.module('indeuApp', [
 		});
 
 		$rootScope.$on('$routeChangeSuccess', function () {
+			//console.log('route', moment.tz());
 			Login.updateLastSeen()
 		});
 
@@ -277,6 +278,8 @@ angular.module('indeuApp', [
 		ESPBA.init().then(function() {
 			Lookup.init();
 		});
+
+		//console.log('run', moment.tz());
 
 		//moment
 		moment.tz.setDefault("Europe/Copenhagen"); 
