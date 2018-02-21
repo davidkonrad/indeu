@@ -254,6 +254,26 @@ SQL;
 	}
 
 
+	//******************
+	//EventContantPersons
+	//event_id
+	public function EventContactPersons() {
+		$event_id = isset($this->array['event_id']) ? $this->array['event_id'] : false;
+$SQL = <<<SQL
+		select 
+			ec.*,
+			u.id as user_id,
+			u.full_name,
+			u.email,
+			u.alias
+		from event_contactperson ec
+		left join user u on ec.user_id = u.id
+		where ec.event_id = $event_id
+SQL;
+		return $SQL;	
+	}
+
+
 }
 
 

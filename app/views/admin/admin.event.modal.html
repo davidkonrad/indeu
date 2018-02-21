@@ -19,7 +19,7 @@
 										id="user_id"
 										ng-click="__eventModal.selectUser()"
 										ng-model="edit.user_id">
-											{{ __eventModal.user_btn_caption }}
+											{{ user_btn_caption }}
 									</button>
 								</div>
 							</div>
@@ -35,7 +35,7 @@
 										placeholder="Navn på event">
 								</div>
 							</div>
-
+<!--
 					    <div class="form-group">
 					      <label class="col-md-3 control-label required" for="event_type_idf">Type</label>
 								<div class="col-md-5">
@@ -51,7 +51,7 @@
 									</button>
 								</div>
 							</div>
-
+-->
 					    <div class="form-group">
 					      <label class="col-md-3 control-label required" for="date">Dato, tid</label>
 								<div class="col-md-3">
@@ -113,22 +113,24 @@
 						</form>
 					</div>
 
-					<div bs-pane data-title="Adresse">
+					<div bs-pane data-title="Adresse / lokalitet">
 						<br>
 						<form role="form" class="form-horizontal" autocomplete="off">
-
+							<input type="hidden" name="lat" ng-model="edit.lat">
+							<input type="hidden" name="lng" ng-model="edit.lng">
 					    <div class="form-group">
 					      <label class="col-md-3 control-label required" for="adresse">Adresse</label>
 								<div class="col-md-8">
 							    <input class="form-control" 
 										type="text"
 										id="adresse"
+										auto-focus
 										select-on-click
 										ng-model="edit.address" 
 										ng-click="adresseClick()"
 										adresse-opslag 
 										adresse-type="adresser" 
-										on-select="adresseSelect" 
+										adresse-on-select="adresseSelect" 
 										placeholder="Vej, nr">
 								</div>
 							</div>
@@ -170,13 +172,13 @@
 						</form>
 					</div>
 
-					<div bs-pane data-title="Kontaktpersoner" data-disabled="__eventModal.create == true">
+					<div bs-pane data-title="Kontaktpersoner" ng-if="event_id != undefined">
 						<table datatable="" 
-							id="table-gruppe-medlemmer"
+							id="table-contavtpersons"
 							class="table table-striped col-md-12 no-padding no-margin" 
-							dt-options="__eventModal.medlemmer.dtOptions" 
-							dt-columns="__eventModal.medlemmer.dtColumns"
-							dt-instance="__eventModal.medlemmer.dtInstanceCallback">
+							dt-options="dtOptionsCP" 
+							dt-columns="dtColumnsCP"
+							dt-instance="dtInstanceCPCallback">
 						</table>
 					</div>
 
@@ -187,7 +189,7 @@
 				<button type="button" 
 					class="btn" 
 					ng-click="eventModalClose(true)" 
-					ng-class="{ 'btn-success' : canSave() }"
+					ng-class="{ 'btn-success' : canSave() && $scope.edit.hash == '', 'btn-primary' : canSave() && $scope.edit.hash != '' }"
 					ng-enabled="canSave()">
 						{{ __eventModal.btnOk }}
 				</button> 
