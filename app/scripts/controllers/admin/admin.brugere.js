@@ -5,13 +5,14 @@
  *
  */
 angular.module('indeuApp').controller('AdminBrugereCtrl', 
-	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, BrugerModal, Const, AdminRights) {
+	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, BrugerModal, Const, $adminRights) {
 
-		if (!AdminRights.isLoaded() || !AdminRights.userView()) {
+		if (!$adminRights || !$adminRights.userView) {
 			$location.path('/admin-overblik').replace()
 		}
 
-		$scope.createRights = AdminRights.userCreate();
+		$scope.adminRights = $adminRights;
+		$scope.createRights = $adminRights.userCreate;
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;

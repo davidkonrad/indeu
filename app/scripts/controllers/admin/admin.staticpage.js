@@ -5,11 +5,13 @@
  *
  */
 angular.module('indeuApp').controller('AdminStatiskCtrl', 
-	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, StaticPageModal, Lookup, Const, AdminRights) {
+	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, StaticPageModal, Lookup, Const, $adminRights) {
 
-		if (!AdminRights.static_pageView()) {
+		if (!$adminRights || !$adminRights.static_pageView) {
 			$location.path('/admin-overblik').replace()
 		}
+
+		$scope.adminRights = $adminRights;
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;
@@ -56,7 +58,7 @@ angular.module('indeuApp').controller('AdminStatiskCtrl',
 					className: 'btn btn-default btn-xs colvis-btn'
 				},
 				{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Ny statisk side</span>',
-					className: AdminRights.static_pageCreate() ? 'btn btn-xs' : 'btn btn-xs disabled',
+					className: $adminRights.static_pageCreate ? 'btn btn-xs' : 'btn btn-xs disabled',
 					action: function( e, dt, node, config ) {
 						StaticPageModal.show().then(function() {
 							$scope.dtInstance.reloadData();

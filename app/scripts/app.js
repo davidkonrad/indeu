@@ -169,39 +169,84 @@ angular.module('indeuApp', [
 			//administration
       .when('/admin-forside', {
         templateUrl: 'views/admin/admin.forside.html',
-        controller: 'AdminForsideCtrl'
+        controller: 'AdminForsideCtrl',
+				resolve: {
+					$adminRights: function(AdminRights) {
+						return AdminRights.getAdminRights()
+					}
+				}
       })
       .when('/admin-overblik', {
         templateUrl: 'views/admin/admin.overblik.html',
-        controller: 'AdminCtrl'
+        controller: 'AdminCtrl',
+				resolve: {
+					$adminRights: function(AdminRights) {
+						return AdminRights.getAdminRights()
+					}
+				}
       })
       .when('/admin-foreninger', {
         templateUrl: 'views/admin/admin.foreninger.html',
-        controller: 'AdminForeningerCtrl'
+        controller: 'AdminForeningerCtrl',
+				resolve: {
+					$adminRights: function(AdminRights) {
+						return AdminRights.getAdminRights()
+					}
+				}
       })
       .when('/admin-artikler', {
         templateUrl: 'views/admin/admin.artikler.html',
-        controller: 'AdminArtiklerCtrl'
+        controller: 'AdminArtiklerCtrl',
+				resolve: {
+					$adminRights: function(AdminRights) {
+						return AdminRights.getAdminRights()
+					}
+				}
       })
       .when('/admin-brugere', {
         templateUrl: 'views/admin/admin.brugere.html',
-        controller: 'AdminBrugereCtrl'
+        controller: 'AdminBrugereCtrl',
+				resolve: {
+					$adminRights: function(AdminRights) {
+						return AdminRights.getAdminRights()
+					}
+				}
       })
       .when('/admin-bruger-requests', {
         templateUrl: 'views/admin/admin.brugerrequests.html',
         controller: 'AdminBrugerRequestsCtrl',
+				resolve: {
+					$adminRights: function(AdminRights) {
+						return AdminRights.getAdminRights()
+					}
+				}
       })
 	   .when('/admin-grupper', {
         templateUrl: 'views/admin/admin.grupper.html',
-        controller: 'AdminGrupperCtrl'
+        controller: 'AdminGrupperCtrl',
+				resolve: {
+					$adminRights: function(AdminRights) {
+						return AdminRights.getAdminRights()
+					}
+				}
       })
       .when('/admin-events', {
         templateUrl: 'views/admin/admin.events.html',
-        controller: 'AdminEventsCtrl'
+        controller: 'AdminEventsCtrl',
+				resolve: {
+					$adminRights: function(AdminRights) {
+						return AdminRights.getAdminRights()
+					}
+				}
       })
       .when('/admin-statiske-sider', {
         templateUrl: 'views/admin/admin.staticpage.html',
-        controller: 'AdminStatiskCtrl'
+        controller: 'AdminStatiskCtrl',
+				resolve: {
+					$adminRights: function(AdminRights) {
+						return AdminRights.getAdminRights()
+					}
+				}
       })
 
       .otherwise({

@@ -4,15 +4,14 @@
  *
  *
  */
-angular.module('indeuApp').controller('AdminForsideCtrl', 
-	function($scope, $timeout, $location, Log, Login, Utils, ESPBA, SelectEventModal, SelectArtikelModal, SelectForeningModal, 
-	SelectStaticPageModal, Notification, AdminRights, ConfirmModal) {
+angular.module('indeuApp').controller('AdminForsideCtrl', function($scope, $timeout, $location, Log, Login, Utils, ESPBA, 
+	SelectEventModal, SelectArtikelModal, SelectForeningModal, SelectStaticPageModal, Notification, ConfirmModal, $adminRights) {
 
-	if (!AdminRights.frontpageView()) {
+	if (!$adminRights || !$adminRights.frontpageView) {
 		$location.path('/admin-overblik').replace()
 	}
 
-	$scope.updateRights = AdminRights.frontpageUpdate();
+	$scope.updateRights = $adminRights.frontpageUpdate;
 	$scope.changed = false;
 
 	function reloadContent() {

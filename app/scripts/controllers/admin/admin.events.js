@@ -5,11 +5,13 @@
  *
  */
 angular.module('indeuApp').controller('AdminEventsCtrl', 
-	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, EventModal, Lookup, Const, AdminRights) {
+	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, EventModal, Lookup, Const, $adminRights) {
 
-		if (!AdminRights.eventView()) {
+		if (!$adminRights || $adminRights.eventView) {
 			$location.path('/admin-overblik').replace()
 		}
+
+		$scope.adminRights = $adminRights;
 
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('indeuApp').factory('AdminRights', function($q, ESPBA, Utils) {
+angular.module('indeuApp').factory('AdminRights', function($q, ESPBA, Utils, Login) {
 
 	var _user_id;
 	var _rights;
@@ -12,17 +12,33 @@ angular.module('indeuApp').factory('AdminRights', function($q, ESPBA, Utils) {
 			return _rights != undefined
 		},
 
-		setUser: function(user_id) {
+		getAdminRights: function() {
+			var user_id = Login.isLoggedIn() ? Login.currentUser().id : false;
+			var	deferred = $q.defer();
+
+			//user not set
+			if (!user_id) {
+				deferred.resolve( false )
+			}
+
+			//already loaded
+			if (_rights && user_id == _user_id){
+				deferred.resolve( this.dictionary() )
+			}
+
 			_user_id = user_id;
 			_self = this;
 
 			ESPBA.get('user_admin_rights', { user_id: user_id }).then(function(r) {
 				if (r.data && r.data.length ==1) {
 					_rights = r.data[0];
+					deferred.resolve( _self.dictionary() )
 				} else {
 					//
 				}
 			})
+
+      return deferred.promise;
 		},
 
 		//complete dictionary
@@ -234,13 +250,5 @@ angular.module('indeuApp').factory('AdminRights', function($q, ESPBA, Utils) {
 	}
 
 });
-
-//initialize
-angular.module('indeuApp').run(function(AdminRights, Login) {
-	if (Login.isLoggedIn()) {
-		AdminRights.setUser(Login.currentUser().id);
-	}
-});
-
 
 

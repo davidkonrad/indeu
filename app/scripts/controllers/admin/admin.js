@@ -4,8 +4,8 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('AdminCtrl', function($scope, $location, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect, AdminRights, Email) {
+angular.module('indeuApp').controller('AdminCtrl', 
+	function($scope, $location, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect, Email, $adminRights) {
 
 		if (!Login.isLoggedIn()) {
 			Redirect.home('Du er ikke logget ind');
@@ -15,12 +15,17 @@ angular.module('indeuApp')
 			}
 		}
 
+		if (!$adminRights || !$adminRights.frontpageView) {
+			Redirect.home('Du har ingen administrator-rettigheder');
+		} 
+
+/*
 		if (!AdminRights.dictionary().frontpageView) {
 			Redirect.home('Du har ingen administrator-rettigheder');
 		} else {
 			$scope.adminRights = AdminRights.dictionary()
 		}
-
+*/
 
 		//frontpage content
 		ESPBA.prepared('AdminContentOverview', {}).then(function(r) {

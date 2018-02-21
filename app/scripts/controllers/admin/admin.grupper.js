@@ -5,10 +5,9 @@
  *
  */
 angular.module('indeuApp').controller('AdminGrupperCtrl', 
-	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, GruppeModal, Lookup, Const, AdminRights) {
+	function($scope, $q, $location, Utils, ESPBA, DTOptionsBuilder, DTColumnBuilder, GruppeModal, Lookup, Const, $adminRights) {
 
-		//if (!AdminRights.groupView()) {
-		if (!AdminRights.dictionary().groupView) {
+		if (!$adminRights || !$adminRights.groupView) {
 			$location.path('/admin-overblik').replace()
 		}
 

@@ -4,13 +4,15 @@
  *
  *
  */
-angular.module('indeuApp').controller('AdminArtiklerCtrl', 
-	function($scope, $location, $q, ESPBA, Lookup, Meta, Utils, DTOptionsBuilder, DTColumnBuilder, ArtikelModal, Const, AdminRights) {
+angular.module('indeuApp').controller('AdminArtiklerCtrl', function($scope, $location, $q, ESPBA, Lookup, Meta, Utils, 
+	DTOptionsBuilder, DTColumnBuilder, ArtikelModal, Const, $adminRights) {
 
-		if (!AdminRights.articleView()) {
+		if (!$adminRights || !$adminRights.articleView) {
 			$location.path('/admin-overblik').replace()
 		}
 
+		$scope.adminRights = $adminRights;
+		
 		$scope.dtInstanceCallback = function(instance) {
 			$scope.dtInstance = instance;
     };
