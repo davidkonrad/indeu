@@ -9,8 +9,6 @@ angular.module('indeuApp').controller('MedlemForsideCtrl',
 
 		Redirect.checkLogin('Du skal være logget ind for at kunne se medlemsprofiler');
 
-		//moment.tz.setDefault("America/New_York");  
-			
 		const user_id = $routeParams.id;
 
 		if (Login.isLoggedIn()) {

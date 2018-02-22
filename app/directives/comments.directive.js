@@ -5,7 +5,7 @@
  * 
  * 
  */
-angular.module('indeuApp').directive('comments', function($timeout, Login, Utils, ESPBA, Lookup, Notification, Log) {
+angular.module('indeuApp').directive('comments', function($timeout, Login, Utils, ESPBA, Lookup, Notification, Log, ConfirmModal) {
 
 	return {
 		templateUrl: "views/inc/inc.comments.html",
@@ -31,7 +31,7 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 
 			$scope.canSave = function(attr) {
 				if (!$scope.comment) return false;
-				return $scope.comment[attr] != '';
+				return $scope.comment[attr] != undefined && $scope.comment[attr] != '';
 			}
 
 			$scope.textAreaAdjust = function(element) {
@@ -123,6 +123,33 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 				});
 			}
 
+			$scope.deleteComment = function(comment_id) {
+				ConfirmModal.show('Er du sikker på du vil slette denne kommentar?').then(function(answer) {
+					if (answer) {
+						if (commentHasChildren(comment_id)) {
+							ESPBA.update('comment', { id: comment_id, is_deleted: 1 }).then(function() {
+								var c = commentById(comment_id);
+								c.is_deleted = 1;
+								c.renderContent = 'Fjernet af bruger';
+								$timeout(function() {
+									$scope.$apply()
+								})
+							})
+						} else {
+							ESPBA.delete('comment', { id: comment_id }).then(function() {
+								var remove = $scope.comments.filter(function(c) {
+									return c.id != comment_id
+								})
+								$scope.comments = remove;
+								$timeout(function() {
+									$scope.$apply()
+								})
+							})
+						}
+					}	
+				})
+			}
+
 			function sortComments(arr) {
 				function hierarchySortFunc(a,b ) {
 					return new Date(a).valueOf() > new Date(b).valueOf()
@@ -169,9 +196,19 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 						var sorted = sortComments(comments.data);
 	
 						sorted.forEach(function(c) {
-							c.dateStamp = moment(c.created_timestamp).fromNow();  
+							c.timestamp_relative = moment(c.created_timestamp).local().fromNow();
+							c.timestamp_precise = moment(c.created_timestamp).local().format("LLLL");
+							if (c.edited_timestamp) {
+								c.edited_timestamp_precise = moment(c.edited_timestamp).local().format("LLLL");
+							}
 							c.user = Lookup.getUser(c.user_id);
-							c.renderContent = self.testContent(c.content.substring(0));
+
+							if (c.is_deleted) {
+								if (c.is_deleted == 1) c.renderContent = 'Fjernet af bruger';
+								if (c.is_deleted == 2) c.renderContent = 'Fjernet af moderator';
+							} else {
+								c.renderContent = self.testContent(c.content.substring(0));
+							}
 
 							if (c.parent_id) {
 								c.parent_user = getParentUser(c.parent_id) 
@@ -182,13 +219,22 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 				});
 			}
 
-			$scope.commentById = function(id) {
+			function commentById(id) {
 				var c = $scope.comments;
 				for (var i=0,l=c.length; i<l; i++) {
 					if (c[i].id == id) return c[i]
 				}
 				return false
 			}
+
+			function commentHasChildren(id) {
+				var c = $scope.comments;
+				for (var i=0,l=c.length; i<l; i++) {
+					if (c[i].parent_id == id) return true
+				}
+				return false
+			}
+
 
 			$scope.indentClass = function(comment_id) {
 
@@ -238,7 +284,7 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 			//edit existing comment
 			$scope.setActionEdit = function(comment_id) {
 				$scope.actionAnswer = '';
-				$scope.comment = $scope.commentById(comment_id);
+				$scope.comment = commentById(comment_id);
 				$scope.comment.contentAnswer = $scope.comment.content;
 				//dont show in master box
 				delete $scope.comment.content; 

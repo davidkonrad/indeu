@@ -44,7 +44,7 @@
 	float: left;
 	display: inline-block;
 	padding-left: 6px;
-	font-size: 90%;
+	font-size: 95%;
 }
 
 .comment .content {
@@ -87,6 +87,8 @@
 	border: none;
 	display: inline-block;
 	padding: 0px;
+	margin-top: 5px;
+	margin-bottom: 15px;
 	padding-left: 6px;
 	float: left;
 	clear: both;

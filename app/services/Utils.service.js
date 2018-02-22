@@ -108,7 +108,7 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 		},
 
 		calendarDate: function(date) {
-			return moment(date).calendar(null, {
+			return moment(date).local().calendar(null, {
 		    lastDay : '[I går]',
 		    sameDay : '[I dag]',
 		    nextDay : '[I morgen]',

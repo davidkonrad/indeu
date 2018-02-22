@@ -69,29 +69,38 @@
 							<span ng-if="!_c.parent_user">
 								<strong> {{ _c.user.full_name }}, </strong>
 							</span>
-							{{ _c.dateStamp }}
+							<span title="{{ _c.timestamp_precise }}">{{ _c.timestamp_relative }}</span>
 
 							<span ng-if="_c.edited_timestamp">
 								&nbsp;
-								<span class="text-muted" title="Redigeret {{ _c.edited_timestamp }}">(redigeret)</span>
+								<span class="text-muted" title="Redigeret {{ _c.edited_timestamp_precise }}">(redigeret)</span>
 							</span>
 					
 						</span>
-						<pre smilies="_c.renderContent"></pre>
+						
+						<pre ng-if="!_c.is_deleted" smilies="_c.renderContent"></pre>
+						<pre ng-if="_c.is_deleted" class="text-muted"><em><small>{{ _c.renderContent }}</small></em></pre>
 						<span class="clearfix"></span>
 	
-						<a class="answer-comment"
-							href="" 
-							ng-click="setActionAnswer(_c.id)">
-							Svar
-						</a>
-
-						<a ng-if="user.id == _c.user_id"
-							class="answer-comment"
-							href="" 
-							ng-click="setActionEdit(_c.id)">
-							Rediger
-						</a>
+						<span ng-if="!_c.is_deleted">
+							<a class="answer-comment"
+								href="" 
+								ng-click="setActionAnswer(_c.id)">
+								Svar
+							</a>
+							<a ng-if="user.id == _c.user_id"
+								class="answer-comment"
+								href="" 
+								ng-click="setActionEdit(_c.id)">
+								Rediger
+							</a>
+							<a ng-if="user.id == _c.user_id"
+								class="answer-comment"
+								href="" 
+								ng-click="deleteComment(_c.id)">
+								Slet
+							</a>
+						</span>
 
 						<!-- new comment box -->		
 						<span class="comment-answer-box indent1" ng-if="actionAnswer == _c.id">
