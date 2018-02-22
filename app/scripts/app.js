@@ -282,7 +282,8 @@ angular.module('indeuApp', [
 		//console.log('run', moment.tz());
 
 		//moment
-		moment.tz.setDefault("Europe/Copenhagen"); 
+		//moment.tz.setDefault("Europe/Copenhagen");
+		moment.tz.guess();
 	
 		//meta
 		Meta.setTitleSuffix(' | indeu.org');

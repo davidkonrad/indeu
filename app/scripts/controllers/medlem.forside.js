@@ -8,6 +8,8 @@ angular.module('indeuApp').controller('MedlemForsideCtrl',
 	function($scope, $q, $routeParams, $timeout, ESPBA, Lookup, Meta, Utils, Login, Redirect, Const) {
 
 		Redirect.checkLogin('Du skal være logget ind for at kunne se medlemsprofiler');
+
+		//moment.tz.setDefault("America/New_York");  
 			
 		const user_id = $routeParams.id;
 
@@ -34,7 +36,8 @@ angular.module('indeuApp').controller('MedlemForsideCtrl',
 			if ($scope.user.last_seen == '0000-00-00 00:00:00') {
 				$scope.user.last_seen	= 'Har endnu ikke været logget ind'
 			} else {
-				$scope.user.last_seen = 'Sidst set '+moment($scope.user.last_seen).add(1, 'hours').calendar();
+				//$scope.user.last_seen = 'Sidst set '+moment($scope.user.last_seen).add(1, 'hours').calendar();
+				$scope.user.last_seen = 'Sidst set '+moment($scope.user.last_seen).local().calendar();
 			}
 
 			ESPBA.get('address', { hash: $scope.user.hash }).then(function(a) {
