@@ -28,6 +28,11 @@
 	padding-top: 0px !important;
 }
 
+/* lineheights */
+*.line-height-110 {
+	line-height: 110%;
+}
+
 /** dataTables **/
 .dataTables_wrapper .dataTables_paginate .paginate_button {
 	padding : 0px;
