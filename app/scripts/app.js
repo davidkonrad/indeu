@@ -9,7 +9,7 @@ angular.module('indeuApp', [
 	'ngCookies',
 	'ngResource',
 	'ngRoute',
-	'ngSanitize',
+	//'ngSanitize',
 	'ngTouch',
 	'mgcrea.ngStrap',
 	'datatables',

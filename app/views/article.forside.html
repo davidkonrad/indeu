@@ -14,9 +14,10 @@
 
 			<auto-image ng-if="article.imageUrl" src="{{ article.imageUrl }}"></auto-image>
 
-			<div class="artikel-content" ng-bind-html="article.content"></div>
+			<div class="artikel-content" ta-bind ng-model="article.content"></div>
 
 			<div class="col-md-12 clearfix">
+				<br>
 				<entity-rating hash="{{ article.hash }}" user-id="{{ user.id }}" is-self="user.id == article.user_id" class="pull-right"></entity-rating>
 			</div>
 

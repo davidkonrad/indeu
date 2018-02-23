@@ -1,10 +1,11 @@
 .frontpage-promo {
 	border-radius: 2px;
 	width: 100%;
-	height: 250px;
-	border: 1px solid #f3f3f3;
+	height: 265px;
+	border: 1px solid #333;
 }
 
+/*
 .frontpage-promo p.h1 {
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -18,6 +19,20 @@
 	font-weight: 900;
   background:rgba(255,255,255, 0.7);
 }
+*/
+.frontpage-promo .h1 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 300%;
+	font-style: normal;
+	font-weight: 900;
+  XXbackground:rgba(255,255,255, 0.7);
+}
+
+/*
 .frontpage-promo p {
 	padding: 10px;
 	padding-top: 0px;
@@ -30,36 +45,88 @@
 	left: 0;
 	bottom: 0;
 }
+*/
+.frontpage-promo p {
+	padding: 10px;
+	padding-top: 0px;
+	padding-left: 30px;
+	margin-top: 0px;
+  background:rgba(0,0,0, 0.7);
+	color: #fff;
+	position: relative;
+	display: block;
+	left: 0;
+	bottom: 0;
+}
+
+.frontpage-promo .h3 {
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 15px;
+	position: absolute;
+	display: inline-block;
+	font-size: 26px;
+	background:rgba(0,0,0, 0.8);
+	-webkit-margin-after: 0;
+	-webkit-margin-before: 0;
+}
+
+.frontpage-promo .h4 {
+	padding-left: 5px !important;
+	Xbottom: 40px;
+	left: 0px;
+	width: 100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 15px;
+	XXposition: absolute;
+	display: inline-block;
+	font-size: 16px;
+	background:rgba(255,255,255, 0.6);
+	-webkit-margin-after: 0;
+	-webkit-margin-before: 0;
+}
 
 /* medium */
 .frontpage-promo-medium {
 	border-radius: 2px;
 	width: 100%;
 	height: 125px;
-	border: 1px solid #f3f3f3;
+	border: 1px solid #333;
 	overflow-y: hidden;
 }
 
-.frontpage-promo-medium p.h3 {
-	margin-top: 20px;
-	margin-bottom: 0px;
-	margin-left: 0px;
-	XXXpadding-left: 5px !important;
-	padding-right: 15px;
-	padding-bottom: 0px !important;
-	padding-top: 0px !important;
-	font-size: 24px;
+.frontpage-promo-medium p {
+	padding-left: 8px !important;
+	padding-right: 1px;
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+	font-size: 22px;
 	font-style: normal;
 	font-weight: 900;
-	background:rgba(255,255,255, 0.6);
-	color: #333;
-	text-shadow: 2px 1px #fff;
-	display: inline;
-	line-height: 30px;
+	background:rgba(0,0,0, 0.7);
+	color: #fff;
 	-webkit-margin-before: 0;
 	-webkit-margin-after: 0;
 }
-.frontpage-promo-medium p.h5 {
+
+
+.frontpage-promo-medium .h3 {
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 900;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	display: inline-block;
+	width: 100%;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+}
+.frontpage-promo-medium .h5 {
 	padding-left: 5px !important;
 	bottom: 0px;
 	left: 0px;
@@ -70,11 +137,12 @@
 	position: absolute;
 	display: inline-block;
 	font-size: 16px;
-	background:rgba(255,255,255, 0.6);
+	XXbackground:rgba(255,255,255, 0.6);
 	-webkit-margin-after: 0;
 	-webkit-margin-before: 0;
 }
 
+/*
 .frontpage-promo-medium p {
 	padding: 0px;
 	padding-top: 0px;
@@ -83,9 +151,9 @@
 	margin-top: 0px;
   XXbackground:rgba(255,255,255, 0.6);
 }
-
+*/
 .promo-margin-top {
-	margin-top: 10px;
+	margin-top: 15px;
 }
 
 

@@ -8,7 +8,6 @@
     "angular-cookies": "^1.4.0",
     "angular-resource": "^1.4.0",
     "angular-route": "~1.6.4",
-    "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
     "font-awesome": "~4.7",
     "jszip": "2.6.0",

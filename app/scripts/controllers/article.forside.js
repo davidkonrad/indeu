@@ -6,7 +6,7 @@
  */
 angular.module('indeuApp')
   .controller('ArticleForsideCtrl', 
-	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, UserVisits, VisitCounter, ConfirmModal, Redirect) {
+	function($scope, $sce, Login, $routeParams, ESPBA, Lookup, Meta, Utils, UserVisits, VisitCounter, ConfirmModal, Redirect) {
 
 		if (Login.isLoggedIn()) {
 			$scope.user = Login.currentUser()
@@ -23,9 +23,9 @@ angular.module('indeuApp')
 				}
 
 				var a = r.data[0];
-				a.dateStamp = moment(a.created_timestamp).fromNow(); 
+				a.dateStamp = moment(a.created_timestamp).local().fromNow(); 
 				a.realDate = moment(a.created_timestamp); 
-				if (a.edited_timestamp) a.editedDateStamp = moment(a.edited_timestamp).fromNow(); 
+				if (a.edited_timestamp) a.editedDateStamp = moment(a.edited_timestamp).local().fromNow(); 
 
 				var user = Lookup.getUser(a.user_id);
 				a.userFullName = user.full_name;

@@ -45,10 +45,8 @@ angular.module('indeuApp')
 
 					c.image_style = {	'background':'#dadada' };
 					if (c.image_url) {
-						//console.log(c.image_url)
 						var img = new Image();
 						img.onload = function() {
-							//console.log('onload', c.id, c.image_url);
 							var ret = {
 								'background-image':'url(' + c.image_url + ')',
 								'background-size': 'cover',
@@ -61,18 +59,12 @@ angular.module('indeuApp')
 					}(c)
 				})
 				$scope.promo = f.data[0];
-				$scope.promo.extract = $scope.promo.extract ? '»'+$scope.promo.extract+'«' : null;
+				$scope.promo.extract = $scope.promo.extract ? $scope.promo.extract : null;
 				$scope.sub_promos = f.data.slice(1);
 
 				if ($scope.promo.image_url) {
 					var img = new Image();
 					img.onload = function() {
-						/*
-							if height>width go for left aligned image, right aligned text
-							if width>height and width > 500 go for fuul width
-								if height < 400 place text at bottom
-						*/							
-		
 						var ret = {
 							'background-image':'url(' + $scope.promo.image_url + ')',
 							'background-size': 'cover',

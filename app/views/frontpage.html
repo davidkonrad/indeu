@@ -1,10 +1,11 @@
 <div class="col-md-6">
 	<a ng-href="{{ promo.url }}"
-		class="frontpage-promo cursor-pointer unstyled hover-effect col-md-12" 
+		class="frontpage-promo cursor-pointer unstyled hover-effect col-md-12 no-padding" 
 		ng-style="getBackgroundStyle()">
 
 		<p class="h1" ng-bind-html="promo.header"></p>
-		<p class="h4" ng-bind-html="promo.extract"></p>
+		<br><br><br>
+		<p class="h3" ng-bind-html="promo.extract"></p>
 
 	</a>
 </div>
@@ -15,16 +16,20 @@
 		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding" 
 		ng-style="sub_promos[0].image_style">
 		<p class="h3 no-padding-left">
-			{{ sub_promos[0].header | limitTo: 40 }}{{sub_promos[0].header.length > 40 ? '&hellip;' : ''}}
+			{{ sub_promos[0].header | limitTo: 80 }}{{sub_promos[0].header.length > 80 ? '&hellip;' : ''}}
 		</p>
+		<!--
 		<p class="h5 no-padding-left">{{ sub_promos[0].extract | limitTo: 90 }}{{sub_promos[0].extract.length > 90 ? '&hellip;' : ''}}</p>
+		-->
 	</a>
 	<a ng-if="sub_promos[1].url"
 		ng-href="{{ sub_promos[1].url }}"
 		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding promo-margin-top" 
 		ng-style="sub_promos[1].image_style">
 		<p class="h3 no-padding-left">{{ sub_promos[1].header | limitTo: 40 }}{{sub_promos[1].header.length > 40 ? '&hellip;' : ''}}</p>
+<!--
 		<p class="h5 no-padding-left">{{ sub_promos[1].extract | limitTo: 90 }}{{sub_promos[1].extract.length > 90 ? '&hellip;' : ''}}</p>
+-->
 	</a>
 </div>
 
@@ -40,14 +45,16 @@
 <div class="col-md-12 clearfix">
 	<div ng-repeat="p in sub_promos" 
 		class="col-md-4 no-padding-left" 
-		ng-class="{ 'no-padding-right': $index == 5 }"
-		ng-if="$index>2 && p.url != '' ">
+		ng-class="{ 'no-padding-right': $index == 4 || $index == 7 }"
+		ng-if="$index>1 && p.url != '' ">
 	<a ng-if="p.url"
 		ng-href="{{ p.url }}"
 		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding promo-margin-top" 
 		ng-style="p.image_style">
-		<p class="h3 no-padding-left">{{ p.header | limitTo: 40 }}{{p.header.length > 40 ? '&hellip;' : ''}}</p>
+		<p class="h3 no-padding-left">{{ p.header | limitTo: 70 }}{{p.header.length > 70 ? '&hellip;' : ''}}</p>
+<!--
 		<p class="h5 no-padding-left">{{ p.extract | limitTo: 90 }}{{p.extract.length > 90 ? '&hellip;' : ''}}</p>
+-->
 	</a>
 
 	</div>
