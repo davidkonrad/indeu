@@ -2,24 +2,9 @@
 	border-radius: 2px;
 	width: 100%;
 	height: 265px;
-	border: 1px solid #333;
+	border: 1px solid #ebebeb;
 }
 
-/*
-.frontpage-promo p.h1 {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	margin-left: 0px;
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	font-size: 300%;
-	font-style: normal;
-	font-weight: 900;
-  background:rgba(255,255,255, 0.7);
-}
-*/
 .frontpage-promo .h1 {
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -29,23 +14,7 @@
 	font-size: 300%;
 	font-style: normal;
 	font-weight: 900;
-  XXbackground:rgba(255,255,255, 0.7);
 }
-
-/*
-.frontpage-promo p {
-	padding: 10px;
-	padding-top: 0px;
-	padding-left: 30px;
-	margin-top: 0px;
-  background:rgba(255,255,255, 0.7);
-	font-style: italic;
-	position: relative;
-	display: block;
-	left: 0;
-	bottom: 0;
-}
-*/
 .frontpage-promo p {
 	padding: 10px;
 	padding-top: 0px;
@@ -74,6 +43,7 @@
 	-webkit-margin-before: 0;
 }
 
+/*
 .frontpage-promo .h4 {
 	padding-left: 5px !important;
 	Xbottom: 40px;
@@ -82,20 +52,20 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-right: 15px;
-	XXposition: absolute;
 	display: inline-block;
 	font-size: 16px;
 	background:rgba(255,255,255, 0.6);
 	-webkit-margin-after: 0;
 	-webkit-margin-before: 0;
 }
+*/
 
 /* medium */
 .frontpage-promo-medium {
 	border-radius: 2px;
 	width: 100%;
 	height: 125px;
-	border: 1px solid #333;
+	border: 1px solid #ebebeb;
 	overflow-y: hidden;
 }
 
@@ -107,7 +77,7 @@
 	font-size: 22px;
 	font-style: normal;
 	font-weight: 900;
-	background:rgba(0,0,0, 0.7);
+	background:rgba(0,0,0, 0.8);
 	color: #fff;
 	-webkit-margin-before: 0;
 	-webkit-margin-after: 0;
@@ -137,21 +107,10 @@
 	position: absolute;
 	display: inline-block;
 	font-size: 16px;
-	XXbackground:rgba(255,255,255, 0.6);
 	-webkit-margin-after: 0;
 	-webkit-margin-before: 0;
 }
 
-/*
-.frontpage-promo-medium p {
-	padding: 0px;
-	padding-top: 0px;
-	padding-left: 10px;
-	padding-right: 0px;
-	margin-top: 0px;
-  XXbackground:rgba(255,255,255, 0.6);
-}
-*/
 .promo-margin-top {
 	margin-top: 15px;
 }

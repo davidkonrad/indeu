@@ -5,7 +5,7 @@
 
 		<p class="h1" ng-bind-html="promo.header"></p>
 		<br><br><br>
-		<p class="h3" ng-bind-html="promo.extract"></p>
+		<p ng-if="promo.extract != '' " class="h3" ng-bind-html="promo.extract"></p>
 
 	</a>
 </div>

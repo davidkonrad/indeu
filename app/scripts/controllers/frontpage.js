@@ -20,22 +20,22 @@ angular.module('indeuApp')
 				f.data.forEach(function(c) {
 					switch (c.type) {
 						case 'Artikel':
-							if (c.image) c.image_url = '/media/artikel/'+c.image;
+							c.image_url = c.image ? '/media/artikel/'+c.image : '/media/statisk/indeu-default.png';
 							c.url = Utils.articleUrl(c.content_id, c.header);
 							break;
 
 						case 'Forening':
-							if (c.image) c.image_url = '../media/forening/'+c.image;
+							c.image_url = c.image ? '/media/forening/'+c.image : '/media/statisk/indeu-default.png';
 							c.url = Utils.foreningUrl(c.content_id, c.header);
 							break;
 
 						case 'Event':
-							if (c.image) c.image_url = '../media/event/'+c.image;
+							c.image_url = c.image ? '/media/event/'+c.image : '/media/statisk/indeu-default.png';
 							c.url = Utils.eventUrl(c.content_id, c.header);
 							break;
 
 						case 'Statisk':
-							if (c.image) c.image_url = 'media/statisk/'+c.image;
+							c.image_url = c.image ? '/media/statisk/'+c.image : '/media/statisk/indeu-default.png';
 							c.url = Utils.staticUrl(c.content_id, c.header);
 							break;
 
