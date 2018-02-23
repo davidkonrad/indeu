@@ -7,6 +7,7 @@
 /app/api/pw.php
 /app/api/test.txt
 /db
+/app/static
 log.txt
 old_Gruntfile.js
 npm-debug.log
