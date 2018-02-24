@@ -24,6 +24,7 @@
 	<div class="col-md-12">
 		<div class="">
 			<text-angular ng-model="edit.about" 
+				spellcheck="false"
 				ta-text-editor-class="form-control ta-editor-md"
 				ta-toolbar="[['h2','h3'],['bold','italics','underline','strikeThrough'],['insertLink'], ['html']]">
 			</text-angular>
@@ -102,12 +103,25 @@
 				    	<div class="form-group col-md-3">
 								<div class="radio">
 								  <label class="no-padding">Signatur</label><br>
-									&nbsp;&nbsp;<label><input type="radio" name="signatur">Alias</label><br>
-									&nbsp;&nbsp;<label><input type="radio" name="signatur">Fulde navn</label><br>
-									&nbsp;&nbsp;<label><input type="radio" name="signatur">Fornavn</label><br>
-									&nbsp;&nbsp;<label><input type="radio" name="signatur">Efternavn</label><br>
+									&nbsp;&nbsp;<label><input type="radio" name="signature" value="1" ng-model="edit.signature">Alias</label><br>
+									&nbsp;&nbsp;<label><input type="radio" name="signature" value="2" ng-model="edit.signature">Fulde navn</label><br>
+									&nbsp;&nbsp;<label><input type="radio" name="signature" value="3" ng-model="edit.signature">Fornavn</label><br>
+									&nbsp;&nbsp;<label><input type="radio" name="signature" value="4" ng-model="edit.signature">Efternavn</label><br>
 								</div>
 				      </div>
+
+				    	<div class="form-group col-md-3">
+								<div class="checkbox">
+								  <label class="control-label">
+										<input type="checkbox" 
+											ng-false-value="0"
+											ng-true-value="1"
+											name="accept_newsletter"
+											ng-model="edit.accept_newsletter">Modtag nyhedsbrev
+									</label>
+								</div>
+							</div>
+
 						</div>
 
 						<div class="col-md-1">

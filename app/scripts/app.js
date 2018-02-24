@@ -44,12 +44,12 @@ angular.module('indeuApp', [
 		}
 
 		NotificationProvider.setOptions({
-			delay: 4000,
+			delay: 5000,
 			startTop: 20,
 			startRight: 10,
 			verticalSpacing: 20,
 			horizontalSpacing: 20,
-			positionX: 'left',
+			positionX: 'right',
 			positionY: 'top'
 		});
 
@@ -262,7 +262,6 @@ angular.module('indeuApp', [
 		});
 
 		$rootScope.$on('$routeChangeSuccess', function () {
-			//console.log('route', moment.tz());
 			Login.updateLastSeen()
 		});
 
@@ -278,8 +277,6 @@ angular.module('indeuApp', [
 		ESPBA.init().then(function() {
 			Lookup.init();
 		});
-
-		//console.log('run', moment.tz());
 
 		//moment
 		//moment.tz.setDefault("Europe/Copenhagen");

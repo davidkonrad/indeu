@@ -23,7 +23,7 @@ angular.module('indeuApp').directive('youtubeWarning', function($timeout, $cooki
 		restrict: 'E',
 		replace: true,
 		link: function($scope, element, attrs) {
-			if ($cookies.get(cookieName)) return;
+			if ($cookies.get(cookieName) == '1') return;
 			$timeout(function() {
 				if ($('iframe').length>0) {
 					element.html(template).show(); 
@@ -31,7 +31,7 @@ angular.module('indeuApp').directive('youtubeWarning', function($timeout, $cooki
 						setCookie()
 					})
 				}
-			}, 1000)
+			}, 5000)
 		}
 	}
 });
