@@ -1,6 +1,6 @@
 <div>
 
-	<div ng-if="user.id && !isSelf">
+	<div ng-if="user.id"> <!-- ng-if="user.id && !isSelf" if disallow user -->
 		<span class="msg-ngrateit text-muted">Vurder dette</span>
 		<button class="btn btn-xs btn-ngrateit"
 			title="Afgiv bedømmelse"

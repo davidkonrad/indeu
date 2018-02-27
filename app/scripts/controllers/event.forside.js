@@ -42,7 +42,7 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 				$scope.event.userFullName = $scope.event.user_full_name; //fallback
 				$scope.event.userUrl = Utils.userUrl($scope.event.user_id, $scope.event.userFullName);
 				if ($scope.user) {
-					$scope.event.isOwner = $scope.event.user_id = $scope.user.id
+					$scope.event.isOwner = $scope.event.user_id == $scope.user.id
 				} 
 
 				UserVisits.visit($scope.event.hash);

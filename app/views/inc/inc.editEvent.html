@@ -84,7 +84,7 @@
 							</div>		
 						</div>
 						<div class="form-group">
-				      <label class="col-md-2 control-label" for="">Sted / navn</label>
+				      <label class="col-md-2 control-label" for="">Hvor, sted</label>
 							<div class="col-md-10">					
 								<input class="form-control" 
 									select-on-click
@@ -138,17 +138,20 @@
 											title="Fjern kontaktperson"
 											ng-click="eventAction.removeContact(cp.id, cp.user.id)">
 										</i>
+<!--
 										<i ng-if="cp.user.id == user_id"
 											ng-click="eventAction.cannotRemoveContact()"
 											class="fa fa-remove text-muted">
 										</i>
+-->
 									</button>
+									<span ng-if="cp.user.id == user_id">&nbsp;</span>
 								</span>
 								<button class="btn btn-primary btn-xs" 
 									type="button"
 									ng-click="eventAction.addContact()">
 									<i class="fa fa-plus"></i>
-									Kontakt
+									Kontaktperson
 								</buttun>
 							</div>
 						</div>
@@ -187,13 +190,16 @@
 <!-- about -->
 				<tr>
 					<td colspan="2">
-				    <div class="form-group">
-							<div class="col-md-12">
-								<text-angular ng-model="event.about" 
-									ta-text-editor-class="form-control ta-editor-small"
-									ta-toolbar="[['h2','h3'],['bold','italics','underline','strikeThrough'],['insertLink'], ['html']]">
-								</text-angular>
-							</div>
+						<div class="col-md-8">
+							<text-angular ng-model="event.about" 
+								spellcheck="false"
+								ta-text-editor-class="form-control ta-editor-md"
+								ta-toolbar="[['h2','h3'],['bold','italics','underline','strikeThrough'],['insertLink'], ['html']]">
+							</text-angular>
+						</div>
+						<div class="col-md-4">
+							<br><br>
+							<attach-image ng-model="event.image" type="e" size="auto" height="200"></attach-image>
 						</div>
 					</td>
 				</tr>

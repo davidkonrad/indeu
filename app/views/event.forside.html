@@ -18,8 +18,11 @@
 						til kl. <strong class="text-primary">{{ event.to | date : "HH:mm" }} </strong>
 					</span>
 				</h4>
+				<h4 ng-if="event.place_name != null" class="no-margin" style="padding-top:15px;">
+					Hvor: <strong class="text-primary">{{ event.place_name }}</strong> 
+				</h4>
 				<h4 class="no-margin" style="padding-top:15px;">
-					Sted: <strong class="text-primary">{{ event.address }}</strong> 
+					Adresse: <strong class="text-primary">{{ event.address }}</strong> 
 				</h4>
 			</div>
 			<div ng-bind-html="event.about"></div>
@@ -104,7 +107,7 @@
 	
 <aside class="col-md-3">
 
-	<div ng-if="!user.id">
+	<div ng-if="!event.isOwner">
 		<div xxclass="layout-right-header-content">
 			<div class="well well-sm clearfix no-margin">
 				<div class="col-md-12">
@@ -124,19 +127,17 @@
 		</div>
 	</div>
 
-	<div ng-if="user.id">
+	<div ng-if="event.isOwner">
 		<div class="layout-right-header">Handlinger</div>
 		<div class="layout-right-header-content">
-			<a ng-if="event.isOwner"
-				href="" 
+			<a href="" 
 				ng-class="{ 'disabled': actionDisable('e') }"
 				ng-disabled="actionDisable('e')" 
 				ng-click="setAction('e')">
 				<i class="fa fa-fw fa-wrench fa-x2"></i>
 				Rediger event<br>
 			</a>
-			<a ng-if="event.isOwner"
-				href="" 
+			<a href="" 
 				ng-class="{ 'disabled': actionDisable('l') }"
 				ng-disabled="actionDisable('l')" 
 				ng-click="setAction('l')">

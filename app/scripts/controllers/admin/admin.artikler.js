@@ -36,7 +36,7 @@ angular.module('indeuApp').controller('AdminArtiklerCtrl', function($scope, $loc
 				.withTitle('Dato')
 				.renderWith(function(data, type, full) {
 					if (type === 'display') {
-						return moment(data).calendar()
+						return moment(data).local().calendar()
 					}
 					return data
 				}),

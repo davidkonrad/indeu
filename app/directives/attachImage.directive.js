@@ -60,6 +60,10 @@ angular.module('indeuApp')
 						scope.defaultImage = '<i class="fa fa-picture-o"></i>';
 						_target = 'artikel';
 						break;
+					case 'e' :
+						scope.defaultImage = '<i class="fa fa-calendar"></i>';
+						_target = 'event';
+						break;
 					case 'u' :
 						scope.defaultImage = '<i class="fa fa-user"></i>';
 							_target = 'medlem';
