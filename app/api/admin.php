@@ -75,7 +75,52 @@ $SQL = <<<SQL
 
 SQL;
 		return $SQL;
+	}
 
+
+	//******************
+	//AdminMostVisited
+	public function AdminMostVisited() {
+
+$SQL = <<<SQL
+		select
+			v.counter,
+			
+			a.id as article_id,
+			a.header as article_header,
+
+			e.id as event_id,
+			e.name as event_name,
+
+			g.id as group_id,
+			g.name as group_name,
+
+			u.id as user_id,
+			u.full_name as user_name,
+
+			ass.id as association_id,
+			ass.name as association_name,
+
+			s.id as static_page_id,
+			s.header as static_page_header
+		
+		from
+			visit_counter v
+
+		left join article a on a.hash = v.hash
+		left join event e on e.hash = v.hash
+		left join `group` g on g.hash = v.hash
+		left join user u on u.hash = v.hash
+		left join association ass on ass.hash = v.hash
+		left join static_page s on s.hash = v.hash
+
+		order by
+			v.counter desc
+
+		limit 10
+
+SQL;
+		return $SQL;
 	}
 
 }

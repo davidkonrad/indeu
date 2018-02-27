@@ -42,16 +42,16 @@
 		  <div class="panel-heading h5 no-margin">Mest kommenterede</div>
 		  <div class="panel-body" style="padding-top:10px;">
 				<span ng-repeat="mc in most_commented">
-					<h4 class="col-md-10 no-margin">
+					<h4 class="col-md-10 no-margin no-padding-right">
 						<i class="fa fa-fw text-muted" ng-class="mc.fa"></i>
 						<a class="unstyled"
 							href="{{ mc.url }}"
 							target=_blank
-							style="width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;top:4px;position:relative;">
+							style="width:270px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;top:4px;position:relative;">
 							{{ mc.name }}
 						</a>
 					</h4>
-					<h3 class="col-md-2 no-margin text-right"> 
+					<h3 class="col-md-2 no-margin text-right no-padding-left"> 
 						{{ mc.count }}
 					</h3>
 				</span>
@@ -102,6 +102,27 @@
 
 		  </div>
 		</div>
+
+		<br>
+
+		<div class="panel panel-default no-margin">
+		  <div class="panel-heading h5 no-margin">Mest viste (total)</div>
+		  <div class="panel-body" style="padding-top:10px;">
+				<span ng-repeat="mv in most_visited">
+					<h4 class="col-md-10 no-margin no-padding-right">
+						<i class="fa fa-fw text-muted" ng-class="mv.fa"></i>
+						<a class="unstyled"
+							href="{{ mv.url }}"
+							target=_blank
+							style="width:270px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;top:4px;position:relative;">
+							{{ mv.name }}
+						</a>
+					</h4>
+					<h3 class="col-md-2 no-margin text-right no-padding-left"> {{ mv.count }}	</h3>
+				</span>
+		  </div>
+		</div>
+
 	</div>
 
 
