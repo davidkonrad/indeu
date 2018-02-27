@@ -11,26 +11,30 @@
 		<h1> {{ event.name }} </h1>
 		<div class="col-md-8">
 			<div class="well well-lg">
-				<h4 class="no-margin">
+				<h3 class="no-margin">
 					Hvornår: <strong class="text-primary">{{ event.showDate }} </strong> 
-					fra kl. <strong class="text-primary">{{ event.from | date : "HH:mm" }}</strong>
+				</h3>
+				<h4 class="no-margin">
+					Fra kl. <strong class="text-primary">{{ event.from | date : "HH:mm" }}</strong>
 					<span ng-if="event.to != null">
 						til kl. <strong class="text-primary">{{ event.to | date : "HH:mm" }} </strong>
 					</span>
 				</h4>
-				<h4 ng-if="event.place_name != null" class="no-margin" style="padding-top:15px;">
+				<h3 ng-if="event.place_name != null" class="no-margin" style="padding-top:15px;">
 					Hvor: <strong class="text-primary">{{ event.place_name }}</strong> 
-				</h4>
-				<h4 class="no-margin" style="padding-top:15px;">
+				</h3>
+				<h3 class="no-margin" style="padding-top:15px;">
 					Adresse: <strong class="text-primary">{{ event.address }}</strong> 
-				</h4>
+				</h3>
 			</div>
-			<div ng-bind-html="event.about"></div>
-
-			<entity-rating hash="{{ event.hash }}" user-id="{{ user.id }}" is-self="user.id == event.user_id" class="pull-right"></entity-rating>
+			<div class="artikel-content" ng-bind-html="event.about"></div>
 
 		</div>
 		<div class="col-md-4 no-padding">
+			<div ng-if="event.image_url != ''">
+				<img ng-src="{{ event.image_url }}" class="cursor-pointer" inject-fancyboxable>
+				<br><br>
+			</div>
 			<leaflet class="event-leaflet-map"
 				center="eventMap.center" 
 				defaults="eventMap.defaults" 
@@ -40,7 +44,10 @@
 			</leaflet>
 		</div>
 
-		<div class="col-md-12 clearfix"></div>
+		<div class="col-md-12 clearfix">
+			<entity-rating hash="{{ event.hash }}" user-id="{{ user.id }}" is-self="user.id == event.user_id" class="pull-right"></entity-rating>
+			<br><br>
+		</div>
 
 		<div class="col-md-12" ng-if="user && dateDue == false">
 			<span>Hvad vil du?&nbsp;&nbsp;</span>

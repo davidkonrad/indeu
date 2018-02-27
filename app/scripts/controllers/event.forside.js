@@ -38,6 +38,11 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 				//date due
 				$scope.dateDue = new Date().valueOf() > new Date($scope.event.date+' '+$scope.event.from).valueOf();
 
+				//image
+				if ($scope.event.image) {
+					$scope.event.image_url = 'media/event/'+$scope.event.image;
+				}
+
 				//user info
 				$scope.event.userFullName = $scope.event.user_full_name; //fallback
 				$scope.event.userUrl = Utils.userUrl($scope.event.user_id, $scope.event.userFullName);
@@ -49,7 +54,8 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 
 				$scope.event.from = Utils.createTime($scope.event.from);
 				$scope.event.to = $scope.event.to != '00:00:00' ? Utils.createTime($scope.event.to) : undefined;
-				$scope.event.showDate = Utils.calendarDate($scope.event.date);
+				//$scope.event.showDate = Utils.calendarDate($scope.event.date);
+				$scope.event.showDate = moment($scope.event.date).format('dddd D MMMM, YYYY');
 
 				var lat = parseFloat($scope.event.lat);
 				var lng = parseFloat($scope.event.lng);
