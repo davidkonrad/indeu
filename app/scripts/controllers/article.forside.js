@@ -52,7 +52,7 @@ angular.module('indeuApp')
 				Meta.setOpenGraph(window.location, a.header, desc);
 	
 				//update visitor count
-				if (update) {
+				if (!update) {
 					UserVisits.visit(a.hash);
 					VisitCounter.visit(a.hash);
 				}
@@ -102,7 +102,7 @@ angular.module('indeuApp')
 			})
 		}
 		Lookup.init().then(function() {
-			$scope.reload(true);
+			$scope.reload(false);
 		})
 
 		//actions copy paste
@@ -115,7 +115,7 @@ angular.module('indeuApp')
 
 		$scope.actionCancel = function() {
 			$scope.action = '';
-			$scope.reload();
+			$scope.reload(true);
 		}
 
 		$scope.actionDisable = function(action) {
@@ -124,14 +124,14 @@ angular.module('indeuApp')
 
 		$scope.actionSaved = function(item) {
 			$scope.action = '';
-			$scope.reload();
+			$scope.reload(true);
 		}
 
 		$scope.unpublishArticle = function() {
 			ConfirmModal.show('Er du sikker på at du vil trække artiklen tilbage?').then(function(answer) {
 				if (answer) {
 					ESPBA.update('article', { published: 0, id: id }).then(function() {
-						$scope.reload();
+						$scope.reload(true);
 					})
 				}
 			})

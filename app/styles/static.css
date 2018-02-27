@@ -29,6 +29,9 @@
 }
 
 /* lineheights */
+*.line-height-100 {
+	line-height: 100%;
+}
 *.line-height-110 {
 	line-height: 110%;
 }

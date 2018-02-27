@@ -24,7 +24,12 @@ angular.module('indeuApp').factory('SelectEventModal', function($modal, $q) {
       DTColumnBuilder.newColumn('created_timestamp').withTitle('Oprettet'),
       DTColumnBuilder.newColumn('date').withTitle('Dato'),
       DTColumnBuilder.newColumn('name').withTitle('Navn'),
-      DTColumnBuilder.newColumn('about').withClass('max400').withTitle('Beskrivelse')
+      DTColumnBuilder.newColumn('about')
+				.withClass('max400')
+				.withTitle('Beskrivelse')
+				.renderWith(function(data) {
+					return Utils.plainText(data, 400)
+				})
 		];
 
 		$scope.dtOptions = DTOptionsBuilder

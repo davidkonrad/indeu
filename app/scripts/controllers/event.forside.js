@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('EventForsideCtrl', 
-	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log) {
+	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log, VisitCounter) {
 
 		$scope.eventMap = Const.defaultMap();
 
@@ -15,7 +15,7 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 			$scope.user = Login.currentUser()
 		}
 
-		$scope.reloadEvent = function() {
+		$scope.reloadEvent = function(update) {
 			ESPBA.prepared('EventWithUser', { event_id: id }).then(function(r) {
 
 				if (!r.data || !r.data.length) {
@@ -50,7 +50,11 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 					$scope.event.isOwner = $scope.event.user_id == $scope.user.id
 				} 
 
-				UserVisits.visit($scope.event.hash);
+				//update visitor count
+				if (!update) {
+					UserVisits.visit($scope.event.hash);
+					VisitCounter.visit($scope.event.hash);
+				}
 
 				$scope.event.from = Utils.createTime($scope.event.from);
 				$scope.event.to = $scope.event.to != '00:00:00' ? Utils.createTime($scope.event.to) : undefined;
@@ -126,7 +130,7 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 				});
 			}
 		}
-		$scope.reloadEvent();
+		$scope.reloadEvent(false);
 
 		//for some reason, two way binding does not work with bs-radio-group and 2.1.13
 		$scope.setFeedback = function(value) {
@@ -178,7 +182,7 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 
 		$scope.actionCancel = function() {
 			$scope.action = '';
-			$scope.reloadEvent(); //??
+			$scope.reloadEvent(true); //??
 		}
 
 		$scope.actionDisable = function(action) {
@@ -187,7 +191,7 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 
 		$scope.actionSaved = function(item) {
 			$scope.action = '';
-			$scope.reloadEvent();
+			$scope.reloadEvent(true);
 		}
 
 });

@@ -4,6 +4,7 @@
 	</span>
 	<div ng-repeat="e in events">
 		<div class="recent">
+			<br>
 			<a ng-href="/event/{{ e.id }}/{{ e.urlName }}" class="unstyled" debug-link>
 				<span class="header small">
 					<strong>{{ e.city }}</strong>.
@@ -13,7 +14,7 @@
 				<span ng-if="e.image" class="recent-image">
 					<img ng-src="media/event/{{ e.image }}">
 				</span>
-				<span class="recent-desc h5">
+				<span class="recent-desc h5 line-height-100">
 					{{ e.name }}
 				</span>
 			</a>
