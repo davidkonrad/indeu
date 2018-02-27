@@ -1,7 +1,7 @@
 <div>
 		<form class="form-horizontal">
 			<div class="form-group">
-	      <label class="col-md-1 control-label" for=""></label>
+	      <label class="col-md-1 control-label no-padding" for=""></label>
 				<label class="radio-inline">
           <input type="radio" 
 						name="event.visibility_level" 
@@ -20,10 +20,10 @@
 						ng-model="event.visibility_level"
 						ng-value="3"> Kun gruppe
         </label>
-				<div class="pull-right XXXaction-element">
+				<div class="pull-right">
 					<button class="btn btn-default btn-sm" 
 						type="button"
-						ng-class="{ 'btn-success' : event.hash == '' && eventAction.canSave(), 'btn-primary' : event.hash != '' && eventAction.canSave() }"
+						ng-class="{ 'btn-success' : event.hash == undefined && eventAction.canSave(), 'btn-primary' : event.hash != undefined && eventAction.canSave() }"
 						ng-disabled="!eventAction.canSave()"
 						ng-click="eventAction.save()">
 						{{ eventAction.caption }}
@@ -38,57 +38,62 @@
 			</div>
 			<table class="col-md-12">
 				<tr>
-					<td class="col-md-7">
+					<td class="col-md-7 no-padding">
 						<div class="form-group">
-				      <label class="col-md-3 control-label required" for="">Hvad</label>
-							<div class="col-md-9">					
+				      <label class="col-md-2 control-label required" for="">Hvad</label>
+							<div class="col-md-10">					
 								<input class="form-control" ng-model="event.name">
 							</div>
 						</div>
 						<div class="form-group">
-				      <label class="col-md-3 control-label required" for="">Hvornår</label>
-							<div class="col-md-9">					
-								<div class="input-group registration-date-time">
-									<span class="input-group-addon" id="basic-addon1">
-										<span class="fa fa-calendar" aria-hidden="true"></span>
-									</span>
-									<input class="form-control event-date" 
-										bs-datepicker
-										data-container="body"
-										data-placement="bottom"
-										data-autoclose="true" 
-										ng-model="event.date">
-		           		<span class="input-group-addon" id="basic-addon1">
-										<span class="fa fa-clock-o" aria-hidden="true"></span>
-									</span>
-		           		<input class="form-control event-from" 
-										bs-timepicker
-										data-container="body"
-										data-placement="bottom"
-										data-time-format="HH:mm" 
-										data-time-type="string" 
-										data-length="1" 
-										data-minute-step="15" 
-										data-arrow-behavior="picker" 
-										data-autoclose="true" 
-										ng-model="event.from">
-		           		<input class="form-control event-to" 
-										bs-timepicker
-										data-container="body"
-										data-placement="bottom"
-										data-time-format="HH:mm" 
-										data-time-type="string" 
-										data-length="1" 
-										data-minute-step="15" 
-										data-arrow-behavior="picker" 
-										data-autoclose="true" 
-										ng-model="event.to">
-		           	</div>
+				      <label class="col-md-2 control-label required" for="">Hvornår</label>
+							<div class="col-md-10">
+								<input class="form-control col-md-3 event-date inline-block" 
+									bs-datepicker
+									data-container="body"
+									data-placement="bottom"
+									data-autoclose="true" 
+									ng-model="event.date">
+
+	           		<label class="control-label col-md-2 required">Fra:</label>
+
+	           		<input class="form-control event-from col-md-2" 
+									bs-timepicker
+									data-placement="bottom"
+									data-time-format="HH:mm" 
+									data-time-type="string" 
+									data-length="1" 
+									data-minute-step="15" 
+									data-arrow-behavior="picker" 
+									data-autoclose="true" 
+									ng-model="event.from">
+
+	           		<label class="control-label col-md-2 no-padding-left">Til:</label>
+
+	           		<input class="form-control event-to col-md-2" 
+									bs-timepicker
+									data-container="body"
+									data-placement="bottom"
+									data-time-format="HH:mm" 
+									data-time-type="string" 
+									data-length="1" 
+									data-minute-step="15" 
+									data-arrow-behavior="picker" 
+									data-autoclose="true" 
+									ng-model="event.to">
+							</div>		
+						</div>
+						<div class="form-group">
+				      <label class="col-md-2 control-label" for="">Sted / navn</label>
+							<div class="col-md-10">					
+								<input class="form-control" 
+									select-on-click
+									ng-model="event.place_name">
 							</div>
 						</div>
 						<div class="form-group">
-				      <label class="col-md-3 control-label required" for="">Sted</label>
-							<div class="col-md-9">					
+				      <label class="col-md-2 control-label required" for="">Adresse</label>
+							<div class="col-md-10">					
 								<input class="form-control" 
 									select-on-click
 									adresse-opslag
@@ -98,8 +103,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-				      <label class="col-md-3 control-label" for=""></label>
-							<div class="col-md-9">					
+				      <label class="col-md-2 control-label" for=""></label>
+							<div class="col-md-10">					
 								<div class="input-group">
 									<input class="form-control event-postalcode" ng-model="event.postal_code">									
 									<input class="form-control event-city" ng-model="event.city">									
@@ -107,7 +112,7 @@
 							</div>
 						</div>
 					</td>
-					<td class="col-md-5 no-padding no-margin">
+					<td class="col-md-5 no-padding-top no-padding-right no-margin" style="width: 100%;float: left;">
 						<leaflet class="event-leaflet-map"
 							id="eventMapId"
 							center="eventMap.center" 

@@ -39,6 +39,23 @@
 	line-height: 150%;
 }
 
+/* float */
+*.no-float {
+	float: none !important;
+}
+
+/* displays */
+*.inline-block {
+	display: inline-block;
+}
+*.inline {
+	display: inline;
+}
+*.block {
+	display: block;
+}
+
+
 /** dataTables **/
 .dataTables_wrapper .dataTables_paginate .paginate_button {
 	padding : 0px;

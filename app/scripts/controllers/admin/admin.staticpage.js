@@ -24,7 +24,7 @@ angular.module('indeuApp').controller('AdminStatiskCtrl',
 				.withClass('no-click')
 				.renderWith(function(data, type, full) {
 					if (type === 'display') {
-						return '<a href="'+Utils.staticUrl(full.id, full.header)+'"><i class="fa fa-eye"></i></a>'
+						return '<a href="'+Utils.staticUrl(full.id, full.header)+'" target=_blank><i class="fa fa-eye"></i></a>'
 					} else {
 						return data;
 					}

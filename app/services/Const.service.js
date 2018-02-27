@@ -73,10 +73,12 @@ angular.module('indeuApp').factory('Const', ['$q', function($q) {
 					}
 				},
 				markers: {
+					/*
 					marker: {
 						lat: 56.126627523318206,
 						lng: 11.457741782069204
 					}
+					*/
 				},
 				center: {
 					lat: 56.126627523318206,
