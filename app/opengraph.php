@@ -18,9 +18,15 @@ class OG extends DbPDO {
 		$type = $params[1];
 		$id = $params[2];
 
+/*
+		$type = 'e';
+		$id = 38;
+*/
+
 		switch ($type) {
-			case 'a':
-			case 'artikel': 
+			/* artikel */
+			case 'a' :
+			case 'artikel' : 
 				$SQL='select header, sub_header, content, image from article where id='.$id;
 				$res = $this->query($SQL);
 				$row = $res->fetch();
@@ -33,13 +39,40 @@ class OG extends DbPDO {
 					$this->desc = substr(strip_tags($row['content']), 0, 199);
 				}
 
-				if ($row['image'] != '') {
-					$path = 'media/artikel/'.$row['image'];
-					$this->image = 'https://indeu.org/'.$path;
-					$size = getimagesize($path);
-					$this->width = $size[0];
-					$this->height = $size[1];
-				}
+				$path = $row['image'] != '' ? 'media/artikel/'.$row['image'] : 'media/statisk/indeu-default.png';
+				$this->image = 'https://indeu.org/'.$path;
+				$size = getimagesize($path);
+				$this->width = $size[0];
+				$this->height = $size[1];
+
+				break;
+
+			/* event */
+			case 'e' :
+			case 'event': 
+				$SQL='select name, `date`, `from`, about, place_name, city, image from event where id='.$id;
+				$res = $this->query($SQL);
+				$row = $res->fetch();
+
+				date_default_timezone_set('Europe/Copenhagen');
+				setlocale(LC_TIME, array('da', 'da_DK', 'da_DK.UTF8') );
+
+				$title = $row['name'].'. ';
+				//$title .= ucfirst(strftime('%A den %e %B %Y', strtotime($row['date']))).' - ';
+				$title .= ucfirst(strftime('%A den %e %B %Y', strtotime($row['date']))).' ';
+				$time = explode(':', $row['from']);
+				$title .= 'fra kl. '.$time[0].'.'.$time[1].'. ';
+				$title .= $row['place_name'] ? $row['place_name'] : $row['city'];
+				$title .= '. ';
+				$this->title = $title;
+
+				$this->desc = substr(strip_tags($row['about']), 0, 200).' ...';
+
+				$path = ($row['image'] != '') ? 'media/event/'.$row['image'] : 'media/statisk/indeu-default.png';
+				$this->image = 'https://indeu.org/'.$path;
+				$size = getimagesize($path);
+				$this->width = $size[0];
+				$this->height = $size[1];
 
 				break;
 
@@ -47,14 +80,17 @@ class OG extends DbPDO {
 				break;
 		}
 
-		/*
+/*
+		echo '<pre>';
 		echo $this->title.'<br>';
 		echo $this->desc.'<br>';
 		echo $this->image.'<br>';
 		echo $this->width.'<br>';
 		echo $this->height.'<br>';
 		echo $this->url.'<br>';
-		*/
+		echo '</pre>';
+*/
+
 	}
 	
 	public function render() {

@@ -1,30 +1,46 @@
-<div class="col-md-6">
-	<a ng-href="{{ promo.url }}"
-		class="frontpage-promo cursor-pointer unstyled hover-effect col-md-12 no-padding" 
-		ng-style="getBackgroundStyle()">
-
-		<p class="h1" ng-bind-html="promo.header"></p>
-		<br><br><br>
-		<p ng-if="promo.extract != '' && promo.extract != undefined" class="h3" ng-bind-html="promo.extract"></p>
-
-	</a>
-</div>
+<div class="col-md-9 no-padding-left no-padding-right">
+	<div class="col-md-8">
+		<a ng-href="{{ promo.url }}"
+			class="frontpage-promo cursor-pointer unstyled hover-effect col-md-12 no-padding" 
+			ng-style="getBackgroundStyle()">
 	
-<div class="col-md-3 no-padding-left">
-	<a ng-if="sub_promos[0].url"
-		ng-href="{{ sub_promos[0].url }}"
-		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding" 
-		ng-style="sub_promos[0].image_style">
-		<p class="h3 no-padding-left">
-			{{ sub_promos[0].header | limitTo: 80 }}{{sub_promos[0].header.length > 80 ? '&hellip;' : ''}}
-		</p>
-	</a>
-	<a ng-if="sub_promos[1].url"
-		ng-href="{{ sub_promos[1].url }}"
-		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding promo-margin-top" 
-		ng-style="sub_promos[1].image_style">
-		<p class="h3 no-padding-left">{{ sub_promos[1].header | limitTo: 40 }}{{sub_promos[1].header.length > 40 ? '&hellip;' : ''}}</p>
-	</a>
+			<p class="h1" ng-bind-html="promo.header"></p>
+			<br><br><br>
+			<p ng-if="promo.extract != '' && promo.extract != undefined" class="h3" ng-bind-html="promo.extract"></p>
+
+		</a>
+	</div>
+	
+	<div class="col-md-4 no-padding-left">
+		<a ng-if="sub_promos[0].url"
+			ng-href="{{ sub_promos[0].url }}"
+			class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding" 
+			ng-style="sub_promos[0].image_style">
+			<p class="h3 no-padding-left">
+				{{ sub_promos[0].header | limitTo: 80 }}{{sub_promos[0].header.length > 80 ? '&hellip;' : ''}}
+			</p>
+		</a>
+		<a ng-if="sub_promos[1].url"
+			ng-href="{{ sub_promos[1].url }}"
+			class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding promo-margin-top" 
+			ng-style="sub_promos[1].image_style">
+			<p class="h3 no-padding-left">{{ sub_promos[1].header | limitTo: 40 }}{{sub_promos[1].header.length > 40 ? '&hellip;' : ''}}</p>
+		</a>
+	</div>
+
+	<div class="col-md-12">
+		<div ng-repeat="p in sub_promos" 
+			class="col-md-4 no-padding-left" 
+			ng-class="{ 'no-padding-right': $index == 4 || $index == 7 }"
+			ng-if="$index>1 && p.url != '' ">
+			<a ng-if="p.url"
+				ng-href="{{ p.url }}"
+				class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding promo-margin-top" 
+				ng-style="p.image_style">
+				<p class="h3 no-padding-left">{{ p.header | limitTo: 70 }}{{p.header.length > 70 ? '&hellip;' : ''}}</p>
+			</a>
+		</div>
+	</div>
 </div>
 
 <div class="col-md-3 no-padding-left">
@@ -35,20 +51,4 @@
 	<div class="layout-right-header-content" recent-articles></div>
 
 </div>
-
-<div class="col-md-12 clearfix">
-	<div ng-repeat="p in sub_promos" 
-		class="col-md-4 no-padding-left" 
-		ng-class="{ 'no-padding-right': $index == 4 || $index == 7 }"
-		ng-if="$index>1 && p.url != '' ">
-	<a ng-if="p.url"
-		ng-href="{{ p.url }}"
-		class="frontpage-promo-medium cursor-pointer unstyled hover-effect col-md-12 no-padding promo-margin-top" 
-		ng-style="p.image_style">
-		<p class="h3 no-padding-left">{{ p.header | limitTo: 70 }}{{p.header.length > 70 ? '&hellip;' : ''}}</p>
-	</a>
-
-	</div>
-</div>
-
 
