@@ -157,6 +157,7 @@ $SQL = <<<SQL
 				e.id,
 				e.visibility_level,
 				e.name,
+				e.place_name, 
 				e.address,
 				e.city,
 				e.lat,
@@ -255,7 +256,7 @@ SQL;
 
 
 	//******************
-	//EventContantPersons
+	//EventContactPersons
 	//event_id
 	public function EventContactPersons() {
 		$event_id = isset($this->array['event_id']) ? $this->array['event_id'] : false;

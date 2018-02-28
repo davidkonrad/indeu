@@ -58,7 +58,6 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 
 				$scope.event.from = Utils.createTime($scope.event.from);
 				$scope.event.to = $scope.event.to != '00:00:00' ? Utils.createTime($scope.event.to) : undefined;
-				//$scope.event.showDate = Utils.calendarDate($scope.event.date);
 				$scope.event.showDate = moment($scope.event.date).format('dddd D MMMM, YYYY');
 
 				var lat = parseFloat($scope.event.lat);

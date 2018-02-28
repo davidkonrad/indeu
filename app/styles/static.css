@@ -58,6 +58,15 @@
 	display: block;
 }
 
+/* once and for all text-overflow-ellipsis, element just need fixed width */
+*.text-overflow-ellipsis {
+	white-space: nowrap;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
 
 /** dataTables **/
 .dataTables_wrapper .dataTables_paginate .paginate_button {

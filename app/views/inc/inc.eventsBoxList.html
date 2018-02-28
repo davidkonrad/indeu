@@ -8,10 +8,10 @@
 			ng-class="{ 'bg-success' : e.dateDue, 'bg-warning' : !e.dateDue }"
 			class="article-box event-box unstyled hover-effect">
 
-			<h4> {{ e.name }}</h4>
-			<h5>Hvor: <strong>{{ e.where }}</strong> </h5>				
-			<h5>Tid: <strong>{{ e.when }}</strong> fra kl. <strong> {{ e.whenFrom }}</strong></h5>
-			<h5>{{ e.feedback2Text }} {{ e.feedback1Text }}</h5>
+			<h3 class="text-overflow-ellipsis"> {{ e.name }}</h3>
+			<h4 class="no-margin no-padding-top"> {{ e.showDate }} </h4>
+			<h4 class="text-overflow-ellipsis"> {{ e.where }} </h4>				
+			<h5><strong>{{ e.feedback2Text }} {{ e.feedback1Text }}</strong></h5>
 
 		</a>
 	</div>

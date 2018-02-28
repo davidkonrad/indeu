@@ -5,7 +5,8 @@
 	max-height: 100px;
 	width: 246px;
 	max-width: 246px;
-	border: 1px solid #888888;
+	border: 1px solid #ebebeb;
+	border-radius: 4px;
 	float: left;
 	clear: none;
 	margin-right: 3px;
@@ -46,15 +47,32 @@
 .event-box {
 	color: #333 !important;
 }
+
+.event-box h3 {
+	font-size: 150%;
+	line-height: 110%;
+	font-weight: 900;
+}	
 .event-box h4 {
-	padding-left: 4px;
-	margin-top: 3px;
+	font-size: 120%;
+	line-height: 110%;
+	font-weight: 500;
+}	
+.event-box h4:first-letter {
+	text-transform: uppercase;
+}
+.event-box h3,
+.event-box h4 {
+	font-family: 'Signika', arial, helvetica;
+	padding-left: 6px;
+	margin-top: 4px;
 	margin-bottom: 3px;
+	max-width: 245px;
 }
 .event-box h5 {
-	padding-left: 4px;
-	margin-top: 3px;
-	margin-bottom: 0px;
+	position: relative;
+	bottom: 10px;
+	left: 7px;
 }
 
 /* Populære artikler fra samme bruger */

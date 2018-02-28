@@ -26,9 +26,10 @@ angular.module('indeuApp')
 					item.url = Utils.eventUrl(item.id, item.name);
 					item.when = Utils.calendarDate(item.date);
 					item.whenFrom = Utils.removeSecs(item.from);
-					item.where = item.city ? item.city : item.address;
+					item.where = item.place_name ? item.place_name : item.address;
 					item.dateExact = new Date(item.date+' '+item.from);
 					item.dateDue = item.dateExact >= now;
+					item.showDate = moment(item.date).format('dddd D MMMM, YYYY');
 
 					if (item.feedback2>0) {
 						item.feedback2Text = item.feedback2 + ' ';
