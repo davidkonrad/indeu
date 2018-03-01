@@ -61,19 +61,21 @@ angular.module('indeuApp').factory('Lookup', function($q, $timeout, ESPBA, Utils
 		init: function() {
 			var	deferred = $q.defer();
 
+			var prepared = Utils.isLocalHost() ? 'prepared' : '$prepared';
+
 			var check = function() {
 				if (user && group) {
 		      deferred.resolve();
 				}
 			}
 
-			ESPBA.get({ user: ['id', 'first_name', 'last_name', 'full_name', 'alias', 'created_timestamp', 'image', 'email', 'last_seen']}, {}).then(function(r) {
-				//user = r.data;
+			ESPBA[prepared]('UsersLookup').then(function(r) {
 				user = r.data.map(function(u) {
 					u.urlName = Utils.urlName(u.full_name);
+					u.image_url = 'media/medlem/'+u.image;
+					u.url = Utils.userUrl(u.id, u.signature_str);
 					return u;
 				});
-				//user = [];
 				check();
 			});
 

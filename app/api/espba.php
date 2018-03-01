@@ -19,9 +19,10 @@ include('articles.php');  //prepared statements for articles
 include('groups.php');  //prepared statements for groups
 include('staticpages.php');  //prepared statements for static_page
 include('admin.php');  //prepared statements for admin pages
+include('users.php');  //prepared statements for users
 
 class ESPBA extends DbPDO {
-	use Prepared, UserReactions, Events, Associations, Articles, Groups, StaticPages, Admin;
+	use Prepared, UserReactions, Events, Associations, Articles, Groups, StaticPages, Admin, Users;
 
 	private $table;
 	private $action;
