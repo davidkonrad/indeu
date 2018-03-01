@@ -275,6 +275,7 @@ angular.module('indeuApp', [
 		}
 		ESPBA.setApiPath('api/espba.php');
 		ESPBA.init().then(function() {
+			console.log('app.run() espba init()');
 			Lookup.init();
 		});
 

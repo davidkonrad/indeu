@@ -47,6 +47,18 @@ angular.module('ESPBA', [])
 			return data		
 		};
 
+		//remove dot in keys
+		var sanitizeData = function(data) {
+			for (var key in data) {
+				if (~key.indexOf('.')) {
+					var p = data[key];
+					var newKey = key.replace(/\./, '&dot;');
+					data[newKey] = p;
+					delete data[key];
+				}
+			}
+		}
+
 		return {
 
 			setHost: function(h) {
@@ -74,15 +86,19 @@ angular.module('ESPBA', [])
 
 			init: function() {
 				var deferred = $q.defer();
-				var data = { __action: 'init' };
-				$http({
-					url: host + api_path,
-					method: 'POST',
-					params: data
-				}).then(function(r) {
-					token = r.data.token || false;
-		      deferred.resolve( process(r) )
-				})
+				if (token) {
+					deferred.resolve(token);
+				} else {
+					var data = { __action: 'init' };
+					$http({
+						url: host + api_path,
+						method: 'POST',
+						params: data
+					}).then(function(r) {
+						token = r.data || false; 
+			      deferred.resolve(process(token))
+					})
+				}
 	      return deferred.promise;
 			},
 				
@@ -100,7 +116,6 @@ angular.module('ESPBA', [])
 					data.__fields = table[data.__table].toString(); 
 				}
 
-				data.__token = token;
 				data = parse(data, selectParams);
 
 				$http({
@@ -117,7 +132,6 @@ angular.module('ESPBA', [])
 				var deferred = $q.defer();
 				data.__action = 'delete';
 				data.__table = table;
-				data.__token = token;
 
 				$http({
 					url: host + api_path,
@@ -133,7 +147,6 @@ angular.module('ESPBA', [])
 				var deferred = $q.defer();
 				data.__action = 'update';
 				data.__table = table;
-				data.__token = token;
 
 				$http({
 					url: host + api_path,
@@ -149,7 +162,6 @@ angular.module('ESPBA', [])
 				var deferred = $q.defer();
 				data.__action = 'insert';
 				data.__table = table;
-				data.__token = token;
 
 				$http({
 					url: host + api_path,
@@ -166,6 +178,7 @@ angular.module('ESPBA', [])
 				if (!data) data = {};
 				
 				//replace . with &dot
+				/*
 				for (var key in data) {
 					if (~key.indexOf('.')) {
 						var p = data[key];
@@ -174,6 +187,8 @@ angular.module('ESPBA', [])
 						delete data[key];
 					}
 				}
+				*/
+				sanitizeData(data);
 
 				data.__action = 'prepared';
 				data.__table = func;
@@ -185,6 +200,51 @@ angular.module('ESPBA', [])
 					params: data
 				}).then(function(r) {
 		      deferred.resolve(r);
+				})
+	      return deferred.promise;
+			},
+
+
+			//			
+			$prepared: function(func, data) {
+				var deferred = $q.defer();
+				if (!data) data = {};
+				
+				data.__action = 'prepared';
+				data.__table = func;
+				data.__crypt = true;
+
+				//replace . with &dot
+				/*
+				for (var key in data) {
+					if (~key.indexOf('.')) {
+						var p = data[key];
+						var newKey = key.replace(/\./, '&dot;');
+						data[newKey] = p;
+						delete data[key];
+					}
+				}
+				*/
+				sanitizeData(data);
+
+				this.init().then(function() {
+					console.log('ok', data);
+					$http({
+						url: host + api_path,
+						method: 'GET',
+						params: data
+					}).then(function(r) {
+						var encrypted = r.data.data;
+						var salt = CryptoJS.enc.Hex.parse(r.data.salt);
+						var iv = CryptoJS.enc.Hex.parse(r.data.iv);   
+						var key = CryptoJS.PBKDF2(token.token, salt, { hasher: CryptoJS.algo.SHA512, keySize: 64/8, iterations: 999});
+						var decrypted = CryptoJS.AES.decrypt(encrypted, key, { iv: iv});
+	
+						var text = decrypted.toString(CryptoJS.enc.Utf8);
+						var data = JSON.parse(text);
+	
+			      deferred.resolve({ data: data });
+					})
 				})
 	      return deferred.promise;
 			}

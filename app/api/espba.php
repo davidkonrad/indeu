@@ -8,7 +8,7 @@
 error_reporting(E_ALL & ~E_NOTICE); 
 ini_set('display_errors', '1');
 
-//session_start();
+session_start();
 
 include('Db.php');
 include('prepared.php');
@@ -27,6 +27,7 @@ class ESPBA extends DbPDO {
 	private $action;
 	private $token;
 	private $fields;
+	private $crypt = false;
 
 /**
 	* constructor
@@ -53,10 +54,12 @@ class ESPBA extends DbPDO {
 		$this->table = isset($array['__table']) ? "`".$array['__table']."`" : false;
 		$this->action = isset($array['__action']) ? $array['__action'] : false;
 		$this->token = isset($array['__token']) ? $array['__token'] : false;
+		$this->crypt = isset($array['__crypt']) ? $array['__crypt'] : false;
 
 		unset($array['__table']);
 		unset($array['__action']);
 		unset($array['__token']);
+		unset($array['__crypt']);
 
 		$this->process($array);
 	}
@@ -122,32 +125,6 @@ class ESPBA extends DbPDO {
 		return (json_last_error() == JSON_ERROR_NONE);
 	}
 
-/**
-  * @desc set token
-  * @return JSON string
-	*/
-	private function init() {
-		$_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(20));
-		$response = array('token' => $_SESSION['token']);
-		echo json_encode($response);
-	}
-
-/**
-  * @desc check token, dies if not valid
-	*/
-	private function checkToken() {
-		return; //check why session comparison sometimes fail
-
-		//pass if localhost
-		if ($this->isLocalhost()) {
-			return;
-		}
-		if (!isset($_SESSION['token']) || $this->token != $_SESSION['token']) {
-			$response = array('error' => 'Not authenticated');
-			echo json_encode($response);
-			die();
-		}
-	}
 
 /**
   * @desc return error message or latest database error
@@ -190,8 +167,6 @@ class ESPBA extends DbPDO {
   * @return JSON string
 	*/
 	public function get($array) {
-		$this->checkToken();
-
 		$limit = '';
 		$orderBy = '';
 
@@ -227,14 +202,13 @@ class ESPBA extends DbPDO {
 		echo $result;
 	}
 
+
 /**
   * @desc executes an UPDATE based on params in $array
   * @param array $array
   * @return JSON string. The inserted record, if any. 
 	*/
 	public function update($array) {
-		$this->checkToken();
-
 		$id = isset($array['id']) ? $array['id'] : false;
 		if (!$id) {
 			$this->err('update', 'id is missing');
@@ -257,9 +231,6 @@ class ESPBA extends DbPDO {
 
 		//return updated object, if any
 		echo $this->get(array('id' => $id));		
-
-		//return used SQL
-		//echo json_encode(array('sql' => $SQL ));
 	}
 
 
@@ -269,8 +240,6 @@ class ESPBA extends DbPDO {
   * @return JSON string
 	*/
 	public function insert($array) {
-		$this->checkToken();
-
 		$keys = array_keys($array);
 
 		foreach($keys as &$key) {
@@ -308,8 +277,6 @@ class ESPBA extends DbPDO {
   * @return JSON string, OK or error message
 	*/
 	public function delete($array) {
-		$this->checkToken();
-
 		$params = $this->getParams($array);
 		if ($params != '') $params = ' where '.$params;
 
@@ -323,6 +290,41 @@ class ESPBA extends DbPDO {
 		} else {
 			echo json_encode(array('recordsDeleted' => 'true'));
 		}
+	}
+
+
+/**
+  * @desc set encryption token
+  * @return JSON string
+	*
+  * Note that the encryption feature not will work in a localhost:port env
+  * 
+	*/
+	private function init() {
+		if (!isset($_SESSION['token'])) {
+			$_SESSION['token'] = substr(str_shuffle(md5(microtime())), 0, 15);
+		}
+		$response = array('token' => $_SESSION['token']);
+		echo json_encode($response);
+	}
+
+
+/**
+  * @desc encrypt a response using 
+  * 
+  * Note that the encryption feature not will work in a localhost:port env
+  */
+	private function encrypt($passphrase, $s){
+    $salt = openssl_random_pseudo_bytes(256);
+    $iv = openssl_random_pseudo_bytes(16);
+    //on PHP7 can use random_bytes() instead of openssl_random_pseudo_bytes()
+    //or PHP5x see : https://github.com/paragonie/random_compat
+
+    $iterations = 999;  
+    $key = hash_pbkdf2("sha512", $passphrase, $salt, $iterations, 64);
+    $encrypted_data = openssl_encrypt($s, 'aes-256-cbc', hex2bin($key), OPENSSL_RAW_DATA, $iv);
+    $data = array("data" => base64_encode($encrypted_data), "iv" => bin2hex($iv), "salt" => bin2hex($salt));
+    return json_encode($data);
 	}
 
 
@@ -345,17 +347,22 @@ class ESPBA extends DbPDO {
 
 		//returned value can be false, a SQL statement or a resultset
 		if ($return == false) {
-			echo json_encode(array('Ok' => 'Executed' ));
+			$res = json_encode(array('Ok' => 'Executed' ));
 		} elseif (is_string($return)) {
 			if (!$this->isJson($return)) {
-				$result = $this->queryJSON($return);
-				echo $result;
+				$res = $this->queryJSON($return);
 			} else {
-				echo $return;
+				$res = $return;
 			}
 		} else {
-			echo json_encode(array('Ok' => 'Unknown result' ));
+			$res = json_encode(array('Ok' => 'Unknown result' ));
 		}
+	
+		if ($this->crypt) {
+			$res = $this->encrypt($_SESSION['token'], $res);
+		}
+
+		echo $res;
 	}
 
 }
@@ -363,7 +370,6 @@ class ESPBA extends DbPDO {
 
 $params = isset($_GET) ? $_GET : array();
 $run = new ESPBA($params);
-
 
 
 ?>

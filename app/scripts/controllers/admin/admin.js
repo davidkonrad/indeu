@@ -61,7 +61,7 @@ angular.module('indeuApp').controller('AdminCtrl',
 		}
 
 		//frontpage content
-		ESPBA.prepared('AdminContentOverview', {}).then(function(r) {
+		ESPBA.$prepared('AdminContentOverview', {}).then(function(r) {
 			$scope.overview = r.data[0]
 		})
 
