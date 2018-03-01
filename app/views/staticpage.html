@@ -5,16 +5,13 @@
 		<h4>
 			<small>
 				Oprettet <span title="{{ page.realDate }}">for {{ page.dateStamp }}</span>
-				af <a href="{{ page.userUrlLink }} ">{{ page.userFullName }}</a>
+				af <user-signature id="{{ page.user_id }}"></user-signature>
 				<span ng-if="page.editedDateStamp != undefined">, redigeret for {{ page.editedDateStamp }}</span>
 			</small>
 		</h4>
 		<h1> {{ page.header }} </h1>
+		<auto-image ng-if="page.imageUrl" src="{{ page.imageUrl }}"></auto-image>
 		<h4><em> {{ page.sub_header }} </em></h4>
-
-		<div ng-if="page.imageUrl" class="artikel-image">
-			<img ng-src="{{ page.imageUrl }}">
-		</div>
 
 		<div class="artikel-content" ng-bind-html="page.content"></div>
 

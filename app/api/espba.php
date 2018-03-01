@@ -1,7 +1,7 @@
 <?
 /**
  * espba.php		Database driver for the ESPBA angular 1.x service
- * @copyright   Copyright (C) 2017 david konrad, davidkonrad at gmail com
+ * @copyright   Copyright (C) 2017-2018 david konrad, davidkonrad at gmail com
  * @license     Licensed under the MIT License; see LICENSE.md
  */
 
@@ -150,7 +150,8 @@ class ESPBA extends DbPDO {
 	private function getParams($array) {
 		$r = '';
 		foreach ($array as $key => $value) {
-			//$_GET converts . to _, so every . is converted to dot in the js service
+			//http://ca.php.net/variables.external
+			//$_GET converts . to _ so every . is converted to &dot; in the js service
 			if (strpos($key, '&dot;') != false) {
 				$key = str_replace('&dot;', '.', $key);
 			}
@@ -299,6 +300,7 @@ class ESPBA extends DbPDO {
   * @return JSON string
 	*
   * Note that the encryption feature not will work in a localhost:port env
+	* since $_SESSION is stored in a different domain than the app
   * 
 	*/
 	private function init() {
@@ -314,12 +316,14 @@ class ESPBA extends DbPDO {
   * @desc encrypt a response using 
   * 
   * Note that the encryption feature not will work in a localhost:port env
+	* since $_SESSION is stored in a different domain than the app
+	*
   */
 	private function encrypt($passphrase, $s){
     $salt = openssl_random_pseudo_bytes(256);
     $iv = openssl_random_pseudo_bytes(16);
-    //on PHP7 can use random_bytes() instead of openssl_random_pseudo_bytes()
-    //or PHP5x see : https://github.com/paragonie/random_compat
+    //on PHP7 random_bytes() can be used instead of openssl_random_pseudo_bytes()
+    //or PHP5x see https://github.com/paragonie/random_compat
 
     $iterations = 999;  
     $key = hash_pbkdf2("sha512", $passphrase, $salt, $iterations, 64);

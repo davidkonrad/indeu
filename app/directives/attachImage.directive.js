@@ -76,6 +76,10 @@ angular.module('indeuApp')
 						scope.defaultImage = '<i class="fa fa-sitemap"></i>';
 						_target = 'forening';
 						break;
+					case 's' :
+						scope.defaultImage = '<i class="fa fa-file-code-o"></i>';
+						_target = 'statisk';
+						break;
 					default:
 						break;
 				};

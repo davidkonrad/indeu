@@ -35,11 +35,10 @@ angular.module('indeuApp').controller('StaticPageCtrl',
 
 				//test image
 				if (a.image) {
-					var imageUrl = 'media/artikel/'+a.image;
+					var imageUrl = 'media/statisk/'+a.image;
 					var img = new Image();
 					img.onload = function() {
 						a.imageUrl = imageUrl;
-						//console.log(img.width, img.height);
 					}
 					img.src = imageUrl;
 				}
