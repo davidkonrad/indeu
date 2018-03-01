@@ -204,7 +204,6 @@ angular.module('ESPBA', [])
 	      return deferred.promise;
 			},
 
-
 			//			
 			$prepared: function(func, data) {
 				var deferred = $q.defer();
@@ -228,7 +227,6 @@ angular.module('ESPBA', [])
 				sanitizeData(data);
 
 				this.init().then(function() {
-					console.log('ok', data);
 					$http({
 						url: host + api_path,
 						method: 'GET',

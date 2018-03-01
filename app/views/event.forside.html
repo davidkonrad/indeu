@@ -3,7 +3,7 @@
 
 		<h4>
 			<small>
-				Oprettet af <a href="{{ event.userUrl }} ">{{ event.userFullName }}</a>,
+				Oprettet af <user-signature id="{{ event.user_id }}"></user-signature>,
 				<span title="{{ event.realDate }}">{{ event.dateStamp }}</span><span ng-if="event.edited_timestamp_display" title="{{ event.edited_timestamp }}">, redigeret {{ event.edited_timestamp_display }}</span>
 			</small>
 		</h4>

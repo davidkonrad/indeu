@@ -62,12 +62,12 @@
 						<span class="user-info">
 
 							<span ng-if="_c.parent_user">
-								<strong> {{ _c.user.full_name }} </strong>
+								<strong> <user-signature id="{{ _c.user.id }}"></user-signature> </strong>
 								&nbsp;<i class="fa fa-share"></i>&nbsp;
-								<strong> {{ _c.parent_user.full_name }}, </strong>
+								<strong> <user-signature id="{{ _c.parent_user.id }}"></user-signature></strong>,
 							</span>
 							<span ng-if="!_c.parent_user">
-								<strong> {{ _c.user.full_name }}, </strong>
+								<strong> <user-signature id="{{ _c.user.id }}"></user-signature></strong>,
 							</span>
 							<span title="{{ _c.timestamp_precise }}">{{ _c.timestamp_relative }}</span>
 
