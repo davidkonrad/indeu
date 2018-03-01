@@ -1,5 +1,5 @@
-<div class="modal ng-scope top am-fade-and-slide-top center medium-dialog" tabindex="-1" role="dialog" style="display: block;" id="forening-dialog">
-	<div class="modal-dialog modal-medium">
+<div class="modal ng-scope top am-fade-and-slide-top center" tabindex="-1" role="dialog" style="display: block;" id="forening-dialog">
+	<div class="modal-dialog medium-dialog">
 		<div class="modal-content">
 			
 			<div class="modal-header">
@@ -11,12 +11,13 @@
 
 					<div bs-pane data-title="Generelt">
 						<br>
-						<form role="form" class="form-horizontal" autocomplete="off">
+						<form role="form" class="form-horizontal" autocomplete="off" spellcheck="false">
 
 					    <div class="form-group">
 					      <label class="col-md-2 control-label required" for="name">Navn</label>
 								<div class="col-md-7">
 							    <input class="form-control input-sm" 
+										spellcheck="false"
 										type="text"
 										id="name"
 										select-on-click
@@ -30,6 +31,7 @@
 					      <label class="col-md-2 control-label" for="short_name">Kort Navn</label>
 								<div class="col-md-5">
 							    <input class="form-control input-sm" 
+										spellcheck="false"
 										type="text"
 										id="short_name"
 										select-on-click
@@ -111,13 +113,19 @@
 
 					<div bs-pane data-title="Tekst">
 						<form role="form" class="form-horizontal" autocomplete="off">
-							<br>
 					    <div class="form-group">
 								<div class="col-md-12">
 									<text-angular ng-model="edit.about" 
 										spellcheck="false"
-										ta-text-editor-class="form-control col-md-12 medium-dialog"
-										ta-toolbar="[['h2','h3'],['bold','italics','underline'],['insertLink'], ['undo', 'redo'], ['clear', 'html']]">
+										ta-text-editor-class="form-control col-md-12 ta-editor-300"
+										ta-toolbar="[
+											['h2', 'h3', 'h4'],
+											['bold','italics','underline','strikeThrough'],
+											['ol', 'ul'],
+											['insertLink'], 
+											['undo', 'redo'], 
+											['clear', 'html']
+										]">
 									</text-angular>
 								</div>
 							</div>
@@ -133,7 +141,6 @@
 					</div>
 
 					<div bs-pane data-title="Adresse" ng-if="edit.hash != undefined">
-						<br>
 						<edit-address hash="{{ edit.hash }}"></edit-address>	
 					</div>
 
@@ -170,7 +177,7 @@
 				<button type="button" 
 					class="btn" 
 					ng-click="modalClose(true)" 
-					ng-class="{ 'btn-success' : canSave() }"
+					ng-class="{ 'btn-success' : canSave() && edit.hash == undefined, 'btn-primary' : canSave() && edit.hash != undefined }"
 					ng-enabled="canSave()">
 						{{ btnOk }}
 				</button> 

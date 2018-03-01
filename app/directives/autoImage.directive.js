@@ -36,7 +36,7 @@ angular.module('indeuApp').directive('autoImage', function($compile) {
 							element.attr('class', 'auto-image-left');
 						} else if (isElongated(w,h)) {
 							element.attr('class', 'auto-image-left-elongated');
-						} else if (w>800) {
+						} else if (w>765) {
 							element.attr('class', 'auto-image-top');
 						} else {
 							element.attr('class', 'auto-image-left');

@@ -250,6 +250,7 @@ div.dataTables_filter {
 }
 
 /** text-angular fixes **/
+.ta-editor.ta-html,
 .ta-scroll-window {
 	margin-top: 4px !important;
 }
@@ -265,9 +266,22 @@ div.dataTables_filter {
 	max-width: 100%;
 	white-space: normal;
 }
+.ta-editor.form-control.ta-editor-300, 
+.ta-scroll-window.form-control.ta-editor-300 {
+	min-height: 300px;
+	height: 300px;
+	max-width: 100%;
+	white-space: normal;
+}
 
 .ta-scroll-window > .ta-bind {
 	max-width: 100%;
+}
+.ta-editor.ta-html {
+	font-family: 'courier new', system;
+	font-weight: 700;
+	color: #333;
+	font-size: 16px;
 }
 
 /* general */

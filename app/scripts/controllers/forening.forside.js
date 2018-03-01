@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('ForeningForsideCtrl', 
-	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log, AlertModal) {
+	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, VisitCounter, Log, AlertModal) {
 
 		const id = $routeParams.id;
 
@@ -28,6 +28,7 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 			}
 
 			$scope.forening = r.data[0];
+			VisitCounter.visit($scope.forening.hash);
 
 			if ($scope.forening.image) {
 				$scope.forening.image_url = 'media/forening/'+$scope.forening.image
