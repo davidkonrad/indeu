@@ -197,13 +197,14 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 			var msg = 'Er du helt sikker? Når du sletter eventen sletter du samtidig<br><br><ul>';
 			msg += '<li>Kommentarer knyttet til eventen</li>';
 			msg += '<li>Tilmeldinger knyttet til eventen</li>';
-			msg += '<li>Links til denne event vil resultere i en 404, page not found</li>';
+			msg += '<li>Bindinger til foreninger og grupper</li>';
 			msg += '</ul>';
+			msg += 'Endvidere vil links og delinger til denne event fremadrettet resultere i en 404, <em>Page not found</em>.<br><br>';
 			msg += 'Du kunne overveje at redigere eventen og markere den som <u>aflyst</u> i stedet.';
 			var params = {
 				header: 'Slet event',
 				message: msg,
-				ok_text: 'OK, slet event',
+				ok_text: 'Jeg forstår, slet event',
 				modalClass: 'small-dialog-large'
 			}
 			ConfirmModal.show(params).then(function(answer) {

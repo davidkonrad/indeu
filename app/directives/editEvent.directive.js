@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('indeuApp')
-	.directive('editEvent', 
-	function($timeout, Utils, ESPBA, Lookup, Login, SelectBrugerModal, SelectGruppeModal, Notification, Const, Log) {
+angular.module('indeuApp').directive('editEvent', 
+	function($timeout, Utils, ESPBA, Lookup, Login, SelectBrugerModal, SelectGruppeModal, Notification, Const, Log, ConfirmModal) {
 
 	return {
 		templateUrl: "views/inc/inc.editEvent.html",
@@ -67,7 +66,8 @@ angular.module('indeuApp')
 			if (event_id) {
 				ESPBA.get('event', { id: event_id }).then(function(e) {
 					scope.event = e.data[0];
-					scope.event.visibility_level = parseInt(scope.event.visibility_level);
+					Utils.debugObj(scope.event);
+					//scope.event.visibility_level = parseInt(scope.event.visibility_level);
 					scope.event.from = Utils.removeSecs(scope.event.from);
 					scope.event.to = Utils.removeSecs(scope.event.to);
 					if (e.data[0].lat && e.data[0].lng) {
@@ -221,6 +221,31 @@ angular.module('indeuApp')
 
 					})
 				}
+			}
+
+			scope.toggleCancelled = function() {
+				var params = {
+					message: scope.event.cancelled == 1 ? 'Fortryd aflysning af event?' : 'Marker eventen som aflyst?'
+				}
+				ConfirmModal.show(params).then(function(answer) {
+					if (answer) {
+						var params = {
+							id: scope.event.id, 
+							cancelled: scope.event.cancelled == 1 ? 0 : 1,
+							user_id: Login.currentUser().id
+						}
+						var note = scope.event.cancelled == 1 ? 'Aflysning af event trukket tilbage' : 'Eventen er markeret som aflyst';
+						ESPBA.update('event', params).then(function() {
+							scope.event.cancelled = scope.event.cancelled == 1 ? 0 : 1;
+							Notification(note);
+							Log.log({
+								type: scope.event.cancelled == 1 ? Log.EVENT_CANCELLED : Log.EVENT_CANCELLED_RETRACTED,
+								user_id: Login.currentUser().id,
+								hash: scope.event.hash
+							});
+						})
+					}
+				})
 			}
 
 			scope.eventAction.cancel = function() {

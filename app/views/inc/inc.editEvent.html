@@ -20,6 +20,14 @@
 						ng-model="event.visibility_level"
 						ng-value="3"> Kun gruppe
         </label>
+				<button ng-if="event.hash != ''"
+					class="btn btn-xs" 
+					ng-click="toggleCancelled()"				
+					ng-class="{ 'btn-danger' : event.cancelled != 1, 'btn-primary': event.cancelled == 1 }"
+					style="position:relative;top:3px;margin-left: 30px;">
+						<span ng-if="event.cancelled == 1">Fortryd aflysning af event</span>
+						<span ng-if="event.cancelled != 1">Marker event som aflyst</span>
+				</button>
 				<div class="pull-right">
 					<button class="btn btn-default btn-sm" 
 						type="button"

@@ -134,6 +134,13 @@ angular.module('indeuApp').directive('logNotifications', function($timeout, $com
 						item.action += ' i '+entityLink(item);
 						item.title = Utils.plainText(item.action);	
 						break;
+
+					case Log.COMMENT_DELETE :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'slettede en kommentar';
+						item.action += ' i '+entityLink(item);
+						item.title = Utils.plainText(item.action);	
+						break;
 					
 					//groups
 					case Log.GROUP_MEMBER_ADDED :
@@ -241,6 +248,18 @@ angular.module('indeuApp').directive('logNotifications', function($timeout, $com
 						item.action = 'deltager alligevel ikke i eventen';
 						item.action += ' <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">' + item.event_name + '</a>';
 						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
+					case Log.EVENT_CANCELLED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'markerede eventen';
+						item.action += ' <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">' + item.event_name + '</a> som aflyst';
+						break;
+
+					case Log.EVENT_CANCELLED_RETRACTED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = 'fortrød aflysning af eventen ';
+						item.action += ' <a href="'+Utils.eventUrl(item.event_id, item.event_name) + '">' + item.event_name + '</a>';
 						break;
 
 					//articles

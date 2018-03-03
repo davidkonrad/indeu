@@ -8,6 +8,10 @@
 			</small>
 		</h4>
 
+		<div ng-if="event.cancelled == 1"	class="alert alert-danger">
+			<h3 class="no-padding no-margin"><strong>Bemærk</strong>: Eventen er blevet aflyst!</h3>
+		</div>
+
 		<h1> {{ event.name }} </h1>
 		<div class="col-md-8">
 			<div class="well well-lg">
@@ -50,7 +54,7 @@
 			<br><br>
 		</div>
 
-		<div class="col-md-12" ng-if="user && dateDue == false">
+		<div class="col-md-12" ng-if="user && dateDue == false && event.cancelled != 1">
 			<span>Hvad vil du?&nbsp;&nbsp;</span>
 			<div class="btn-group" ng-model="feedback.feedback" bs-radio-group>
 			  <label class="btn btn-default btn-sm" 

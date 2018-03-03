@@ -149,6 +149,15 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 								})
 							})
 						}
+
+						var logParams = {
+							user_id: $scope.comment.user_id,
+							hash: $scope.comment.hash,
+							type: Log.COMMENT_DELETE
+						}
+						Log.log(logParams);
+						Notification.primary('Din kommentar er blevet fjernet');
+
 					}	
 				})
 			}
