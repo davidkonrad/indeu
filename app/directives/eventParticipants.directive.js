@@ -16,15 +16,17 @@ angular.module('indeuApp')
 				var user_id = Login.isLoggedIn() ? Login.currentUser().id : false;
 				var userParticipate = false;
 				var p1 = [];
+				var maybe_participants = 0;
 				par.forEach(function(p) {
 					p.feedback = parseInt(p.feedback);
-					p.full_name = Lookup.getUser(p.user_id).full_name;
-					p.urlName = Utils.urlName(p.full_name);
-					p.urlLink = Utils.isLocalHost() 
-						? '#/medlemmer/'+p.user_id+'/'+p.urlName
-						: '/medlemmer/'+p.user_id+'/'+p.urlName;
-
+					var u = Lookup.getUser(p.user_id);
+					p.full_name = u.signature_str;
+					p.urlLink = u.url; 
 					switch (p.feedback) {
+						case 1:
+							maybe_participants = maybe_participants +1;
+							break;
+
 						case 2: 
 							if (p.user_id == user_id) {
 								userParticipate = true; 
@@ -34,10 +36,18 @@ angular.module('indeuApp')
 								p1.push(p);
 							}
 							break;
-
+						
 						default: break;
 					}
+
+					$timeout(function() {
+						console.log(maybe_participants);
+						if (maybe_participants>0) {
+							scope.maybe_participants = (maybe_participants==1) ? 'En anden deltager måske' : maybe_participants+' andre deltager måske'
+						}
+					})
 				})
+
 				scope.participants = p1;
 				scope.sep = '';
 				if (p1.length <= 0) {
@@ -63,13 +73,6 @@ angular.module('indeuApp')
 						scope.sep = ' og ';
 					} 
 				}
-				
-				$timeout(function() {
-					//$compile(angular.element(element).contents())(scope);
-					//console.log('eventParticipants $ompile instead of ');
-					//scope.$apply()
-	        //$compile(element)(scope);
-				})
 			}
 
 			attrs.$observe('eventParticipants', function() {
