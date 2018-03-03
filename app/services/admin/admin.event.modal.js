@@ -159,7 +159,10 @@ angular.module('indeuApp').factory('EventModal', function($modal, $q) {
 		$('body').on('click', '.remove-contactperson', function(e) {
 			e.stopPropagation();
 			var data = $scope.dtInstanceCP.DataTable.row( $(this).closest('tr') ).data();
-			ConfirmModal.show('Fjern <strong>'+data.full_name+'</strong> som kontaktperson?').then(function(answer) {
+			var params = {
+				message: 'Fjern <strong>'+data.full_name+'</strong> som kontaktperson?'
+			}
+			ConfirmModal.show(params).then(function(answer) {
 				if (answer) {
 					ESPBA.delete('event_contactperson', { id: data.id }).then(function() {
 						$scope.dtInstanceCP.reloadData()

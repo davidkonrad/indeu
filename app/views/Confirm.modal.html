@@ -1,5 +1,5 @@
 <div class="modal ng-scope top am-fade center" tabindex="-1" role="dialog" style="display: block;" id="confirm-modal">
-	<div class="modal-dialog">
+	<div class="modal-dialog" ng-class="modalClass">
 		<div class="modal-content">
 			
 			<div class="modal-header">
@@ -7,17 +7,16 @@
 			</div>
 
 			<div class="modal-body">
-				<div class="pull-left" style="padding-right:15px;">
+				<div class="col-md-2">
 					<i class="fa fa-question-circle fa-5x text-primary"></i>
 				</div>
-				<div style="vertical-align: top;">
+				<div class="col-md-10" style="vertical-align: top;">
 					<h4 ng-bind-html="message"></h4>
 				</div>
-				<br>
 			</div>
 
-			<div class="modal-footer clearfix">
-			  <button	class="btn btn-primary" ng-click="closeModal(true)">OK</button>
+			<div class="modal-footer">
+			  <button	class="btn btn-primary" ng-click="closeModal(true)">{{ ok_text }}</button>
 				<button class="btn btn-default" ng-click="closeModal(false)">Fortryd</button> 
 			</div>
 

@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('EventForsideCtrl', 
-	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log, VisitCounter) {
+	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log, VisitCounter, ConfirmModal) {
 
 		$scope.eventMap = Const.defaultMap();
 
@@ -191,6 +191,23 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 		$scope.actionSaved = function(item) {
 			$scope.action = '';
 			$scope.reloadEvent(true);
+		}
+
+		$scope.deleteEvent = function() {
+			var msg = 'Er du helt sikker? Når du sletter eventen sletter du samtidig<br><br><ul>';
+			msg += '<li>Kommentarer knyttet til eventen</li>';
+			msg += '<li>Tilmeldinger knyttet til eventen</li>';
+			msg += '<li>Links til denne event vil resultere i en 404, page not found</li>';
+			msg += '</ul>';
+			msg += 'Du kunne overveje at redigere eventen og markere den som <u>aflyst</u> i stedet.';
+			var params = {
+				header: 'Slet event',
+				message: msg,
+				ok_text: 'OK, slet event',
+				modalClass: 'small-dialog-large'
+			}
+			ConfirmModal.show(params).then(function(answer) {
+			})
 		}
 
 });

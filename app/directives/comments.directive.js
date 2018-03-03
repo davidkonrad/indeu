@@ -124,7 +124,10 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 			}
 
 			$scope.deleteComment = function(comment_id) {
-				ConfirmModal.show('Er du sikker på du vil slette denne kommentar?').then(function(answer) {
+				var params = {
+					message: 'Er du sikker på du vil slette denne kommentar?'
+				}
+				ConfirmModal.show(params).then(function(answer) {
 					if (answer) {
 						if (commentHasChildren(comment_id)) {
 							ESPBA.update('comment', { id: comment_id, is_deleted: 1 }).then(function() {

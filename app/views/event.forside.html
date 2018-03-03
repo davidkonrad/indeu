@@ -152,6 +152,13 @@
 				<i class="fa fa-fw fa-cog fa-x2"></i>
 				Se eventens log<br>
 			</a>
+			<a href="" 
+				ng-class="{ 'disabled': actionDisable('s') }"
+				ng-disabled="actionDisable('s')" 
+				ng-click="deleteEvent()">
+				<i class="fa fa-fw fa-times fa-x2 text-danger"></i>
+				Slet event<br>
+			</a>
 		</div>
 	</div>
 

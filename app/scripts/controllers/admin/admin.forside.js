@@ -58,7 +58,10 @@ angular.module('indeuApp').controller('AdminForsideCtrl', function($scope, $time
 	}
 
 	$scope.removeContent = function(item) {
-		ConfirmModal.show('Fjern dette indhold fra forsiden?').then(function(answer) {
+		var params = {
+			message: 'Fjern dette indhold fra forsiden?'
+		}
+		ConfirmModal.show(params).then(function(answer) {
 			if (answer) {
 				var update = {
 					id: item.id,

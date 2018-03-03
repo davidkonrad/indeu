@@ -128,7 +128,10 @@ angular.module('indeuApp')
 		}
 
 		$scope.unpublishArticle = function() {
-			ConfirmModal.show('Er du sikker på at du vil trække artiklen tilbage?').then(function(answer) {
+			var params = {
+				message: 'Er du sikker på at du vil trække artiklen tilbage?'
+			}
+			ConfirmModal.show(params).then(function(answer) {
 				if (answer) {
 					ESPBA.update('article', { published: 0, id: id }).then(function() {
 						$scope.reload(true);

@@ -47,7 +47,7 @@ angular.module('indeuApp').controller('AdminCtrl',
 
 			if (c.association_id) {
 				item.fa = 'fa-sitemap';
-				item.url = Utils.userUrl(c.association_id, c.association_name);
+				item.url = Utils.foreningUrl(c.association_id, c.association_name);
 				item.name = c.association_name;
 			}
 

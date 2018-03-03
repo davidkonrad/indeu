@@ -74,6 +74,42 @@ td.max600 {
 }
 
 /* std modals */
+.modal-dialog.small-dialog-large {
+	min-width: 500px !important;
+	max-width: 500px !important;
+	width: 500px !important;
+}
+.small-dialog-large .modal-body {
+	clear: both;
+	height: 250px !important;
+	min-height: 250px !important;
+	max-height: 550px !important;
+	font-size: 90%;
+}
+.small-dialog-large .modal-footer {
+	height: 70px;
+	clear: both;
+}
+
+
+.modal-dialog.small-dialog {
+	min-width: 400px !important;
+	max-width: 400px !important;
+	width: 400px !important;
+}
+.small-dialog .modal-body {
+	clear: both;
+	height: 100px !important;
+	min-height: 100px !important;
+	max-height: 100px !important;
+	font-size: 90%;
+}
+.small-dialog .modal-footer {
+	height: 70px;
+	clear: both;
+}
+
+
 .modal-dialog.medium-dialog {
 	min-width: 800px !important;
 	max-width: 800px !important;

@@ -40,7 +40,10 @@ angular.module('indeuApp').factory('BrugerRequestModal', function($modal, $q) {
 			var confirm = 'Gensend email-bekræftelses email? ';
 			confirm += 'OBS: Bør kun benyttes hvis brugeren har anmodet om ændret email-adresse, ';
 			confirm += 'eller ved en fejl ikke har modtaget den oprindelige automail efter brugeroprettelsen';
-			ConfirmModal.show(confirm, 'Gensend bekræftelses-email?').then(function(answer) {
+			var params = {
+				message: confirm
+			}
+			ConfirmModal.show(params, 'Gensend bekræftelses-email?').then(function(answer) {
 				if (answer) {
 					Email.requestConfirmation($scope.data.email, $scope.data.full_name, $scope.data.hash);
 					Log.log({
@@ -54,7 +57,11 @@ angular.module('indeuApp').factory('BrugerRequestModal', function($modal, $q) {
 		}
 
 		$scope.confirmUser = function() {
-			ConfirmModal.show('Opret bruger og send bekræftelsesemail?', 'Opret bruger').then(function(answer) {
+			var params = {
+				header: 'Opret bruger',
+				message: 'Opret bruger og send bekræftelsesemail?'
+			}
+			ConfirmModal.show(params).then(function(answer) {
 				if (answer) {
 					var user = {
 						hash: $scope.data.hash,
@@ -94,7 +101,10 @@ angular.module('indeuApp').factory('BrugerRequestModal', function($modal, $q) {
 		}
 
 		$scope.removeUser = function() {
-			ConfirmModal.show('Slet brugeranmodning?').then(function(answer) {
+			var params = {
+				message: 'Slet brugeranmodning?'
+			}
+			ConfirmModal.show(params).then(function(answer) {
 				if (answer) {
 					ESPBA.delete('user_request', { id: request_id }).then(function() {
 						$scope.modalClose(true)

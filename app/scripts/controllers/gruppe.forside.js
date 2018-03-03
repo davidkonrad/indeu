@@ -167,7 +167,10 @@ angular.module('indeuApp').controller('GruppeForsideCtrl',
 		}
 
 		$scope.unFollow = function() {
-			ConfirmModal.show('Er du sikker på du ikke længere vil følge <strong>'+$scope.group.name+'</strong>?').then(function(answer) {
+			var params = {
+				message: 'Er du sikker på du ikke længere vil følge <strong>'+$scope.group.name+'</strong>?'
+			}
+			ConfirmModal.show(params).then(function(answer) {
 				if (answer) {
 					ESPBA.get('group_user', { group_id: $scope.group.id, user_id: $scope.user.id }).then(function(gu) {
 						var id = gu.data[0].id;

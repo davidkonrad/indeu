@@ -153,7 +153,10 @@ angular.module('indeuApp')
 					AlertModal.show('Gruppeejeren kan ikke fjernes fra medlemslisten', 'No can do');
 					return
 				}
-				ConfirmModal.show('Fjern medlem fra gruppe?').then(function(answer) {
+				var params = {
+					message: 'Fjern medlem fra gruppe?'
+				}
+				ConfirmModal.show(params).then(function(answer) {
 					if (answer) {
 						ESPBA.delete('group_user', { group_id: $scope.edit.id, user_id: user_id }).then(function() {
 							$scope.dtInstance.reloadData();
