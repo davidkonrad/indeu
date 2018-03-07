@@ -9,7 +9,6 @@ angular.module('indeuApp', [
 	'ngCookies',
 	'ngResource',
 	'ngRoute',
-	//'ngSanitize',
 	'ngTouch',
 	'mgcrea.ngStrap',
 	'datatables',
@@ -160,6 +159,20 @@ angular.module('indeuApp', [
         controller: 'SearchCtrl'
       })
 
+			//issues
+      .when('/issues', {
+        templateUrl: 'views/issues.forside.html',
+        controller: 'IssuesForsideCtrl'
+      })
+      .when('/issues/opret', {
+        templateUrl: 'views/issues.html',
+        controller: 'IssueCtrl'
+      })
+      .when('/issues/:action/:id', {
+        templateUrl: 'views/issues.html',
+        controller: 'IssueCtrl'
+      })
+
 			//confirm email
       .when('/confirm/:hash', {
         templateUrl: 'views/confirm-email.html',
@@ -280,8 +293,8 @@ angular.module('indeuApp', [
 		});
 
 		//moment
-		//moment.tz.setDefault("Europe/Copenhagen");
-		moment.tz.guess();
+		moment.tz.setDefault("Europe/Copenhagen");
+		//moment.tz.guess();
 	
 		//meta
 		Meta.setTitleSuffix(' | indeu.org');

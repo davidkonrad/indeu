@@ -80,6 +80,10 @@ angular.module('indeuApp')
 						scope.defaultImage = '<i class="fa fa-file-code-o"></i>';
 						_target = 'statisk';
 						break;
+					case 'i' :
+						scope.defaultImage = '<i class="fa fa-bug"></i>';
+						_target = 'issue';
+						break;
 					default:
 						break;
 				};

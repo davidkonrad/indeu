@@ -52,6 +52,16 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 			return u + 's/' + id + '/' + this.urlName(header);
 		},
 
+		issueUrl: function(id, edit) {
+			var u = this.isLocalHost() ? '/#/' : '/';
+			//view or edit
+			if (!edit) {
+				return u + 'issues/se/' + id
+			} else {
+				return u + 'issues/rediger/' + id
+			}
+		},
+
 		//localhost db return numbers as strings
 		//convert "x" int's to x ints if in localhost mode
 		debugObj: function(obj) {
@@ -117,6 +127,11 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 		    nextWeek : '[på] dddd',
 		    sameElse : 'L'
 			})
+		},
+
+		//programmatically convert server timestamps to Europe/Copenhagen timestamp
+		calendar: function(timestamp) {
+			return !isLocalHost ? moment(timestamp).add(1, 'hours').calendar() : moment(timestamp).calendar()
 		},
 
 		ratingStr: function(r) {

@@ -156,6 +156,9 @@
 					<li ng-if="showSearchBox() && userIsAdmin()">
 						<a href="/admin-overblik" debug-link>Administration</a>
 					</li>
+					<li ng-if="showSearchBox() && userIsAdmin()">
+						<a href="/issues" debug-link>Issues</a>
+					</li>
 					<li ng-if="!isLoggedIn()"><a href="/bliv-medlem" debug-link>Bliv medlem</a></li>
 					<li ng-if="isLoggedIn()"><a href="" ng-click="logout()">Log af</a></li>
 				</ul>

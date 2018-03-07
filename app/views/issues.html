@@ -1,0 +1,122 @@
+
+<div class="col-md-8">
+
+	<h4 ng-if="header">
+		<small>
+			Oprettet <span title="{{ header.realDate }}">for {{ header.dateStamp }}</span>
+			af <user-signature id="{{ header.user_id }}"></user-signature>
+			<span ng-if="header.editedDateStamp != undefined">, redigeret for {{ header.editedDateStamp }}</span>
+		</small>
+	</h4>
+
+<!-- edit -->
+	<div ng-if="edit && edit.hash == undefined">
+		<h2>Nyt issue</h2>
+		<h4>Rapporter en fejl. Foreslå en ændring eller ny funktionalitet</h4>
+	</div>
+
+	<div ng-if="edit && edit.hash != undefined">
+		<h2>Rediger issue #{{ edit.id }}</h2>
+	</div>
+
+	<div ng-if="edit != undefined" class="col-md-12">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="control-label required">Overskrift</label>
+				<input class="form-control input-md" 
+					spellcheck="false"
+					auto-focus
+					type="text" 
+					ng-model="edit.title">
+			</div>
+			<div class="form-group">
+				<label class="control-label required clear-fix">Labels</label>
+				<div class="col-md-12 no-padding">
+					<button ng-repeat="l in labels"
+						style="margin-right: 10px; color: white; font-weight: bold;"
+						ng-style="{ 'background-color': l.color }"
+						class="btn btn-sm">
+							{{ l.name }} &nbsp;
+						<i class="fa fa-times" title="Fjern" ng-click="removeLabel(l)"></i>
+					</button>
+					
+					<button type="button" 
+						class="btn btn-default btn-sm" 
+						ng-model="select.label" 
+						data-html="true"
+						data-toggle="false"
+						ng-disabled="labels.length>3"
+						data-placeholder="Vælg max 4 labels"
+						bs-options="label.item for label in labelList" bs-select>
+							<span class="caret"></span>
+					</button>
+				</div>
+			</div>
+
+			<div class="form-group" style="margin-top: 30px;">
+				<label class="control-label col-md-12 no-padding" style="text-align:left;">Beskrivelse og evt. screenshot</label>
+				<div class="col-md-7 no-padding-left">
+					<textarea class="form-control" 
+						spellcheck="false"
+						rows="9" 
+						ng-model="edit.desc">
+					</textarea>
+				</div>
+				<div class="col-md-5 no-padding">
+					<attach-image ng-model="edit.image" type="i" size="auto" height="200"></attach-image>
+				</div>
+			</div>
+
+		</form>
+
+		<hr>
+
+		<div class="col-md-12" ng-if="btn_ok_caption != undefined">
+			<button class="btn btn-md pull-right"
+				ng-disabled="!canSave()"	
+				ng-click="updateIssue()"
+				ng-class="{ 'btn-success': canSave() && edit.hash == '', 'btn-primary': canSave() && edit.hash != '' }">
+					{{ btn_ok_caption }}
+			</button>
+		</div>
+	</div>
+
+<!-- view -->
+	<div ng-if="issue != undefined">
+		<h2>#{{ issue.id }} - {{ issue.title }}</h2>
+		<div class="col-md-12 no-padding" style="margin-top: 10px;">
+			<button ng-repeat="l in labels"
+				style="margin-right: 10px; color: white; font-weight: bold;"
+				ng-style="{ 'background-color': l.color }"
+				class="btn btn-sm">
+					{{ l.name }}
+			</button>
+		</div>
+		<div class="col-md-12 clearfix">
+			<br>
+		</div>
+		<div ng-if="!issue.image_url" class="col-md-12 no-padding">
+			<div class="artikel-content"><p> {{ issue.desc }} </p> </div>
+		</div>
+		<div ng-if="issue.image_url">
+			<div class="col-md-7 no-padding">
+				<div class="artikel-content"><p> {{ issue.desc }} </p> </div>
+			</div>
+			<div class="col-md-5">
+				<img ng-src="{{ issue.image_url }}" inject-fancyboxable>
+			</div>
+		</div>
+
+		<comments hash="{{ issue.hash }}" on-comment-added="onCommentAdded"></comments>		
+	</div>
+
+
+	
+</div>
+
+
+<aside class="col-md-4">
+
+</aside>
+
+

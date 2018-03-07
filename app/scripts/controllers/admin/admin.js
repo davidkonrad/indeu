@@ -19,6 +19,7 @@ angular.module('indeuApp').controller('AdminCtrl',
 			Redirect.home('Du har ingen administrator-rettigheder');
 		} 
 
+		Meta.setTitle('Administration');
 
 		function processItem(c, item) {
 			if (c.article_id) {

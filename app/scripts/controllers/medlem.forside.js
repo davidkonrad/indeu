@@ -30,6 +30,8 @@ angular.module('indeuApp').controller('MedlemForsideCtrl',
 			$scope.user = r.data[0];
 			$scope.user.image = $scope.user.image || '';
 
+			Meta.setTitle(Lookup.getUser($scope.user.id).signature_str);
+
 			//for some reason timezone not work (yet)
 			if ($scope.user.last_seen == '0000-00-00 00:00:00') {
 				$scope.user.last_seen	= 'Har endnu ikke været logget ind'

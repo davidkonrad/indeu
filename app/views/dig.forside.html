@@ -155,17 +155,25 @@
 			XXng-click="setAction('r')">
 			<i class="fa fa-fw fa-star-half-empty fa-x2"></i>Review nye brugere<br>
 		</a>
+		<a ng-href="{{ user.url }}" 
+			title="Vis din profil som andre ser den"
+			ng-class="{ 'disabled': actionDisable('v') }"
+			ng-disabled="actionDisable('v')">
+			<i class="fa fa-fw fa-eye fa-x2"></i>Se din offentlige profil<br>
+		</a>
+		<hr class="no-margin" style="margin-top: 5px !important; margin-bottom: 5px !important;">
 		<a href="" 
 			ng-class="{ 'disabled': actionDisable('l') }"
 			ng-disabled="actionDisable('l')" 
 			ng-click="setAction('l')">
 			<i class="fa fa-fw fa-cog fa-x2"></i>Se din handlings-log<br>
 		</a>
-		<a ng-href="{{ user.url }}" 
-			title="Vis din profil som andre ser den"
-			ng-class="{ 'disabled': actionDisable('v') }"
-			ng-disabled="actionDisable('v')">
-			<i class="fa fa-fw fa-eye fa-x2"></i>Se din offentlige profil<br>
+		<a href="/issues/opret" 
+			title="Rapporter en fejl, foreslå en ændring eller ny funktionalitet"
+			debug-link
+			ng-class="{ 'disabled': actionDisable('i') }"
+			ng-disabled="actionDisable('i')">
+			<i class="fa fa-fw fa-bug fa-x2"></i>Rapporter en fejl<br>
 		</a>
 
 	</div>

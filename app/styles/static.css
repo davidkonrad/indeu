@@ -240,6 +240,17 @@ div.dataTables_filter {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }	
+.td-icon {
+	padding-right: 0px !important;
+	max-width: 25px !important;
+	width: 25px !important;
+	min-width: 25px !important;
+}	
+.td-text-400 {
+	max-width: 400px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}	
 
 /** device widths **/
 .max-width {
@@ -462,11 +473,14 @@ p {
 }	
 
 /* update code */
-
 code {
 	color: #333;
 	font-size: 95%;
 	font-weight: 900;
 }
 
+/* angularstrap fix select padding */
+ul.select li a {
+	padding-left: 10px;
+}
 

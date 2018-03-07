@@ -177,17 +177,6 @@ angular.module('ESPBA', [])
 				var deferred = $q.defer();
 				if (!data) data = {};
 				
-				//replace . with &dot
-				/*
-				for (var key in data) {
-					if (~key.indexOf('.')) {
-						var p = data[key];
-						var newKey = key.replace(/\./, '&dot;');
-						data[newKey] = p;
-						delete data[key];
-					}
-				}
-				*/
 				sanitizeData(data);
 
 				data.__action = 'prepared';
@@ -213,17 +202,6 @@ angular.module('ESPBA', [])
 				data.__table = func;
 				data.__crypt = true;
 
-				//replace . with &dot
-				/*
-				for (var key in data) {
-					if (~key.indexOf('.')) {
-						var p = data[key];
-						var newKey = key.replace(/\./, '&dot;');
-						data[newKey] = p;
-						delete data[key];
-					}
-				}
-				*/
 				sanitizeData(data);
 
 				this.init().then(function() {
@@ -241,7 +219,9 @@ angular.module('ESPBA', [])
 						var text = decrypted.toString(CryptoJS.enc.Utf8);
 						var data = JSON.parse(text);
 	
-			      deferred.resolve({ data: data });
+						//r.data.data = data;
+			      //deferred.resolve( process(r) );
+						deferred.resolve( { data: data } );
 					})
 				})
 	      return deferred.promise;

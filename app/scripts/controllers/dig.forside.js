@@ -4,8 +4,8 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('DigForsideCtrl', function($scope, $location, Settings, Login, ESPBA, Lookup, Meta, Utils, ImageUploadModal, Redirect, AlertModal) {
+angular.module('indeuApp').controller('DigForsideCtrl', 
+	function($scope, $location, Settings, Login, ESPBA, Lookup, Meta, Utils, ImageUploadModal, Redirect, AlertModal) {
 
 		Redirect.checkLogin('Du skal være logget ind for at kunne se din egen forside');
 
@@ -87,6 +87,7 @@ angular.module('indeuApp')
 				$scope.user = r.data[0];
 				$scope.user.image = $scope.user.image || '';
 				$scope.user.url = Utils.userUrl($scope.user.id, $scope.user.full_name);
+				Meta.setTitle(Lookup.getUser($scope.user.id).signature_str);
 				var a = $scope.user.about;
 				if (!a || a.trim() == '') $scope.user.about = 'Du har endnu ikke udfyldt en beskrivelse af dig selv. Klik på linket "Rediger profil" til højre. '
 			});
@@ -189,7 +190,6 @@ angular.module('indeuApp')
 			$scope.groups = groups;
 		});
 
-		
 
 
 });
