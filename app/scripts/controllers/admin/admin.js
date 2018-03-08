@@ -58,6 +58,12 @@ angular.module('indeuApp').controller('AdminCtrl',
 				item.name = c.static_page_header;
 			}
 
+			if (c.issue_id) {
+				item.fa = 'fa-bug';
+				item.url = Utils.issueUrl(c.issue_id);
+				item.name = c.issue_title;
+			}
+
 			return item
 		}
 

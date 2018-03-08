@@ -54,7 +54,10 @@ $SQL = <<<SQL
 			ass.name as association_name,
 
 			s.id as static_page_id,
-			s.header as static_page_header
+			s.header as static_page_header,
+
+			iss.id as issue_id,
+			iss.title as issue_title
 		
 		from
 			comment c
@@ -65,6 +68,7 @@ $SQL = <<<SQL
 		left join user u on u.hash = c.hash
 		left join association ass on ass.hash = c.hash
 		left join static_page s on s.hash = c.hash
+		left join issue iss on iss.hash = c.hash
 
 		group by
 			c.hash

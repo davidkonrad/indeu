@@ -30,6 +30,8 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 			$scope.forening = r.data[0];
 			VisitCounter.visit($scope.forening.hash);
 
+			Meta.setTitle($scope.forening.name);
+
 			if ($scope.forening.image) {
 				$scope.forening.image_url = 'media/forening/'+$scope.forening.image
 			}
