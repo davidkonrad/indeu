@@ -87,7 +87,9 @@ angular.module('indeuApp').controller('DigForsideCtrl',
 				$scope.user = r.data[0];
 				$scope.user.image = $scope.user.image || '';
 				$scope.user.url = Utils.userUrl($scope.user.id, $scope.user.full_name);
-				Meta.setTitle(Lookup.getUser($scope.user.id).signature_str);
+				Lookup.init().then(function() {
+					Meta.setTitle(Lookup.getUser($scope.user.id).signature_str);				
+				})
 				var a = $scope.user.about;
 				if (!a || a.trim() == '') $scope.user.about = 'Du har endnu ikke udfyldt en beskrivelse af dig selv. Klik på linket "Rediger profil" til højre. '
 			});
