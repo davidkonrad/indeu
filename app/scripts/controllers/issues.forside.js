@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('IssuesForsideCtrl', 
-	function($scope, $location, $q, ESPBA, Utils, Lookup, Const, DTOptionsBuilder, DTColumnBuilder, Meta) {
+	function($scope, $location, $q, ESPBA, Utils, Lookup, Const, DTOptionsBuilder, DTColumnBuilder, Meta, Redirect, Login) {
 
 	var issueLabels = [];
 	ESPBA.get('issue_label', {}).then(function(r) {
@@ -22,6 +22,7 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 	}
 
 	Meta.setTitle('Issues');
+	var current_user = Login.currentUser();
 
 	$scope.dtColumns = [
 		DTColumnBuilder.newColumn('id')
@@ -41,7 +42,11 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 		.notSortable()
 		.renderWith(function(data, type, full, meta) {
 			if (type === 'display') {
-				return '<a href="'+Utils.issueUrl(full.id, true)+'" title="Rediger issue"><i class="fa fa-pencil"></i></a>'
+				if (current_user.id == full.user_id) {
+					return '<a href="'+Utils.issueUrl(full.id, true)+'" title="Rediger issue"><i class="fa fa-pencil"></i></a>'
+				} else {
+					return '<i class="fa fa-pencil text-muted"></i>'
+				}
 			} else {
 				return data;
 			}
@@ -106,6 +111,9 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 		.withOption('order', [[ 2, "desc" ]])
 		.withOption('dom', 'Blfrtip')
 		.withOption('stateSave', true)
+		.withOption('createdRow', function(row, data, index) {
+			if (data.solved == 1) $(row).addClass('warning');
+		})
 		.withOption('language', Const.dataTables_daDk )
 		.withButtons([ 
 			/*
@@ -122,6 +130,11 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
  				}
 			}
 		]);
+
+	if (Redirect.message()) {
+		Notification(Redirect.message());
+		Redirect.clear();
+	}
 
 
 });

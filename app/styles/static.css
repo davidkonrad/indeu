@@ -307,7 +307,7 @@ div.dataTables_filter {
 }
 
 *.cursor-pointer {
-	cursor: pointer;
+	cursor: pointer !important;
 }
 *.no-wrap {
 	white-space: nowrap;

@@ -17,7 +17,7 @@ $SQL = <<<SQL
 			(select count(*) from user where quarantine = 1) as user_quarantine_count,
 			(select count(*) from user where logged_in = 1) as user_logged_in_count,
 			(select count(*) from comment) as comment_count,
-			(select count(*) from issue) as issue_count,
+			(select count(*) from issue where solved is null) as issue_count,
 
 			count(*) as user_count		
 		from

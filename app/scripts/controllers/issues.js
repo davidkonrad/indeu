@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('IssueCtrl', 
-	function($scope, $timeout, $routeParams, $location, Login, ESPBA, Lookup, Utils, Notification, Redirect, Meta) {
+	function($scope, $timeout, $routeParams, $location, Login, ESPBA, Lookup, Utils, Notification, Redirect, Meta, Log, ConfirmModal, Email) {
 
 	ESPBA.get('issue_label', {}).then(function(r) {
 		r.data.forEach(function(l) {
@@ -39,6 +39,7 @@ angular.module('indeuApp').controller('IssueCtrl',
 		}	
 	}
 
+	var user = Login.currentUser();
 	switch(action) {
 		case 'opret': 
 			$scope.edit = {};
@@ -47,6 +48,10 @@ angular.module('indeuApp').controller('IssueCtrl',
 		case 'rediger' : 
 			ESPBA.get('issue', { id: id }).then(function(r) {
 				$scope.edit = r.data[0];
+				$scope.is_owner = $scope.edit.user_id == user.id;
+				if (!$scope.is_owner || user.id != 1) {
+					Redirect.issues('Du har ikke rettigheder til at redigere dette issue');
+				}
 				ESPBA.get('issue_labels', { issue_id: $scope.edit.id }).then(function(i) {
 					i.data.forEach(function(label) {
 						$scope.labels.push(getIssueLabel(label.issue_label_id))
@@ -59,6 +64,7 @@ angular.module('indeuApp').controller('IssueCtrl',
 		case 'se' :
 			ESPBA.get('issue', { id: id }).then(function(r) {
 				$scope.issue = r.data[0];
+				$scope.is_owner = $scope.issue.user_id == user.id || user.id == 1;
 				if ($scope.issue.image) {
 					$scope.issue.image_url = 'media/issue/'+$scope.issue.image
 				}
@@ -129,17 +135,70 @@ angular.module('indeuApp').controller('IssueCtrl',
 				var issue_id = r.data[0].id;
 				updateLabels(issue_id);
 				$location.path('/issues/se/'+issue_id);
-				Notification('Issue #'+issue_id+' er blevet oprettet');
-			})
+				Notification('Issue <strong>#'+issue_id+'</strong> er blevet oprettet');
+
+				Log.log({
+					type: Log.ISSUE_CREATED,
+					user_id: Login.currentUser().id,
+					hash: r.data[0].hash
+				})
+
+			});
+
 		} else {
 			$scope.edit.edited_timestamp = 'CURRENT_TIMESTAMP';
 			ESPBA.update('issue', $scope.edit);
 			ESPBA.delete('issue_labels', { issue_id: $scope.edit.id }).then(function() {
 				updateLabels($scope.edit.id);
 				$location.path('/issues/se/'+$scope.edit.id);
-				Notification('Issue #'+$scope.edit.id+' er blevet redigeret');
+				Notification('Issue <strong>#'+$scope.edit.id+'</strong> er blevet redigeret');
+
+				Log.log({
+					type: Log.ISSUE_EDITED,
+					user_id: Login.currentUser().id,
+					hash: $scope.edit.hash
+				})
+
 			})
 		}
+	}
+
+	$scope.editIssue = function() {
+		$location.path('issues/rediger/'+$scope.issue.id);
+	}
+
+	$scope.markAsSolved = function() {
+		var id = $scope.edit ? $scope.edit.id : $scope.issue.id;
+		var hash = $scope.edit ? $scope.edit.hash : $scope.issue.hash;
+		var params = {
+			id: id,
+			solved: 1,
+			solved_timestamp: 'CURRENT_TIMESTAMP'
+		}
+		var confirm = {
+			header: 'Marker som løst?',
+			message: 'Dette vil markere issue som løst og sende en mail til brugeren'
+		} 
+		ConfirmModal.show(confirm).then(function(answer) {
+			if (answer) {
+				ESPBA.update('issue', params).then(function(r) {
+					var issue_user_id = r.data[0].user_id;
+					var issue_title = r.data[0].title;
+
+					Notification('Issue <strong>#'+id+'</strong> markeret som løst');
+					$scope.issue.solved = true;
+
+					Log.log({
+						type: Log.ISSUE_MARK_SOLVED,
+						user_id: Login.currentUser().id,
+						hash: hash
+					});
+
+					var user = Lookup.getUser(issue_user_id);
+					Email.issueSolved(user.email, user.full_name, issue_title, id);
+				})
+			}
+		})
 	}
 	
 });

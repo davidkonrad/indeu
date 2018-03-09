@@ -33,6 +33,9 @@ $SQL = <<<SQL
 			g.name as group_name,
 			g.id as group_id,
 
+			iss.title as issue_title,
+			iss.id as issue_id,
+
 			us.id as user_user_id,
 			us.full_name as user_user_full_name
 
@@ -44,6 +47,7 @@ $SQL = <<<SQL
 		left join article a on a.hash = l.hash
 		left join event e on e.hash = l.hash
 		left join `group` g on g.hash = l.hash
+		left join issue iss on iss.hash = l.hash
 		left join `user` us on us.hash = l.hash
 SQL;
 		//**must** have either user_id or hash

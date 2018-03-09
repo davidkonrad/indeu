@@ -53,6 +53,10 @@ angular.module('indeuApp').factory('Log', function(ESPBA, Utils) {
 		ASSOCIATION_MEMBER_EXCLUDED: 57,
 		ASSOCIATION_ARTICLE_CREATED: 58,
 
+		ISSUE_CREATED: 60,
+		ISSUE_EDITED: 61,
+		ISSUE_MARK_SOLVED: 62,
+		
 		//misc
 		FRONTPAGE_CONTENT_CHANGED: 70,	
 

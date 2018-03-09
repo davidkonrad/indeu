@@ -103,10 +103,24 @@
 				<div class="artikel-content"><p> {{ issue.desc }} </p> </div>
 			</div>
 			<div class="col-md-5">
-				<img ng-src="{{ issue.image_url }}" inject-fancyboxable>
+				<img class="cursor-pointer" ng-src="{{ issue.image_url }}" inject-fancyboxable>
 			</div>
 		</div>
 
+		<div class="col-md-12 no-padding text-right">
+			<hr>
+			<button class="btn btn-sm btn-default"
+				ng-click="markAsSolved()"
+				ng-class="{ 'btn-success': is_owner && issue.solved != 1 }"
+				ng-disabled="!is_owner || issue.solved == 1">
+				Marker som løst
+			</button>
+			<button class="btn btn-sm btn-primary"
+				ng-click="editIssue()"
+				ng-disabled="!is_owner || issue.solved">
+				Rediger
+			</button>
+		</div>
 		<comments hash="{{ issue.hash }}" on-comment-added="onCommentAdded"></comments>		
 	</div>
 
