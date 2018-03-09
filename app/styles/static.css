@@ -484,3 +484,7 @@ ul.select li a {
 	padding-left: 10px;
 }
 
+/* pre elements */
+pre {
+	border: none;
+}

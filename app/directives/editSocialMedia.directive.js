@@ -47,6 +47,7 @@ angular.module('indeuApp')
 				})
 			})
 
+			//add a method so changes can be saved from outside the directive
 			scope.$root.__socialMediaSave = function() {
 				if (scope.edit.id) {
 					ESPBA.update('social_media', scope.edit).then(function(a) {
@@ -62,5 +63,4 @@ angular.module('indeuApp')
 		}
 	}
 });
-
 

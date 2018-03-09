@@ -199,6 +199,7 @@ angular.module('indeuApp').factory('ForeningModal', function($modal, $q) {
 			if (value) {
 				if (association_id) {
 					$scope.__addressSave();
+					$scope.__socialMediaSave();
 					ESPBA.update('association', $scope.edit).then(function(r) {
 						//we should probably sanity check
 						r = r.data[0];

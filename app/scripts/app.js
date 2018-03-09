@@ -132,13 +132,19 @@ angular.module('indeuApp', [
 			//official "open" event frontpage
       .when('/event/:id/:navn', {
         templateUrl: 'views/event.forside.html',
-        controller: 'EventForsideCtrl'
+        controller: 'EventForsideCtrl',
+				resolve: function(Lookup) {
+					return Lookup.init()
+				}
       })
 
 			//official "open" forening frontpage
       .when('/forening/:id/:navn', {
         templateUrl: 'views/forening.forside.html',
-        controller: 'ForeningForsideCtrl'
+        controller: 'ForeningForsideCtrl',
+				resolve: function(Lookup) {
+					return Lookup.init()
+				}
       })
 
 			//official "open" event summary / calendar
@@ -162,7 +168,10 @@ angular.module('indeuApp', [
 			//issues
       .when('/issues', {
         templateUrl: 'views/issues.forside.html',
-        controller: 'IssuesForsideCtrl'
+        controller: 'IssuesForsideCtrl',
+				resolve: function(Lookup) {
+					return Lookup.init()
+				}
       })
       .when('/issues/opret', {
         templateUrl: 'views/issues.html',

@@ -90,9 +90,8 @@
 		<div class="layout-right-header">Handlinger</div>
 		<div class="layout-right-header-content">
 			<a href="" 
-				ng-class="{ 'disabled': actionDisable('r') }"
-				ng-disabled="actionDisable('r')"
-				ng-click="setAction('r')">
+				class="disabled"
+				ng-disabled="true">
 				<i class="fa fa-fw fa-wrench fa-x2"></i>
 				Rediger foreningsinfo<br>
 			</a>
@@ -123,21 +122,41 @@
 		</div>
 	</div>
 
-	<div ng-if="hasAddress == true">
-		<div class="layout-right-header">Adresse</div>
-		<div class="layout-right-header-content">
-			<span ng-if="address.address">{{ address.address }}<br></span>
+	<div ng-if="hasAddress == true || forening.email">
+		<div class="layout-right-header">Kontakt</div>
+		<div class="layout-right-header-content line-height-125">
+			<span ng-if="forening.email"><a ng-href="mailto:{{ forening.email }}">{{ forening.email }}</a><br></span>
+			<span ng-if="address.co">c/o {{ address.co }}<br></span>
+			<span ng-if="address.address">{{ address.address }}</span><span ng-if="address.country">, {{ address.country }}<br></span>
+			<br ng-if="!address.country">
+			<span ng-if="address.phone1"><i class="fa fa-phone fa-fw"></i>{{ address.phone1 }}</span><span ng-if="address.phone2"> / {{ address.phone2 }}</span>
+			
+<!--
 			<span ng-if="address.postal_code">{{ address.postal_code }} {{ address.city }}<br></span>
 			<span ng-if="address.municiplality">{{ address.municipality }}<br></span>
 			<span ng-if="address.region">{{ address.region }}<br></span>
-			<span ng-if="address.country">{{ address.country }}</span>
+-->
+			
 		</div>
 	</div>
 
 	<div ng-if="hasSocialMedia == true">
-		<div class="layout-right-header">Web / sociale medier</div>
+		<div class="layout-right-header">Hjemmeside og sociale medier</div>
 		<div class="layout-right-header-content">
 			<social-media-links record="{{ socialMediaLinks }}"></social-media-links>
+		</div>
+	</div>
+
+	<div ng-if="forening.mobilepay || forening.bank_account">
+		<div class="layout-right-header">Støt foreningen</div>
+		<div class="layout-right-header-content">
+			<span ng-ig="forening.mobile_pay">
+				<img src="assets/mobilepay/MP_RGB_NoTM_Logo+Type Horisontal Blue_fixed.png" style="width: 110px;">
+				<span class="h4 no-word-wrap">{{ forening.mobilepay }}</span><br>
+			</span>
+			<span ng-if="forening.bank_account">
+				<pre>{{ forening.bank_account }} </pre>
+			</span>
 		</div>
 	</div>
 	

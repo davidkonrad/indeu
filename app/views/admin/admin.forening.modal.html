@@ -41,6 +41,19 @@
 							</div>
 
 					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="email">Email</label>
+								<div class="col-md-5">
+							    <input class="form-control input-sm" 
+										spellcheck="false"
+										type="text"
+										id="email"
+										select-on-click
+										ng-model="edit.email" 
+										placeholder="kontakt@forening.dk">
+								</div>
+							</div>
+
+					    <div class="form-group">
 					      <label class="col-md-2 control-label required" for="owner_id">Ejer</label>
 								<div class="col-md-5">
 							    <button class="btn btn-default btn-sm"
@@ -111,6 +124,36 @@
 						</form>
 					</div>
 
+<!-- diverse -->
+					<div bs-pane data-title="Diverse">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off" spellcheck="false">
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="mobilepay">MobilePay</label>
+								<div class="col-md-5">
+							    <input class="form-control input-sm" 
+										spellcheck="false"
+										type="text"
+										id="mobilepay"
+										select-on-click
+										auto-focus
+										ng-model="edit.mobilepay">
+								</div>
+							</div>
+					    <div class="form-group">
+					      <label class="col-md-2 control-label" for="bank_account">Bank kontonr.</label>
+								<div class="col-md-5">
+									<textarea cols="20" rows="3" 
+										class="form-control"
+										ng-model="edit.bank_account">
+									</textarea>
+								</div>
+							</div>
+
+						</form>
+					</div>
+
+<!-- tekst -->
 					<div bs-pane data-title="Tekst">
 						<form role="form" class="form-horizontal" autocomplete="off">
 					    <div class="form-group">
@@ -132,22 +175,26 @@
 						</form>
 					</div>
 
+<!-- logo -->
 					<div bs-pane data-title="logo">
 						<br>
 						<div class="col-md-10 col-md-offset-1">
-							<attach-image ng-model="edit.image" type="f" size="auto" height="190"></attach-image>
+							<attach-image ng-model="edit.image" type="f" size="auto" height="290"></attach-image>
 						</div>
 						<br>
 					</div>
 
+<!-- adresse -->
 					<div bs-pane data-title="Adresse" ng-if="edit.hash != undefined">
 						<edit-address hash="{{ edit.hash }}"></edit-address>	
 					</div>
 
+<!-- web / sociale medier -->
 					<div bs-pane data-title="Web / Sociale medier" ng-if="edit.hash != undefined">
 						<edit-social-media hash="{{ edit.hash }}"></edit-social-media>	
 					</div>
 
+<!-- medlemmer -->
 					<div bs-pane data-title="Medlemmer" ng-if="edit.id != null">
 						<table datatable="" 
 							id="table-forening-medlemmer"
@@ -175,14 +222,14 @@
 			
 			<div class="modal-footer">
 				<button type="button" 
-					class="btn" 
+					class="btn btn-sm" 
 					ng-click="modalClose(true)" 
 					ng-class="{ 'btn-success' : canSave() && edit.hash == undefined, 'btn-primary' : canSave() && edit.hash != undefined }"
 					ng-enabled="canSave()">
 						{{ btnOk }}
 				</button> 
 				<button type="button" 
-					class="btn btn-default" 
+					class="btn btn-sm btn-default" 
 					ng-click="modalClose(false)" >
 						Fortryd
 				</button> 
