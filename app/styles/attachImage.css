@@ -12,7 +12,10 @@
 }
 
 .attach-image img {
-	vertical-align: middle;
+	XXvertical-align: middle;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 }
 
 .attach-image-center {

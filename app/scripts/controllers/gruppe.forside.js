@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('GruppeForsideCtrl', 
-	function($scope, Login, $route, $routeParams, Const, ESPBA, Lookup, Meta, Utils, Log, Notification, ConfirmModal, Redirect) {
+	function($scope, Login, $route, $routeParams, Const, ESPBA, Lookup, Meta, Utils, Log, Notification, ConfirmModal, Redirect, EditArticle) {
 
 		const id = $routeParams.id;
 
@@ -106,7 +106,13 @@ angular.module('indeuApp').controller('GruppeForsideCtrl',
 					}
 				}
 			})
+			loadArticles();
+			reloadEvents();
 
+		}
+		reloadGroup();
+
+		function loadArticles() {
 			ESPBA.prepared('ArticlesByGroupFull', { group_id: id }).then(function(a) {
 				//sanitize
 				a.data.forEach(function(item) {
@@ -119,10 +125,7 @@ angular.module('indeuApp').controller('GruppeForsideCtrl',
 					limitTo: $scope.limitToItems[0].id
 				}
 			})
-			reloadEvents();
-
 		}
-		reloadGroup();
 
 		function reloadEvents() {
 			ESPBA.prepared('EventsByGroup', { group_id: id }).then(function(g) {
@@ -229,6 +232,27 @@ angular.module('indeuApp').controller('GruppeForsideCtrl',
 			});
 		}
 		reloadMembers();
+
+
+/* new interface */
+		$scope.editArticle = function(article_id) {
+			var article_info = {};
+			if (article_id) {
+				article_info.article_id = article_id
+			} else {
+				article_info.group = {
+					id: $scope.group.id,
+					name: $scope.group.name
+				}
+			}
+			EditArticle.show(article_info).then(function(r) {
+				if (r) {
+					$timeout(function() {
+						loadArticles();
+					}, 500)
+				}
+			})
+		}
 
 
 });

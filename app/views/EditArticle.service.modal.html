@@ -1,0 +1,191 @@
+<div class="modal ng-scope top am-fade center" tabindex="-1" role="dialog" style="display: block;" id="edit-article-modal">
+	<div class="modal-dialog article-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header modal-header-article">
+				<h3 class="modal-title pull-left">{{ header }}</h3>
+			</div>
+
+			<div class="modal-body">
+				<div bs-tabs>
+					<div bs-pane data-title="Tekst">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off" spellcheck="false">
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required no-padding-left" for="header">Overskrift</label>
+								<div class="col-md-10">
+							    <input class="form-control" 
+										type="text"
+										id="header"
+										auto-focus
+										ng-model="edit.header">
+								</div>
+							</div>
+					    <div class="form-group">
+					      <label class="col-md-2 control-label no-padding-left" for="sub_header">Manchet</label>
+								<div class="col-md-10">
+									<textarea	class="form-control no-resize"
+										id="sub_header"
+										rows="2"
+										ng-model="edit.sub_header">
+									</textarea>
+								</div>
+							</div>
+					    <div class="form-group">
+								<div class="col-md-12">
+									<text-angular ng-model="edit.content" 
+										spellcheck="false"
+										ta-text-editor-class="form-control ta-editor-article-dialog"
+										ta-toolbar="[
+											['h2','h3','h4'],
+											['bold','italics','underline','strikeThrough'],
+											['ol', 'ul'],
+											['insertLink','insertVideo'], 
+											['quote'], 
+											['ol', 'ul'], 
+											['undo', 'redo'], 
+											['clear', 'html']
+										]">
+									</text-angular>
+								</div>
+							</div>
+						</form>
+
+					</div>
+
+					<div bs-pane data-title="Billede">
+						<br>
+						<div class="col-md-1">
+							<i class="fa fa-info-circle fa-4x text-primary"></i>
+						</div>
+						<div class="col-md-10">
+							<p class="h5 no-margin no-padding-top">
+								Cover-billedets position afgøres af dets position. 
+								Er billedet bredt og min. 800 pixel vil det fylde hele bredden, evt blive croppet i højden. 
+								Er billedet aflangt eller nærmest firkantet, vil det blive placeret i venstre side, og tekst vil flyde rundt om.
+							</p>
+						</div>
+						<div class="col-md-1 no-padding"></div>
+						<div class="col-md-10">
+							<br><br>
+							<attach-image ng-model="edit.image" type="a" size="auto" height="270"></attach-image>
+						</div>
+						<div class="col-md-1 no-padding"></div>
+					</div>
+
+					<div bs-pane data-title="Indstillinger">
+						<br>
+						<form role="form" class="form-horizontal" autocomplete="off" spellcheck="false">
+					    <div class="form-group">
+					      <label class="col-md-2 control-label required no-padding-left" for="">Synlighed</label>
+								<div class="col-md-10">
+									<label class="radio-inline">
+					          <input type="radio" 
+											name="visibility_level" 
+											ng-model="edit.visibility_level"
+											ng-value="1" > Offentlig
+									</label>
+									<label class="radio-inline">
+						         <input type="radio" 
+											name="visibility_level" 
+											ng-model="edit.visibility_level"
+											ng-value="2"> Kun medlemmer
+									</label>
+									<label class="radio-inline">
+						         <input type="radio" 
+											name="edit.visibility_level" 
+											ng-model="edit.visibility_level"
+											ng-value="3"> Kun gruppe
+									</label>
+									<label class="radio-inline">
+						         <input type="radio" 
+											name="edit.visibility_level" 
+											ng-model="edit.visibility_level"
+											ng-value="4"> Kun forening
+									</label>
+								</div>
+							</div>
+							<hr>
+							<div class="form-group">
+								<div class="col-md-2"></div>
+								<div class=" col-md-5 checkbox">
+									<label>
+										<input type="checkbox" 
+											ng-model="edit.draft"
+											ng-false-value="0" 
+											ng-true-value="1">Marker som kladde
+									</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-2"></div>
+								<div class=" col-md-5 checkbox">
+									<label>
+										<input type="checkbox"
+											ng-model="edit.published"
+											ng-false-value="0" 
+											ng-true-value="1">Marker som publiseret
+									</label>
+								</div>
+							</div>
+							<hr>	
+							<div class="form-group">
+								<div class="col-md-2"></div>
+								<div class=" col-md-5 checkbox">
+									<label>
+										<input type="checkbox" 
+											ng-model="edit.allow_comments"
+											ng-false-value="0" 
+											ng-true-value="1">Tillad kommentarer
+									</label>
+								</div>
+							</div>
+							<hr>
+							<div class="form-group">
+					      <label class="col-md-2 control-label no-padding-left" for="">Knyt til forening</label>
+								<div class=" col-md-5">
+									<button class="btn btn-sm btn-default" 
+										ng-class="{ 'btn-primary': forening != undefined, 'strong': forening != undefined  }"
+										ng-click="selectForening()">
+										{{ forening.name || 'Vælg' }}
+									</button>
+								</div>
+							</div>
+							<hr>
+							<div class="form-group">
+					      <label class="col-md-2 control-label no-padding-left" for="">Knyt til grupper</label>
+								<div class=" col-md-10">
+									<button ng-repeat="g in groups"	class="btn btn-xs btn-primary" style="margin-right:5px;">
+										{{ g.group_name }}&nbsp;
+										<i class="fa fa-times" title="Fjern" ng-click="removeGroup(g.group_id)"></i>
+									</button>
+									<button class="btn btn-xs btn-default" ng-click="addGroup()">
+										<i class="fa fa-plus fa-fw text-primary"></i>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="modal-footer modal-footer-article">
+			  <button	class="btn btn-sm btn-default" 
+					ng-class="{ 'btn-primary': canUpdate() }"
+					ng-disabled="!canUpdate()"
+					ng-click="update()">Gem ændringer
+				</button>
+			  <button	class="btn btn-sm btn-default" 
+					ng-class="{ 'btn-primary': edit.id != undefined, 'btn-success': edit.id == undefined }"
+					ng-disabled="!canSave()"
+					ng-click="save();closeModal(true);">Gem og luk
+				</button>
+			  <button	class="btn btn-default btn-sm" 
+					ng-click="closeModal(false)">Fortryd
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -4,8 +4,8 @@
  *
  *
  */
-angular.module('indeuApp')
-	.factory('SelectGruppeModal', function($modal, $q, ESPBA, Lookup, Utils, DTOptionsBuilder, DTColumnBuilder) {
+angular.module('indeuApp').factory('SelectGruppeModal', 
+	function($modal, $q, ESPBA, Lookup, Utils, DTOptionsBuilder, DTColumnBuilder) {
 
 	var deferred = null;
 	var modal = null;
@@ -20,7 +20,7 @@ angular.module('indeuApp')
 			deferred = $q.defer();
 
 			$scope.__modal = {
-				btnOk: 'Gem og luk',
+				btnOk: 'Vælg og luk',
 				title: multi ? 'Vælg en eller flere grupper' : 'Vælg en gruppe'
 			};
 

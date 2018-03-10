@@ -151,7 +151,7 @@ SQL;
 
 	//******************
 	//ArticleGroups
-	//return groups associated with an 
+	//return groups associated with an article
 	//@article_id
 	public function ArticleGroups() {
 		$article_id = isset($this->array['article_id']) ? $this->array['article_id'] : false;
@@ -169,6 +169,27 @@ SQL;
 		return $SQL;
 	}
 
+
+	//******************
+	//ArticleAssociation
+	//return info for related assoc, if any
+	//@article_id
+	public function ArticleAssociation() {
+		$article_id = isset($this->array['article_id']) ? $this->array['article_id'] : false;
+
+$SQL = <<<SQL
+		select 
+			ass.id,
+			ass.name,
+			ass.short_name	
+		from
+			association_articles asa 
+		left join association ass on ass.id = asa.association_id
+		where
+			asa.article_id = $article_id
+SQL;
+		return $SQL;
+	}
 			
 
 }

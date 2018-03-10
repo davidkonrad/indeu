@@ -113,6 +113,39 @@ div.artikel-content iframe {
 	margin-left: 10px;
 }
 	
+/* EditArticle.service */
+.modal-header-article {
+	border: none !important;
+	padding-bottom: 0px !important;
+}
+.modal-footer-article {
+	border: none !important;
+	padding-top: 10px !important;
+}
 
+.modal-dialog.article-dialog {
+	min-width: 800px !important;
+	max-width: 800px !important;
+	width: 700px !important;
+}
+.article-dialog .modal-body {
+	height: 460px !important;
+	min-height: 460px !important;
+	max-height: 460px !important;
+	font-size: 90%;
+}
 
+.ta-editor.form-control.ta-editor-article-dialog, 
+.ta-scroll-window.form-control.ta-editor-article-dialog {
+	min-height: 220px;
+	height: 220px;
+	max-width: 100%;
+	white-space: normal;
+}
+#edit-article-modal textarea.ta-html {
+	min-height: 220px;
+	max-height: 220px;
+	font-weight: normal;
+	XXpadding: 6px 12px;
+}
 

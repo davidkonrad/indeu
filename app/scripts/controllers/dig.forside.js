@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('DigForsideCtrl', 
-	function($scope, $location, Settings, Login, ESPBA, Lookup, Meta, Utils, ImageUploadModal, Redirect, AlertModal) {
+	function($scope, $location, Settings, Login, ESPBA, Lookup, Meta, Utils, ImageUploadModal, Redirect, AlertModal, EditArticle) {
 
 		Redirect.checkLogin('Du skal være logget ind for at kunne se din egen forside');
 
@@ -41,11 +41,13 @@ angular.module('indeuApp').controller('DigForsideCtrl',
 			$scope.edit_event_id = undefined;
 		}
 
+/*
 		$scope.editArticle = function(article_id) {
 			$scope.edit_article_id = article_id;
 			$scope.action = 'a';
 			Utils.scrollTop();
 		}
+*/
 
 		$scope.editEvent = function(event_id) {
 			$scope.edit_event_id = event_id;
@@ -192,6 +194,13 @@ angular.module('indeuApp').controller('DigForsideCtrl',
 			$scope.groups = groups;
 		});
 
+/* new interface */
+	$scope.editArticle = function(article_id) {
+		var article_info = article_id ? { article_id: article_id } : {};
+		EditArticle.show(article_info).then(function() {
+		})
+	}
+	
 
 
 });

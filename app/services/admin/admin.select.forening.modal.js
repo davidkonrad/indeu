@@ -75,9 +75,13 @@ angular.module('indeuApp').factory('SelectForeningModal', function($modal, $q) {
 			}
 
 			if (value) {
-				var content = $scope.dtInstance.DataTable.rows( { selected: true } ).data();
+				var selected = [];
+				$scope.dtInstance.DataTable.rows( { selected: true } ).every(function(rowIdx, tableLoop, rowLoop) {
+					selected.push(this.data());
+				})
+				//var content = $scope.dtInstance.DataTable.rows( { selected: true } ).data();
 				close();
-				deferred.resolve(content);
+				deferred.resolve(selected);
 			} else {
 				close();
 				deferred.resolve(false);

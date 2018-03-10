@@ -20,14 +20,14 @@
 			
 			<div class="modal-footer">
 				<button type="button" 
-					class="btn" 
+					class="btn btn-sm" 
 					ng-click="__modalClose(true)" 
-					ng-class="{ 'btn-success' : __modal.canSave() }"
+					ng-class="{ 'btn-primary' : __modal.canSave() }"
 					ng-disabled="!__modal.canSave()">
 						{{ __modal.btnOk }}
 				</button> 
 				<button type="button" 
-					class="btn btn-default" 
+					class="btn btn-sm btn-default" 
 					ng-click="__modalClose(false)" >
 						Fortryd
 				</button> 

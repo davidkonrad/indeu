@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('ForeningForsideCtrl', 
-	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, VisitCounter, Log, AlertModal) {
+	function($scope, Login, $routeParams, $timeout, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, VisitCounter, Log, AlertModal, EditArticle) {
 
 		const id = $routeParams.id;
 
@@ -28,6 +28,7 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 			}
 
 			$scope.forening = r.data[0];
+			Utils.debugObj($scope.forening);
 			VisitCounter.visit($scope.forening.hash);
 
 			Meta.setTitle($scope.forening.name);
@@ -140,6 +141,26 @@ angular.module('indeuApp').controller('ForeningForsideCtrl',
 					break;
 			}
 		});
+
+/* new interface */
+		$scope.editArticle = function(article_id) {
+			var article_info = {};
+			if (article_id) {
+				article_info.article_id = article_id
+			} else {
+				article_info.association = {
+					id: $scope.forening.id,
+					name: $scope.forening.name
+				}
+			}
+			EditArticle.show(article_info).then(function(r) {
+				if (r) {
+					$timeout(function() {
+						loadArticles();
+					}, 500)
+				}
+			})
+		}
 
 
 });

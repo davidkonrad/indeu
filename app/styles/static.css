@@ -488,3 +488,11 @@ ul.select li a {
 pre {
 	border: none;
 }
+
+/* texxtarea no resize */
+textarea.no-resize {
+	resize: none;
+}
+
+
+
