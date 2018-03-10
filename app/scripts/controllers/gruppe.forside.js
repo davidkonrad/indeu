@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('GruppeForsideCtrl', 
-	function($scope, Login, $route, $routeParams, Const, ESPBA, Lookup, Meta, Utils, Log, Notification, ConfirmModal, Redirect, EditArticle) {
+	function($scope, Login, $route, $routeParams, $timeout, Const, ESPBA, Lookup, Meta, Utils, Log, Notification, ConfirmModal, Redirect, EditArticle) {
 
 		const id = $routeParams.id;
 
@@ -202,19 +202,6 @@ angular.module('indeuApp').controller('GruppeForsideCtrl',
 			reloadEvents();
 			$scope.setAction('');
 			$scope.edit_event_id = undefined;
-		}
-
-		$scope.onArticleSave = function() {
-			console.log('save!!!');
-			$scope.setAction('');
-			$route.reload();
-			/*
-			reloadGroup();
-			reloadMembers();
-			$timeout(function() {
-				$scope.$apply()
-			})
-			*/			
 		}
 
 		$scope.onActionCancel = function() {

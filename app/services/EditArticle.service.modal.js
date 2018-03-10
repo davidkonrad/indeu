@@ -20,8 +20,8 @@ angular.module('indeuApp').factory('EditArticle', function($modal, $q) {
 	var deferred;
 	var local = this;
 
-	local.modalInstance = ['$scope', '$timeout', 'Notification', 'ESPBA', 'SelectGruppeModal', 'SelectForeningModal', 'Utils', 'Login', 'article_info', 
-		function($scope, $timeout, Notification, ESPBA, SelectGruppeModal, SelectForeningModal, Utils, Login, article_info) {
+	local.modalInstance = ['$scope', '$timeout', 'Notification', 'ESPBA', 'Log', 'SelectGruppeModal', 'SelectForeningModal', 'Utils', 'Login', 'article_info', 
+		function($scope, $timeout, Notification, ESPBA, Log, SelectGruppeModal, SelectForeningModal, Utils, Login, article_info) {
 		$scope.header = !article_id ? 'Ny artikel' : 'Rediger artikel';
 		$scope.ok_btn = !article_id ? 'Opret og luk' : 'Gem og luk';
 
@@ -95,6 +95,13 @@ angular.module('indeuApp').factory('EditArticle', function($modal, $q) {
 				if (groupChanged) saveGroups();
 				if (foreningChanged) saveForening();
 				updateCheck();
+
+				Log.log({
+					type: Log.ARTICLE_EDITED,
+					user_id: Login.currentUser().id,
+					hash: $scope.edit.hash
+				});
+
 			})
 		}
 
@@ -107,11 +114,26 @@ angular.module('indeuApp').factory('EditArticle', function($modal, $q) {
 					saveGroups();
 					saveForening();
 					updateCheck();
+
+					Log.log({
+						type: Log.ARTICLE_CREATED,
+						user_id: Login.currentUser().id,
+						hash: $scope.edit.hash
+					});
+
 				})
 			} else {
 				$scope.update();
 			}
 		}
+
+		$scope.saveClose = function() {
+			$scope.save();
+			$timeout(function() {
+				$scope.closeModal(true)
+			}, 500);
+		}
+
 			
 /* groups */
 		$scope.addGroup = function() {
@@ -165,7 +187,9 @@ angular.module('indeuApp').factory('EditArticle', function($modal, $q) {
 	
 
 /* close */
-		$scope.closeModal = function(value){
+		$scope.closeModal = function(value) {
+			//return current edit if true
+			if (value) value = $scope.edit;
 			$scope.$hide();
 			deferred.resolve(value)
 		}

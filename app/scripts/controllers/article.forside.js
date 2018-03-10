@@ -4,9 +4,8 @@
  *
  *
  */
-angular.module('indeuApp')
-  .controller('ArticleForsideCtrl', 
-	function($scope, $sce, Login, $routeParams, ESPBA, Lookup, Meta, Utils, UserVisits, VisitCounter, ConfirmModal, Redirect) {
+angular.module('indeuApp').controller('ArticleForsideCtrl', 
+	function($scope, $sce, $location, $timeout, $routeParams, ESPBA, Login, Lookup, Meta, Utils, UserVisits, VisitCounter, ConfirmModal, Redirect, EditArticle) {
 
 		if (Login.isLoggedIn()) {
 			$scope.user = Login.currentUser()
@@ -140,10 +139,28 @@ angular.module('indeuApp')
 			})
 		}
 
-//
-		$scope.onCommentAdded = function(e) {
-			//alert('ok');
-			console.log(arguments);
+
+/* new interface */
+		$scope.editArticle = function(article_id) {
+			var article_info = {};
+			if (article_id) {
+				article_info.article_id = article_id
+			} 
+			EditArticle.show(article_info).then(function(r) {
+				if (r) {
+					if (article_id) {
+						$timeout(function() {
+							$scope.reload()
+						}, 500);
+					} else {
+						//we asssume r hold the inserted article info
+						$timeout(function() {
+							var urlName = Utils.urlName(r.header);
+							$location.path('/artikel/'+r.id+'/'+urlName);
+						}, 500);
+					}
+				}
+			})
 		}
 
 

@@ -85,18 +85,6 @@
 		</div>
 	</div>
 
-<!-- article -->
-	<div ng-if="action == 'a'">
-		<h1>{{ group.name }} </h1>
-		<h3 class="no-padding no-margin">&nbsp;Skriv ny artikel</h3>
-		<div edit-article="{{ edit_article_id }}"  
-			user-id="{{ user.id }}"
-			group-id="{{ group.id }}"
-			on-save="onArticleSave()" 
-			on-cancel="onActionCancel()">
-		</div>
-	</div>
-
 <!-- new group -->
 	<div ng-if="action == 'n'">
 		<div edit-gruppe=""  
@@ -106,7 +94,7 @@
 	</div>
 
 	<div class="clearfix">
-		<br><br><br><br><br>
+		<br><br><br><br>
 	</div>
 
 </div>
@@ -142,7 +130,6 @@
 				<i class="fa fa-fw fa-wrench fa-x2"></i>Rediger gruppe<br>
 			</a>
 
-<!-- 				ng-click="setAction('a')" -->
 			<a href=""
 				ng-if="group.articles_enabled && (userIsOwner || userIsMember)"
 				title="Opret en ny artikel og knyt den til gruppen"

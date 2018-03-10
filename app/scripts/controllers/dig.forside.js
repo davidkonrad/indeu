@@ -41,14 +41,6 @@ angular.module('indeuApp').controller('DigForsideCtrl',
 			$scope.edit_event_id = undefined;
 		}
 
-/*
-		$scope.editArticle = function(article_id) {
-			$scope.edit_article_id = article_id;
-			$scope.action = 'a';
-			Utils.scrollTop();
-		}
-*/
-
 		$scope.editEvent = function(event_id) {
 			$scope.edit_event_id = event_id;
 			$scope.action = 'e';

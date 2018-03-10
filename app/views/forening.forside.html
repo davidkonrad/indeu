@@ -70,16 +70,6 @@
 		</div>
 	</div>
 
-<!-- edit article -->
-	<div ng-if="action == 'a'">
-		<div edit-article="{{ edit_article_id }}"  
-			user-id="{{ user.id }}"
-			association-id="{{ forening.id }}"
-			on-save="actionSaved(item)" 
-			on-cancel="actionCancel()">
-		</div>
-	</div>
-
 	<comments ng-if="forening.comments_enabled == 1" hash="{{ forening.hash }}" user-id="{{ user.id }}"></comments>
 
 </div>
@@ -95,7 +85,6 @@
 				<i class="fa fa-fw fa-wrench fa-x2"></i>
 				Rediger foreningsinfo<br>
 			</a>
-<!-- ng-click="setAction('a')" -->
 			<a href="" 
 				ng-class="{ 'disabled': actionDisable('a') }"
 				ng-disabled="actionDisable('a')"
@@ -131,13 +120,6 @@
 			<span ng-if="address.address">{{ address.address }}</span><span ng-if="address.country">, {{ address.country }}<br></span>
 			<br ng-if="!address.country">
 			<span ng-if="address.phone1"><i class="fa fa-phone fa-fw"></i>{{ address.phone1 }}</span><span ng-if="address.phone2"> / {{ address.phone2 }}</span>
-			
-<!--
-			<span ng-if="address.postal_code">{{ address.postal_code }} {{ address.city }}<br></span>
-			<span ng-if="address.municiplality">{{ address.municipality }}<br></span>
-			<span ng-if="address.region">{{ address.region }}<br></span>
--->
-			
 		</div>
 	</div>
 
