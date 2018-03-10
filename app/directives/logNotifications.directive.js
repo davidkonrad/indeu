@@ -308,6 +308,13 @@ angular.module('indeuApp').directive('logNotifications', function($timeout, $com
 						item.title = item.userName + ' ' + Utils.plainText(item.action);
 						break;
 
+					case Log.ISSUE_REOPENED :
+						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;
+						item.action = ' genåbnede';
+						item.action += ' <a href="'+Utils.issueUrl(item.issue_id) + '">issue #'+item.issue_id+'</a>';
+						item.title = item.userName + ' ' + Utils.plainText(item.action);
+						break;
+
 					//misc
 					case Log.FRONTPAGE_CONTENT_CHANGED :
 						item.userName = item.user_id == login_user_id ? 'Du' : item.user_full_name;

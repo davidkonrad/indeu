@@ -109,6 +109,12 @@
 
 		<div class="col-md-12 no-padding text-right">
 			<hr>
+			<button class="btn btn-sm btn-success"
+				ng-click="reopenIssue()"
+				ng-class="{ 'btn-success': is_owner && issue.solved == 1 }"
+				ng-if="issue.solved == 1">
+				Genåben issue
+			</button>
 			<button class="btn btn-sm btn-default"
 				ng-click="markAsSolved()"
 				ng-class="{ 'btn-success': is_owner && issue.solved != 1 }"

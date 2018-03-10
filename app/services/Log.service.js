@@ -56,6 +56,7 @@ angular.module('indeuApp').factory('Log', function(ESPBA, Utils) {
 		ISSUE_CREATED: 60,
 		ISSUE_EDITED: 61,
 		ISSUE_MARK_SOLVED: 62,
+		ISSUE_REOPENED: 63,
 		
 		//misc
 		FRONTPAGE_CONTENT_CHANGED: 70,	

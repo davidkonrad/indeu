@@ -200,6 +200,34 @@ angular.module('indeuApp').controller('IssueCtrl',
 			}
 		})
 	}
+
+	$scope.reopenIssue = function() {
+		var params = {
+			id: $scope.issue.id,
+			solved: 'NULL'
+		}
+		var confirm = {
+			header: 'Genåben issue? ',
+			message: 'Gør dette hvis issuet ikke er løst eller en kritisk opdatering af beskrivelsen er nødvendig.'
+		} 
+		ConfirmModal.show(confirm).then(function(answer) {
+			if (answer) {
+				ESPBA.update('issue', params).then(function(r) {
+
+					Notification('Issue <strong>#'+id+'</strong> er genåbnet');
+					$scope.issue.solved = undefined;
+
+					Log.log({
+						type: Log.ISSUE_REOPENED,
+						user_id: Login.currentUser().id,
+						hash: $scope.issue.hash
+					});
+
+				})
+			}
+		})
+	}
+
 	
 });
 

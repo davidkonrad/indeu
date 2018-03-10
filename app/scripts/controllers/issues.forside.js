@@ -25,6 +25,7 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 	var current_user = Login.currentUser();
 
 	$scope.dtColumns = [
+		/*
 		DTColumnBuilder.newColumn('id')
 		.withTitle('')
 		.withClass('td-icon')
@@ -36,6 +37,7 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 				return data;
 			}
 		}),
+		*/
 		DTColumnBuilder.newColumn('id')
 		.withTitle('')
 		.withClass('td-icon')
@@ -114,14 +116,11 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 		.withOption('createdRow', function(row, data, index) {
 			if (data.solved == 1) $(row).addClass('warning');
 		})
+		.withOption('rowCallback', function(row, data /*, index*/) {
+			$(row).attr('issue-id', data.id);
+		})
 		.withOption('language', Const.dataTables_daDk )
-		.withButtons([ 
-			/*
-			{ extend : 'colvis',
-				text: 'Vis kolonner &nbsp;<i class="caret"></i>',
-				className: 'btn btn-default btn-xs colvis-btn'
-			},
-			*/
+		.withButtons([
 			{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Opret nyt issue</span>',
 				className: 'btn btn-xs',
 				action: function(e, dt, node, config) {
@@ -131,6 +130,29 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 			}
 		]);
 
+		angular.element('#table-issues').on('click', 'tbody td:not(.no-click)', function(e) {
+			var id=$(this).parent().attr('issue-id');
+			$location.path('/issues/se/'+id);
+			$scope.$apply()
+		});
+
+		/*
+		.withButtons({
+			dom: {
+				button: {
+					tag: 'button',
+					className: 'btn btn-default'
+				}
+			},
+			buttons: [{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Opret nyt issue</span>',
+				className: 'btn btn-xs',
+				action: function(e, dt, node, config) {
+					$location.path('/issues/opret');
+					$scope.$apply()
+ 				}
+			}]
+		});
+		*/
 	if (Redirect.message()) {
 		Notification(Redirect.message());
 		Redirect.clear();
