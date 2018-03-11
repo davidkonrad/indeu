@@ -25,19 +25,16 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 	var current_user = Login.currentUser();
 
 	$scope.dtColumns = [
-		/*
 		DTColumnBuilder.newColumn('id')
 		.withTitle('')
 		.withClass('td-icon')
-		.notSortable()
 		.renderWith(function(data, type, full, meta) {
 			if (type === 'display') {
-				return '<a href="'+Utils.issueUrl(full.id)+'" title="Vis issue"><i class="fa fa-eye"></i></a>'
+				return '#'+data
 			} else {
 				return data;
 			}
 		}),
-		*/
 		DTColumnBuilder.newColumn('id')
 		.withTitle('')
 		.withClass('td-icon')
