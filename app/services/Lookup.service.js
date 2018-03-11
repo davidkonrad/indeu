@@ -65,24 +65,31 @@ angular.module('indeuApp').factory('Lookup', function($q, $timeout, ESPBA, Utils
 
 			var check = function() {
 				if (user && group) {
+					//console.log('Lookup.init');
 		      deferred.resolve();
 				}
 			}
+			if (user && group) {
+				//console.log('Early exit');
+	      deferred.resolve();
+			} else {
 
-			ESPBA[prepared]('UsersLookup').then(function(r) {
-				user = r.data.map(function(u) {
-					u.urlName = Utils.urlName(u.full_name);
-					u.image_url = 'media/medlem/'+u.image;
-					u.url = Utils.userUrl(u.id, u.signature_str);
-					return u;
+				ESPBA[prepared]('UsersLookup').then(function(r) {
+					//console.log('Loookup db access');
+					user = r.data.map(function(u) {
+						u.urlName = Utils.urlName(u.full_name);
+						u.image_url = 'media/medlem/'+u.image;
+						u.url = Utils.userUrl(u.id, u.signature_str);
+						return u;
+					});
+					check();
 				});
-				check();
-			});
 
-			ESPBA.get('group', {}).then(function(r) {
-				group = r.data;
-				check();
-			});
+				ESPBA.get('group', {}).then(function(r) {
+					group = r.data;
+					check();
+				});
+			}
 
       return deferred.promise;
 		},

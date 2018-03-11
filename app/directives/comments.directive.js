@@ -189,46 +189,49 @@ angular.module('indeuApp').directive('comments', function($timeout, Login, Utils
 
 			$scope.reloadComments = function() {
 				var self = this;
-				
-				ESPBA.get('comment', { hash: $scope.hash }).then(function(comments) {
-					var count = !comments.data.length ? 0 : comments.data.length;
-					var countText = count == 1 ? 'kommentar' : 'kommentarer';
-					$scope.commentsHeader = count+' '+countText;
-					
-					function getParentUser(parent_id) {
-						for (var i=0, l=comments.data.length; i<l; i++) {
-							if (comments.data[i].id == parent_id) {
-								return Lookup.getUser(comments.data[i].user_id)
+
+				//should really find a stady solution - really, really soon
+				Lookup.init().then(function() {				
+					ESPBA.get('comment', { hash: $scope.hash }).then(function(comments) {
+						var count = !comments.data.length ? 0 : comments.data.length;
+						var countText = count == 1 ? 'kommentar' : 'kommentarer';
+						$scope.commentsHeader = count+' '+countText;
+						
+						function getParentUser(parent_id) {
+							for (var i=0, l=comments.data.length; i<l; i++) {
+								if (comments.data[i].id == parent_id) {
+									return Lookup.getUser(comments.data[i].user_id)
+								}
 							}
+							return null
 						}
-						return null
-					}
 
-					if (comments.data.length) {
-						var sorted = sortComments(comments.data);
+						if (comments.data.length) {
+							var sorted = sortComments(comments.data);
 	
-						sorted.forEach(function(c) {
-							c.timestamp_relative = moment(c.created_timestamp).local().fromNow();
-							c.timestamp_precise = moment(c.created_timestamp).local().format("LLLL");
-							if (c.edited_timestamp) {
-								c.edited_timestamp_precise = moment(c.edited_timestamp).local().format("LLLL");
-							}
-							c.user = Lookup.getUser(c.user_id);
+							sorted.forEach(function(c) {
+								c.timestamp_relative = moment(c.created_timestamp).local().fromNow();
+								c.timestamp_precise = moment(c.created_timestamp).local().format("LLLL");
+								if (c.edited_timestamp) {
+									c.edited_timestamp_precise = moment(c.edited_timestamp).local().format("LLLL");
+								}
+								c.user = Lookup.getUser(c.user_id);
 
-							if (c.is_deleted) {
-								if (c.is_deleted == 1) c.renderContent = 'Fjernet af bruger';
-								if (c.is_deleted == 2) c.renderContent = 'Fjernet af moderator';
-							} else {
-								c.renderContent = self.testContent(c.content.substring(0));
-							}
+								if (c.is_deleted) {
+									if (c.is_deleted == 1) c.renderContent = 'Fjernet af bruger';
+									if (c.is_deleted == 2) c.renderContent = 'Fjernet af moderator';
+								} else {
+									c.renderContent = self.testContent(c.content.substring(0));
+								}
 
-							if (c.parent_id) {
-								c.parent_user = getParentUser(c.parent_id) 
-							}
-						})
-						$scope.comments = sorted;
-					}
-				});
+								if (c.parent_id) {
+									c.parent_user = getParentUser(c.parent_id) 
+								}
+							})
+							$scope.comments = sorted;
+						}
+					})
+				})
 			}
 
 			function commentById(id) {
