@@ -5,6 +5,13 @@ trait Prepared {
 	//******************
 	//Log
 	public function Log() {
+		$this->query('SET SQL_BIG_SELECTS=1');
+		/* due to server error 
+		"SQLSTATE[42000]: 
+		Syntax error or access violation: 1104 The SELECT would examine more than MAX_JOIN_SIZE rows; 
+		check your WHERE and use SET SQL_BIG_SELECTS=1 or SET MAX_JOIN_SIZE=# if the SELECT is okay"
+		*/
+
 		$user_id = isset($this->array['user_id']) ? $this->array['user_id'] : false;
 		$hash = isset($this->array['hash']) ? $this->array['hash'] : false;
 		$not_seen = isset($this->array['not_seen']) ? $this->array['not_seen'] : false;
@@ -68,7 +75,6 @@ SQL;
 			$SQL.=' limit '.$limit;
 		}
 
-		//echo $SQL;
 		return $SQL;
 	}
 

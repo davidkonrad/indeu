@@ -1,10 +1,9 @@
 'use strict';
 
-angular.module('indeuApp')
-	.directive('entityArticles', function($timeout, Utils, Lookup, ESPBA) {
+angular.module('indeuApp').directive('entityArticles', function($timeout, Utils, Lookup, ESPBA) {
 
 	return {
-		templateUrl: "views/inc.entityArticles.html",
+		templateUrl: "views/inc/inc.entityArticles.html",
 		restrict: 'A',
 		transclude: true,
 		priority: 500,

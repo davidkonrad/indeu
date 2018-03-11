@@ -340,11 +340,6 @@ angular.module('indeuApp').directive('logNotifications', function($timeout, $com
 						process(item)
 					})
 					scope.notifications = p.data;
-
-					$timeout(function() {
-						//element.attr('datatable', 'ng');
-						//$compile(element.contents())(scope);
-					}, 1000)
 				})
 			}
 
