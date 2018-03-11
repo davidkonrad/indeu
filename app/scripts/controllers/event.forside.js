@@ -209,9 +209,24 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 			}
 			ConfirmModal.show(params).then(function(answer) {
 				Wait.show('Vent medens eventen slettes ...');
-				$timeout(function() {
-					$rootScope.$broadcast('wait.cancel')
-				}, 5000);
+				ESPBA.delete('event', { id: id }).then(function() {
+					ESPBA.delete('association_events', { event_id: id }).then(function() {
+						ESPBA.delete('group_events', { event_id: id }).then(function() {
+							ESPBA.delete('comments', { hash: $scope.event.hash }).then(function() {
+								ESPBA.delete('event_user_feedback', { event_id: id }).then(function() {
+									ESPBA.delete('star_rating', { hash: $scope.event.hash }).then(function() {
+										ESPBA.delete('log', { hash: $scope.event.hash }).then(function() {
+											$timeout(function() {
+												$rootScope.$broadcast('wait.cancel')
+												Redirect.dig('Eventen er blevet slettet ...');
+											}, 100);
+										})
+									})
+								})
+							})
+						})
+					})
+				})
 			})
 		}
 

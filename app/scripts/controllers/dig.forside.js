@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('DigForsideCtrl', 
-	function($scope, $location, Settings, Login, ESPBA, Lookup, Meta, Utils, ImageUploadModal, Redirect, AlertModal, EditArticle) {
+	function($scope, $location, Settings, Notification, Login, ESPBA, Lookup, Meta, Utils, ImageUploadModal, Redirect, AlertModal, EditArticle) {
 
 		Redirect.checkLogin('Du skal være logget ind for at kunne se din egen forside');
 
@@ -221,6 +221,11 @@ angular.module('indeuApp').controller('DigForsideCtrl',
 		})
 	}
 	
+/* redirect */
+		if (Redirect.message()) {
+			Notification(Redirect.message());
+			Redirect.clear();
+		}
 
 
 });

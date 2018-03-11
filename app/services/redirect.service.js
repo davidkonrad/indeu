@@ -31,6 +31,11 @@ angular.module('indeuApp').factory('Redirect', function($location, $window, Logi
 			$location.path('/forside').replace()
 		},
 
+		dig: function(redirectMessage) {
+			_redirectMessage = redirectMessage;
+			$location.path('/dig').replace()
+		},
+
 		issues: function(redirectMessage) {
 			_redirectMessage = redirectMessage;
 			$location.path('/issues').replace()
