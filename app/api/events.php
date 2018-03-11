@@ -153,6 +153,7 @@ SQL;
 
 $SQL = <<<SQL
 			select 
+				e.user_id,
 				e.created_timestamp,
 				e.id,
 				e.visibility_level,
@@ -165,12 +166,15 @@ $SQL = <<<SQL
 				e.date,
 				e.from,
 				e.to,
+				e.cancelled,
+				v.counter,
 				(select count(*) from event_user_feedback where event_id = e.id and feedback = 1) as feedback1,
 				(select count(*) from event_user_feedback where event_id = e.id and feedback = 2) as feedback2
 
 			from event e
 				left join `association_events` ae on ae.event_id = e.id
 				left join `association` a on a.id = ae.association_id
+				left join visit_counter v on v.hash = e.hash 
 			where e.user_id = $user_id
 SQL;
 		return $SQL;	

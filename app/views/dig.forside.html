@@ -57,7 +57,7 @@
 				data-toggle="true"
 				placeholder="Sorter"
 				bs-select
-				bs-options="sort.id as sort.navn for sort in orderByItems">
+				bs-options="sort.id as sort.navn for sort in articleOrderByItems">
 			  <span class="caret"></span>
 			</button>
 		</div>
@@ -73,8 +73,33 @@
 			<br>
 		</div>
 
-		<div class="layout-right-header no-bottom-margin">Dine events</div>
-		<div entity-events="{{ user.id }}" entity-type="user" user-id="{{ user.id }}" on-edit="editEvent"></div>
+		<div class="layout-right-header no-bottom-margin">Dine events
+			<button type="button" 
+				class="btn btn-xs btn-default pull-right" 
+				ng-model="view.events.limitTo" 
+				data-toggle="true"
+				placeholder="Antal"
+				bs-select
+				bs-options="sort.id as sort.navn for sort in limitToItems">
+			  <span class="caret"></span>
+			</button>
+			<button type="button" 
+				class="btn btn-xs btn-default pull-right" 
+				ng-model="view.events.orderBy" 
+				data-toggle="true"
+				placeholder="Sorter"
+				bs-select
+				bs-options="sort.id as sort.navn for sort in eventOrderByItems">
+			  <span class="caret"></span>
+			</button>
+		</div>
+		<div entity-events="{{ user.id }}" 
+			entity-type="user" 
+			order-by="view.events.orderBy"
+			limit-to="view.events.limitTo"
+			user-id="{{ user.id }}" 
+			on-edit="editEvent">
+		</div>
 
 		<div class="col-md-12 clearfix">
 			<br><br><br>

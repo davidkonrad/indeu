@@ -26,6 +26,8 @@ angular.module('indeuApp').directive('entityArticles', function($timeout, Utils,
 				function process(articles) {
 					articles.forEach(function(a) {
 						a.counter = a.counter ? parseInt(a.counter) : 0;
+						a.counter_suffix = a.counter == 1 ? 'gang ' : 'gange';
+
 						a.created_timestamp_calendar = Utils.calendar(a.created_timestamp);
 						a.dateInt = new Date(a.created_timestamp).valueOf();
 						a.url = Utils.articleUrl(a.id, a.header);

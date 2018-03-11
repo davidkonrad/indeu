@@ -1,0 +1,45 @@
+<div>
+	<table class="table table-striped" id="entity-event-directive">
+		<tr ng-repeat="event in events | orderBy:orderBy | limitTo:limitTo">
+			<td class="h5 td-icon">
+				<i ng-if="user_id == event.user_id"
+					title="Rediger event"
+					ng-click="onEdit(event.id)"
+					class="fa fa-fw fa-pencil fa-x2 text-primary cursor-pointer" >
+				</i>
+			</td>
+			<td class="h5 td-icon">
+				<i ng-if="event.cancelled == 1"
+					title="Eventen er aflyst"
+					class="fa fa-calendar-times-o fa-fw text-danger">
+				</i>
+			</td>
+			<td class="h5">
+				{{ event.date_fromNow | capitalizeFirstLetter }}
+			</td>
+			<td class="text-right" title="Vist {{ event.counter }} {{ event.counter_suffix }}" style="width: 50px;">
+				{{ event.counter }}
+			</td>
+			<td class="h5 text-right">
+				<span title="{{ event.feedback_title }}">
+					{{ event.feedback_str }}
+					<i ng-if="event.feedback_str != '-'" class="fa fa-user text-muted"></i>
+				</span>
+			</td>
+			<td>
+				<a class="unstyled h4" ng-href="/event/{{ event.id }}/{{ event.urlName }}" debug-link style="overflow: hidden;">
+					{{ event.name }}
+				</a>
+			</td>
+<!--
+			<td>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a class="unstyled h4" ng-href="/event/{{ event.id }}/{{ event.urlName }}" debug-link style="overflow: hidden;">
+					{{ event.city }}
+				</a>
+			</td>
+-->
+		</tr>
+	</table>
+
+</div>

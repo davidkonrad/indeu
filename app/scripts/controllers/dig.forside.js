@@ -17,21 +17,25 @@ angular.module('indeuApp').controller('DigForsideCtrl',
 			{ id: '50', navn: '50' },
 			{ id: '', navn: 'Alle' }
 		];
-		$scope.orderByItems = [
+		$scope.articleOrderByItems = [
 			{ id: '-created_timestamp', navn: 'Nyeste' },
-			//{ id: '-stars', navn: 'Højest ratede' },
-			{ id: '-counter', navn: 'Mest læste' },
+			{ id: '-counter', navn: 'Mest viste' },
 			{ id: 'draft', navn: 'Kladder øverst' }
+		];
+		$scope.eventOrderByItems = [
+			{ id: '-dateInt', navn: 'Event dato / tid' },
+			{ id: '-feedback_total', navn: 'Tilmeldinger' },
+			{ id: '-counter', navn: 'Mest viste' }
 		];
 		
 		$scope.view = {
 			artikler: {
 				limitTo: $scope.limitToItems[0].id,
-				orderBy: $scope.orderByItems[0].id
+				orderBy: $scope.articleOrderByItems[0].id
 			},
 			events: {
 				limitTo: $scope.limitToItems[0].id,
-				orderBy: $scope.orderByItems[0].id
+				orderBy: $scope.eventOrderByItems[0].id
 			}
 		};
 

@@ -26,10 +26,10 @@
 			</td>
 			<td class="h5" style="width: 100px;">
 				<span title="{{ article.created_timestamp }}">
-					{{ article.created_timestamp_calendar }} 
+					{{ article.created_timestamp_calendar | capitalizeFirstLetter }} 
 				</span>
 			</td>
-			<td class="text-right" title="Vist {{ article.counter }} gange" style="width: 50px;">
+			<td class="text-right" title="Vist {{ article.counter }} {{ article_counter_suffix }}" style="width: 50px;">
 				{{ article.counter }}
 			</td>
 			<td class="max500">
