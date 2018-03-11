@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('EventForsideCtrl', 
-	function($scope, Login, $routeParams, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log, VisitCounter, ConfirmModal) {
+	function($scope, $rootScope, $routeParams, $timeout, Login, ESPBA, Lookup, Meta, Utils, Redirect, Const, UserVisits, Log, VisitCounter, ConfirmModal, Wait) {
 
 		$scope.eventMap = Const.defaultMap();
 
@@ -208,6 +208,10 @@ angular.module('indeuApp').controller('EventForsideCtrl',
 				modalClass: 'small-dialog-large'
 			}
 			ConfirmModal.show(params).then(function(answer) {
+				Wait.show('Vent medens eventen slettes ...');
+				$timeout(function() {
+					$rootScope.$broadcast('wait.cancel')
+				}, 5000);
 			})
 		}
 
