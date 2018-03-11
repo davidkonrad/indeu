@@ -224,7 +224,7 @@ label.required:before {
 	border-bottom: 0px;
 }
 table.table-striped tbody tr {
-	cursor: pointer;
+	XXcursor: pointer;
 }
 table tbody tr td {
 	white-space: nowrap

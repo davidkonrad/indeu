@@ -68,9 +68,12 @@ SQL;
 $SQL = <<<SQL
 				select 
 					a.id,
+					a.user_id,
 					a.header,
 					a.sub_header,
 					a.image,
+					a.draft,
+					a.published,
 					a.created_timestamp,
 					v.counter,
 					(select avg(rating) from user_stars where hash = a.hash) as stars,

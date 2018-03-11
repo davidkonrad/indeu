@@ -118,20 +118,14 @@ angular.module('indeuApp').factory('Utils', function($location, $window) {
 			return time.join(':');
 		},
 
-		calendarDate: function(date) {
-			return moment(date).local().calendar(null, {
-		    lastDay : '[I går]',
-		    sameDay : '[I dag]',
-		    nextDay : '[I morgen]',
-		    lastWeek : '[Forrige] dddd',
-		    nextWeek : '[på] dddd',
-		    sameElse : 'L'
-			})
-		},
-
 		//programmatically convert server timestamps to Europe/Copenhagen timestamp
 		calendar: function(timestamp) {
 			return !isLocalHost ? moment(timestamp).add(1, 'hours').calendar() : moment(timestamp).calendar()
+		},
+
+		//programmatically convert server timestamps to Europe/Copenhagen timestamp
+		fromNow: function(timestamp) {
+			return !isLocalHost ? moment(timestamp).add(1, 'hours').fromNow() : moment(timestamp).fromNow()
 		},
 
 		ratingStr: function(r) {

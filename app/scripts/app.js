@@ -302,7 +302,8 @@ angular.module('indeuApp', [
 		});
 
 		//moment
-		moment.tz.setDefault("Europe/Copenhagen");
+		moment.locale('fr');
+		//moment.tz.setDefault("Europe/Copenhagen");
 		//moment.tz.guess();
 	
 		//meta

@@ -11,6 +11,30 @@ angular.module('indeuApp').controller('DigForsideCtrl',
 
 		Settings.init($scope);
 
+		$scope.limitToItems = [
+			{ id: '10', navn: '10' },
+			{ id: '25', navn: '25' },
+			{ id: '50', navn: '50' },
+			{ id: '', navn: 'Alle' }
+		];
+		$scope.orderByItems = [
+			{ id: '-created_timestamp', navn: 'Nyeste' },
+			//{ id: '-stars', navn: 'Højest ratede' },
+			{ id: '-counter', navn: 'Mest læste' },
+			{ id: 'draft', navn: 'Kladder øverst' }
+		];
+		
+		$scope.view = {
+			artikler: {
+				limitTo: $scope.limitToItems[0].id,
+				orderBy: $scope.orderByItems[0].id
+			},
+			events: {
+				limitTo: $scope.limitToItems[0].id,
+				orderBy: $scope.orderByItems[0].id
+			}
+		};
+
 		//get logged in user id
 		if (Login.isLoggedIn()) {
 			var user_id = Login.currentUser().id;

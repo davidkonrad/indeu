@@ -41,8 +41,33 @@
 
 		<div class="col-md-12 clearfix">&nbsp;</div>
 
-		<div class="layout-right-header no-bottom-margin">Dine artikler</div>
-		<div entity-articles="{{ user.id }}" entity-type="user" user-id="{{ user.id }}" on-edit="editArticle"></div>
+		<div class="layout-right-header no-bottom-margin">Dine artikler
+			<button type="button" 
+				class="btn btn-xs btn-default pull-right" 
+				ng-model="view.artikler.limitTo" 
+				data-toggle="true"
+				placeholder="Antal"
+				bs-select
+				bs-options="sort.id as sort.navn for sort in limitToItems">
+			  <span class="caret"></span>
+			</button>
+			<button type="button" 
+				class="btn btn-xs btn-default pull-right" 
+				ng-model="view.artikler.orderBy" 
+				data-toggle="true"
+				placeholder="Sorter"
+				bs-select
+				bs-options="sort.id as sort.navn for sort in orderByItems">
+			  <span class="caret"></span>
+			</button>
+		</div>
+		<div entity-articles="{{ user.id }}" 
+			order-by="view.artikler.orderBy"
+			limit-to="view.artikler.limitTo"
+			entity-type="user" 
+			user-id="{{ user.id }}" 
+			on-edit="editArticle">
+		</div>
 
 		<div class="clearfix">
 			<br>

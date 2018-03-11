@@ -24,7 +24,10 @@ angular.module('indeuApp')
 				var now = new Date();
 				events.forEach(function(item) {
 					item.url = Utils.eventUrl(item.id, item.name);
-					item.when = Utils.calendarDate(item.date);
+
+					//item.when = Utils.calendarDate(item.date);
+					item.when = Utils.fromNow(item.date);
+
 					item.whenFrom = Utils.removeSecs(item.from);
 					item.where = item.place_name ? item.place_name : item.address;
 					item.dateExact = new Date(item.date+' '+item.from);

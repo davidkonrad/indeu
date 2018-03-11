@@ -10,31 +10,32 @@ angular.module('indeuApp').directive('entityArticles', function($timeout, Utils,
 		scope: {
 			entityType: '@',
 			hash: '@',
+			orderBy: '=',
+			limitTo: '=',
 			onEdit: '='
 		},
 		replace: true,
 		link: function(scope, element, attrs) {
 			attrs.$observe('entityArticles', function(user_id) {
 				var id = attrs['entityArticles'] || false; //either group or user (so far)
-				//scope.user_id = attrs['userId'] || false; 
 				var type = attrs['entityType'] || false;
 				scope.user_id = type == 'user' ? id : attrs['userId'];
-				//scope.onEdit = attrs['onEdit'] || false;
 				
 				if (!id || !type) return;
 
 				function process(articles) {
 					articles.forEach(function(a) {
-						a.created_timestamp = new Date(a.created_timestamp);
-						a.dateInt = a.created_timestamp.valueOf();
-						a.urlName = Utils.plainText( Utils.urlName(a.header), 50);
+						a.counter = a.counter ? parseInt(a.counter) : 0;
+						a.created_timestamp_calendar = Utils.calendar(a.created_timestamp);
+						a.dateInt = new Date(a.created_timestamp).valueOf();
+						a.url = Utils.articleUrl(a.id, a.header);
 					});
 					scope.articles = articles;
 				}
 
 				switch (type) {
 					case 'user': 
-						ESPBA.get('article', { user_id: id }).then(function(r) {
+						ESPBA.prepared('ArticlesByUserFull', { user_id: id }).then(function(r) {
 							process(r.data);
 						});
 						break;
