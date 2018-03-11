@@ -10,6 +10,11 @@
 					<span ng-if="article.editedDateStamp != undefined">, redigeret for {{ article.editedDateStamp }}</span>
 				</small>
 			</h4>
+
+			<div ng-if="article.draft == 1" class="alert alert-info">
+				<strong>Bemærk</strong>: Dette er en kladde, artiklen er endnu ikke færdigredigeret.
+			</div>
+
 			<h1> {{ article.header }} </h1>
 			<h4><em> {{ article.sub_header }} </em></h4>
 

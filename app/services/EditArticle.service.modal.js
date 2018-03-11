@@ -22,10 +22,10 @@ angular.module('indeuApp').factory('EditArticle', function($modal, $q) {
 
 	local.modalInstance = ['$scope', '$timeout', 'Notification', 'ESPBA', 'Log', 'SelectGruppeModal', 'SelectForeningModal', 'Utils', 'Login', 'article_info', 
 		function($scope, $timeout, Notification, ESPBA, Log, SelectGruppeModal, SelectForeningModal, Utils, Login, article_info) {
-		$scope.header = !article_id ? 'Ny artikel' : 'Rediger artikel';
-		$scope.ok_btn = !article_id ? 'Opret og luk' : 'Gem og luk';
 
 		var article_id = article_info.article_id || undefined;
+		$scope.header = !article_id ? 'Ny artikel' : 'Rediger artikel';
+		$scope.ok_btn = !article_id ? 'Opret og luk' : 'Gem og luk';
 
 		$scope.edit = {};
 		$scope.groups = [];
