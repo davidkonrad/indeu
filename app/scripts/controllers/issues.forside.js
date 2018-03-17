@@ -24,6 +24,11 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 	Meta.setTitle('Issues');
 	var current_user = Login.currentUser();
 
+	$scope.dtInstance = {};
+	$scope.dtInstanceCallback = function(instance) {
+		$scope.dtInstance = instance
+	}
+
 	$scope.dtColumns = [
 		DTColumnBuilder.newColumn('id')
 		.withTitle('')
@@ -92,6 +97,28 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 	$scope.dtOptions = DTOptionsBuilder
 		.fromFnPromise(function() {
 			var defer = $q.defer();
+
+			ESPBA.get('issue_labels', {}).then(function(i) {
+				var labels = i.data;
+				
+				function getLabels(issue_id) {
+					return labels.map(function(f) {
+						if (f.issue_id == issue_id) {
+							return f.issue_label_id
+						}
+					})
+				}
+
+				ESPBA.get('issue', {}).then(function(r) {
+					var processed = 0;
+					var length = r.data.length;
+					r.data.forEach(function(d) {				
+						processed++;
+						d.labels = getLabels(d.id)
+						if (processed == length) defer.resolve(r.data);
+					})
+				})
+			/*
 			ESPBA.get('issue', {}).then(function(r) {
 				var processed = 0;
 				var length = r.data.length;
@@ -104,11 +131,12 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 						if (processed == length) defer.resolve(r.data);
 					})
 				})
+				*/
 			});
 			return defer.promise;
 	   })
 		.withOption('order', [[ 2, "desc" ]])
-		.withOption('dom', 'Blfrtip')
+		.withOption('dom', 'Bl<"#open-issues">frtip')
 		.withOption('stateSave', true)
 		.withOption('createdRow', function(row, data, index) {
 			if (data.solved == 1) $(row).addClass('warning');
@@ -116,10 +144,13 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 		.withOption('rowCallback', function(row, data /*, index*/) {
 			$(row).attr('issue-id', data.id);
 		})
+		.withOption('initComplete', function() {
+			$('#open-issues').append('<div class="checkbox no-select" style="margin-left:30px;margin-top:3px;"><label class="checkbox-inline"><input type="checkbox" id="open-issues-check" style="position:relative;top:3px;">&nbsp;Kun åbne issues</label></div>');
+		})
 		.withOption('language', Const.dataTables_daDk )
 		.withButtons([
-			{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Opret nyt issue</span>',
-				className: 'btn btn-xs',
+			{ text: '<span><i class="fa fa-plus"></i>&nbsp;Opret nyt issue</span>',
+				className: 'btn btn-sm btn-success',
 				action: function(e, dt, node, config) {
 					$location.path('/issues/opret');
 					$scope.$apply()
@@ -127,18 +158,28 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 			}
 		]);
 
+		$('body').on('change', '#open-issues-check', function() {
+			if (this.checked) {
+				$.fn.dataTable.ext.search.push(function( settings, data, dataIndex ) {
+					return data[2] != '1'
+				})
+			} else {
+				$.fn.dataTable.ext.search.pop()
+			}
+			$scope.dtInstance.DataTable.draw()
+		})
+
 		angular.element('#table-issues').on('click', 'tbody td:not(.no-click)', function(e) {
 			var id=$(this).parent().attr('issue-id');
 			$location.path('/issues/se/'+id);
 			$scope.$apply()
 		});
-
 		/*
 		.withButtons({
 			dom: {
 				button: {
-					tag: 'button',
-					className: 'btn btn-default'
+					tag: 'input',
+					className: ''
 				}
 			},
 			buttons: [{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Opret nyt issue</span>',
