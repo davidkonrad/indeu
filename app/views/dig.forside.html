@@ -222,7 +222,7 @@
 		Reaktioner
 		<span class="pull-right">
 			<small class="text-muted" style="font-weight: 100;line-height: 10px;position:relative; top:-2px;">Seneste 7 dage</small>
-				<input type="checkbox" ng-false-value="undefined" ng-true-value="true" ng-model="Settings.recentReactionsShowAll">
+				<input type="checkbox" ng-false-value="undefined" ng-true-value="true" ng-model="$settings.recentReactionsShowAll">
 		</span>
 	</div>
 	<div class="layout-right-header-content" user-reactions></div>
@@ -231,7 +231,7 @@
 		Seneste events
 		<span class="pull-right">
 			<small class="text-muted" style="font-weight: 100;line-height: 10px;position:relative; top:-2px;">Kun ikke-sete</small>
-				<input type="checkbox" ng-false-value="undefined" ng-true-value="true" ng-model="Settings.recentEventsShowVisited">
+				<input type="checkbox" ng-false-value="undefined" ng-true-value="true" ng-model="$settings.recentEventsShowVisited">
 		</span>
 	</div>
 	<div class="layout-right-header-content" recent-events></div>
@@ -240,7 +240,7 @@
 		Nyeste artikler
 		<span class="pull-right">
 			<small class="text-muted" style="font-weight: 100;line-height: 10px;position:relative; top:-2px;">Kun ikke-sete</small>
-				<input type="checkbox" ng-false-value="undefined" ng-true-value="true" ng-model="Settings.recentArticlesShowVisited">
+				<input type="checkbox" ng-false-value="undefined" ng-true-value="true" ng-model="$settings.recentArticlesShowVisited">
 		</span>
 	</div>
 	<div class="layout-right-header-content" recent-articles></div>

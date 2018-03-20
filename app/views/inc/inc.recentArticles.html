@@ -1,7 +1,7 @@
 		<div class="list-group">
 			<span class="text-muted" ng-if="showEmpty()"><em>Ingen nye eller ikke læste artikler</em></span>
 		  <a ng-repeat="a in articles" 
-				ng-if="!Settings.recentArticlesShowVisited || (Settings.recentArticlesShowVisited && !a.user_visited)"
+				ng-if="!$settings.recentArticlesShowVisited || ($settings.recentArticlesShowVisited && !a.user_visited)"
 				ng-href="/artikel/{{ a.id }}/{{ a.urlName }}" 
 				debug-link
 				ng-class="{ 'list-group-item-success' : !a.user_visited }"

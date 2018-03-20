@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * Settings factory
+ * maintain a cookie with settings, checks, defaults etc
+ * populate a scope with a $settings literal which is $watched
+ * and can be used as ng-models
+**/
 angular.module('indeuApp').factory('Settings', function($cookies, $rootScope, $timeout, Login, ESPBA) {
 
 	//defaults
@@ -27,13 +33,11 @@ angular.module('indeuApp').factory('Settings', function($cookies, $rootScope, $t
 	var settings = undefined;
 	var cookieName = 'indeu.settings';
 	var scope = undefined;
-	var scopes = [];
 
 	return {
 		
 		init: function($scope) {
 			scope = $scope;
-			scopes.push($scope);
 			this.load();
 		},
 
@@ -47,48 +51,57 @@ angular.module('indeuApp').factory('Settings', function($cookies, $rootScope, $t
 			$cookies.put(cookieName, JSON.stringify(settings), { expires: this.getExpireDate() } );
 		},
 
+		/*
+			$settings can be updated with $settings.prop = value
+			but to be sure the value is catched by $watch we need a $timeout 
+			this is a shorthand for doing this
+			using ng-model="$settings.prop" will be triggered as expected
+		*/
+		update: function(prop, value) {
+			$timeout(function() {
+				scope.$settings[prop] = value
+			})
+		},
+
 		load: function() {
-			var s = $cookies.get(cookieName);
 			var self = this;
 
-			try {
-				s = JSON.parse(s);
-			} catch(e) {
-				s = undefined;
+			if (!settings) {
+				var s = $cookies.get(cookieName);
+				try {
+					s = JSON.parse(s);
+				} catch(e) {
+					s = undefined;
+				}
+				settings = s
+				settings = (!s || typeof s != 'object') 
+					? $.extend( {}, defaultSettings)
+					: s;
 			}
+	
+			scope.$settings = settings;
 
-			settings = (!s || typeof s != 'object') 
-				? $.extend( {}, defaultSettings)
-				: s;
-
-			scope.Settings = settings;
-
-			scope.$watch('Settings', function(newVal, oldVal) {
-				//angularstrap/collapse.js return array with negative values upon deletion
-				if (newVal.groupEditCollapse && newVal.groupEditCollapse[0] == -1) return;
-
+			scope.$watch('$settings', function(newVal, oldVal) {
+				//console.log('Settings changed', newVal);
 				settings = newVal;
 				self.save();
-
-				scopes.forEach(function(s) {
-					if (s) s.Settings = settings
-				});
-				$rootScope.$broadcast('settings.changed');
-
 			}, true);
 
+				//angularstrap/collapse.js return array with negative values upon deletion
+				//if (newVal.groupEditCollapse && newVal.groupEditCollapse[0] == -1) return;
 
+			/*
 			//always at least 1 search area
 			if (!scope.Settings.searchWithinEvents &&	
 					!scope.Settings.searchWithinArticles &&	
 					!scope.Settings.searchWithinBulletins) {
 				scope.Settings.searchWithinArticles = true
 			}
+			*/
 		}
 
 
 	}
 
 });
-		
 

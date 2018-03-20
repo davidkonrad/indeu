@@ -2,7 +2,7 @@
 		<div class="list-group">
 			<span class="text-muted" ng-if="showEmpty()">Ingen nye eller ikke sete events</span>
 		  <a ng-repeat="e in events" 
-				ng-if="!Settings.recentEventsShowVisited || (Settings.recentEventsShowVisited && !e.user_visited)"
+				ng-if="!$settings.recentEventsShowVisited || ($settings.recentEventsShowVisited && !e.user_visited)"
 				ng-href="{{ e.urlLink }}"
 				ng-class="{ 'list-group-item-success' : !e.user_visited }"
 				debug-link

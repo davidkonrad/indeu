@@ -5,7 +5,15 @@
  *
  */
 angular.module('indeuApp').controller('IssuesForsideCtrl', 
-	function($scope, $location, $q, ESPBA, Utils, Lookup, Const, DTOptionsBuilder, DTColumnBuilder, Meta, Redirect, Login) {
+	function($scope, $location, $q, ESPBA, Utils, Lookup, Const, DTOptionsBuilder, DTColumnBuilder, Meta, Redirect, Login, Settings) {
+
+	Meta.setTitle('Issues');
+	if (!Login.isLoggedIn()) {
+		Redirect.home('Du skal være logget ind for at se issues')
+	}
+	var current_user = Login.currentUser();
+
+	Settings.init($scope);
 
 	var issueLabels = [];
 	ESPBA.get('issue_label', {}).then(function(r) {
@@ -21,8 +29,10 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 		return ''
 	}
 
-	Meta.setTitle('Issues');
-	var current_user = Login.currentUser();
+	//todo: Save in Settings
+	while ($.fn.dataTable.ext.search.length>0) {
+		$.fn.dataTable.ext.search.pop()
+	}
 
 	$scope.dtInstance = {};
 	$scope.dtInstanceCallback = function(instance) {
@@ -118,20 +128,6 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 						if (processed == length) defer.resolve(r.data);
 					})
 				})
-			/*
-			ESPBA.get('issue', {}).then(function(r) {
-				var processed = 0;
-				var length = r.data.length;
-				r.data.forEach(function(d) {
-					ESPBA.get('issue_labels', { issue_id: d.id }).then(function(i) {
-						processed++;
-						d.labels = i.data.map(function(f) {
-							return f.issue_label_id
-						})
-						if (processed == length) defer.resolve(r.data);
-					})
-				})
-				*/
 			});
 			return defer.promise;
 	   })
@@ -145,7 +141,10 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 			$(row).attr('issue-id', data.id);
 		})
 		.withOption('initComplete', function() {
-			$('#open-issues').append('<div class="checkbox no-select" style="margin-left:30px;margin-top:3px;"><label class="checkbox-inline"><input type="checkbox" id="open-issues-check" style="position:relative;top:3px;">&nbsp;Kun åbne issues</label></div>');
+			$('#open-issues').append('<div class="checkbox-inline no-select" style="margin-left:30px;margin-top:3px;"><label class="checkbox-inline"><input type="checkbox" id="open-issues-check">Kun åbne issues</label></div>');
+			if ($scope.$settings.openIssuesCheck) {
+				$('#open-issues-check').prop('checked', true);
+			}
 		})
 		.withOption('language', Const.dataTables_daDk )
 		.withButtons([
@@ -158,39 +157,27 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 			}
 		]);
 
-		$('body').on('change', '#open-issues-check', function() {
-			if (this.checked) {
-				$.fn.dataTable.ext.search.push(function( settings, data, dataIndex ) {
-					return data[2] != '1'
-				})
-			} else {
-				$.fn.dataTable.ext.search.pop()
-			}
-			$scope.dtInstance.DataTable.draw()
-		})
+	$('body').on('change', '#open-issues-check', function() {
+		if (this.checked) {
+			$.fn.dataTable.ext.search.push(function( settings, data, dataIndex ) {
+				return data[2] != '1'
+			})
+		} else {
+			$.fn.dataTable.ext.search.pop()
+		}
+		$scope.dtInstance.DataTable.draw();
+		//$timeout(function() {
+		//$scope.$settings.openIssuesCheck = this.checked;
+		Settings.update('openIssuesCheck', this.checked);
+		//$scope.$apply();
+	})
 
-		angular.element('#table-issues').on('click', 'tbody td:not(.no-click)', function(e) {
-			var id=$(this).parent().attr('issue-id');
-			$location.path('/issues/se/'+id);
-			$scope.$apply()
-		});
-		/*
-		.withButtons({
-			dom: {
-				button: {
-					tag: 'input',
-					className: ''
-				}
-			},
-			buttons: [{ text: '<span><i class="fa fa-plus text-success"></i>&nbsp;Opret nyt issue</span>',
-				className: 'btn btn-xs',
-				action: function(e, dt, node, config) {
-					$location.path('/issues/opret');
-					$scope.$apply()
- 				}
-			}]
-		});
-		*/
+	angular.element('#table-issues').on('click', 'tbody td:not(.no-click)', function(e) {
+		var id=$(this).parent().attr('issue-id');
+		$location.path('/issues/se/'+id);
+		$scope.$apply()
+	});
+
 	if (Redirect.message()) {
 		Notification(Redirect.message());
 		Redirect.clear();

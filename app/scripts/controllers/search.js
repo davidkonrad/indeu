@@ -4,8 +4,8 @@
  *
  *
  */
-angular.module('indeuApp')
-	.controller('SearchCtrl', function($scope, $timeout, ESPBA, Lookup, Meta, Utils, Redirect, Notification, Settings) {
+angular.module('indeuApp').controller('SearchCtrl', 
+	function($scope, $timeout, ESPBA, Lookup, Meta, Utils, Redirect, Notification, Settings) {
 
 		$scope.term = Redirect.message(true);
 
@@ -14,8 +14,8 @@ angular.module('indeuApp')
 		var search = function() {
 			var params = { 
 				term: $scope.term, 
-				articles: $scope.Settings.searchWithinArticles,
-				events: $scope.Settings.searchWithinEvents
+				articles: $scope.$settings.searchWithinArticles,
+				events: $scope.$settings.searchWithinEvents
 			};
 
 			ESPBA.prepared('Search', params).then(function(s) {
