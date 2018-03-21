@@ -98,4 +98,37 @@
 	margin-top: 15px;
 }
 
+/* new frontpage */
+a.frontpage-link {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	padding-top: 5vh;
+	padding-bottom: 5vh;
+	border-radius: 4px;
+	color: white;
+}
+a.frontpage-foreninger {
+	background-color: #9C27B0;
+}
+a.frontpage-artikler {
+	background-color: #4CAF50;
+}
+a.frontpage-medlemmer {
+	background-color: #FF5722
+;
+}
+a.frontpage-events {
+	background-color: #3F51B5;
+}
+a.frontpage-link:hover {
+	opacity: 0.4;
+}
+
+iframe.frontpage {
+	border-radius: 4px;
+}
+
+
+
 

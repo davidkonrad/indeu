@@ -57,7 +57,7 @@ angular.module('indeuApp').directive('userReactions', function($timeout, Login, 
 				})
 				reactionsAll = rr;
 				reactions = rr.slice(0,5);
-				scope.reactions = scope.$ettings.recentReactionsShowAll ? reactionsAll : reactions;
+				scope.reactions = scope.$settings.recentReactionsShowAll ? reactionsAll : reactions;
 
 				scope.$watch('$settings.recentReactionsShowAll', function() {
 					scope.reactions = scope.$settings.recentReactionsShowAll ? reactionsAll : reactions;

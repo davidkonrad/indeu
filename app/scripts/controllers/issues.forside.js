@@ -5,7 +5,7 @@
  *
  */
 angular.module('indeuApp').controller('IssuesForsideCtrl', 
-	function($scope, $location, $q, ESPBA, Utils, Lookup, Const, DTOptionsBuilder, DTColumnBuilder, Meta, Redirect, Login, Settings) {
+	function($scope, $location, $q, $timeout, ESPBA, Utils, Lookup, Const, DTOptionsBuilder, DTColumnBuilder, Meta, Redirect, Login, Settings) {
 
 	Meta.setTitle('Issues');
 	if (!Login.isLoggedIn()) {
@@ -143,19 +143,37 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 		.withOption('initComplete', function() {
 			$('#open-issues').append('<div class="checkbox-inline no-select" style="margin-left:30px;margin-top:3px;"><label class="checkbox-inline"><input type="checkbox" id="open-issues-check">Kun åbne issues</label></div>');
 			if ($scope.$settings.openIssuesCheck) {
-				$('#open-issues-check').prop('checked', true);
+				$timeout(function() {
+					$('#open-issues-check').click() 
+				})
 			}
 		})
 		.withOption('language', Const.dataTables_daDk )
-		.withButtons([
-			{ text: '<span><i class="fa fa-plus"></i>&nbsp;Opret nyt issue</span>',
+		.withButtons(
+			/*
+			{
+			dom: {
+        button: {
+  				tag: 'button',
+	  			className: ''
+				}
+			},
+			buttons: [
+		    'colvis', 
+				'copy',
+		    'print',
+    		'excel'
+			]
+		}
+		*/
+			[{ text: '<span><i class="fa fa-plus"></i>&nbsp;Opret nyt issue</span>',
 				className: 'btn btn-sm btn-success',
 				action: function(e, dt, node, config) {
 					$location.path('/issues/opret');
 					$scope.$apply()
  				}
-			}
-		]);
+			}]
+		);
 
 	$('body').on('change', '#open-issues-check', function() {
 		if (this.checked) {
@@ -166,10 +184,7 @@ angular.module('indeuApp').controller('IssuesForsideCtrl',
 			$.fn.dataTable.ext.search.pop()
 		}
 		$scope.dtInstance.DataTable.draw();
-		//$timeout(function() {
-		//$scope.$settings.openIssuesCheck = this.checked;
 		Settings.update('openIssuesCheck', this.checked);
-		//$scope.$apply();
 	})
 
 	angular.element('#table-issues').on('click', 'tbody td:not(.no-click)', function(e) {
