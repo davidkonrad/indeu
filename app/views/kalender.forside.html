@@ -1,6 +1,25 @@
 <div class="container-fluid">
 
 	<div class="col-md-8">
+
+		<div ng-repeat="(groupName, items) in grouped">
+			<strong> {{ groupName }} </strong>
+			<div ng-repeat="item in items | orderBy:'sortOrder'">
+				<p><a target="_blank" href="{{ item.url }}"> {{ item.title }} </a></p>
+			</div>
+		</div>
+
+
+<!--
+		<div ng-repeat="group(key) in groupBy(externalLinks, 'groupName')">
+			{{ group | json }}
+			<strong> {{ key }} </strong>
+		</div>		
+-->
+
+<!--
+ class="fa fa-android fa fa-bluetooth fa fa-buysellads"></div>
+-->
 		<div ui-calendar="uiConfig.calendar" class="calendar" ng-model="events" calendar="calendar"></div> 
 	</div>
 	
