@@ -494,5 +494,9 @@ textarea.no-resize {
 	resize: none;
 }
 
+/* fix ui calendar uppercase in months */
+.fc-left h2:first-letter {
+	text-transform: uppercase;
+}
 
 

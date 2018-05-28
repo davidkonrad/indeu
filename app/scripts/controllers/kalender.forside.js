@@ -194,56 +194,6 @@ angular.module('indeuApp')
         },
     ]
 
-		$scope.test = {
-			'a' : { test: 'qwertyA' },
-			'b' : { test: 'qwertyB' },
-			'c' : { test: 'qwertyC' },
-		};
-
-var groupBy = function(array, key) {
-	var r = {};
-	array.forEach(function(item) {
-		if (r[item[key]]) {
-			r[item[key]].push(item)
-		} else {
-			r[item[key]] = [item]
-		}
-	})
-	return r
-}
-
-		//console.log( $scope.groupBy($scope.externalLinks, 'groupName'));
-		$scope.grouped = groupBy($scope.externalLinks, 'groupName')
-			
-
-
 });
 
-/*
-angular.module('indeuApp')
-	.directive('stockValue', function() {
-	return {
-		restrict: 'E',
-		template: '<input type="text" data-numeric-input-directive>',
-		replace: true,
-		scope: {
-			value: '='
-		},
-		controller: function($scope) {
-			$scope.localModel = undefined
-		},
-    link: function link(scope, element, attrs) {
-			var value = angular.copy(scope.value);
-			scope.localModel = parseFloat(value || 0).toFixed(2);
-			if (!element.attr('ng-model')) {
-        element.attr('ng-model', 'localModel');
- 	      $compile(element)(scope);
-			}
-			scope.$watch('localModel', function(newVal, oldVal) {
-				if (!oldVal || newVal === oldVal) return
-				scope.value = parseFloat(newVal);
-			})
-		}
-	}
-});
-*/
+
